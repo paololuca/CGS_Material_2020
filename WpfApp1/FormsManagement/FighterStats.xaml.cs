@@ -49,8 +49,7 @@ namespace FormsManagement
               CompositeDataSource(datesDataSource, numberOpenDataSource);
             //CompositeDataSource compositeDataSource2 = new
             //  CompositeDataSource(datesDataSource, numberClosedDataSource);
-
-
+            
             plotter.AddLineGraph(compositeDataSource1,
                 new Pen(Brushes.Blue, 2),
                 new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },

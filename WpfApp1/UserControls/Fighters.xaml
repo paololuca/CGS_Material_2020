@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="HEMATournamentSystem.Fighters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HEMATournamentSystem"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" Height="580" Width="1030" Loaded="UserControl_Loaded">
+    <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                    Margin="24,8,10,524" Grid.ColumnSpan="1">
+            <TextBlock Text="Fighters" FontWeight="Bold" />
+            <TextBlock Opacity=".68"
+                                   Text="Lista degli Atleti presenti all'interno del sistema" TextWrapping="Wrap" />
+            <Separator Margin="0,2,208,2"></Separator>
+        </StackPanel>
+        <TextBox Name="txtSearch" DockPanel.Dock="Top" Margin="820,31,10,508" Width="200" BorderThickness="0"
+                        materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
+        <materialDesign:PackIcon Kind="AccountCircle" Margin="120,70,0,0" Height="108" Width="108" />
+        <TextBox Name="txtName" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,178,715,359" />
+        <TextBox Name="txtSurnameame" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,226,715,311" />
+        <StackPanel Margin="24,274,0,225" HorizontalAlignment="Left" Width="123" Orientation="Vertical">
+
+            <RadioButton Name="rbtMaschile"  Margin="4,10,4,11" IsChecked="False" Content="M" Width="110" BorderBrush="#FFB835B2" />
+            <RadioButton Name="rbtFemminile" Margin="4,10,4,11" IsChecked="False" Content="F" Width="110" BorderBrush="#FFB835B2"/>
+        </StackPanel>
+        <ComboBox Name="cmbAssociation" materialDesign:HintAssist.Hint="Association Type" ItemsSource="{Binding LongListToTestComboVirtualization}" 
+                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="31,360,715,180" Height="40">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+        <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="164,428,715,110" RenderTransformOrigin="0.5,0.5"  >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Floppy"/>
+                <TextBlock Text="  Save Fighter"/>
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="dataGridAthletes" HorizontalAlignment="Left" Height="493" 
+                  Margin="372,77,0,0" VerticalAlignment="Top" Width="648" AutoGeneratingColumn="DataGridAthletes_AutoGeneratingColumn"
+                  CanUserSortColumns="True"  CanUserAddRows="False" CanUserDeleteRows="False"
+                  SelectionUnit="Cell" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDetailsAccount" Height="32"  Click="BtnDetailsAccount_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CardAccountDetails"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDeleteAccount" Height="32"  Click="BtnDeleteAccount_Click" Background="Red" Width="Auto" ToolTip="Delete Fighter">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Delete"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

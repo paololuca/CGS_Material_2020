@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="HEMATournamentSystem.Associations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HEMATournamentSystem"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" Height="580" Width="1030" Loaded="UserControl_Loaded">
+    <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                    Margin="24,8,215,500" Grid.ColumnSpan="1">
+            <TextBlock Text="Associations" FontWeight="Bold" />
+            <TextBlock Opacity=".68"
+                                   Text="Lista delle associzioni presenti all'interno del DataBase" TextWrapping="Wrap" />
+            <Separator Height="8"></Separator>
+        </StackPanel>
+        <TextBox Name="txtSearch" DockPanel.Dock="Top" Margin="820,39,10,500" Width="200" BorderThickness="0"
+                        materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
+        <materialDesign:PackIcon Kind="HomeAdd" Margin="146,80,0,0" Height="108" Width="108" />
+        <TextBox Name="txtAssociation" materialDesign:HintAssist.Hint="Association" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="67,202,679,335" />
+        <Button x:Name="btnSaveAssociation" Height="Auto"  Click="BtnSaveAssociation_Click" Background="#FF28D137" Margin="200,282,679,256" RenderTransformOrigin="0.5,0.5"  >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Floppy"/>
+                <TextBlock Text="  Save Fighter"/>
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="dataGridAssociations" HorizontalAlignment="Left" Height="485" Margin="482,85,0,0" VerticalAlignment="Top" Width="538"
+                  CanUserSortColumns="True"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="DataGridAssociations_AutoGeneratingColumn"
+                  SelectionUnit="Cell" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDetailsAssociation" Height="32"  Click="BtnDetailsAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Details"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDeleteAssociation" Height="32"  Click="BtnDeleteAssociation_Click" Background="Red" Width="Auto" ToolTip="Delete Association">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Delete"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

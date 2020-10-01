@@ -36,7 +36,7 @@ namespace HEMATournamentSystem
 
                 var currentUser = HelperMasterDB.CheckLogin(txtBoxUsername.Text);
 
-                if (currentUser is null)
+                if (currentUser == null)
                     PopUpBoxes.ShowPopup("Username not valid");
                 else if (sb.ToString().ToUpper() != currentUser.Password)
                     PopUpBoxes.ShowPopup("Uncorrect Password");

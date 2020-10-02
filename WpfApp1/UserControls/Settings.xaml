@@ -139,6 +139,32 @@
                     </StackPanel>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                <Expander HorizontalAlignment="Stretch" Header="Pools Setting">
+                    <Grid Height="249">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="109*"/>
+                            <ColumnDefinition Width="921*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="54*"/>
+                            <RowDefinition Height="43*"/>
+                            <RowDefinition Height="152*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16" Grid.ColumnSpan="2">
+                            <TextBlock Text="Phase control" />
+                            <TextBlock Opacity=".68"
+                                   Text="In this control panel you can set the minimum number of athletes who must be present in the groups and decide which phase they will access" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,620,0">
+                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                <TextBlock VerticalAlignment="Bottom" Text="Maximum" />
+                                <TextBox x:Name="sliderMaxH" Text="100000" VerticalAlignment="Bottom" />
+                                <Slider Minimum="0" Maximum="{Binding Text, ElementName=sliderMaxH, Mode=OneWay}" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                        ToolTip="MaterialDesignDiscreteSlider" Value="50" Width="280" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
                 <Expander HorizontalAlignment="Stretch" Header="Expander Example 2c">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                         <TextBlock Text="Your Content" />

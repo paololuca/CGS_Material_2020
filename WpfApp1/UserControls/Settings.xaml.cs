@@ -155,10 +155,30 @@ namespace HEMATournamentSystem
                 else
                     PopUpBoxes.ShowPopup("Error during saving DB Info");
             }
+        }
+
+        private void BtnSaveFighterByPhase_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
         #endregion
-                
+
+        #region Slider
+        private void SldMinFor16_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            txtBoxFor16th.Text = sldMinFor16.Value.ToString();
+        }
+
+        private void SldMinFor8_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            txtBoxFor8th.Text = sldMinFor8.Value.ToString();
+        }
+
+        private void SldMinFor4_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            txtBoxFor4th.Text = sldMinFor4.Value.ToString();
+        }
+        #endregion
     }
 }

@@ -139,6 +139,54 @@
                     </StackPanel>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                <Expander HorizontalAlignment="Stretch" Header="Pools Setting">
+                    <Grid Height="384">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="109*"/>
+                            <ColumnDefinition Width="921*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*"/>
+                            <RowDefinition Height="152*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16" Grid.ColumnSpan="2">
+                            <TextBlock Text="Phase control" />
+                            <TextBlock Opacity=".68"
+                                   Text="In this control panel you can set the minimum number of athletes who must be present in the groups and decide which phase they will access" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="24,10,24,0" Grid.RowSpan="2">
+                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for 16th" />
+                                <Slider Name="sldMinFor16" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                        ToolTip="Min number of present fighter to have round of 16" Value="0" Width="280" ValueChanged="SldMinFor16_ValueChanged"/>
+                                <TextBox x:Name="txtBoxFor16th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   8th" />
+                                <Slider Name="sldMinFor8" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                        ToolTip="Min number of present fighter to have round of 8" Value="0" Width="280" ValueChanged="SldMinFor8_ValueChanged"/>
+                                <TextBox x:Name="txtBoxFor8th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   4th" />
+                                <Slider Name="sldMinFor4" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                        ToolTip="Min number of present fighter to have round of 4" Value="0" Width="280" ValueChanged="SldMinFor4_ValueChanged"/>
+                                <TextBox x:Name="txtBoxFor4th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="615,241,0,40" Grid.Row="1">
+                            <Button x:Name="btnSaveFighterByPhase" Height="34"  Click="BtnSaveFighterByPhase_Click" Background="#FF28D137" Margin="206,0,10,0" >
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Floppy"/>
+                                    <TextBlock Text="  Save"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
                 <Expander HorizontalAlignment="Stretch" Header="Expander Example 2c">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                         <TextBlock Text="Your Content" />

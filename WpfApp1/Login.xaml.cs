@@ -20,8 +20,8 @@ namespace HEMATournamentSystem
             if (!Helper.TestConnectionString())
                 PopUpBoxes.ShowPopup("Unavailable DB Connection");
 
-            var f = new FighterStats();
-            f.Show();
+            //TODOPL da spostare var f = new FighterStats();
+            //TODOPL da spostare f.Show();
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)

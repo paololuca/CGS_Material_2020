@@ -448,15 +448,6 @@
     <Resource Include="img\img-logo-big.png" />
     <Resource Include="img\Man2.ico" />
     <Resource Include="img\marozzo.ico" />
-    <Resource Include="img\Menu\application.png" />
-    <Resource Include="img\Menu\folder-open.png" />
-    <Resource Include="img\Menu\folder_arrow.png" />
-    <Resource Include="img\Menu\information.png" />
-    <Resource Include="img\Menu\plus-circle.png" />
-    <Resource Include="img\Menu\printer.png" />
-    <Resource Include="img\Menu\quit.png" />
-    <Resource Include="img\Menu\Saveicon.png" />
-    <Resource Include="img\Menu\sitemap.png" />
     <Resource Include="img\password.ico" />
     <Resource Include="img\quit.png" />
     <Resource Include="img\Schizzo.png" />

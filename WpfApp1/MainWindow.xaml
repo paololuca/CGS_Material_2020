@@ -5,9 +5,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         xmlns:domain1="clr-namespace:HEMATournamentSystem"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="HEMATournamentSystem.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        mc:Ignorable="d" x:Class="HEMATournamentSystem.MainWindow"
         WindowStartupLocation="CenterScreen"
-        Title="CGS" Height="768" Width="1280"
+        Title="HEMA TMS" Height="768" Width="1280"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -97,7 +98,7 @@
                                 </Button>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold">UISP - Tournament's Managment System</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold"><Run Text="HEMA "/><Run Text="- Tournament's Managment System"/></TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>

@@ -9,7 +9,7 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="SingleBorderWindow" 
-        FontFamily="Segoe UI Emoji">
+        FontFamily="Segoe UI Emoji" Icon="img/group.ico">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <Grid>
             <Rectangle Height="500" VerticalAlignment="Top">

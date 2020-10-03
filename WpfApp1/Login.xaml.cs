@@ -13,12 +13,12 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class Login : Window
     {
+        private readonly bool _connectionAvailable;
+
         public Login()
         {
             InitializeComponent();
-
-            if (!Helper.TestConnectionString())
-                PopUpBoxes.ShowPopup("Unavailable DB Connection");
+            _connectionAvailable = Helper.TestConnectionString();
 
             //TODOPL da spostare var f = new FighterStats();
             //TODOPL da spostare f.Show();
@@ -26,6 +26,12 @@ namespace HEMATournamentSystem
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            if (!_connectionAvailable)
+            {
+                PopUpBoxes.ShowPopup("Unavailable DB Connection");
+                return;
+            }
+
             if (txtBoxUsername.Text == "")
                 PopUpBoxes.ShowPopup("User Name cannot be empty");
             else if (txtBoxPassword.Password == "")
@@ -56,7 +62,9 @@ namespace HEMATournamentSystem
                     this.Close();
                 }
             }
-        }         
+        }
+
+        
     }
 
 }

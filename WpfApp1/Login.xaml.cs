@@ -19,7 +19,6 @@ namespace HEMATournamentSystem
         {
             InitializeComponent();
             _connectionAvailable = Helper.TestConnectionString();
-
             //TODOPL da spostare var f = new FighterStats();
             //TODOPL da spostare f.Show();
         }

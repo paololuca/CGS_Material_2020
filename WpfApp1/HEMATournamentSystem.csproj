@@ -404,6 +404,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DB\HemaRatings.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\HemaRatings_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>HemaRatings.mdf</DependentUpon>
+    </Content>
     <Content Include="DB\Master.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

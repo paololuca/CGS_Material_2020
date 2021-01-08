@@ -15,6 +15,7 @@ namespace HEMATournamentSystem
     {
         private readonly bool _connectionAvailable;
 
+
         public Login()
         {
             InitializeComponent();

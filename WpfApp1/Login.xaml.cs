@@ -1,10 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using Resources;
 using BusinessEntity.Entity;
-using FormsManagement;
 
 namespace HEMATournamentSystem
 {

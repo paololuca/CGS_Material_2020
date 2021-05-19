@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BusinessEntity.Entity;
 
 namespace HEMATournamentSystem
 {
@@ -21,6 +22,10 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class Tournaments : UserControl
     {
+        private List<TorneoEntity> newTournamentList;
+        private List<TorneoEntity> activeTournamentList;
+        private List<TorneoEntity> closedTournamentList;
+
         public Tournaments()
         {
             InitializeComponent();
@@ -28,27 +33,22 @@ namespace HEMATournamentSystem
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dataGridActiveTournament.ItemsSource = Helper.GetTorneiAttivi(true);
-            dataGridClosedTournament.ItemsSource = Helper.GetTorneiNonAttivi(true);
-        }
+            newTournamentList = Helper.GetTorneiToActivate(true);
+            dataGridNewTournament.ItemsSource = newTournamentList;
 
-        private void DataGridActiveTournament_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+            activeTournamentList = Helper.GetTorneiAttivi(true);
+            dataGridActiveTournament.ItemsSource = activeTournamentList;
+
+            closedTournamentList = Helper.GetTorneiNonAttivi(true);
+            dataGridClosedTournament.ItemsSource = closedTournamentList;
+        }
+        
+        private void dataGridTournament_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch (e.Column.Header.ToString())
-            {
-                case "Id":
-                case "StartDate":
-                case "EndDate":
-                    e.Column.Visibility = Visibility.Hidden;
-                    break;
-                default:
-                    e.Column.Visibility = Visibility.Visible;
-                    e.Column.IsReadOnly = true;
-                    break;
-            }
+            SetColumnHeader(e);
         }
 
-        private void DataGridClosedTournament_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private static void SetColumnHeader(DataGridAutoGeneratingColumnEventArgs e)
         {
             switch (e.Column.Header.ToString())
             {
@@ -60,6 +60,42 @@ namespace HEMATournamentSystem
                     e.Column.IsReadOnly = true;
                     break;
             }
+        }
+              
+
+        private void btnNewTournament_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtSearchNewTournament_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = newTournamentList.
+                Where(tournament => 
+                tournament.Name.ToLower().Contains(txtSearchNewTournament.Text) || 
+                tournament.Note.ToLower().Contains(txtSearchNewTournament.Text)).ToList();
+
+            dataGridNewTournament.ItemsSource = filtered;
+        }
+
+        private void txtSearchActiveTournament_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = activeTournamentList.
+                Where(tournament =>
+                tournament.Name.ToLower().Contains(txtSearchNewTournament.Text) ||
+                tournament.Note.ToLower().Contains(txtSearchNewTournament.Text)).ToList();
+
+            dataGridActiveTournament.ItemsSource = filtered;
+        }
+
+        private void txtSearchClosedTournament_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = closedTournamentList.
+                Where(tournament =>
+                tournament.Name.ToLower().Contains(txtSearchNewTournament.Text) ||
+                tournament.Note.ToLower().Contains(txtSearchNewTournament.Text)).ToList();
+
+            dataGridClosedTournament.ItemsSource = filtered;
         }
     }
 }

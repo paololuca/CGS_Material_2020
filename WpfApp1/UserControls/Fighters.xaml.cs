@@ -88,7 +88,7 @@ namespace HEMATournamentSystem
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
             //TODO uppercase dei campi
-            var filtered = atletiPresenti.Where(fighter => fighter.Nome.Contains(txtSearch.Text) || fighter.Cognome.Contains(txtSearch.Text)).ToList();
+            var filtered = atletiPresenti.Where(fighter => fighter.Nome.ToLower().Contains(txtSearch.Text) || fighter.Cognome.ToLower().Contains(txtSearch.Text)).ToList();
 
             dataGridAthletes.ItemsSource = filtered;
         }

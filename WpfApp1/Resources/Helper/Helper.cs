@@ -438,6 +438,51 @@ namespace Resources
             }
 
         }
+
+        public static List<TorneoEntity> GetTorneiToActivate(Boolean onlyList)
+        {
+            SqlConnection c = null;
+
+            try
+            {
+                String sqlText = "SELECT * FROM TORNEO WHERE CONCLUSO = -1";
+                c = new SqlConnection(GetConnectionString());
+
+                c.Open();
+                List<TorneoEntity> tornei = new List<TorneoEntity>();
+
+                if (!onlyList)
+                    tornei.Add(new TorneoEntity() { Id = 0 });
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tornei.Add(new TorneoEntity()
+                    {
+                        Name = reader["NomeTorneo"].ToString(),
+                        Id = Int32.Parse(reader["Id"].ToString()),
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
+                        Place = reader["Luogo"].ToString(),
+                        Note = reader["Commenti"].ToString()
+                    });
+                }
+
+                return tornei;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+
+        }
+
         public static List<TorneoEntity> GetTorneiNonAttivi(Boolean onlyList)
         {
             SqlConnection c = null;

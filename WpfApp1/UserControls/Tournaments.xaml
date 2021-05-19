@@ -8,41 +8,81 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" Height="580" Width="1030" Loaded="UserControl_Loaded">
     <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
-            <StackPanel>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Active Tournaments">
-                    <Grid>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <TextBlock Text="Actiove Tournaments" FontWeight="Bold" />
-                            <TextBlock Opacity=".68"
+            <ScrollViewer>
+                <StackPanel>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="New Tournaments">
+                        <Grid>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                <TextBlock Text="New Tournaments" FontWeight="Bold" />
+                                <TextBlock Opacity=".68"
+                                   Text="Nuovi tornei presenti all'interno del sistema" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <TextBox Name="txtSearchNewTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                                materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchNewTournament_KeyUp" />
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                    Margin="24,102,10,10">
+                                <DataGrid Name="dataGridNewTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
+                                   CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
+                                </DataGrid>
+                            </StackPanel>
+                            <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="873,70,0,0" Click="btnNewTournament_Click"
+                                Background="#FF28D137" VerticalAlignment="Top" Width="133">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="AddBox" RenderTransformOrigin="0.771,1.104" Height="18"/>
+                                    <TextBlock Text="  Tournament"/>
+                                </StackPanel>
+                            </Button>
+
+                        </Grid>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="Active Tournaments">
+                        <Grid>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                <TextBlock Text="Active Tournaments" FontWeight="Bold" />
+                                <TextBlock Opacity=".68"
                                    Text="Tornei Attivi attualmente presenti all'interno del sistema" TextWrapping="Wrap" />
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                            </StackPanel>
+                            <TextBox Name="txtSearchActiveTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                                materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchActiveTournament_KeyUp" />
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
                                     Margin="24,102,10,10">
-                            <DataGrid Name="dataGridActiveTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="DataGridActiveTournament_AutoGeneratingColumn" VerticalAlignment="Center"
+                                <DataGrid Name="dataGridActiveTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
-                            </DataGrid>
-                        </StackPanel>
-                    </Grid>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Closed Tournaments">
-                    <Grid>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <TextBlock Text="Your Content" FontWeight="Bold" />
-                            <TextBlock Opacity=".68"
+                                </DataGrid>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="Closed Tournaments">
+                        <Grid>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                <TextBlock Text="Your Content" FontWeight="Bold" />
+                                <TextBlock Opacity=".68"
                                    Text="Lista dei tornei conclusi all'interno del sistema dai quali si possono estrapolare vari report" TextWrapping="Wrap" />
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                            </StackPanel>
+                            <TextBox Name="txtSearchClosedTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                                materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchClosedTournament_KeyUp" />
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
                                     Margin="24,102,10,10">
-                            <DataGrid Name="dataGridClosedTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="DataGridClosedTournament_AutoGeneratingColumn" VerticalAlignment="Center"
+                                <DataGrid Name="dataGridClosedTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
-                            </DataGrid>
-                        </StackPanel>
-                    </Grid>
-                </Expander>
-            </StackPanel>
+                                </DataGrid>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
         </materialDesign:Card>
+        
     </Grid>
 </UserControl>

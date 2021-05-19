@@ -440,6 +440,7 @@
       <DependentUpon>Tornei.mdf</DependentUpon>
     </Content>
     <Content Include="DLL\IronPdf.dll" />
+    <Resource Include="img\Menu\information.png" />
     <Resource Include="img\LectureMarozzo.png" />
     <Resource Include="img\Menu\home.png" />
     <Resource Include="img\Material\Contact.png" />

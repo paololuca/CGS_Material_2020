@@ -31,7 +31,7 @@
                                 </DataGrid>
                             </StackPanel>
                             <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="873,70,0,0" Click="btnNewTournament_Click"
-                                Background="#FF28D137" VerticalAlignment="Top" Width="133">
+                                Background="#FF28D137" VerticalAlignment="Top" Width="133" ToolTip="New Tournament">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="AddBox" RenderTransformOrigin="0.771,1.104" Height="18"/>
                                     <TextBlock Text="  Tournament"/>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BusinessEntity.Entity;
+using BusinessEntity.Type;
 
 namespace HEMATournamentSystem
 {
@@ -74,19 +75,19 @@ namespace HEMATournamentSystem
 
         private void LoadUserMenu(ObservableCollection<WindowsItem> items)
         {
-            if (user.Type != LoginProfile.None)
+            if (user.Type != ProfileType.None)
             {
                 //if (user.IsAdmin)
                     //create tournament (con controllo se già non è stato creato)
 
-                items.Add(new WindowsItem("Play Tournament", new Pools(), null));
+                items.Add(new WindowsItem("Play Tournament", new Pools(user), null));
 
                 if (user.IsAdmin)
                 {
-                    items.Add(new WindowsItem("Manage Associations", new Associations(), null));
-                    items.Add(new WindowsItem("Manage Fighters", new Fighters(), null));
-                    items.Add(new WindowsItem("Manage Tournaments", new Tournaments(), null));
-                    items.Add(new WindowsItem("System Settings", new Settings(), null));
+                    items.Add(new WindowsItem("Manage Associations", new Associations(user), null));
+                    items.Add(new WindowsItem("Manage Fighters", new Fighters(user), null));
+                    items.Add(new WindowsItem("Manage Tournaments", new Tournaments(user), null));
+                    items.Add(new WindowsItem("System Settings", new Settings(user), null));
                 }
 
                 //report

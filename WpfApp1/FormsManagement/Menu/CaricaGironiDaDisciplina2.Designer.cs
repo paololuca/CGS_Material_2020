@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CircuitoGareUISP.FormsManagement.Menu {
+namespace FormsManagement.Menu {
     using System;
     
     
@@ -61,7 +61,7 @@ namespace CircuitoGareUISP.FormsManagement.Menu {
                     global::System.Threading.Monitor.Enter(InternalSyncObject);
                     try {
                         if (object.ReferenceEquals(_resourceManager, null)) {
-                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("CircuitoGareUISP.FormsManagement.Menu.CaricaGironiDaDisciplina", typeof(CaricaGironiDaDisciplina).Assembly));
+                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("FormsManagement.Menu.CaricaGironiDaDisciplina", typeof(CaricaGironiDaDisciplina).Assembly));
                         }
                     }
                     finally {

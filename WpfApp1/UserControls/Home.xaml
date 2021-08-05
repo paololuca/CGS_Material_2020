@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image Source="../img/weapon-swords-crossed-512.png" Stretch="Uniform" Width="100" Height="100" />
+            <Image Source="../img/swordsCrossed.png" Stretch="Uniform" Width="100" Height="100" />
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Welcome to the Tournamanents Management System</TextBlock>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"

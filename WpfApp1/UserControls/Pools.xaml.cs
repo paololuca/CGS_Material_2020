@@ -21,6 +21,7 @@ namespace HEMATournamentSystem
 
         private CaricaGironiDaDisciplina caricaGironi = null;
         List<List<AtletaEntity>> gironi = new List<List<AtletaEntity>>();
+        
         //Lista degli scontri per girone
         List<List<MatchEntity>> gironiIncontri = null;
 
@@ -32,9 +33,11 @@ namespace HEMATournamentSystem
         private int disciplineId;
         private string disciplineName;
         private int atletiAmmessiEliminatorie;
+        private readonly LoginUser user;
 
-        public Pools()
+        public Pools(LoginUser user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
@@ -118,7 +121,7 @@ namespace HEMATournamentSystem
 
                         gironiIncontri.Add(l);
                         string title = "Girone " + (tabControlPool.Items.Count + 1).ToString();
-                        tabControlPool.Items.Add(ElaboraTab(title, g, l, (tabControlPool.Items.Count + 1)));
+                        tabControlPool.Items.Add(ElaboraTab(title, g, l, tabControlPool.Items.Count + 1));
                     }
                     idGirone++;
                 }
@@ -166,17 +169,24 @@ namespace HEMATournamentSystem
                 System.Windows.Forms.MessageBoxButtons.OKCancel,
                 System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
             {
-                Helper.DeleteAllPahases(tournamentId, disciplineId);
+                //TODO Helper.DeleteAllPahases(tournamentId, disciplineId);
+
+                foreach (var p in tabControlPool.Items)
+                    Console.WriteLine(p.GetType());
+
+                //TODO calcolo dei valori presi da DB
 
                 atletiAmmessiEliminatorie = numeroAtletiTorneoDisciplina >= 54 ? 32 :
                     numeroAtletiTorneoDisciplina >= 24 ? 16 :
                     numeroAtletiTorneoDisciplina >= 12 ? 8 : 4;
 
+                //TODO salvare tutti i tab
+
                 Window validaAtleti = new CheckResult(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, atletiAmmessiEliminatorie);
                 
 
                 validaAtleti.Closing += new CancelEventHandler(creaEliminatorie_FormClosed);
-
+                
                 validaAtleti.Show();
             }
 
@@ -184,7 +194,13 @@ namespace HEMATournamentSystem
 
         private void creaEliminatorie_FormClosed(object sender, CancelEventArgs e)
         {
-            
+            CheckResult windowResult = (sender as CheckResult);
+
+            if(windowResult.WindowCheckResult)
+                MessageBox.Show("User clicked OK");
+            else
+                MessageBox.Show("User clicked cancel");
+
         }
 
         #region Export
@@ -223,10 +239,11 @@ namespace HEMATournamentSystem
 
         }
 
-        private void BtnOpen16Final_Click(object sender, RoutedEventArgs e)
+        private void btnOpenFinal_Click(object sender, RoutedEventArgs e)
         {
 
         }
         #endregion
+
     }
 }

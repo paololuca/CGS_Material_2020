@@ -18,6 +18,7 @@ namespace Report
         private int _idTorneo;
         private int _idDisciplina;
         private string _categoria;
+
         public ReportRisultatiTorneo(int idTorneo, int idDisciplina, string categoria)
         {
             _idTorneo = idTorneo;

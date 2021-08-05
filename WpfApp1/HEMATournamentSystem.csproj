@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1A6589AC-1A08-49D6-842D-960B05C5B36D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CircuitoGareUISP</RootNamespace>
-    <AssemblyName>CircuitoGareUISP</AssemblyName>
+    <RootNamespace>HEMATournamentSystem</RootNamespace>
+    <AssemblyName>HEMATournamentSystem</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -85,7 +85,9 @@
     <Reference Include="ShowMeTheXAML.AvalonEdit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.1.0.12\lib\net45\ShowMeTheXAML.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -112,7 +114,8 @@
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusinessEntity\EntityDAO\RankingByYear.cs" />
-    <Compile Include="Engine\EngineType.cs" />
+    <Compile Include="BusinessEntity\Type\PhasesType.cs" />
+    <Compile Include="Engine\Type\EngineType.cs" />
     <Compile Include="FormsManagement\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
     </Compile>
@@ -131,13 +134,26 @@
       <DependentUpon>CheckResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
-    <Compile Include="Resources\Helper\FighterStatistics_DAL.cs" />
+    <Compile Include="Resources\Helper\SqlDal_FighterStatistics.cs" />
+    <Compile Include="Resources\Helper\SqlDal_Associations.cs" />
+    <Compile Include="Resources\Helper\SqlDal_Fighters.cs" />
+    <Compile Include="Resources\Helper\PathResolver.cs" />
+    <Compile Include="Resources\Helper\SqlDal_Tournaments.cs" />
     <Compile Include="UserControls\Associations.xaml.cs">
       <DependentUpon>Associations.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Common\NotEmptyValidationRule.cs" />
     <Compile Include="UserControls\Fighters.xaml.cs">
       <DependentUpon>Fighters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FinalsTransitions.xaml.cs">
+      <DependentUpon>FinalsTransitions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Phases\Finals16.xaml.cs">
+      <DependentUpon>Finals16.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Phases\Finals8.xaml.cs">
+      <DependentUpon>Finals8.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -173,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\FinalsTransitions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,7 +211,7 @@
     <Compile Include="BusinessEntity\Entity\AsdEntity.cs" />
     <Compile Include="BusinessEntity\Entity\AtletaEntity.cs" />
     <Compile Include="BusinessEntity\Entity\DisciplinaEntity.cs" />
-    <Compile Include="BusinessEntity\Entity\LoginProfile.cs" />
+    <Compile Include="BusinessEntity\Type\ProfileType.cs" />
     <Compile Include="BusinessEntity\Entity\LoginUser.cs" />
     <Compile Include="BusinessEntity\Entity\MatchEntity.cs" />
     <Compile Include="BusinessEntity\Entity\TorneoEntity.cs" />
@@ -289,6 +309,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Phases\Finals16.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Phases\Finals8.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,7 +419,6 @@
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-Light.ttf" />
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-LightItalic.ttf" />
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-Regular.ttf" />
-    <None Include="img\Logo SAAM.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -440,6 +467,7 @@
       <DependentUpon>Tornei.mdf</DependentUpon>
     </Content>
     <Content Include="DLL\IronPdf.dll" />
+    <Resource Include="img\swords.png" />
     <Resource Include="img\Menu\information.png" />
     <Resource Include="img\LectureMarozzo.png" />
     <Resource Include="img\Menu\home.png" />
@@ -448,10 +476,7 @@
     <Resource Include="img\Material\ms-icon-310x310.png" />
     <Resource Include="DLL\IronPdf.XML" />
     <Content Include="DLL\NReco.PdfGenerator.dll" />
-    <Resource Include="img\128728-simple-red-square-icon-business-tool-sword-sc48.png" />
     <Resource Include="img\bracket16.png" />
-    <Resource Include="img\create.png" />
-    <Resource Include="img\favicon.ico" />
     <Resource Include="img\group.ico" />
     <Resource Include="img\img-logo-big.png" />
     <Resource Include="img\Man2.ico" />
@@ -460,7 +485,7 @@
     <Resource Include="img\quit.png" />
     <Resource Include="img\Schizzo.png" />
     <Resource Include="img\splash.png" />
-    <Resource Include="img\weapon-swords-crossed-512.png" />
+    <Resource Include="img\swordsCrossed.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -499,7 +524,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PDF\" />
-    <Folder Include="UserControls\Phases\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />

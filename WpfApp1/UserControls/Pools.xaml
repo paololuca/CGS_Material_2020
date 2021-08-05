@@ -34,16 +34,16 @@
                                  Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                  ToggleCheckedContentCommandParameter="wowsers"
                                  ToolTip="Load specific phase" 
-                                 Width="36" Margin="984,0,0,547" Height="Auto" Background="#FF28D137" BorderBrush="#FF30F942">
+                                 Width="36" Margin="984,0,0,547" Height="Auto" Background="#FF673AB7" BorderBrush="#FF673AB7">
             <materialDesign:PopupBox.ToggleContent>
                 <materialDesign:PackIcon Kind="Tournament" Width="24" Height="24"/>
             </materialDesign:PopupBox.ToggleContent>
             <StackPanel>
-                <Button Name="btnOpen16th" ToolTip="Round of 16" Content="16th" Background="#FF30F942" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen16th_Click"></Button>
-                <Button Name="btnOpen8th" ToolTip="Round of 8" Content="8th" Background="#FF30F942" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen8th_Click"></Button>
-                <Button Name="btnOpen4th" ToolTip="Ruarter finals" Content="4th" Background="#FF30F942" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen4th_Click"></Button>
-                <Button Name="btnOpenSemifinal" ToolTip="Semifinals" Content="SF" Background="#FF30F942" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpenSemifinal_Click"></Button>
-                <Button Name="btnOpen16Final" ToolTip="Finals finals" Content="F" Background="#FF30F942" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen16Final_Click"></Button>
+                <Button Name="btnOpen16th" ToolTip="1/16 Finals" Content="1/16" Background="#FF673AB7" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen16th_Click" FontWeight="Bold"></Button>
+                <Button Name="btnOpen8th" ToolTip="1/8 Finals" Content="1/8" Background="#FF673AB7" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen8th_Click" FontWeight="Bold"></Button>
+                <Button Name="btnOpen4th" ToolTip="1/4 Finals" Content="1/4" Background="#FF673AB7" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpen4th_Click" FontWeight="Bold"></Button>
+                <Button Name="btnOpenSemifinal" ToolTip="Semifinals" Content="SF" Background="#FF673AB7" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="BtnOpenSemifinal_Click" FontWeight="Bold"></Button>
+                <Button Name="btnOpenFinal" ToolTip="Finals" Content="F" Background="#FF673AB7" BorderBrush="#FF7DD0FF" Foreground="#DDFFFFFF" Click="btnOpenFinal_Click" FontWeight="Bold"></Button>
             </StackPanel>
         </materialDesign:PopupBox>
 

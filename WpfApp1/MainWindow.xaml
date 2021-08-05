@@ -16,7 +16,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{materialDesign:MaterialDesignFont}" 
         ResizeMode="CanMinimize"
-        Icon="img/Man2.ico">
+        Icon="img/swords.png">
     <Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy" />
     </Window.CommandBindings>

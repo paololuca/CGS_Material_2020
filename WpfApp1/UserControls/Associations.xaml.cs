@@ -23,9 +23,11 @@ namespace HEMATournamentSystem
     public partial class Associations : UserControl
     {
         private List<AsdEntity> associations;
+        private readonly LoginUser user;
 
-        public Associations()
+        public Associations(LoginUser user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
@@ -45,7 +47,7 @@ namespace HEMATournamentSystem
 
         }
 
-        private void BtnDetailsAssociation_Click(object sender, RoutedEventArgs e)
+        private void BtnMigrateAssociation_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -76,6 +78,16 @@ namespace HEMATournamentSystem
         private void BtnSaveAssociation_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO to implement
+        }
+
+        private void BtnExport_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO to implement
         }
     }
 }

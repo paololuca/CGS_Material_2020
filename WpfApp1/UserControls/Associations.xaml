@@ -19,12 +19,12 @@
                         materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
-        <materialDesign:PackIcon Kind="HomeAdd" Margin="146,80,0,0" Height="108" Width="108" />
+        <materialDesign:PackIcon Kind="HomeAccount" Margin="146,80,0,0" Height="108" Width="108" />
         <TextBox Name="txtAssociation" materialDesign:HintAssist.Hint="Association" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="67,202,679,335" />
-        <Button x:Name="btnSaveAssociation" Height="Auto"  Click="BtnSaveAssociation_Click" Background="#FF28D137" Margin="200,282,679,256" RenderTransformOrigin="0.5,0.5"  >
+        <Button x:Name="btnSaveAssociation" Height="Auto"  Click="BtnSaveAssociation_Click" Background="#FF28D137" Margin="185,274,679,264" RenderTransformOrigin="0.5,0.5"  >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Floppy"/>
-                <TextBlock Text="  Save Fighter"/>
+                <TextBlock Text="  Save Association"/>
             </StackPanel>
         </Button>
         <DataGrid x:Name="dataGridAssociations" HorizontalAlignment="Left" Height="485" Margin="482,85,0,0" VerticalAlignment="Top" Width="538"
@@ -34,9 +34,9 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnDetailsAssociation" Height="32"  Click="BtnDetailsAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                            <Button x:Name="btnMigrateAssociation" Height="32"  Click="BtnMigrateAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Details"/>
+                                    <materialDesign:PackIcon Kind="Transfer"/>
                                 </StackPanel>
                             </Button>
                         </DataTemplate>
@@ -55,6 +55,16 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnExport" Height="Auto"  Click="BtnExport_Click" Background="#FF673AB7" Margin="535,50,447,501" RenderTransformOrigin="0.5,0.5" ToolTip="Export Associations" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FileExport"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnExport_Copy" Height="Auto"  Click="BtnExport_Copy_Click" Background="#FF673AB7" Margin="482,50,500,501" RenderTransformOrigin="0.5,0.5" ToolTip="Import Associations" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FileImport"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </UserControl>

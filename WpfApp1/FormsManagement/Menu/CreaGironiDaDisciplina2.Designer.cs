@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CircuitoGareUISP.FormsManagement.Menu {
+namespace FormsManagement.Menu {
     using System;
     
     
@@ -32,12 +32,6 @@ namespace CircuitoGareUISP.FormsManagement.Menu {
         
         private static global::System.Globalization.CultureInfo _resourceCulture;
         
-        /// <summary>
-        /// Initializes a CreaGironiDaDisciplina object.
-        /// </summary>
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public CreaGironiDaDisciplina() {
-        }
         
         /// <summary>
         /// Thread safe lock object used by this class.
@@ -61,7 +55,7 @@ namespace CircuitoGareUISP.FormsManagement.Menu {
                     global::System.Threading.Monitor.Enter(InternalSyncObject);
                     try {
                         if (object.ReferenceEquals(_resourceManager, null)) {
-                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("CircuitoGareUISP.FormsManagement.Menu.CreaGironiDaDisciplina", typeof(CreaGironiDaDisciplina).Assembly));
+                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("FormsManagement.Menu.CreaGironiDaDisciplina", typeof(CreaGironiDaDisciplina).Assembly));
                         }
                     }
                     finally {

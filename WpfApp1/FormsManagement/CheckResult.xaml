@@ -8,30 +8,32 @@
         mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
         Title="Chek Result" Height="728.5" Width="900">
-    <Grid>
+    <Grid Margin="0,0,0,-21">
         <DataGrid x:Name="dataGridResult" HorizontalAlignment="Left" Height="552" Margin="31,32,0,0" VerticalAlignment="Top" Width="827"
                   CanUserSortColumns="False" CanUserAddRows="False" materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                   materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" 
                   AutoGeneratingColumn="DataGridResult_AutoGeneratingColumn" SelectionUnit="Cell" SelectionMode="Extended"/>
 
-        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FF28D137" Margin="621,613,159,24" >
+        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="10,589,0,0" VerticalAlignment="Top" Width="872"/>
+        
+        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FF28D137" Margin="616,618,164,47" IsCancel="True">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Cancel"/>
                 <TextBlock Text="  Cancel"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnSaveResult" Height="32"  Click="BtnSaveResult_Click" Background="#FF28D137" Margin="746,613,34,24" >
+        <Button x:Name="btnSaveResult" Height="32"  Click="BtnSaveResult_Click" Background="#FF28D137" Margin="733,618,34,47" IsDefault="True" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Create"/>
                 <TextBlock Text="  Confirm"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="31,613,748,24" >
+        <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="31,618,748,47" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Pdf"/>
                 <TextBlock Text="  Print"/>
             </StackPanel>
         </Button>
-        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="10,589,0,0" VerticalAlignment="Top" Width="872"/>
+        
     </Grid>
 </Window>

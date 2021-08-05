@@ -8,6 +8,7 @@ using System.Collections;
 using System;
 using System.Linq;
 using System.Text;
+using BusinessEntity.Type;
 
 namespace HEMATournamentSystem
 {
@@ -16,8 +17,12 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class Settings : UserControl
     {
-        public Settings()
+        private readonly LoginUser user;
+
+        public Settings(LoginUser user)
         {
+            this.user = user;
+
             InitializeComponent();
 
             LoadUsersList();
@@ -72,8 +77,8 @@ namespace HEMATournamentSystem
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            cmbAccountType.ItemsSource = Enum.GetValues(typeof(LoginProfile)).Cast<LoginProfile>();
-            cmbAccountType.SelectedValue = LoginProfile.None;
+            cmbAccountType.ItemsSource = Enum.GetValues(typeof(ProfileType)).Cast<ProfileType>();
+            cmbAccountType.SelectedValue = ProfileType.None;
         }
 
 
@@ -104,7 +109,7 @@ namespace HEMATournamentSystem
                 PopUpBoxes.ShowPopup("User Name cannot be empty");
             else if (txtPassword.Password == "")
                 PopUpBoxes.ShowPopup("Password cannot be empty");
-            else if ((LoginProfile)cmbAccountType.SelectedValue == LoginProfile.None)
+            else if ((ProfileType)cmbAccountType.SelectedValue == ProfileType.None)
                 PopUpBoxes.ShowPopup("Choose a valid Account Type");
             else
             {
@@ -115,7 +120,7 @@ namespace HEMATournamentSystem
 
                     StringBuilder sb = EncryptionHelper.GetEncryptedPassword(txtPassword.Password);
 
-                    var newId = HelperMasterDB.AddNewAccount(txtUserName.Text, sb.ToString(), (LoginProfile)cmbAccountType.SelectedValue);
+                    var newId = HelperMasterDB.AddNewAccount(txtUserName.Text, sb.ToString(), (ProfileType)cmbAccountType.SelectedValue);
 
                     if (newId < 0)
                         PopUpBoxes.ShowPopup("Account not created");
@@ -123,7 +128,7 @@ namespace HEMATournamentSystem
                     {
                         txtUserName.Text = "";
                         txtPassword.Password = "";
-                        cmbAccountType.SelectedValue = LoginProfile.None;
+                        cmbAccountType.SelectedValue = ProfileType.None;
 
                         //referesh user lsit
                         LoadUsersList();

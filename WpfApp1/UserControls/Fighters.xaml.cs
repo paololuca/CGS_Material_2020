@@ -14,9 +14,11 @@ namespace HEMATournamentSystem
     public partial class Fighters : UserControl
     {
         private List<AtletaEntity> atletiPresenti;
+        private readonly LoginUser user;
 
-        public Fighters()
+        public Fighters(LoginUser user)
         {
+            this.user = user;
             InitializeComponent();
         }
 

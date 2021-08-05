@@ -2,6 +2,7 @@
 using System.Windows;
 using Resources;
 using BusinessEntity.Entity;
+using BusinessEntity.Type;
 
 namespace HEMATournamentSystem
 {
@@ -19,6 +20,12 @@ namespace HEMATournamentSystem
             _connectionAvailable = Helper.TestConnectionString();
             //TODOPL da spostare var f = new FighterStats();
             //TODOPL da spostare f.Show();
+
+            var currentUser = HelperMasterDB.CheckLogin("admin");
+            var main = new MainWindow(currentUser);
+            main.Show();
+
+            this.Close();
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -47,7 +54,7 @@ namespace HEMATournamentSystem
                 {
                     PopUpBoxes.ShowPopup("The user '"+ txtBoxUsername.Text + "' is not active");
                 }
-                else if(currentUser.Type == LoginProfile.None)
+                else if(currentUser.Type == ProfileType.None)
                 {
                     PopUpBoxes.ShowPopup("The user '" + txtBoxUsername.Text + "' is not allowed to access due its privileges");
                 }

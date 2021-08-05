@@ -16,6 +16,9 @@ namespace FormsManagement
         Int32 idTorneo = 0;
         Int32 idDisciplina = 0;
         Int32 atletiAmmessiEliminatorie;
+
+        public bool WindowCheckResult = false;
+
         public CheckResult(Int32 idTorneo, Int32 idDisciplina, Int32 atletiAmmessiEliminatorie)
         {
             this.idTorneo = idTorneo;
@@ -93,15 +96,23 @@ namespace FormsManagement
 
         private void BtnSaveResult_Click(object sender, RoutedEventArgs e)
         {
+                        
             if (CountSelectedRowInDataGrid() != atletiAmmessiEliminatorie)
             {
                 System.Windows.Forms.MessageBox.Show("Il numero di atleti selezionati non è " + atletiAmmessiEliminatorie + ": controllare la lista", "ERRORE", 
                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
+            else
+            {
+                //TODO save result
+                WindowCheckResult = true;
+                this.Close();
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
+            WindowCheckResult = false;
             this.Close();
         }
 
@@ -113,8 +124,5 @@ namespace FormsManagement
                 Helper.GetTorneoById(this.idTorneo).Name,
                 Helper.GetDisciplinaById(this.idDisciplina));
         }
-
-       
-       
     }
 }

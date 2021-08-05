@@ -16,9 +16,11 @@ namespace HEMATournamentSystem
         private List<TorneoEntity> newTournamentList;
         private List<TorneoEntity> activeTournamentList;
         private List<TorneoEntity> closedTournamentList;
+        private readonly LoginUser user;
 
-        public Tournaments()
+        public Tournaments(LoginUser user)
         {
+            this.user = user;
             InitializeComponent();
         }
 

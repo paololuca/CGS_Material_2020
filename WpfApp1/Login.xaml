@@ -9,7 +9,7 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="SingleBorderWindow" 
-        FontFamily="Segoe UI Emoji" Icon="img/group.ico">
+        FontFamily="Segoe UI Emoji" Icon="img/swords.png" Background="{x:Null}">
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <Grid>
             <Rectangle Height="500" VerticalAlignment="Top">
@@ -37,7 +37,7 @@
             <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsDefault="True"
                     Margin="0,65" Content="LOGIN" Background="#FF202AFF" Click="BtnLogin_Click"/>
             <TextBlock Text="Powered By PL®" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Wheat" Cursor="Hand"/>
-            
+
         </Grid>
     </materialDesign:DialogHost>
 </Window>

@@ -71,7 +71,7 @@ namespace FormsManagement
 
         private static List<RankingByYear> LoadBugInfo(int idAtleta, int idDisciplina)
         {
-            var result = FighterStatistics_DAL.GetFighterRankingByCategory(idAtleta, idDisciplina);
+            var result = SqlDal_FighterStatistics.GetFighterRankingByCategory(idAtleta, idDisciplina);
 
             return result;
         }

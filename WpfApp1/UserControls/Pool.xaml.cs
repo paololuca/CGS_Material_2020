@@ -246,7 +246,7 @@ namespace HEMATournamentSystem
 
         private void BtnSavePool_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("pool saved");
         }
     }
 }

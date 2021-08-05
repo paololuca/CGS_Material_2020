@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using BusinessEntity.Type;
+using System;
+
 
 namespace BusinessEntity.Entity
 {
@@ -12,7 +9,7 @@ namespace BusinessEntity.Entity
         public int UserId { get; set; }
         public String UserName { get; set; }
         public String Password { get; set; }
-        public LoginProfile Type { get; set; }
+        public ProfileType Type { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsEnabled { get; set; }
     }

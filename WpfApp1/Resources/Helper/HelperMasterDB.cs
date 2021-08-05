@@ -1,4 +1,5 @@
 ﻿using BusinessEntity.Entity;
+using BusinessEntity.Type;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,8 +38,8 @@ namespace Resources
                     {
                         UserName = userName,
                         Password = reader["Password"].ToString().ToUpper(),
-                        IsAdmin = (LoginProfile)reader["UserType"] == LoginProfile.Admin,
-                        Type = (LoginProfile)reader["UserType"],
+                        IsAdmin = (ProfileType)reader["UserType"] == ProfileType.Admin,
+                        Type = (ProfileType)reader["UserType"],
                         IsEnabled = Convert.ToBoolean(reader["Enabled"])
                     };
                 }
@@ -148,8 +149,8 @@ namespace Resources
                         UserId = Convert.ToInt32(reader["UserId"]),
                         UserName = reader["UserName"].ToString(),
                         Password = reader["Password"].ToString().ToUpper(),
-                        IsAdmin = (LoginProfile)reader["UserType"] == LoginProfile.Admin,
-                        Type = (LoginProfile)reader["UserType"],
+                        IsAdmin = (ProfileType)reader["UserType"] == ProfileType.Admin,
+                        Type = (ProfileType)reader["UserType"],
                         IsEnabled = Convert.ToBoolean(reader["Enabled"])
                     });
                 }
@@ -202,7 +203,7 @@ namespace Resources
         }
 
         #region Insert
-        internal static int AddNewAccount(string userName, string password, LoginProfile accountType)
+        internal static int AddNewAccount(string userName, string password, ProfileType accountType)
         {
             String commandText = "INSERT INTO Account VALUES ('" + userName + "'," 
                 + (int)accountType 

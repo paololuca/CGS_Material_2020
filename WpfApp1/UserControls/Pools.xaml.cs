@@ -196,8 +196,13 @@ namespace HEMATournamentSystem
         {
             CheckResult windowResult = (sender as CheckResult);
 
-            if(windowResult.WindowCheckResult)
-                MessageBox.Show("User clicked OK");
+            if (windowResult.WindowCheckResult)
+            {
+                var finals = new FinalsTransitions(0);
+
+                
+                finals.Show();
+            }
             else
                 MessageBox.Show("User clicked cancel");
 

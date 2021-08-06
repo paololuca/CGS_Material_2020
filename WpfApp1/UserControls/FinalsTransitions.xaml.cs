@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UserControls.Phases;
 
 namespace HEMATournamentSystem
 {
@@ -19,14 +20,64 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class FinalsTransitions : Window
     {
-        public FinalsTransitions()
+
+        /*
+         * 0 = 1/16
+         * 1 = 1/8
+         * 2 = 1/4
+         * 3 = semifinals
+         * 4 = finals
+         */
+        private const int MAX_TRANSITIONER_INDEX = 4;
+        private int _currentTransition = 0;
+        private int _firstTransitionValid = 0;
+
+        public FinalsTransitions(int initialPhase)  //TODO initiale transitioner, e non posso andare indietro, MAI
         {
             InitializeComponent();
+
+            SetInitialIndexs(initialPhase);
+
+            SetButton();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void SetInitialIndexs(int initialPhase)
         {
+            _firstTransitionValid = initialPhase;
+            _currentTransition = initialPhase;
+            finalTransition.SelectedIndex = _currentTransition;
+        }
 
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            _currentTransition--;
+            finalTransition.SelectedIndex = _currentTransition;
+
+
+            //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
+            var panel = (IFinalsPhase)finalTransition.SelectedItem;
+            panel.LoadField();
+
+            SetButton();
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            _currentTransition++;
+            finalTransition.SelectedIndex = _currentTransition;
+
+            //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
+            var panel = (IFinalsPhase)finalTransition.SelectedItem;
+            panel.LoadField();
+
+            SetButton();
+
+        }
+
+        private void SetButton()
+        {
+            btnPrevious.IsEnabled = _currentTransition == 0 ? false : true;
+            btnNext.IsEnabled = _currentTransition == MAX_TRANSITIONER_INDEX ? false : true;
         }
     }
 }

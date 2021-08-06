@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="UserControls.Phases.Finals"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Width="1100" Height="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="17"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Grid.Row="0" Mode="Dark" Height="74" Background="#FF1C83FF">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center">FINALS</TextBlock>
+        </materialDesign:ColorZone>
+
+        <StackPanel Grid.Row="2" Margin="10,10,0,0">
+            <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto"  Margin="0,0,10,0" Height="698">
+                <Button x:Name="btnSavePools" Height="58" Click="btnSavePools_Click" Background="#FF28D137"  HorizontalAlignment="Left" Width="127" Margin="943,630,0,0" VerticalAlignment="Top"  >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Floppy"/>
+                        <TextBlock Text="  Save"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

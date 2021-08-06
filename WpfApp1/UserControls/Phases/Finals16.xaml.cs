@@ -18,11 +18,21 @@ namespace UserControls.Phases
     /// <summary>
     /// Interaction logic for Finals16.xaml
     /// </summary>
-    public partial class Finals16 : UserControl
+    public partial class Finals16 : UserControl, IFinalsPhase
     {
         public Finals16()
         {
             InitializeComponent();
+        }
+
+        public void LoadField()
+        {
+            
+        }
+
+        private void btnSavePools_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

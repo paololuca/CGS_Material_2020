@@ -1049,6 +1049,7 @@ namespace Resources
                 c.Close();
             }
         }
+
         public static List<AsdEntity> GetAllAsd(bool onlyList)
         {
             String commandText = "SELECT * FROM Asd ORDER BY Nome_ASD";

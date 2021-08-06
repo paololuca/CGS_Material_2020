@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>img\Man2.ico</ApplicationIcon>
+    <ApplicationIcon>img\swords.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CodeDisplayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -60,6 +60,9 @@
     </Reference>
     <Reference Include="DynamicDataDisplay, Version=0.3.0.1, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicDataDisplay.0.3.0.1\lib\net45\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.34.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.34\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -114,10 +117,60 @@
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusinessEntity\EntityDAO\RankingByYear.cs" />
+    <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
+    <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
     <Compile Include="FormsManagement\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\AddAnagraphic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\AddAnagraphic.designer.cs">
+      <DependentUpon>AddAnagraphic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\AddTorneo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\AddTorneo.designer.cs">
+      <DependentUpon>AddTorneo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\DeleteTorneo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\DeleteTorneo.designer.cs">
+      <DependentUpon>DeleteTorneo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\GestioneAtleti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\GestioneAtleti.designer.cs">
+      <DependentUpon>GestioneAtleti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ManageTournament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ManageTournament.designer.cs">
+      <DependentUpon>ManageTournament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ModificaTorneo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ModificaTorneo.designer.cs">
+      <DependentUpon>ModificaTorneo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ModifyAnagrafic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\ModifyAnagrafic.designer.cs">
+      <DependentUpon>ModifyAnagrafic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsManagement\Settings\Settings.designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsManagement\ValidaEliminatorie.cs">
       <SubType>Form</SubType>
@@ -134,11 +187,12 @@
       <DependentUpon>CheckResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
-    <Compile Include="Resources\Helper\SqlDal_FighterStatistics.cs" />
-    <Compile Include="Resources\Helper\SqlDal_Associations.cs" />
-    <Compile Include="Resources\Helper\SqlDal_Fighters.cs" />
+    <Compile Include="Resources\Helper\HemaRatingsHelper.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_FighterStatistics.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_Associations.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />
     <Compile Include="Resources\Helper\PathResolver.cs" />
-    <Compile Include="Resources\Helper\SqlDal_Tournaments.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_Tournaments.cs" />
     <Compile Include="UserControls\Associations.xaml.cs">
       <DependentUpon>Associations.xaml</DependentUpon>
     </Compile>
@@ -149,11 +203,21 @@
     <Compile Include="UserControls\FinalsTransitions.xaml.cs">
       <DependentUpon>FinalsTransitions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Phases\Finals.xaml.cs">
+      <DependentUpon>Finals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Phases\Finals16.xaml.cs">
       <DependentUpon>Finals16.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Phases\Finals4.xaml.cs">
+      <DependentUpon>Finals4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Phases\Finals8.xaml.cs">
       <DependentUpon>Finals8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Phases\Interface\IFinalsPhase.cs" />
+    <Compile Include="UserControls\Phases\SemiFinals.xaml.cs">
+      <DependentUpon>SemiFinals.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -238,47 +302,47 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreaGironiDaDisciplina.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report\OutputRisultatiEliminatorieTorneo.cs" />
-    <Compile Include="Report\OutputRisultatiTorneo.cs" />
-    <Compile Include="Report\ReportAssociazioni.cs">
+    <Compile Include="Resources\Report\OutputRisultatiEliminatorieTorneo.cs" />
+    <Compile Include="Resources\Report\OutputRisultatiTorneo.cs" />
+    <Compile Include="FormsManagement\Report\ReportAssociazioni.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\ReportAssociazioni.designer.cs">
+    <Compile Include="FormsManagement\Report\ReportAssociazioni.designer.cs">
       <DependentUpon>ReportAssociazioni.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportAssociazioni2.Designer.cs">
+    <Compile Include="FormsManagement\Report\ReportAssociazioni2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportAssociazioni.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportAtleti.cs">
+    <Compile Include="FormsManagement\Report\ReportAtleti.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\ReportAtleti.designer.cs">
+    <Compile Include="FormsManagement\Report\ReportAtleti.designer.cs">
       <DependentUpon>ReportAtleti.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportAtleti2.Designer.cs">
+    <Compile Include="FormsManagement\Report\ReportAtleti2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportAtleti.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportRisultatiTorneo.cs">
+    <Compile Include="FormsManagement\Report\ReportRisultatiTorneo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Report\ReportRisultatiTorneo.designer.cs">
+    <Compile Include="FormsManagement\Report\ReportRisultatiTorneo.designer.cs">
       <DependentUpon>ReportRisultatiTorneo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportRisultatiTorneo2.Designer.cs">
+    <Compile Include="FormsManagement\Report\ReportRisultatiTorneo2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportRisultatiTorneo.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\EncryptionHelper.cs" />
-    <Compile Include="Resources\ExportPdf.cs" />
+    <Compile Include="Resources\Helper\EncryptionHelper.cs" />
+    <Compile Include="Engine\ExportPdfEngine.cs" />
     <Compile Include="Resources\FormattedString.cs" />
     <Compile Include="Resources\Helper\Helper.cs" />
     <Compile Include="Resources\Helper\HelperMasterDB.cs" />
-    <Compile Include="Resources\PdfManager.cs" />
+    <Compile Include="Resources\Manager\PdfManager.cs" />
     <Compile Include="Resources\PopUpBoxes.cs" />
     <Compile Include="Resources\ProgressBar.cs">
       <SubType>Form</SubType>
@@ -312,11 +376,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Phases\Finals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Phases\Finals16.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Phases\Finals4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Phases\Finals8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Phases\SemiFinals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -372,6 +448,30 @@
       <DependentUpon>CreaGironiDaDisciplina.cs</DependentUpon>
       <LastGenOutput>CreaGironiDaDisciplina2.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\AddAnagraphic.resx">
+      <DependentUpon>AddAnagraphic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\AddTorneo.resx">
+      <DependentUpon>AddTorneo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\DeleteTorneo.resx">
+      <DependentUpon>DeleteTorneo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\GestioneAtleti.resx">
+      <DependentUpon>GestioneAtleti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\ManageTournament.resx">
+      <DependentUpon>ManageTournament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\ModificaTorneo.resx">
+      <DependentUpon>ModificaTorneo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\ModifyAnagrafic.resx">
+      <DependentUpon>ModifyAnagrafic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsManagement\Settings\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormsManagement\ValidaEliminatorie.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>
       <DependentUpon>ValidaEliminatorie.cs</DependentUpon>
@@ -381,17 +481,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\ReportAssociazioni.resx">
+    <EmbeddedResource Include="FormsManagement\Report\ReportAssociazioni.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>
       <DependentUpon>ReportAssociazioni.cs</DependentUpon>
       <LastGenOutput>ReportAssociazioni2.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\ReportAtleti.resx">
+    <EmbeddedResource Include="FormsManagement\Report\ReportAtleti.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>
       <DependentUpon>ReportAtleti.cs</DependentUpon>
       <LastGenOutput>ReportAtleti2.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\ReportRisultatiTorneo.resx">
+    <EmbeddedResource Include="FormsManagement\Report\ReportRisultatiTorneo.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>
       <DependentUpon>ReportRisultatiTorneo.cs</DependentUpon>
       <LastGenOutput>ReportRisultatiTorneo2.Designer.cs</LastGenOutput>
@@ -467,6 +567,10 @@
       <DependentUpon>Tornei.mdf</DependentUpon>
     </Content>
     <Content Include="DLL\IronPdf.dll" />
+    <Resource Include="img\atleta_sfondo_bianco.jpg" />
+    <Resource Include="img\swords.ico" />
+    <Resource Include="swords.ico" />
+    <Resource Include="Swords.png" />
     <Resource Include="img\swords.png" />
     <Resource Include="img\Menu\information.png" />
     <Resource Include="img\LectureMarozzo.png" />

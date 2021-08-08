@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using HtmlAgilityPack;
+using WindowsFormsApplication1;
 
 namespace Resources
 {
@@ -20,13 +21,13 @@ namespace Resources
         public static async void SyncFigthersAsync()
         {
             ProgressBar p = new ProgressBar();
-            p.SetProgressBarTitle("Fighters");
+            //p.SetProgressBarTitle("Fighters");
 
             var response = await GetResponse(fightersUrl);
 
             List<HtmlNode> figtherNodes = GetNodes(response);
 
-            List<HemaRatingsFighter> hemaFigthers = new List<HemaRatingsFighter>();
+            List<HemaRatingsFighterEntity> hemaFigthers = new List<HemaRatingsFighterEntity>();
 
             p.InizializeProgressBar(1, figtherNodes.Count);
             p.Show();
@@ -45,7 +46,7 @@ namespace Resources
                     var figtherId = GetId(li);
                     int clubId = GetClubId(li);
 
-                    hemaFigthers.Add(new HemaRatingsFighter
+                    hemaFigthers.Add(new HemaRatingsFighterEntity
                     {
                         Id = figtherId,
                         IdClub = clubId,
@@ -65,13 +66,13 @@ namespace Resources
         public static async void SyncClubsAsync()
         {
             ProgressBar p = new ProgressBar();
-            p.SetProgressBarTitle("Clubs");
+            //p.SetProgressBarTitle("Clubs");
 
             var response = await GetResponse(clubsUrl);
             
             List<HtmlNode> clubNodes = GetNodes(response);
 
-            List<HemaRatingsClub> hemaClubs = new List<HemaRatingsClub>();
+            List<HemaRatingsClubEntity> hemaClubs = new List<HemaRatingsClubEntity>();
 
             p.InizializeProgressBar(1, clubNodes.Count);
             p.Show();
@@ -91,7 +92,7 @@ namespace Resources
                     var state = GetState(li);
                     var city = GetCity(li);
 
-                    hemaClubs.Add(new HemaRatingsClub
+                    hemaClubs.Add(new HemaRatingsClubEntity
                     {
                         Id = clubId,
                         Name = clubName,
@@ -226,7 +227,7 @@ namespace Resources
                 return TEST;
         }
         //TODO: l'inserimento deve essere in delta
-        private static void InsertFightersIntoDB(List<HemaRatingsFighter> hemaFigthers)
+        private static void InsertFightersIntoDB(List<HemaRatingsFighterEntity> hemaFigthers)
         {
             //throw new NotImplementedException();
         }

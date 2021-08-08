@@ -75,8 +75,8 @@ namespace HEMATournamentSystem
         {
             var filtered = activeTournamentList.
                 Where(tournament =>
-                tournament.Name.ToLower().Contains(txtSearchNewTournament.Text) ||
-                tournament.Note.ToLower().Contains(txtSearchNewTournament.Text)).ToList();
+                tournament.Name.ToLower().Contains(txtSearchActiveTournament.Text) ||
+                tournament.Note.ToLower().Contains(txtSearchActiveTournament.Text)).ToList();
 
             dataGridActiveTournament.ItemsSource = filtered;
         }
@@ -85,8 +85,8 @@ namespace HEMATournamentSystem
         {
             var filtered = closedTournamentList.
                 Where(tournament =>
-                tournament.Name.ToLower().Contains(txtSearchNewTournament.Text) ||
-                tournament.Note.ToLower().Contains(txtSearchNewTournament.Text)).ToList();
+                tournament.Name.ToLower().Contains(txtSearchClosedTournament.Text) ||
+                tournament.Note.ToLower().Contains(txtSearchClosedTournament.Text)).ToList();
 
             dataGridClosedTournament.ItemsSource = filtered;
         }

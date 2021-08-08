@@ -122,6 +122,7 @@ namespace HEMATournamentSystem
                         gironiIncontri.Add(l);
                         string title = "Girone " + (tabControlPool.Items.Count + 1).ToString();
                         tabControlPool.Items.Add(ElaboraTab(title, g, l, tabControlPool.Items.Count + 1));
+                        
                     }
                     idGirone++;
                 }
@@ -171,41 +172,58 @@ namespace HEMATournamentSystem
             {
                 //TODO Helper.DeleteAllPahases(tournamentId, disciplineId);
 
-                foreach (var p in tabControlPool.Items)
-                    Console.WriteLine(p.GetType());
+                //save all pools for safety
+                if (SaveAll())
+                {
 
-                //TODO calcolo dei valori presi da DB
+                    //TODO calcolo dei valori presi da DB
+                    atletiAmmessiEliminatorie = numeroAtletiTorneoDisciplina >= 54 ? 32 :
+                        numeroAtletiTorneoDisciplina >= 24 ? 16 :
+                        numeroAtletiTorneoDisciplina >= 12 ? 8 : 4;
 
-                atletiAmmessiEliminatorie = numeroAtletiTorneoDisciplina >= 54 ? 32 :
-                    numeroAtletiTorneoDisciplina >= 24 ? 16 :
-                    numeroAtletiTorneoDisciplina >= 12 ? 8 : 4;
+                    Window validaAtleti = new CheckResult(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, atletiAmmessiEliminatorie);
 
-                //TODO salvare tutti i tab
+                    validaAtleti.Closing += new CancelEventHandler(creaEliminatorie_FormClosed);
 
-                Window validaAtleti = new CheckResult(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, atletiAmmessiEliminatorie);
-                
-
-                validaAtleti.Closing += new CancelEventHandler(creaEliminatorie_FormClosed);
-                
-                validaAtleti.Show();
+                    validaAtleti.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Si è verificato un errore durante il salvataggio dei gironi \r\nContattare un amministratore",
+                                "ERRORE Applicazione", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
         }
 
+        private bool SaveAll()
+        {
+            bool saveAllResult = true;
+            for (int i = 0; i < tabControlPool.Items.Count; i++)
+            {
+                tabControlPool.SelectedIndex = i;
+                Pool p = (Pool)tabControlPool.SelectedContent;
+                saveAllResult = saveAllResult && p.SavePoolFromFather();
+            }
+
+            return saveAllResult;
+        }
+
         private void creaEliminatorie_FormClosed(object sender, CancelEventArgs e)
         {
-            CheckResult windowResult = (sender as CheckResult);
+            CheckResult result = (sender as CheckResult);
 
-            if (windowResult.WindowCheckResult)
+            if (result.WindowCheckResult)
             {
-                var finals = new FinalsTransitions(0);
+                FinalsTransitions finals = new FinalsTransitions(0);
 
                 
                 finals.Show();
             }
             else
-                MessageBox.Show("User clicked cancel");
-
+            {
+                //MessageBox.Show("User clicked cancel");
+            }
         }
 
         #region Export

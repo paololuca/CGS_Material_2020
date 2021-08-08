@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +41,7 @@ namespace WindowsFormsApplication1
 
         private void Search(String nome, String cognome)
         {
-            List<Atleta> atleti = Helper.GetAtletiFromNameAndSurname(nome, cognome);
+            List<AtletaEntity> atleti = Helper.GetAtletiFromNameAndSurname(nome, cognome);
 
             if (atleti != null)
             {
@@ -77,7 +79,7 @@ namespace WindowsFormsApplication1
 
         private void FullFillAssociationComboBox(Int32 idAtleta, Int32 idAsd)
         {
-            List<Asd> allAsd = Helper.GetAllAsd();
+            List<AsdEntity> allAsd = Helper.GetAllAsd(false);
             comboBoxNewAssociation.DataSource = allAsd.ToArray();
             comboBoxNewAssociation.ValueMember = "Id";
             this.comboBoxNewAssociation.DisplayMember = "NomeAsd";
@@ -117,7 +119,7 @@ namespace WindowsFormsApplication1
 
             IdAsd = (int)comboBoxNewAssociation.SelectedValue;
 
-            Atleta a = new Atleta()
+            AtletaEntity a = new AtletaEntity()
             {
                 IdAsd = IdAsd,
                 IdAtleta = IdAtleta,

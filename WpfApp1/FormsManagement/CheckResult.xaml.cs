@@ -13,11 +13,12 @@ namespace FormsManagement
     /// </summary>
     public partial class CheckResult : Window
     {
-        Int32 idTorneo = 0;
-        Int32 idDisciplina = 0;
-        Int32 atletiAmmessiEliminatorie;
+        private Int32 idTorneo = 0;
+        private Int32 idDisciplina = 0;
+        private Int32 atletiAmmessiEliminatorie;
 
         public bool WindowCheckResult = false;
+        private int _currentSelectedItems;
 
         public CheckResult(Int32 idTorneo, Int32 idDisciplina, Int32 atletiAmmessiEliminatorie)
         {
@@ -28,6 +29,9 @@ namespace FormsManagement
             InitializeComponent();
 
             CaricaAtletiPostGironi();
+
+            this._currentSelectedItems = atletiAmmessiEliminatorie;
+            SetLStatusLabel();
         }
 
         private void CaricaAtletiPostGironi()
@@ -37,8 +41,6 @@ namespace FormsManagement
             for (int i = 0; i < atletiAmmessiEliminatorie; i++)
                 gironiConclusi[i].Qualificato = true;
 
-            lblStatus.Content = " Selezionati " + atletiAmmessiEliminatorie + " Atleti per la fase successiva";
-
             dataGridResult.ItemsSource = gironiConclusi;
         }
 
@@ -46,7 +48,6 @@ namespace FormsManagement
         {
             Style horizontalAlignment = new Style();
             horizontalAlignment.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
-
 
             switch (e.Column.Header.ToString())
             {
@@ -60,6 +61,7 @@ namespace FormsManagement
                 case "Nome":
                 case "Cognome":
                     e.Column.Visibility = Visibility.Visible;
+                    e.Column.IsReadOnly = true;
                     break;
                 case "Qualificato":
                     e.Column.Visibility = Visibility.Visible;
@@ -73,31 +75,22 @@ namespace FormsManagement
                     e.Column.HeaderStyle = horizontalAlignment;
                     e.Column.IsReadOnly = true;
                     break;
-            }            
+            }
+
+
         }
 
        
 
         private void SetLStatusLabel()
         {
-            lblStatus.Content = " Selezionati " + CountSelectedRowInDataGrid() + " Atleti per la fase successiva";
-        }
-
-        private int CountSelectedRowInDataGrid()
-        {
-            int i = 0;
-            foreach(GironiConclusi girone in dataGridResult.Items)
-            {
-                i += girone.Qualificato ? 1 : 0;
-            }
-
-            return i;
+            lblStatus.Content = " Selezionati " + _currentSelectedItems + " Atleti per la fase successiva";
         }
 
         private void BtnSaveResult_Click(object sender, RoutedEventArgs e)
         {
                         
-            if (CountSelectedRowInDataGrid() != atletiAmmessiEliminatorie)
+            if (_currentSelectedItems != atletiAmmessiEliminatorie)
             {
                 System.Windows.Forms.MessageBox.Show("Il numero di atleti selezionati non è " + atletiAmmessiEliminatorie + ": controllare la lista", "ERRORE", 
                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
@@ -123,6 +116,30 @@ namespace FormsManagement
                 dataGridResult,
                 Helper.GetTorneoById(this.idTorneo).Name,
                 Helper.GetDisciplinaById(this.idDisciplina));
+        }
+
+        private void dataGridResult_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column as DataGridBoundColumn;
+                if (column != null)
+                {
+                    
+                    int rowIndex = e.Row.GetIndex();
+
+                    var row = (GironiConclusi)dataGridResult.Items[rowIndex];
+
+                    MessageBox.Show("Stato cambiato per " + row.Cognome + " da " + row.Qualificato + " a " + !row.Qualificato);
+
+                    if (row.Qualificato)
+                        _currentSelectedItems--;    //from true to false
+                    else
+                        _currentSelectedItems++;    //from false to true
+
+                    SetLStatusLabel();
+                }
+            }
         }
     }
 }

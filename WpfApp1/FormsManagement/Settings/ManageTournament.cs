@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +21,7 @@ namespace WindowsFormsApplication1
 
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            List<Torneo> tornei = Helper.GetTorneiAttivi();
+            List<TorneoEntity> tornei = Helper.GetTorneiAttivi(true);
             this.comboBox1.DataSource = tornei.ToArray();
             this.comboBox1.ValueMember = "TournamentId";
             this.comboBox1.DisplayMember = "TournamentName";
@@ -27,7 +29,7 @@ namespace WindowsFormsApplication1
             this.comboBox1.SelectedItem = 0;
 
             //La inizializzo a 0
-            List<Disciplina> discipline = Helper.GetDisciplineByIdTorneo(0);
+            List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo(0);
             this.comboBox2.DataSource = discipline.ToArray();
             this.comboBox2.ValueMember = "IdDisciplina";
             this.comboBox2.DisplayMember = "Nome";
@@ -46,7 +48,7 @@ namespace WindowsFormsApplication1
             {
                 ComboBox comboBox = (ComboBox)sender;
 
-                List<Disciplina> discipline = Helper.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
+                List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
 
                 this.comboBox2.DataSource = discipline.ToArray();
                 this.comboBox2.ValueMember = "IdDisciplina";
@@ -79,7 +81,7 @@ namespace WindowsFormsApplication1
 
         private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
-            List<Atleta> atleti = Helper.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atleti = Helper.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina, categoria);
             
 
             if ((atleti != null) && (atleti.Count > 0))
@@ -106,7 +108,7 @@ namespace WindowsFormsApplication1
 
         private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
-            List<Atleta> atletiOffTournament = Helper.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atletiOffTournament = Helper.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
             comboBoxAtletaToAdd.DataSource = atletiOffTournament.OrderBy(x => x.Cognome).ToArray();
             this.comboBoxAtletaToAdd.ValueMember = "IdAtleta";
             this.comboBoxAtletaToAdd.DisplayMember = "FullName";// + " " + "Nome";

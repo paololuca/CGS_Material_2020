@@ -11,7 +11,7 @@
     <Grid Margin="0,0,0,-21">
         <DataGrid x:Name="dataGridResult" HorizontalAlignment="Left" Height="552" Margin="31,32,0,0" VerticalAlignment="Top" Width="827"
                   CanUserSortColumns="False" CanUserAddRows="False" materialDesign:DataGridAssist.CellPadding="4 2 2 2"
-                  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" 
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" CellEditEnding="dataGridResult_CellEditEnding"
                   AutoGeneratingColumn="DataGridResult_AutoGeneratingColumn" SelectionUnit="Cell" SelectionMode="Extended"/>
 
         <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="10,589,0,0" VerticalAlignment="Top" Width="872"/>

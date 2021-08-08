@@ -519,6 +519,9 @@
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-Light.ttf" />
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-LightItalic.ttf" />
     <Resource Include="DLL\Resources\Roboto\RobotoCondensed-Regular.ttf" />
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

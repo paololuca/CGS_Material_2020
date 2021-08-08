@@ -1,4 +1,5 @@
 ﻿using BusinessEntity.Entity;
+using Resources;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,6 +16,7 @@ namespace HEMATournamentSystem
 
         private List<AtletaEntity> listaAtleti;
         private List<MatchEntity> listaIncontri;
+        private string Header;
         private readonly int tabIndex;
         private readonly int idTorneo;
         private readonly int idDisciplina;
@@ -39,6 +41,8 @@ namespace HEMATournamentSystem
 
             this.listaAtleti = listaAtleti;
             this.listaIncontri = listaIncontri;
+
+            this.Header = "Girone " + tabIndex;
 
             SetPool();
         }
@@ -244,9 +248,15 @@ namespace HEMATournamentSystem
             }
         }
 
+        public bool SavePoolFromFather()
+        {
+            //MessageBox.Show("Pool " + Header + " Saved");
+            return true;
+        }
+
         private void BtnSavePool_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("pool saved");
+            PopUpBoxes.ShowPopup("Pool " + Header + " Saved");
         }
     }
 }

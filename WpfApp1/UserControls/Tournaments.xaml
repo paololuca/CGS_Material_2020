@@ -8,30 +8,34 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" Height="580" Width="1030" Loaded="UserControl_Loaded">
     <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
-        
+
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
             <ScrollViewer>
                 <StackPanel>
                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                     <Expander HorizontalAlignment="Stretch" Header="New Tournaments">
                         <Grid>
-                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="162*"/>
+                                <ColumnDefinition Width="851*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,23.8,16.6" Grid.ColumnSpan="2">
                                 <TextBlock Text="New Tournaments" FontWeight="Bold" />
                                 <TextBlock Opacity=".68"
                                    Text="Nuovi tornei presenti all'interno del sistema" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBox Name="txtSearchNewTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                            <TextBox Name="txtSearchNewTournament" Margin="24,45,788.8,500.6" BorderThickness="0"
                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchNewTournament_KeyUp" />
+                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchNewTournament_KeyUp" Grid.ColumnSpan="2" />
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
-                                    Margin="24,102,10,10">
+                                    Margin="24,102,9.8,9.6" Grid.ColumnSpan="2">
                                 <DataGrid Name="dataGridNewTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
                                 </DataGrid>
                             </StackPanel>
-                            <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="873,70,0,0" Click="btnNewTournament_Click"
-                                Background="#FF28D137" VerticalAlignment="Top" Width="133" ToolTip="New Tournament">
+                            <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="711,70,0,0" Click="btnNewTournament_Click"
+                                Background="#FF28D137" VerticalAlignment="Top" Width="133" ToolTip="New Tournament" Grid.Column="1">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="AddBox" RenderTransformOrigin="0.771,1.104" Height="18"/>
                                     <TextBlock Text="  Tournament"/>
@@ -48,7 +52,7 @@
                                 <TextBlock Opacity=".68"
                                    Text="Tornei Attivi attualmente presenti all'interno del sistema" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBox Name="txtSearchActiveTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                            <TextBox Name="txtSearchActiveTournament" DockPanel.Dock="Top" Margin="24,45,788.8,542.2" BorderThickness="0"
                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchActiveTournament_KeyUp" />
@@ -64,11 +68,11 @@
                     <Expander HorizontalAlignment="Stretch" Header="Closed Tournaments">
                         <Grid>
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                <TextBlock Text="Your Content" FontWeight="Bold" />
+                                <TextBlock Text="Closed Tournament" FontWeight="Bold" />
                                 <TextBlock Opacity=".68"
                                    Text="Lista dei tornei conclusi all'interno del sistema dai quali si possono estrapolare vari report" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBox Name="txtSearchClosedTournament" DockPanel.Dock="Top" Margin="24,57,806,482" Width="200" BorderThickness="0"
+                            <TextBox Name="txtSearchClosedTournament" DockPanel.Dock="Top" Margin="24,46,788.8,499.6" BorderThickness="0"
                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchClosedTournament_KeyUp" />
@@ -83,6 +87,6 @@
                 </StackPanel>
             </ScrollViewer>
         </materialDesign:Card>
-        
+
     </Grid>
 </UserControl>

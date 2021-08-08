@@ -34,7 +34,7 @@ namespace WindowsFormsApplication1
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Atleta newAtleta;
+            AtletaEntity newAtleta;
 
             if (comboBoxAssociation.SelectedIndex < 0)
                 MessageBox.Show("Selezionare un'ASD", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -44,7 +44,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Selezionare il Nome", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
             {
-                newAtleta = new Atleta()
+                newAtleta = new AtletaEntity()
                 {
                     IdAsd = (int)comboBoxAssociation.SelectedValue,
                     Nome = textBoxName.Text,

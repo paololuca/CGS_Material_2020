@@ -8,7 +8,7 @@
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize" Topmost="True" Width="1100" Height="900">
+        ResizeMode="CanMinimize" Topmost="True" Height="768" Width="1280">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center">Finals Phases</TextBlock>
         <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnNext"
                 materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                ToolTip="Next Phase" Margin="881,35,1,0" Click="btnNext_Click">
+                ToolTip="Next Phase" Margin="1113,35,0.6,0.2" Click="btnNext_Click">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="SkipNext" Height="20"/>
                 <TextBlock Text="  Next"/>
@@ -27,7 +27,7 @@
         </Button>
         <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnPrevious"
                 materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                ToolTip="Next Phase" Margin="1,35,881,0" Click="btnPrevious_Click">
+                ToolTip="Next Phase" Margin="1,35,1112.6,0.2" Click="btnPrevious_Click">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="SkipPrevious" Height="20"/>
                 <TextBlock Text="  Prev"/>
@@ -38,7 +38,7 @@
             <!-- the transitioner will manage your transitions. notice how SelectedIndex is set to zero: the first slide (instead of the default of -1) -->
             <materialDesign:Transitioner Name="finalTransition"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
 
-                <local:Finals16/>
+                <local:Finals16 Height="544"/>
                 <local:Finals8/>
                 <local:Finals4/>
                 <local:SemiFinals/>

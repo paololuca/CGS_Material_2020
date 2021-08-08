@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +24,7 @@ namespace WindowsFormsApplication1
 
         private void LoadTornei()
         {
-            List<Torneo> tornei = Helper.GetTorneiAttivi();
+            List<TorneoEntity> tornei = Helper.GetTorneiAttivi(false);
             this.comboBoxTornei.DataSource = tornei.ToArray();
             this.comboBoxTornei.ValueMember = "TournamentId";
             this.comboBoxTornei.DisplayMember = "TournamentName";

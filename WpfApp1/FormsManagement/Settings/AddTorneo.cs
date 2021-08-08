@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,12 +40,12 @@ namespace WindowsFormsApplication1
                 bool twoHandSword = checkBoxSpadaDueMani.Checked;
                 bool singleSword = checkBoxSpadaSola.Checked;
 
-                Torneo t = new Torneo()
+                TorneoEntity t = new TorneoEntity()
                 {
-                    TournamentName = nomeTorneo,
-                    TournamentPlace = luogoTorneo,
-                    TournamentStartDate = datainizioTorneo,
-                    TournamentEndDate = dataFineTorneo
+                    Name = nomeTorneo,
+                    Place = luogoTorneo,
+                    StartDate = datainizioTorneo,
+                    EndDate = dataFineTorneo
                     //mancano i commenti
                 };
 

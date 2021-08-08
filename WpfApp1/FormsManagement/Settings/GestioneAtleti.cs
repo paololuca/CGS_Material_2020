@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +24,7 @@ namespace WindowsFormsApplication1
 
         private void LoadListAtleti()
         {
-            List<Atleta> atletiPresenti = Helper.GetAllAnagraficaAtletiWithRanking();
+            List<AtletaEntity> atletiPresenti = Helper.GetAllAnagraficaAtletiWithRanking();
 
             dataGridView1.DataSource = atletiPresenti.ToArray();
 

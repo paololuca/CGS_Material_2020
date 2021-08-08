@@ -70,7 +70,7 @@ namespace HEMATournamentSystem
 
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = associations.Where(associaition => associaition.NomeAsd.Contains(txtSearch.Text)).ToList();
+            var filtered = associations.Where(associaition => associaition.NomeAsd.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
 
             dataGridAssociations.ItemsSource = filtered;
         }

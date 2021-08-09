@@ -31,7 +31,7 @@ namespace HEMATournamentSystem
 
         private void LoadSelectedDatabase()
         {
-            DataBaseType db = HelperMasterDB.GetSelectedDB();
+            DataBaseType db = SqlDal_MasterDB.GetSelectedDB();
 
             switch (db)
             {
@@ -51,7 +51,7 @@ namespace HEMATournamentSystem
 
         private void LoadUsersList()
         {
-            var accountList = HelperMasterDB.GetAccountList();
+            var accountList = SqlDal_MasterDB.GetAccountList();
 
             dataGridAccount.ItemsSource = accountList;                       
         }
@@ -93,7 +93,7 @@ namespace HEMATournamentSystem
                                System.Windows.Forms.MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK)
             {
 
-                if (HelperMasterDB.DeleteUserAccount(userToDelete.UserName))
+                if (SqlDal_MasterDB.DeleteUserAccount(userToDelete.UserName))
                 {
                     LoadUsersList();
                     PopUpBoxes.ShowPopup("User " + userToDelete.UserName + " deleted ");
@@ -113,14 +113,14 @@ namespace HEMATournamentSystem
                 PopUpBoxes.ShowPopup("Choose a valid Account Type");
             else
             {
-                if (HelperMasterDB.CheckIfAccountExist(txtUserName.Text) > 0)
+                if (SqlDal_MasterDB.CheckIfAccountExist(txtUserName.Text) > 0)
                     PopUpBoxes.ShowPopup("User name already exist");
                 else
                 {
 
                     StringBuilder sb = EncryptionHelper.GetEncryptedPassword(txtPassword.Password);
 
-                    var newId = HelperMasterDB.AddNewAccount(txtUserName.Text, sb.ToString(), (ProfileType)cmbAccountType.SelectedValue);
+                    var newId = SqlDal_MasterDB.AddNewAccount(txtUserName.Text, sb.ToString(), (ProfileType)cmbAccountType.SelectedValue);
 
                     if (newId < 0)
                         PopUpBoxes.ShowPopup("Account not created");
@@ -155,7 +155,7 @@ namespace HEMATournamentSystem
                 PopUpBoxes.ShowPopup("Please select a DB");
             else
             {
-                if(HelperMasterDB.UpdateSelectedDB(db))
+                if(SqlDal_MasterDB.UpdateSelectedDB(db))
                     PopUpBoxes.ShowPopup("Saved !!");
                 else
                     PopUpBoxes.ShowPopup("Error during saving DB Info");
@@ -164,7 +164,7 @@ namespace HEMATournamentSystem
 
         private void BtnSaveFighterByPhase_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         #endregion

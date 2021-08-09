@@ -120,6 +120,7 @@
     <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
+    <Compile Include="Engine\AscEngine.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
     <Compile Include="FormsManagement\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
@@ -192,6 +193,7 @@
     <Compile Include="Resources\SqlDAL\SqlDal_Associations.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />
     <Compile Include="Resources\Helper\PathResolver.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_MasterDB.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Tournaments.cs" />
     <Compile Include="UserControls\Associations.xaml.cs">
       <DependentUpon>Associations.xaml</DependentUpon>
@@ -208,6 +210,9 @@
     </Compile>
     <Compile Include="UserControls\Phases\Finals16.xaml.cs">
       <DependentUpon>Finals16.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Phases\Finals32.xaml.cs">
+      <DependentUpon>Finals32.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Phases\Finals4.xaml.cs">
       <DependentUpon>Finals4.xaml</DependentUpon>
@@ -341,7 +346,6 @@
     <Compile Include="Engine\ExportPdfEngine.cs" />
     <Compile Include="Resources\FormattedString.cs" />
     <Compile Include="Resources\Helper\Helper.cs" />
-    <Compile Include="Resources\Helper\HelperMasterDB.cs" />
     <Compile Include="Resources\Manager\PdfManager.cs" />
     <Compile Include="Resources\PopUpBoxes.cs" />
     <Compile Include="Resources\ProgressBar.cs">
@@ -381,6 +385,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Phases\Finals16.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Phases\Finals32.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

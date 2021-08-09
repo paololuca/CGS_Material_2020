@@ -21,16 +21,9 @@ namespace HEMATournamentSystem
     public partial class FinalsTransitions : Window
     {
 
-        /*
-         * 0 = 1/16
-         * 1 = 1/8
-         * 2 = 1/4
-         * 3 = semifinals
-         * 4 = finals
-         */
         private const int MAX_TRANSITIONER_INDEX = 4;
-        private int _currentTransition = 0;
-        private int _firstTransitionValid = 0;
+        private int currentTransition = 0;
+        private int firstTransitionValid = 0;
 
         public FinalsTransitions(int initialPhase)  //TODO initiale transitioner, e non posso andare indietro, MAI
         {
@@ -38,46 +31,45 @@ namespace HEMATournamentSystem
 
             SetInitialIndexs(initialPhase);
 
-            SetButton();
+            SetButtonVisibility();
         }
 
         private void SetInitialIndexs(int initialPhase)
         {
-            _firstTransitionValid = initialPhase;
-            _currentTransition = initialPhase;
-            finalTransition.SelectedIndex = _currentTransition;
+            firstTransitionValid = initialPhase;
+            currentTransition = initialPhase;
+            finalTransition.SelectedIndex = currentTransition;
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-            _currentTransition--;
-            finalTransition.SelectedIndex = _currentTransition;
-
+            currentTransition--;
+            finalTransition.SelectedIndex = currentTransition;
 
             //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
             var panel = (IFinalsPhase)finalTransition.SelectedItem;
             panel.LoadField();
 
-            SetButton();
+            SetButtonVisibility();
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            _currentTransition++;
-            finalTransition.SelectedIndex = _currentTransition;
+            currentTransition++;
+            finalTransition.SelectedIndex = currentTransition;
 
             //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
             var panel = (IFinalsPhase)finalTransition.SelectedItem;
             panel.LoadField();
 
-            SetButton();
+            SetButtonVisibility();
 
         }
 
-        private void SetButton()
+        private void SetButtonVisibility()
         {
-            btnPrevious.IsEnabled = _currentTransition == 0 ? false : true;
-            btnNext.IsEnabled = _currentTransition == MAX_TRANSITIONER_INDEX ? false : true;
+            btnPrevious.IsEnabled = currentTransition == firstTransitionValid ? false : true;
+            btnNext.IsEnabled = currentTransition == MAX_TRANSITIONER_INDEX ? false : true;
         }
     }
 }

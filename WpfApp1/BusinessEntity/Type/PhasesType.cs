@@ -9,11 +9,11 @@ namespace BusinessEntity.Type
     public enum PhasesType
     {
         None = -1,
-        Finals_32 = 1,
-        Finals_16 = 2,
-        Finals_8 = 3,
-        Finals_4 = 4,
-        SemiFinals = 5,
-        Finals = 6
+        Finals_32 = 0,
+        Finals_16 = 1,
+        Finals_8 = 2,
+        Finals_4 = 3,
+        SemiFinals = 4,
+        Finals = 5
     }
 }

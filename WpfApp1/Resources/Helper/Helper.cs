@@ -246,7 +246,7 @@ namespace Resources
 
         public static string GetDbType()
         {
-            DataBaseType dbType = HelperMasterDB.GetSelectedDB();
+            DataBaseType dbType = SqlDal_MasterDB.GetSelectedDB();
 
             if (dbType == DataBaseType.Maschile)
                 return MASCHILE;

@@ -21,7 +21,7 @@ namespace HEMATournamentSystem
             //TODOPL da spostare var f = new FighterStats();
             //TODOPL da spostare f.Show();
 
-            var currentUser = HelperMasterDB.CheckLogin("admin");
+            var currentUser = SqlDal_MasterDB.CheckLogin("admin");
             var main = new MainWindow(currentUser);
             main.Show();
 
@@ -44,7 +44,7 @@ namespace HEMATournamentSystem
             {
                 StringBuilder sb = EncryptionHelper.GetEncryptedPassword(txtBoxPassword.Password);
 
-                var currentUser = HelperMasterDB.CheckLogin(txtBoxUsername.Text);
+                var currentUser = SqlDal_MasterDB.CheckLogin(txtBoxUsername.Text);
 
                 if (currentUser == null)
                     PopUpBoxes.ShowPopup("Username not valid");

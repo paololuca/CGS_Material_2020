@@ -97,10 +97,49 @@ namespace FormsManagement
             }
             else
             {
-                //TODO save result
+                List<AtletaEliminatorie> listaQualificati = new List<AtletaEliminatorie>();
+                int posizione = 1;
+                foreach (GironiConclusi a in dataGridResult.Items)
+                {
+                    if (a.Qualificato)
+                    {
+                        listaQualificati.Add(new AtletaEliminatorie()
+                            {
+                                IdAtleta = a.IdAtleta,
+                                IdTorneo = a.IdTorneo,
+                                idDisciplina = a.IdDisciplina,
+                                Posizione = posizione
+                            }
+                        );
+                        posizione++;
+                    }
+                }
+
+                
+                if (atletiAmmessiEliminatorie == 32)
+                    Helper.InsertSedicesimi(listaQualificati);
+                else if (atletiAmmessiEliminatorie == 16)
+                    Helper.InsertOttavi(listaQualificati);
+                else if (atletiAmmessiEliminatorie == 8)
+                    Helper.InsertQuarti(listaQualificati);
+                else if (atletiAmmessiEliminatorie == 4)
+                    Helper.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
+
+                Helper.ConcludiGironi(idTorneo, idDisciplina);
+
                 WindowCheckResult = true;
                 this.Close();
             }
+        }
+
+        private List<AtletaEliminatorie> SetCampoForSemifinali(List<AtletaEliminatorie> listaQualificati)
+        {
+            listaQualificati[0].Campo = 1;
+            listaQualificati[3].Campo = 1;
+            listaQualificati[1].Campo = 2;
+            listaQualificati[2].Campo = 2;
+
+            return listaQualificati;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

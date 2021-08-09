@@ -108,9 +108,6 @@ namespace Resources
             p.Dispose();
         }
 
-
-
-
         #region Parsing
         private static List<HtmlNode> GetNodes(byte[] response)
         {

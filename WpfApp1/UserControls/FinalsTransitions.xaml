@@ -38,7 +38,8 @@
             <!-- the transitioner will manage your transitions. notice how SelectedIndex is set to zero: the first slide (instead of the default of -1) -->
             <materialDesign:Transitioner Name="finalTransition"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
 
-                <local:Finals16 Height="544"/>
+                <local:Finals32/>
+                <local:Finals16/>
                 <local:Finals8/>
                 <local:Finals4/>
                 <local:SemiFinals/>

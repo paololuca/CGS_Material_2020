@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
 
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            List<TorneoEntity> tornei = Helper.GetTorneiAttivi(true);
+            List<TorneoEntity> tornei = SqlDal_Tournaments.GetTorneiAttivi(true);
             this.comboBox1.DataSource = tornei.ToArray();
             this.comboBox1.ValueMember = "TournamentId";
             this.comboBox1.DisplayMember = "TournamentName";

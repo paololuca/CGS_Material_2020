@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
 
         private void LoadTornei()
         {
-            List<TorneoEntity> tornei = Helper.GetTorneiAttivi(false);
+            List<TorneoEntity> tornei = SqlDal_Tournaments.GetTorneiAttivi(false);
             this.comboBoxTornei.DataSource = tornei.ToArray();
             this.comboBoxTornei.ValueMember = "TournamentId";
             this.comboBoxTornei.DisplayMember = "TournamentName";

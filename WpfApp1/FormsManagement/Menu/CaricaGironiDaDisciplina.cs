@@ -17,7 +17,7 @@ namespace FormsManagement.Menu
             if(export)
                 this.buttonOk.Text = "Carica Risultati";
 
-            List<TorneoEntity> tornei = !export ? Helper.GetTorneiAttivi(false) : Helper.GetTorneiNonAttivi(false);
+            List<TorneoEntity> tornei = !export ? SqlDal_Tournaments.GetTorneiAttivi(false) : SqlDal_Tournaments.GetTorneiConclusi(false);
             this.comboBox1.DataSource = tornei.ToArray();
             this.comboBox1.ValueMember = "Id";
             this.comboBox1.DisplayMember = "Name";

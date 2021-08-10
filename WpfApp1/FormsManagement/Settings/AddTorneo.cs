@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace FormsManagement.Settings
 {
     public partial class AddTorneo : Form
     {
@@ -49,12 +49,13 @@ namespace WindowsFormsApplication1
                     //mancano i commenti
                 };
 
-                Int32 newTournamentId = Helper.InserNewTorneo(t);
+                Int32 newTournamentId = SqlDal_Tournaments.InserNewTorneo(t);
 
                 if(newTournamentId > 0)
                 {
                     String categoria = radioButtonMale.Checked ? "M" : "F";
-                    Helper.AddDisciplineToTorneo(newTournamentId, singleSword, swordAndDagger, swordAndBuckler, swordAndShield, twoHandSword, categoria);
+                    //TODO
+                    SqlDal_Tournaments.AddDisciplineToTorneo(newTournamentId, singleSword, swordAndDagger, swordAndBuckler, swordAndShield, twoHandSword, categoria);
                 }
                 else
                 {

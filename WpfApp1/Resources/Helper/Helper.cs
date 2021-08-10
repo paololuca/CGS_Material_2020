@@ -395,137 +395,7 @@ namespace Resources
                 c.Close();
             }
         }
-        public static List<TorneoEntity> GetTorneiAttivi(Boolean onlyList)
-        {
-            SqlConnection c = null;
-
-            try
-            {
-                String sqlText = "SELECT * FROM TORNEO WHERE CONCLUSO = 0";
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-                List<TorneoEntity> tornei = new List<TorneoEntity>();
-
-                if (!onlyList)
-                    tornei.Add(new TorneoEntity() { Id = 0 });
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tornei.Add(new TorneoEntity()
-                    {
-                        Name = reader["NomeTorneo"].ToString(),
-                        Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
-                        Place = reader["Luogo"].ToString(),
-                        Note = reader["Commenti"].ToString()
-                    });
-                }
-
-                return tornei;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-
-        }
-
-        public static List<TorneoEntity> GetTorneiToActivate(Boolean onlyList)
-        {
-            SqlConnection c = null;
-
-            try
-            {
-                String sqlText = "SELECT * FROM TORNEO WHERE CONCLUSO = -1";
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-                List<TorneoEntity> tornei = new List<TorneoEntity>();
-
-                if (!onlyList)
-                    tornei.Add(new TorneoEntity() { Id = 0 });
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tornei.Add(new TorneoEntity()
-                    {
-                        Name = reader["NomeTorneo"].ToString(),
-                        Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
-                        Place = reader["Luogo"].ToString(),
-                        Note = reader["Commenti"].ToString()
-                    });
-                }
-
-                return tornei;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-
-        }
-
-        public static List<TorneoEntity> GetTorneiNonAttivi(Boolean onlyList)
-        {
-            SqlConnection c = null;
-
-            try
-            {
-                String sqlText = "SELECT * FROM TORNEO WHERE CONCLUSO = 1";
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-                List<TorneoEntity> tornei = new List<TorneoEntity>();
-
-                if (!onlyList)
-                    tornei.Add(new TorneoEntity() { Id = 0 });
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tornei.Add(new TorneoEntity()
-                    {
-                        Name = reader["NomeTorneo"].ToString(),
-                        Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
-                        Place = reader["Luogo"].ToString(),
-                        Note = reader["Commenti"].ToString()
-                    });
-                }
-
-                return tornei;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-
-        }
+        
         public static List<DisciplinaEntity> GetDisciplineByIdTorneo(int idTorneo)
         {
             SqlConnection c = null;
@@ -1138,50 +1008,7 @@ namespace Resources
             }
         }
 
-        public static List<TorneoEntity> GetAllTornei()
-        {
-            List<TorneoEntity> tornei = new List<TorneoEntity>();
-
-            String commandText = "SELECT * FROM Torneo WHERE Concluso = 0";
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    tornei.Add(new TorneoEntity()
-                    {
-                        Id = (int)reader["Id"],
-                        Name = Convert.ToString(reader["NomeTorneo"]),
-                        Place = Convert.ToString(reader["Luogo"]),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString())
-                    }
-                    );
-                }
-                if (tornei.Count > 0)
-                    return tornei;
-                else
-                    return null;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-
-        }
+        
         public static List<AtletaEntity> GetAtletiFromNameAndSurname(String name, String surname)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
@@ -1861,35 +1688,7 @@ namespace Resources
             }
         }
 
-        public static bool EliminaTorneo(Int32 idTorneo)
-        {
-            String commandText = "DELETE Torneo where Id = " + idTorneo;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
+        
 
         public static bool EliminaAtletiVsTorneoVsDiscipline(Int32 idTorneo)
         {
@@ -2399,68 +2198,7 @@ namespace Resources
 
         }
 
-        public static Int32 InserNewTorneo(TorneoEntity t)
-        {
-            String startDate = "@startDate";
-            String endDate = "@endDate";
-
-            String commandText = "INSERT INTO Torneo VALUES ('" + t.Name + "','" + t.Place + "'," + startDate + "," + endDate + ", 0, '')" +
-                                "SELECT SCOPE_IDENTITY();";
-
-            List<SqlParameter> parms = new List<SqlParameter>
-            {
-                new SqlParameter(startDate, SqlDbType.DateTime) { Value = t.StartDate},
-                new SqlParameter(endDate, SqlDbType.DateTime) { Value = t.EndDate}
-            };
-
-            SqlConnection c = null;
-
-            try
-            {
-
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                command.Parameters.Add(parms);
-                SqlDataReader reader = command.ExecuteReader();
-
-                Int32 idInserted = 0;
-                reader.Read();
-
-                idInserted = Convert.ToInt32(reader[0]);
-
-                if (idInserted > 0)
-                    return idInserted;
-                else
-                    return 0;
-            }
-            catch (Exception ex)
-            {
-                return 0;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        internal static void AddDisciplineToTorneo(int newTournamentId,
-                                                    bool singleSword,
-                                                    bool swordAndDagger,
-                                                    bool swordAndBuckler,
-                                                    bool swordAndShield,
-                                                    bool twoHandSword,
-                                                    string categoria)
-        {
-            String commandText = "";
-
-            if (singleSword)
-                commandText += "INSERT INTO TorneoVsDiscipline VALUES ()";
-        }
-
-
+        
         public static void InsertFinali(List<AtletaEliminatorie> listAtleti)
         {
             String commandText = "";

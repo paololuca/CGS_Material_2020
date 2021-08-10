@@ -19,11 +19,11 @@ namespace FormsManagement.Menu
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            List<TorneoEntity> tornei = Helper.GetTorneiAttivi(false);
+            List<TorneoEntity> tornei = SqlDal_Tournaments.GetTorneiAttivi(false);
             this.comboBox1.DataSource = tornei.ToArray();
             this.comboBox1.ValueMember = "Id";
             this.comboBox1.DisplayMember = "Name";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.Tornei_SelectedIndexChanged);
 
             //La inizializzo a 0
             List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo(0);
@@ -35,13 +35,14 @@ namespace FormsManagement.Menu
             buttonCancel.DialogResult = DialogResult.Abort;
         }
 
-        private void ComboBox1_SelectedIndexChanged(object sender,
+        private void Tornei_SelectedIndexChanged(object sender,
         System.EventArgs e)
         {
             if ((int)comboBox1.SelectedValue > 0)
             {
                 ComboBox comboBox = (ComboBox)sender;
 
+                //TODO estrarre solo le discipline di cui non esistono i gironi
                 List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
 
                 this.comboBox2.DataSource = discipline.ToArray();

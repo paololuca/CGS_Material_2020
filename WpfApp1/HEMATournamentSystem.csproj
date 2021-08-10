@@ -580,8 +580,6 @@
     <Content Include="DLL\IronPdf.dll" />
     <Resource Include="img\atleta_sfondo_bianco.jpg" />
     <Resource Include="img\swords.ico" />
-    <Resource Include="swords.ico" />
-    <Resource Include="Swords.png" />
     <Resource Include="img\swords.png" />
     <Resource Include="img\Menu\information.png" />
     <Resource Include="img\LectureMarozzo.png" />

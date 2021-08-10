@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
 
         private void LoadAllTornei()
         {
-            dataGridViewTornei.DataSource = Helper.GetAllTornei().ToArray();
+            dataGridViewTornei.DataSource = SqlDal_Tournaments.GetAllTornei().ToArray();
 
             dataGridViewTornei.Columns["TournamentId"].Visible = false;
             dataGridViewTornei.Columns["TournamentName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -59,7 +59,7 @@ namespace WindowsFormsApplication1
                 {
                     Int32 idTorneo = (int)row.Cells["tournamentId"].Value;
 
-                    if(Helper.EliminaTorneo(idTorneo))
+                    if(SqlDal_Tournaments.EliminaTorneo(idTorneo))
                     {
                         if (Helper.EliminaAtletiVsTorneoVsDiscipline(idTorneo))
                         {

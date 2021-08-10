@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using BusinessEntity.Entity;
+using FormsManagement.Settings;
+using System;
 
 namespace HEMATournamentSystem
 {
@@ -26,16 +28,31 @@ namespace HEMATournamentSystem
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            newTournamentList = Helper.GetTorneiToActivate(true);
-            dataGridNewTournament.ItemsSource = newTournamentList;
+            LoadNewTournaments();
 
-            activeTournamentList = Helper.GetTorneiAttivi(true);
-            dataGridActiveTournament.ItemsSource = activeTournamentList;
+            LoadActiveTournaments();
 
-            closedTournamentList = Helper.GetTorneiNonAttivi(true);
+            LoadClosedTournaments();
+        }
+
+        private void LoadClosedTournaments()
+        {
+            closedTournamentList = SqlDal_Tournaments.GetTorneiConclusi(true);
             dataGridClosedTournament.ItemsSource = closedTournamentList;
         }
-        
+
+        private void LoadActiveTournaments()
+        {
+            activeTournamentList = SqlDal_Tournaments.GetTorneiAttivi(true);
+            dataGridActiveTournament.ItemsSource = activeTournamentList;
+        }
+
+        private void LoadNewTournaments()
+        {
+            newTournamentList = SqlDal_Tournaments.GetTorneiToActivate(true);
+            dataGridNewTournament.ItemsSource = newTournamentList;
+        }
+
         private void dataGridTournament_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             SetColumnHeader(e);
@@ -58,7 +75,16 @@ namespace HEMATournamentSystem
 
         private void btnNewTournament_Click(object sender, RoutedEventArgs e)
         {
+            AddTorneo newTorneo = new AddTorneo();
+            newTorneo.FormClosing += new System.Windows.Forms.FormClosingEventHandler(creaTorneo_FormClosed);
 
+            newTorneo.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            newTorneo.Show();
+        }
+
+        private void creaTorneo_FormClosed(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            LoadNewTournaments();
         }
 
         private void txtSearchNewTournament_KeyUp(object sender, KeyEventArgs e)
@@ -89,6 +115,16 @@ namespace HEMATournamentSystem
                 tournament.Note.ToLower().Contains(txtSearchClosedTournament.Text)).ToList();
 
             dataGridClosedTournament.ItemsSource = filtered;
+        }
+
+        private void btnDeleteTournament_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnActivateTournament_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

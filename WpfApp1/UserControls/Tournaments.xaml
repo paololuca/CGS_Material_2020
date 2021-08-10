@@ -32,6 +32,30 @@
                                     Margin="24,102,9.8,9.6" Grid.ColumnSpan="2">
                                 <DataGrid Name="dataGridNewTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnActivateTournament" Height="32"  Click="btnActivateTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="CardAccountDetails"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnDeleteTournament" Height="32"  Click="btnDeleteTournament_Click" Background="Red" Width="Auto" ToolTip="Delete Fighter">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="Delete"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                             <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="711,70,0,0" Click="btnNewTournament_Click"

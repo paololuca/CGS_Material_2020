@@ -194,6 +194,7 @@
     <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />
     <Compile Include="Resources\Helper\PathResolver.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_MasterDB.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_Pools.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Tournaments.cs" />
     <Compile Include="UserControls\Associations.xaml.cs">
       <DependentUpon>Associations.xaml</DependentUpon>

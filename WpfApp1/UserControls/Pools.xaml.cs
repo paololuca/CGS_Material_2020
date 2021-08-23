@@ -19,6 +19,8 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class Pools : UserControl
     {
+        private int _idTorneo;
+        private int _idDisciplina;
 
         private CaricaGironiDaDisciplina caricaGironi = null;
         private CreaGironiDaDisciplina creaGironi = null;
@@ -70,6 +72,8 @@ namespace HEMATournamentSystem
                         //TODO solo se non ci sono già gironi attivi (e cioè in stato 0 per quel torneo e disciplina)
                         //problematica rigirata sulla form di caricamento 
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina, creaGironi.Categoria);
+                        _idTorneo = creaGironi.IdTorneo;
+                        _idDisciplina = creaGironi.IdDisciplina;
                     }
                 }
             }
@@ -92,14 +96,13 @@ namespace HEMATournamentSystem
             //                                    Helper.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, categoria) :
             //                                    Helper.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
 
-            var partecipantiTorneo = Helper.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
+            var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
 
             //TODO: da parametrizzare
 
             bool rankingEnabled = partecipantiTorneo.Sum(x => x.Ranking) != 0;
 
-            numeroGironi = Helper.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);
-            
+            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);            
 
 
             if (numeroGironi > 0)
@@ -233,17 +236,18 @@ namespace HEMATournamentSystem
 
                     gironiIncontri.Add(matchList);
                     string title = "Girone " + (tabControlPool.Items.Count + 1).ToString();
-                    tabControlPool.Items.Add(ElaboraTab(title, g, matchList, tabControlPool.Items.Count + 1));
+                    tabControlPool.Items.Add(ElaboraTab(idTorneo, idDisciplina, title, g, matchList, tabControlPool.Items.Count + 1));
 
                     //TODO l'inserimento va fatto solo se già non è stato fatto, altrimenti vanno eliminati TUTTI i dati
-                    Helper.InserisciGironiIncontri(idTorneo, idDisciplina, matchList, idGirone);
+                    SqlDal_Pools.InserisciGironiIncontri(idTorneo, idDisciplina, matchList, idGirone);
 
                     foreach (AtletaEntity a in g)
-                        Helper.InsertAtletaInGirone(creaGironi.IdTorneo, creaGironi.IdDisciplina, idGirone, a.IdAtleta);
+                        SqlDal_Pools.InsertAtletaInGirone(creaGironi.IdTorneo, creaGironi.IdDisciplina, idGirone, a.IdAtleta);
 
                     idGirone++;
                 }
 
+                EnablePageControls();
             }
             else
             {
@@ -261,7 +265,6 @@ namespace HEMATournamentSystem
             caricaGironi.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             caricaGironi.Show();
         }
-
         
         private void caricaGironi_FormClosed(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
@@ -280,7 +283,10 @@ namespace HEMATournamentSystem
                         tournamentName = caricaGironi.NomeTorneo;
                         disciplineId = caricaGironi.IdDisciplina;
                         disciplineName = caricaGironi.Disciplina;
-                        
+
+                        _idTorneo = caricaGironi.IdTorneo;
+                        _idDisciplina = caricaGironi.IdDisciplina;
+
                     }
                 }
             }
@@ -293,13 +299,12 @@ namespace HEMATournamentSystem
         private void CaricaGironiCreati(int idTorneo, int idDisciplina, String categoria)
         {
 
-            numeroGironi = Helper.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);
+            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);
 
             if (numeroGironi > 0)
             {
                 gironi = new List<List<AtletaEntity>>();
-                //TODO il problema è qui, carica la lista degli atleti in maniera diversa di come li salva la prima volta
-                gironi = Helper.GetGironiSalvati(idTorneo, idDisciplina, categoria);
+                gironi = SqlDal_Pools.GetGironiSalvati(idTorneo, idDisciplina, categoria);
 
                 numeroAtletiTorneoDisciplina = gironi.SelectMany(list => list).Distinct().Count();
 
@@ -324,11 +329,11 @@ namespace HEMATournamentSystem
                     if (l != null)
                     {
                         foreach (MatchEntity i in l)
-                            Helper.CaricaPunteggiEsistentiGironiIncontri(idTorneo, idDisciplina, i, idGirone);
+                            SqlDal_Pools.CaricaPunteggiEsistentiGironiIncontri(idTorneo, idDisciplina, i, idGirone);
 
                         gironiIncontri.Add(l);
                         string title = "Girone " + (tabControlPool.Items.Count + 1).ToString();
-                        tabControlPool.Items.Add(ElaboraTab(title, g, l, tabControlPool.Items.Count + 1));
+                        tabControlPool.Items.Add(ElaboraTab(idTorneo, idDisciplina, title, g, l, tabControlPool.Items.Count + 1));
                         
                     }
                     idGirone++;
@@ -359,13 +364,13 @@ namespace HEMATournamentSystem
         /// <param name="g">lista dei giroi (lista di persone)</param>
         /// <param name="l">Lista degli incontri</param>
         /// <returns></returns>
-        private TabItem ElaboraTab(string title, List<AtletaEntity> g, List<MatchEntity> l, Int32 tabIndex)
+        private TabItem ElaboraTab(int idTorneo, int idDisciplina, string title, List<AtletaEntity> g, List<MatchEntity> l, Int32 tabIndex)
         {
             TabItem item = new TabItem();
 
             item.Header = title;
 
-            item.Content = new Pool(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, g, l, tabIndex);
+            item.Content = new Pool(idTorneo, idDisciplina, g, l, tabIndex);
 
             return item;
         }
@@ -380,7 +385,7 @@ namespace HEMATournamentSystem
                 //save all pools for safety
                 if (SaveAll())
                 {
-                    Helper.DeleteAllPahases(tournamentId, disciplineId);
+                    SqlDal_Pools.DeleteAllPahases(tournamentId, disciplineId);
 
                     SetPhasesIndex();
 
@@ -439,7 +444,7 @@ namespace HEMATournamentSystem
 
             if (result.WindowCheckResult)
             {
-                FinalsTransitions finals = new FinalsTransitions(startPhase);
+                FinalsTransitions finals = new FinalsTransitions(startPhase, _idTorneo, _idDisciplina);
                 
                 finals.Show();
             }
@@ -467,42 +472,43 @@ namespace HEMATournamentSystem
 
         private void btnOpen32th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_32);
+
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_32, _idTorneo, _idDisciplina);
 
             finals.Show();
         }
 
         private void BtnOpen16th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_16);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_16, _idTorneo, _idDisciplina);
 
             finals.Show();
         }
 
         private void BtnOpen8th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_8);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_8, _idTorneo, _idDisciplina);
 
             finals.Show();
         }
 
         private void BtnOpen4th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_4);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_4, _idTorneo, _idDisciplina);
 
             finals.Show();
         }
 
         private void BtnOpenSemifinal_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.SemiFinals);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.SemiFinals, _idTorneo, _idDisciplina);
 
             finals.Show();
         }
 
         private void btnOpenFinal_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals, _idTorneo, _idDisciplina);
 
             finals.Show();
         }

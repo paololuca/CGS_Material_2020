@@ -23,7 +23,7 @@ namespace WindowsFormsApplication1
 
         private void LoadAllAsd()
         {
-            List<AsdEntity> asd = Helper.GetAllAsd(false);
+            List<AsdEntity> asd = SqlDal_Associations.GetAllAsd(false);
 
             comboBoxAssociation.DataSource = asd.OrderBy(x => x.NomeAsd).ToArray();
 
@@ -51,7 +51,7 @@ namespace WindowsFormsApplication1
                     Cognome = textBoxSurname.Text,
                     Sesso = radioButtonMale.Checked ? "M" : "F"
                 };
-                int idInserted = Helper.InsertNewAtleta(newAtleta);
+                int idInserted = SqlDal_Fighters.InsertNewAtleta(newAtleta);
 
                 if(idInserted > 0)
                 {

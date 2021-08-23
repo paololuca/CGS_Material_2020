@@ -279,5 +279,283 @@ namespace Resources
 
         }
 
+        public static List<AtletaEntity> GetAtletiTorneoVsDisciplinaAssoluti(int idTorneo, int idDisciplina, string categoria)
+        {
+            List<AtletaEntity> atleti = new List<AtletaEntity>();
+
+            AtletaEntity a;
+
+            String sqlText = "select * from AtletiVsTorneoVsDiscipline atd, TorneoVsDiscipline td, atleti a, ASD, Ranking r " +
+                                "where atd.IdTorneoVsDiscipline = td.Id " +
+                                "and a.Id = atd.IdAtleta " +
+                                "and asd.Id = a.IdASD " +
+                                "and r.IdAtleta = a.Id " +
+                                "and td.IdTorneo = " + idTorneo + " " +
+                                "and td.IdDisciplina = " + idDisciplina + " " +
+                                "and a.Sesso = '" + categoria + "' " +
+                                "and r.IdDisciplina = " + idDisciplina + " " +
+                                "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    a = new AtletaEntity()
+                    {
+                        IdAsd = Convert.ToInt32(reader["IdASD"]),
+                        Asd = Convert.ToString(reader["Nome_ASD"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Cognome = Convert.ToString(reader["Cognome"]),
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"]),
+                        Ranking = Convert.ToDouble(reader["Punteggio"])
+                    };
+
+                    atleti.Add(a);
+                }
+
+                if (atleti.Count > 0)
+                    return atleti;
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        
+        public static List<AtletaEntity> GetAtletiTorneoVsDisciplina(int idTorneo, int idDisciplina, string categoria)
+        {
+
+            List<AtletaEntity> atleti = new List<AtletaEntity>();
+            List<AtletaEntity> atletiAsd = new List<AtletaEntity>();
+            String currentAsd = "";
+            AtletaEntity a;
+
+            String sqlText = "select * from AtletiVsTorneoVsDiscipline atd, TorneoVsDiscipline td, atleti a, ASD, Ranking r " +
+                                "where atd.IdTorneoVsDiscipline = td.Id " +
+                                "and a.Id = atd.IdAtleta " +
+                                "and asd.Id = a.IdASD " +
+                                "and r.IdAtleta = a.Id " +
+                                "and td.IdTorneo = " + idTorneo + " " +
+                                "and td.IdDisciplina = " + idDisciplina + " " +
+                                "and a.Sesso = '" + categoria + "' " +
+                                "and r.IdDisciplina = " + idDisciplina + " " +
+                                "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    a = new AtletaEntity()
+                    {
+                        IdAsd = Convert.ToInt32(reader["IdASD"]),
+                        Asd = Convert.ToString(reader["Nome_ASD"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Cognome = Convert.ToString(reader["Cognome"]),
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"]),
+                        Ranking = Convert.ToDouble(reader["Punteggio"])
+                    };
+
+                    if (currentAsd != a.Asd)
+                    {
+                        if (currentAsd != "")
+                        {
+                            var rnd = new Random();
+                            atleti.AddRange(atletiAsd.OrderBy(item => rnd.Next()));
+                        }
+
+                        currentAsd = a.Asd;
+                        atletiAsd.Clear();
+                        atletiAsd.Add(a);
+                    }
+                    else
+                    {
+                        atletiAsd.Add(a);
+                    }
+                }
+
+                if (atletiAsd.Count > 0)
+                {
+                    var rnd = new Random();
+
+                    atleti.AddRange(atletiAsd.OrderBy(item => rnd.Next()));
+                }
+
+                if (atleti.Count > 0)
+                    return atleti;
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        
+        public static List<AtletaEntity> GetAtletiIscrittiTorneoVsDisciplina(int idTorneo, int idDisciplina, string categoria)
+        {
+
+            List<AtletaEntity> atleti = new List<AtletaEntity>();
+
+            AtletaEntity a;
+
+            String sqlText = "select * from AtletiVsTorneoVsDiscipline atd, TorneoVsDiscipline td, atleti a, ASD, Ranking r " +
+                                "where atd.IdTorneoVsDiscipline = td.Id " +
+                                "and a.Id = atd.IdAtleta " +
+                                "and asd.Id = a.IdASD " +
+                                "and r.IdAtleta = a.Id " +
+                                "and td.IdTorneo = " + idTorneo + " " +
+                                "and td.IdDisciplina = " + idDisciplina + " " +
+                                "and a.Sesso = '" + categoria + "' " +
+                                "and r.IdDisciplina = " + idDisciplina +
+                                "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    a = new AtletaEntity()
+                    {
+                        IdAsd = Convert.ToInt32(reader["IdASD"]),
+                        Asd = Convert.ToString(reader["Nome_ASD"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Cognome = Convert.ToString(reader["Cognome"]),
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"]),
+                        Posizionamento = Convert.ToInt32(reader["Posizionamento"]),
+                        Ranking = Convert.ToDouble(reader["Punteggio"])
+                    };
+
+                    atleti.Add(a);
+                }
+
+                if (atleti.Count > 0)
+                    return atleti;
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        
+        public static List<AtletaEntity> GetAtletiOffTournament(int idTorneo, int idDisciplina, string categoria)
+        {
+            List<AtletaEntity> atleti = new List<AtletaEntity>();
+
+            String sqlText = "SELECT * FROM ATLETI WHERE Id NOT IN (SELECT atd.IdAtleta FROM AtletiVsTorneoVsDiscipline atd JOIN TorneoVsDiscipline td " +
+                    " ON atd.IdTorneoVsDiscipline = td.Id AND td.Categoria = '" + categoria + "'" +
+                    " WHERE td.IdTorneo = " + idTorneo + " AND td.IdDisciplina = " + idDisciplina + ") " +
+                    "AND SESSO = '" + categoria + "'";
+
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                atleti.Add(new AtletaEntity() { IdAtleta = 0 });
+
+                while (reader.Read())
+                {
+                    atleti.Add(new AtletaEntity()
+                    {
+                        IdAsd = Convert.ToInt32(reader["IdASD"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Cognome = Convert.ToString(reader["Cognome"]),
+                        IdAtleta = Convert.ToInt32(reader["Id"])
+                    });
+                }
+                if (atleti.Count > 0)
+                    return atleti;
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool InsertAtletaOnTournament(int idTorneo, int idDisciplina, int idAtleta, string categoria)
+        {
+            String sqlText = "DECLARE @IdTorneoVsDisciplina int; " +
+                                "SET @IdTorneoVsDisciplina = (SELECT Id from TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and Categoria = '" + categoria + "'); " +
+                                "INSERT INTO AtletiVsTorneoVsDiscipline values (@IdTorneoVsDisciplina, " + idAtleta + ")";
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
     }
 }

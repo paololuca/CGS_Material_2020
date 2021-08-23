@@ -22,7 +22,7 @@ namespace Report
 
         private void LoadDataGrid()
         {
-            List<AsdEntity> asd = Helper.GetAllAsdWithMembersNumber();
+            List<AsdEntity> asd = SqlDal_Associations.GetAllAsdWithMembersNumber();
 
             dataGridView1.DataSource = asd.ToArray();
 

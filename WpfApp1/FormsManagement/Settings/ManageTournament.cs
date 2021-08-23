@@ -81,7 +81,7 @@ namespace WindowsFormsApplication1
 
         private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
-            List<AtletaEntity> atleti = Helper.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atleti = SqlDal_Tournaments.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina, categoria);
             
 
             if ((atleti != null) && (atleti.Count > 0))
@@ -108,7 +108,7 @@ namespace WindowsFormsApplication1
 
         private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
-            List<AtletaEntity> atletiOffTournament = Helper.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atletiOffTournament = SqlDal_Tournaments.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
             comboBoxAtletaToAdd.DataSource = atletiOffTournament.OrderBy(x => x.Cognome).ToArray();
             this.comboBoxAtletaToAdd.ValueMember = "IdAtleta";
             this.comboBoxAtletaToAdd.DisplayMember = "FullName";// + " " + "Nome";
@@ -191,7 +191,7 @@ namespace WindowsFormsApplication1
 
             if(idAtleta >0 )
             {
-                if(Helper.InsertAtletaOnTournament(idTorneo, idDisciplina, idAtleta, Categoria))
+                if(SqlDal_Tournaments.InsertAtletaOnTournament(idTorneo, idDisciplina, idAtleta, Categoria))
                 {
                     LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
                     LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
@@ -216,7 +216,7 @@ namespace WindowsFormsApplication1
             Int32 idTorneo = (int)comboBox1.SelectedValue;
             Int32 idDisciplina = (int)comboBox2.SelectedValue;
 
-            pdf.StampaAtletiTorneo(Helper.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, Categoria), comboBox1.Text, comboBox2.Text);
+            pdf.StampaAtletiTorneo(SqlDal_Tournaments.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, Categoria), comboBox1.Text, comboBox2.Text);
         }
     }
 }

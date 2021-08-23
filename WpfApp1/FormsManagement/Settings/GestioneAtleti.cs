@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
 
         private void LoadListAtleti()
         {
-            List<AtletaEntity> atletiPresenti = Helper.GetAllAnagraficaAtletiWithRanking();
+            List<AtletaEntity> atletiPresenti = SqlDal_Fighters.GetAllAnagraficaAtletiWithRanking();
 
             dataGridView1.DataSource = atletiPresenti.ToArray();
 

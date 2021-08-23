@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
 
         private void Search(String nome, String cognome)
         {
-            List<AtletaEntity> atleti = Helper.GetAtletiFromNameAndSurname(nome, cognome);
+            List<AtletaEntity> atleti = SqlDal_Fighters.GetAtletiFromNameAndSurname(nome, cognome);
 
             if (atleti != null)
             {
@@ -79,7 +79,7 @@ namespace WindowsFormsApplication1
 
         private void FullFillAssociationComboBox(Int32 idAtleta, Int32 idAsd)
         {
-            List<AsdEntity> allAsd = Helper.GetAllAsd(false);
+            List<AsdEntity> allAsd = SqlDal_Associations.GetAllAsd(false);
             comboBoxNewAssociation.DataSource = allAsd.ToArray();
             comboBoxNewAssociation.ValueMember = "Id";
             this.comboBoxNewAssociation.DisplayMember = "NomeAsd";
@@ -128,7 +128,7 @@ namespace WindowsFormsApplication1
                 Sesso = sesso
             };
 
-            if (Helper.UpdateAngraficDataByAtleta(a))
+            if (SqlDal_Fighters.UpdateAngraficDataByAtleta(a))
             {
                 MessageBox.Show("Anagrafica aggiornata correttamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Search(textBoxName.Text, textBoxSurname.Text);

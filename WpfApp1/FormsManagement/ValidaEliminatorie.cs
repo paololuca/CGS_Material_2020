@@ -30,7 +30,7 @@ namespace FormsManagement
 
         private void CaricaAtletiPostGironi()
         {
-            List<GironiConclusi> gironiConclusi = Helper.GetClassificaGironi(idTorneo, idDisciplina);
+            List<GironiConclusi> gironiConclusi = SqlDal_Pools.GetClassificaGironi(idTorneo, idDisciplina);
 
             for (int i = 0; i < atletiAmmessiEliminatorie; i++)
                 gironiConclusi[i].Qualificato = true;
@@ -94,22 +94,18 @@ namespace FormsManagement
                     }
                 }
 
-                Helper.DeleteAllSedicesimi(idTorneo, idDisciplina);
-                Helper.DeleteAllOttavi(idTorneo, idDisciplina);
-                Helper.DeleteAllQuarti(idTorneo, idDisciplina);
-                Helper.DeleteAllSemifinali(idTorneo, idDisciplina);
-                Helper.DeleteAllFinali(idTorneo, idDisciplina);
+                SqlDal_Pools.DeleteAllPahases(idTorneo, idDisciplina);
 
                 if (atletiAmmessiEliminatorie == 32)
-                    Helper.InsertSedicesimi(listaQualificati);
+                    SqlDal_Pools.InsertSedicesimi(listaQualificati);
                 else if (atletiAmmessiEliminatorie == 16)
-                    Helper.InsertOttavi(listaQualificati);
+                    SqlDal_Pools.InsertOttavi(listaQualificati);
                 else if (atletiAmmessiEliminatorie == 8)
-                    Helper.InsertQuarti(listaQualificati);
+                    SqlDal_Pools.InsertQuarti(listaQualificati);
                 else if (atletiAmmessiEliminatorie == 4)
-                    Helper.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
+                    SqlDal_Pools.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
 
-                Helper.ConcludiGironi(idTorneo, idDisciplina);
+                SqlDal_Pools.ConcludiGironi(idTorneo, idDisciplina);
 
                 //va fatta la lista di output per la generazione degli incontri
                 //in realtà qui salvo semplicemente i dati sui Qualificati 'atletiAmmessiEliminatorie'

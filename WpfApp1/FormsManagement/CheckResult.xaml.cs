@@ -36,7 +36,7 @@ namespace FormsManagement
 
         private void CaricaAtletiPostGironi()
         {
-            List<GironiConclusi> gironiConclusi = Helper.GetClassificaGironi(idTorneo, idDisciplina);
+            List<GironiConclusi> gironiConclusi = SqlDal_Pools.GetClassificaGironi(idTorneo, idDisciplina);
 
             for (int i = 0; i < atletiAmmessiEliminatorie; i++)
                 gironiConclusi[i].Qualificato = true;
@@ -104,32 +104,36 @@ namespace FormsManagement
                     if (a.Qualificato)
                     {
                         listaQualificati.Add(new AtletaEliminatorie()
-                            {
-                                IdAtleta = a.IdAtleta,
-                                IdTorneo = a.IdTorneo,
-                                idDisciplina = a.IdDisciplina,
-                                Posizione = posizione
-                            }
+                        {
+                            IdAtleta = a.IdAtleta,
+                            IdTorneo = a.IdTorneo,
+                            idDisciplina = a.IdDisciplina,
+                            Posizione = posizione
+                        }
                         );
                         posizione++;
                     }
                 }
 
-                
-                if (atletiAmmessiEliminatorie == 32)
-                    Helper.InsertSedicesimi(listaQualificati);
-                else if (atletiAmmessiEliminatorie == 16)
-                    Helper.InsertOttavi(listaQualificati);
-                else if (atletiAmmessiEliminatorie == 8)
-                    Helper.InsertQuarti(listaQualificati);
-                else if (atletiAmmessiEliminatorie == 4)
-                    Helper.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
+                CreateNextPhase(listaQualificati);
 
-                Helper.ConcludiGironi(idTorneo, idDisciplina);
+                SqlDal_Pools.ConcludiGironi(idTorneo, idDisciplina);
 
                 WindowCheckResult = true;
                 this.Close();
             }
+        }
+
+        private void CreateNextPhase(List<AtletaEliminatorie> listaQualificati)
+        {
+            if (atletiAmmessiEliminatorie == 32)
+                SqlDal_Pools.InsertSedicesimi(listaQualificati);
+            else if (atletiAmmessiEliminatorie == 16)
+                SqlDal_Pools.InsertOttavi(listaQualificati);
+            else if (atletiAmmessiEliminatorie == 8)
+                SqlDal_Pools.InsertQuarti(listaQualificati);
+            else if (atletiAmmessiEliminatorie == 4)
+                SqlDal_Pools.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
         }
 
         private List<AtletaEliminatorie> SetCampoForSemifinali(List<AtletaEliminatorie> listaQualificati)
@@ -168,8 +172,6 @@ namespace FormsManagement
                     int rowIndex = e.Row.GetIndex();
 
                     var row = (GironiConclusi)dataGridResult.Items[rowIndex];
-
-                    MessageBox.Show("Stato cambiato per " + row.Cognome + " da " + row.Qualificato + " a " + !row.Qualificato);
 
                     if (row.Qualificato)
                         _currentSelectedItems--;    //from true to false

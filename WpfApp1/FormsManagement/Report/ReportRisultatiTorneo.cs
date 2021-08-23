@@ -39,7 +39,7 @@ namespace Report
                 //lblTotal.Text = "Totale Incontri Gironi : " + risultatiGironi.Count;
             }
 
-            List<GironiConclusi> gironiConclusi = Helper.GetClassificaGironi(_idTorneo, _idDisciplina);
+            List<GironiConclusi> gironiConclusi = SqlDal_Pools.GetClassificaGironi(_idTorneo, _idDisciplina);
             if (gironiConclusi != null)
             {
                 dataGridViewPostGironi.DataSource = gironiConclusi.ToArray();

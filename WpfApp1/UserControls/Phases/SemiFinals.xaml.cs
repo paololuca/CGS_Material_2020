@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity.Entity;
+using Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,19 +22,68 @@ namespace UserControls.Phases
     /// </summary>
     public partial class SemiFinals : UserControl, IFinalsPhase
     {
+        private int _id_torneo;
+        private int _idDisciplina;
+
         public SemiFinals()
         {
             InitializeComponent();
         }
 
-        public void LoadField()
+        public void LoadFields(int idTorneo, int idDisciplina)
         {
-            
+            _id_torneo = idTorneo;
+            _idDisciplina = idDisciplina;
+
+            //TODO da lettura da DB
+            List<MatchEntity> listaIncontri = new List<MatchEntity>
+            {
+                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
+                
+            };
+
+            dataGridPoolOne.ItemsSource = listaIncontri;
+            dataGridPoolTwo.ItemsSource = listaIncontri;
+        }
+
+        public void SaveFields(int idTorneo, int idDisciplina)
+        {
+            PopUpBoxes.ShowPopup("Semifinals Saved");
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            Style horizontalAlignment = new Style();
+            horizontalAlignment.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
+
+
+            switch (e.Column.Header.ToString())
+            {
+                case "IdBlu":
+                case "IdRosso":
+                case "SatrapiaRosso":
+                case "SatrapiaBlu":
+                case "DoppiaMorte":
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Hidden;
+                    break;
+                case "PuntiRosso":
+                case "PuntiBlu":
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Visible;
+                    e.Column.CellStyle = horizontalAlignment;
+                    break;
+                default:
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Visible;
+                    e.Column.IsReadOnly = true;
+                    break;
+            }
         }
     }
 }

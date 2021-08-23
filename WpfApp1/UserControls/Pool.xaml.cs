@@ -56,7 +56,6 @@ namespace HEMATournamentSystem
                 hiddenId.Content += a.IdAtleta + ";";
             }
 
-
             hiddenId.Content = hiddenId.Content.ToString().Substring(0, hiddenId.Content.ToString().Length - 1);
 
 

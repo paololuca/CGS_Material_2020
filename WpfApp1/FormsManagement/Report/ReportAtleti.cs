@@ -16,7 +16,7 @@ namespace Report
 
         private void LoadDataGrid()
         {
-            List<AtletaEntity> atleti = Helper.GetAllAnagraficaAtleti();
+            List<AtletaEntity> atleti = SqlDal_Fighters.GetAllAnagraficaAtleti();
 
             dataGridView1.DataSource = atleti.ToArray();
 

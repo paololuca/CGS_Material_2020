@@ -2,6 +2,7 @@
 {
     internal interface IFinalsPhase
     {
-        void LoadField();
+        void LoadFields(int idTorneo, int idDisciplina);
+        void SaveFields(int idTorneo, int idDisciplina);
     }
 }

@@ -32,14 +32,14 @@ namespace HEMATournamentSystem
 
         private void LoadListAtleti()
         {
-            atletiPresenti = Helper.GetAllAnagraficaAtletiWithRanking();
+            atletiPresenti = SqlDal_Fighters.GetAllAnagraficaAtletiWithRanking();
 
             dataGridAthletes.ItemsSource = atletiPresenti;
         }
 
         private void LoadAssociation()
         {
-            var associations = Helper.GetAllAsd(false);
+            var associations = SqlDal_Associations.GetAllAsd(false);
             cmbAssociation.ItemsSource = associations;
             cmbAssociation.DisplayMemberPath = "NomeAsd";
             cmbAssociation.SelectedValuePath = "NomeAsd";

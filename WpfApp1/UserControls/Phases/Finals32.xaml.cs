@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,18 +21,57 @@ namespace UserControls.Phases
     /// </summary>
     public partial class Finals32 : UserControl, IFinalsPhase
     {
+        private int _id_torneo;
+        private int _idDisciplina;
+
         public Finals32()
         {
             InitializeComponent();
         }
-        public void LoadField()
+        public void LoadFields(int idTorneo, int idDisciplina)
         {
+            _id_torneo = idTorneo;
+            _idDisciplina = idDisciplina;
+        }
 
+        public void SaveFields(int idTorneo, int idDisciplina)
+        {
+            PopUpBoxes.ShowPopup("1/32 Saved");
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            Style horizontalAlignment = new Style();
+            horizontalAlignment.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
+
+
+            switch (e.Column.Header.ToString())
+            {
+                case "IdBlu":
+                case "IdRosso":
+                case "SatrapiaRosso":
+                case "SatrapiaBlu":
+                case "DoppiaMorte":
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Hidden;
+                    break;
+                case "PuntiRosso":
+                case "PuntiBlu":
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Visible;
+                    e.Column.CellStyle = horizontalAlignment;
+                    break;
+                default:
+                    e.Column.CanUserSort = false;
+                    e.Column.Visibility = Visibility.Visible;
+                    e.Column.IsReadOnly = true;
+                    break;
+            }
         }
     }
 }

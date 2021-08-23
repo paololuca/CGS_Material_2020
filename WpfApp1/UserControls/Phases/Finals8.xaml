@@ -13,18 +13,34 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <materialDesign:ColorZone Grid.Row="0" Mode="Dark" Height="74" Background="#FF1C83FF">
-            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center">1/8 FINALS</TextBlock>
+            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center" Width="270">1/8 FINALS</TextBlock>
         </materialDesign:ColorZone>
 
         <StackPanel Grid.Row="2" Margin="10,10,0,0">
             <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto"  Margin="0,0,10,0" Height="658">
-                <Button x:Name="btnSavePools" Height="58" Click="btnSavePools_Click" Background="#FF28D137"  HorizontalAlignment="Left" Width="127" 
-                        Margin="1123,592,0,0"  VerticalAlignment="Top"  >
+                <DataGrid x:Name="dataGridPoolOne" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,0,0,521" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
+                          CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
+                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"/>
+                <DataGrid x:Name="dataGridPoolTwo" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,142,0,379" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
+                          CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
+                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"/>
+                <DataGrid x:Name="dataGridPoolThree" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,284,0,237" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
+                          CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
+                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"/>
+                <DataGrid x:Name="dataGridPoolFour" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,426,0,94" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
+                          CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
+                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"/>
+                <Button x:Name="btnSavePools" Height="42" Click="btnSavePools_Click" Background="#FF28D137"  
+                        HorizontalAlignment="Left" Width="90" Margin="1150,-72,0,0" VerticalAlignment="Top"  >
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Floppy"/>
                         <TextBlock Text="  Save"/>
                     </StackPanel>
                 </Button>
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="42" Content="Field 1" FontSize="32" FontWeight="DemiBold" Margin="1063,0,20,521" />
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="42" Content="Field 2" FontSize="32" FontWeight="DemiBold" Margin="1063,142,20,379" />
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="42" Content="Field 3" FontSize="32" FontWeight="DemiBold" Margin="1063,284,20,237" />
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="42" Content="Field 4" FontSize="32" FontWeight="DemiBold" Margin="1063,427,20,94" />
             </Grid>
 
 

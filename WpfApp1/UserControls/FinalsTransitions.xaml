@@ -8,7 +8,7 @@
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize" Topmost="True" Height="768" Width="1280">
+        ResizeMode="CanMinimize" Height="768" Width="1280">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -38,7 +38,7 @@ namespace HEMATournamentSystem
 
         private void LoadAssociations()
         {
-            associations = Helper.GetAllAsd(true);
+            associations = SqlDal_Associations.GetAllAsd(true);
             dataGridAssociations.ItemsSource = associations;
         }
 

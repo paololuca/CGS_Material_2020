@@ -25,13 +25,20 @@ namespace HEMATournamentSystem
         private int currentTransition = 0;
         private int firstTransitionValid = 0;
 
-        public FinalsTransitions(int initialPhase)  //TODO initiale transitioner, e non posso andare indietro, MAI
+        private int _idTorneo;
+        private int _idDisciplina;
+
+        public FinalsTransitions(int initialPhase, int idTorneo, int idDisciplina)  //TODO initiale transitioner, e non posso andare indietro, MAI
         {
+            _idTorneo = idTorneo;
+            _idDisciplina = idDisciplina;
+
             InitializeComponent();
 
             SetInitialIndexs(initialPhase);
 
             SetButtonVisibility();
+
         }
 
         private void SetInitialIndexs(int initialPhase)
@@ -39,32 +46,38 @@ namespace HEMATournamentSystem
             firstTransitionValid = initialPhase;
             currentTransition = initialPhase;
             finalTransition.SelectedIndex = currentTransition;
+            ((IFinalsPhase)finalTransition.SelectedItem).LoadFields(_idTorneo, _idDisciplina);
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
             currentTransition--;
-            finalTransition.SelectedIndex = currentTransition;
 
-            //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
-            var panel = (IFinalsPhase)finalTransition.SelectedItem;
-            panel.LoadField();
-
-            SetButtonVisibility();
+            SwitchPhase();
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             currentTransition++;
+
+            SwitchPhase();
+        }
+
+        private void SwitchPhase()
+        {
+            var currentPanel = (IFinalsPhase)finalTransition.SelectedItem;
+            currentPanel.SaveFields(_idTorneo, _idDisciplina);
+
             finalTransition.SelectedIndex = currentTransition;
 
             //TODO check che io possa leggere la fase successiva (i.e. esistono i dati nel DB)
-            var panel = (IFinalsPhase)finalTransition.SelectedItem;
-            panel.LoadField();
+            var destinantionPanel = (IFinalsPhase)finalTransition.SelectedItem;
+            destinantionPanel.LoadFields(_idTorneo, _idDisciplina);
 
             SetButtonVisibility();
-
         }
+
+        
 
         private void SetButtonVisibility()
         {

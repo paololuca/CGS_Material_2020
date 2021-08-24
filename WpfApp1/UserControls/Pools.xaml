@@ -23,18 +23,22 @@
         </Grid.ColumnDefinitions>
         <TabControl x:Name="tabControlPool" Height="490" Margin="18,43,10,0"
                     VerticalAlignment="Top" />
-        <Button x:Name="btnOpenTournament" Height="Auto" Margin="18,0,876,554" Click="BtnOpenTournament_Click" Background="#FF28D137" >
+        <Button x:Name="btnOpenTournament" Height="Auto" Margin="18,0,876,554" Click="BtnOpenTournament_Click" Background="#FF673AB7" >
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="OpenInNew"/>
+                <materialDesign:PackIcon Kind="DatabaseSearch"/>
                 <TextBlock Text="  Open Pools"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnCreateTournamentPools" Height="Auto" Margin="159,0,735,554" Click="btnCreateTournamentPools_Click" Background="#FF28D137" >
+        <Button x:Name="btnCreateTournamentPools" Height="Auto" Margin="159,0,735,554" Click="btnCreateTournamentPools_Click" Background="#FF673AB7" >
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Tournament"/>
+                <materialDesign:PackIcon Kind="DatabasePlus"/>
                 <TextBlock Text="  Create Pools"/>
             </StackPanel>
         </Button>
+        <ComboBox Name="cmbSearchFighter" materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.HelperText="Search a Fighter by Surname and name" materialDesign:HintAssist.HintOpacity=".26" 
+                  IsEditable="True" Margin="411,-2,338,554" materialDesign:TextFieldAssist.HasClearButton="True"
+                  IsEnabled="False" KeyUp="cmbSearchFighter_KeyUp" DropDownClosed="cmbSearchFighter_DropDownClosed">
+        </ComboBox>
 
         <materialDesign:PopupBox Name="btnLoadPhases" PlacementMode="BottomAndAlignCentres" ToolTipService.Placement="Right"  IsEnabled="false"
                                  Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
@@ -124,7 +128,7 @@
         </Button>
         <Button x:Name="btnClosePools" Height="Auto" Margin="842,544,10,10" Click="BtnClosePools_Click" Background="#FF28D137" IsEnabled="False">
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="ArrowBottomRight"/>
+                <materialDesign:PackIcon Kind="Tournament"/>
                 <TextBlock Text="  Next Pase"/>
             </StackPanel>
         </Button>

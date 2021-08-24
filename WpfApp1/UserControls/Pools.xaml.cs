@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BusinessEntity.Type;
+using System.Windows.Input;
 
 namespace HEMATournamentSystem
 {
@@ -31,7 +32,7 @@ namespace HEMATournamentSystem
         List<List<MatchEntity>> gironiIncontri = null;
 
         private int numeroAtletiTorneoDisciplina = 0;
-
+        private Dictionary<string, int> _dicFighter;
         private int numeroGironi = 0;
         private int tournamentId;
         private string tournamentName;
@@ -85,6 +86,7 @@ namespace HEMATournamentSystem
 
         private void creaGironiAndLoad(int idTorneo, int idDisciplina, String categoria)
         {
+            _dicFighter = new Dictionary<string, int>();
 
             //loadToolStripMenuItem.Enabled = false;      //Non permetto più di caricare i dati (in teoria va fatto meglio)
 
@@ -286,7 +288,6 @@ namespace HEMATournamentSystem
 
                         _idTorneo = caricaGironi.IdTorneo;
                         _idDisciplina = caricaGironi.IdDisciplina;
-
                     }
                 }
             }
@@ -298,6 +299,7 @@ namespace HEMATournamentSystem
 
         private void CaricaGironiCreati(int idTorneo, int idDisciplina, String categoria)
         {
+            _dicFighter = new Dictionary<string, int>();
 
             numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);
 
@@ -314,26 +316,26 @@ namespace HEMATournamentSystem
 
                 Int32 idGirone = 1;
 
-                foreach (List<AtletaEntity> g in gironi)
+                foreach (List<AtletaEntity> poolList in gironi)
                 {
-                    List<MatchEntity> l = null;
+                    List<MatchEntity> matchList = null;
 
                     //TODO eliminabile visto che sono già sul DB
-                    if (g.Count == 4)
-                        l = Helper.ElaborateT4(g);
-                    else if (g.Count == 5)
-                        l = Helper.ElaborateT5(g);
-                    else if (g.Count == 6)
-                        l = Helper.ElaborateT6(g);
+                    if (poolList.Count == 4)
+                        matchList = Helper.ElaborateT4(poolList);
+                    else if (poolList.Count == 5)
+                        matchList = Helper.ElaborateT5(poolList);
+                    else if (poolList.Count == 6)
+                        matchList = Helper.ElaborateT6(poolList);
 
-                    if (l != null)
+                    if (matchList != null)
                     {
-                        foreach (MatchEntity i in l)
+                        foreach (MatchEntity i in matchList)
                             SqlDal_Pools.CaricaPunteggiEsistentiGironiIncontri(idTorneo, idDisciplina, i, idGirone);
 
-                        gironiIncontri.Add(l);
+                        gironiIncontri.Add(matchList);
                         string title = "Girone " + (tabControlPool.Items.Count + 1).ToString();
-                        tabControlPool.Items.Add(ElaboraTab(idTorneo, idDisciplina, title, g, l, tabControlPool.Items.Count + 1));
+                        tabControlPool.Items.Add(ElaboraTab(idTorneo, idDisciplina, title, poolList, matchList, tabControlPool.Items.Count + 1));
                         
                     }
                     idGirone++;
@@ -355,22 +357,28 @@ namespace HEMATournamentSystem
             btnExportMatch.IsEnabled = true;
             btnExportPools.IsEnabled = true;
             btnLoadPhases.IsEnabled = true;
+            cmbSearchFighter.IsEnabled = true;
+
+            cmbSearchFighter.ItemsSource = _dicFighter.Keys.ToList().OrderBy(x => x);
         }
 
         /// <summary>
         /// Costruisce il tab dello specifico del girone
         /// </summary>
         /// <param name="title">Titolo del TAB</param>
-        /// <param name="g">lista dei giroi (lista di persone)</param>
-        /// <param name="l">Lista degli incontri</param>
+        /// <param name="poolList">lista dei giroi (lista di persone)</param>
+        /// <param name="matchList">Lista degli incontri</param>
         /// <returns></returns>
-        private TabItem ElaboraTab(int idTorneo, int idDisciplina, string title, List<AtletaEntity> g, List<MatchEntity> l, Int32 tabIndex)
+        private TabItem ElaboraTab(int idTorneo, int idDisciplina, string title, List<AtletaEntity> poolList, List<MatchEntity> matchList, Int32 tabIndex)
         {
+            foreach (var a in poolList)
+                _dicFighter.Add(a.FullName, tabIndex);
+
             TabItem item = new TabItem();
 
             item.Header = title;
 
-            item.Content = new Pool(idTorneo, idDisciplina, g, l, tabIndex);
+            item.Content = new Pool(idTorneo, idDisciplina, poolList, matchList, tabIndex);
 
             return item;
         }
@@ -513,7 +521,35 @@ namespace HEMATournamentSystem
             finals.Show();
         }
 
+
         #endregion
+
+        private void cmbSearchFighter_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SwitchPoolTab(sender);
+            }
+        }
+
+        private void cmbSearchFighter_DropDownClosed(object sender, EventArgs e)
+        {
+            SwitchPoolTab(sender);
+        }
+
+        private void SwitchPoolTab(object sender)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            // Save the selected employee's name, because we will remove
+            // the employee's name from the list.
+            string selectedFigther = (string)cmbSearchFighter.SelectedItem;
+
+            if (selectedFigther != null && _dicFighter.TryGetValue(selectedFigther, out int tab))
+            {
+                tabControlPool.SelectedIndex = tab - 1;  //tabControlPool index start from 0
+            }
+        }
 
         
     }

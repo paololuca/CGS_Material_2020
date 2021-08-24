@@ -249,7 +249,7 @@ namespace HEMATournamentSystem
 
         public bool SavePoolFromFather()
         {
-            //MessageBox.Show("Pool " + Header + " Saved");
+            MessageBox.Show("Pool " + Header + " Saved");
             return true;
         }
 

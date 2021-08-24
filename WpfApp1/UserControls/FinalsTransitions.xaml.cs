@@ -67,8 +67,8 @@ namespace HEMATournamentSystem
 
         private void SwitchPhase()
         {
-            var currentPanel = (IFinalsPhase)finalTransition.SelectedItem;
-            currentPanel.SaveFields(_idTorneo, _idDisciplina);
+            //var currentPanel = (IFinalsPhase)finalTransition.SelectedItem;
+            //currentPanel.SaveFields(_idTorneo, _idDisciplina);
 
             finalTransition.SelectedIndex = currentTransition;
 

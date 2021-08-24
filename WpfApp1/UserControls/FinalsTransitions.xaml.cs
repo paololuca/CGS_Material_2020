@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntity.Type;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,10 @@ namespace HEMATournamentSystem
     public partial class FinalsTransitions : Window
     {
 
-        private const int MAX_TRANSITIONER_INDEX = 4;
+        private const int MAX_TRANSITIONER_INDEX = (int)PhasesType.Finals;
+        private int firstTransitionValid = (int)PhasesType.Finals_32;
         private int currentTransition = 0;
-        private int firstTransitionValid = 0;
-
+        
         private int _idTorneo;
         private int _idDisciplina;
 
@@ -47,6 +48,7 @@ namespace HEMATournamentSystem
             currentTransition = initialPhase;
             finalTransition.SelectedIndex = currentTransition;
             ((IFinalsPhase)finalTransition.SelectedItem).LoadFields(_idTorneo, _idDisciplina);
+
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
@@ -83,6 +85,20 @@ namespace HEMATournamentSystem
         {
             btnPrevious.IsEnabled = currentTransition == firstTransitionValid ? false : true;
             btnNext.IsEnabled = currentTransition == MAX_TRANSITIONER_INDEX ? false : true;
+
+            btnPrintBracket.IsEnabled = currentTransition > 2 ? false : true;
+        }
+
+        private void btnPrintPools_Click(object sender, RoutedEventArgs e)
+        {
+            var currentPanel = (IFinalsPhase)finalTransition.SelectedItem;
+            currentPanel.PrintPools();
+        }
+
+        private void btnPrintBracket_Click(object sender, RoutedEventArgs e)
+        {
+            var currentPanel = (IFinalsPhase)finalTransition.SelectedItem;
+            currentPanel.PrintBracket();
         }
     }
 }

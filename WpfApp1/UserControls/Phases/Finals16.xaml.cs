@@ -42,14 +42,22 @@ namespace UserControls.Phases
             _idDisciplina = idDisciplina;
 
             LoadMatchs();
-
-            btnBracket.IsEnabled = true;
         }
         
         public void SaveFields(int idTorneo, int idDisciplina)
         {
         }
+        public void PrintBracket()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void PrintPools()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Private
         private void LoadMatchs()
         {
             List<AtletaEliminatorie> allAtleti = SqlDal_Pools.GetSedicesimi(_idTorneo, _idDisciplina);
@@ -79,7 +87,7 @@ namespace UserControls.Phases
             #region campo4
             LoadFourthPool(allAtleti);
             #endregion
-        }        
+        }
 
         private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
         {
@@ -246,9 +254,10 @@ namespace UserControls.Phases
             }
         }
 
-        private void btnBracket_Click(object sender, RoutedEventArgs e)
+        private void btnSavePools_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        #endregion
     }
 }

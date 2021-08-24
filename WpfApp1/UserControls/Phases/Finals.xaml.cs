@@ -49,12 +49,24 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            PopUpBoxes.ShowPopup("Finals Saved");
+
+
+            btnPrintResult.IsEnabled = true;
+            btnCloseTournament.IsEnabled = true;
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        public void PrintBracket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintPools()
+        {
+            throw new NotImplementedException();
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -85,6 +97,16 @@ namespace UserControls.Phases
                     e.Column.IsReadOnly = true;
                     break;
             }
+        }
+
+        private void BtnPrintResult_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCloseTournament_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

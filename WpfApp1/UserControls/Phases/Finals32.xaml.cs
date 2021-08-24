@@ -28,6 +28,7 @@ namespace UserControls.Phases
         {
             InitializeComponent();
         }
+
         public void LoadFields(int idTorneo, int idDisciplina)
         {
             _id_torneo = idTorneo;
@@ -36,12 +37,22 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            PopUpBoxes.ShowPopup("1/32 Saved");
+            
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void PrintBracket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintPools()
+        {
+            throw new NotImplementedException();
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

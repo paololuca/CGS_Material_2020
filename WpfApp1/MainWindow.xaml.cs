@@ -97,5 +97,10 @@ namespace HEMATournamentSystem
             var about = new About();
             about.Show();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            App.Current.Shutdown();
+        }
     }
 }

@@ -27,6 +27,20 @@
                 <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/xamldisplayer.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="DGHeaderStyle" TargetType="{x:Type DataGrid}">
+                <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
+            </Style>
+            <Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                <Setter Property="Margin" Value="-1,-1,0,0" />
+                <Setter Property="Height" Value="28" />
+                <Setter Property="Width" Value="auto"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+            
 
             <Style TargetType="smtx:XamlDisplay" BasedOn="{StaticResource {x:Type smtx:XamlDisplay}}">
                 <Style.Resources>

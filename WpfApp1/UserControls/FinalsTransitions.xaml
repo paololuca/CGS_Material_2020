@@ -16,7 +16,29 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="256" />
         </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center">Finals Phases</TextBlock>
+
+        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="442,0,0,0" Width="57">
+            <materialDesign:PopupBox.ToggleContent>
+                <materialDesign:PackIcon Kind="Printer" Height="40" Width="60" ToolTip="Print"/>
+            </materialDesign:PopupBox.ToggleContent>
+            <StackPanel>
+                <Button Name="btnPrintBracket" Click="btnPrintBracket_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Tournament"/>
+                        <TextBlock Text="  Bracket" ToolTip="Print bracket"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Name="btnPrintPools" Click="btnPrintPools_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FilePdf"/>
+                        <TextBlock Text="  Pools" ToolTip="Print pools"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+            </StackPanel>
+        </materialDesign:PopupBox>
+        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center" Margin="499,0,479,0" Width="296">Finals Phases</TextBlock>
         <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnNext"
                 materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
                 ToolTip="Next Phase" Margin="1113,35,0.6,0.2" Click="btnNext_Click">
@@ -33,17 +55,17 @@
                 <TextBlock Text="  Prev"/>
             </StackPanel>
         </Button>
-        
+
         <smtx:XamlDisplay  Grid.Row="1">
             <!-- the transitioner will manage your transitions. notice how SelectedIndex is set to zero: the first slide (instead of the default of -1) -->
-            <materialDesign:Transitioner Name="finalTransition"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
+            <materialDesign:Transitioner Name="finalTransition"  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
 
                 <local:Finals32/>
                 <local:Finals16/>
                 <local:Finals8/>
                 <local:Finals4/>
                 <local:SemiFinals/>
-                <local:Finals/>                
+                <local:Finals/>
 
             </materialDesign:Transitioner>
         </smtx:XamlDisplay>

@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.Entity;
 using Resources;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,11 +26,31 @@ namespace UserControls.Phases
             _id_torneo = idTorneo;
             _idDisciplina = idDisciplina;
 
+            //TODO da lettura da DB
+            List<MatchEntity> listaIncontri = new List<MatchEntity>
+            {
+                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
+            };
+
+            dataGridPoolOne.ItemsSource = listaIncontri;
+            dataGridPoolTwo.ItemsSource = listaIncontri;
+            dataGridPoolThree.ItemsSource = listaIncontri;
+            dataGridPoolFour.ItemsSource = listaIncontri;
+
         }
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            PopUpBoxes.ShowPopup("1/4 Saved");
+            
+        }
+        public void PrintBracket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintPools()
+        {
+            throw new NotImplementedException();
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)

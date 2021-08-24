@@ -50,7 +50,16 @@ namespace UserControls.Phases
         }
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            PopUpBoxes.ShowPopup("1/8 Saved");
+        }
+
+        public void PrintBracket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintPools()
+        {
+            throw new NotImplementedException();
         }
 
         private void btnSavePools_Click(object sender, RoutedEventArgs e)
@@ -86,6 +95,11 @@ namespace UserControls.Phases
                     e.Column.IsReadOnly = true;
                     break;
             }
+        }
+
+        private void btnBracket_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

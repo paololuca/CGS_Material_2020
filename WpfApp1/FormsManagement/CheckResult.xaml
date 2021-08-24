@@ -16,7 +16,7 @@
 
         <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="10,589,0,0" VerticalAlignment="Top" Width="872"/>
         
-        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FF28D137" Margin="616,618,164,47" IsCancel="True">
+        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FFA0AAA0" Margin="616,618,164,47" IsCancel="True">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Cancel"/>
                 <TextBlock Text="  Cancel"/>

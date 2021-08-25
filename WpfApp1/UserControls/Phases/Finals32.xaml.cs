@@ -21,9 +21,7 @@ namespace UserControls.Phases
     /// </summary>
     public partial class Finals32 : UserControl, IFinalsPhase
     {
-        private int _id_torneo;
-        private int _idDisciplina;
-
+        //this class exist but , now, is never used
         public Finals32()
         {
             InitializeComponent();
@@ -31,8 +29,6 @@ namespace UserControls.Phases
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            _id_torneo = idTorneo;
-            _idDisciplina = idDisciplina;
         }
 
         public void SaveFields(int idTorneo, int idDisciplina)
@@ -40,19 +36,14 @@ namespace UserControls.Phases
             
         }
 
-        private void btnSavePools_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public void PrintBracket()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void PrintPools()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

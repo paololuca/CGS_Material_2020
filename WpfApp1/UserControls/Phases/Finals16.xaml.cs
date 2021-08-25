@@ -23,49 +23,57 @@ namespace UserControls.Phases
     /// </summary>
     public partial class Finals16 : UserControl, IFinalsPhase
     {
-        private int _idTorneo;
-        private int _idDisciplina;
+        private bool _loaded = false;
+        private PdfManager pdf;
 
-        private List<AtletaEliminatorie> campo1;
-        private List<AtletaEliminatorie> campo2;
-        private List<AtletaEliminatorie> campo3;
-        private List<AtletaEliminatorie> campo4;
-
+        private List<AtletaEliminatorie> poolOne;
+        private List<AtletaEliminatorie> poolTwo;
+        private List<AtletaEliminatorie> poolThree;
+        private List<AtletaEliminatorie> poolFour;
+        
         public Finals16()
         {
             InitializeComponent();
+
+            pdf = new PdfManager();
         }
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            _idTorneo = idTorneo;
-            _idDisciplina = idDisciplina;
+            LoadMatchs(idTorneo, idDisciplina);
 
-            LoadMatchs();
+            _loaded = true;
         }
         
         public void SaveFields(int idTorneo, int idDisciplina)
         {
+
         }
+
         public void PrintBracket()
         {
-            throw new NotImplementedException();
+            if (_loaded)
+                pdf.StampaBracketSedicesimi(poolOne, poolTwo, poolThree, poolFour);
         }
 
         public void PrintPools()
         {
-            throw new NotImplementedException();
+            if (_loaded)
+                pdf.StampaSedicesimi(poolOne, poolTwo, poolThree, poolFour);
         }
 
         #region Private
-        private void LoadMatchs()
+        private void LoadMatchs(int idTorneo, int idDisciplina)
         {
-            List<AtletaEliminatorie> allAtleti = SqlDal_Pools.GetSedicesimi(_idTorneo, _idDisciplina);
+            List<AtletaEliminatorie> allAtleti = SqlDal_Pools.GetSedicesimi(idTorneo, idDisciplina);
 
-            campo1 = new List<AtletaEliminatorie>();
-            campo2 = new List<AtletaEliminatorie>();
-            campo3 = new List<AtletaEliminatorie>();
-            campo4 = new List<AtletaEliminatorie>();
+            poolOne = new List<AtletaEliminatorie>();
+            poolTwo = new List<AtletaEliminatorie>();
+            poolThree = new List<AtletaEliminatorie>();
+            poolFour = new List<AtletaEliminatorie>();
+
+            if (allAtleti.Count == 0)
+                return;
 
             LoadMatchesByPool(allAtleti);
         }
@@ -91,137 +99,132 @@ namespace UserControls.Phases
 
         private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
         {
-            campo1.Add(allAtleti.ElementAt(0));
-            campo1.Add(allAtleti.ElementAt(31));
+            poolOne.Add(allAtleti.ElementAt(0));
+            poolOne.Add(allAtleti.ElementAt(31));
 
-            campo1.Add(allAtleti.ElementAt(15));
-            campo1.Add(allAtleti.ElementAt(16));
+            poolOne.Add(allAtleti.ElementAt(15));
+            poolOne.Add(allAtleti.ElementAt(16));
 
-            campo1.Add(allAtleti.ElementAt(11));
-            campo1.Add(allAtleti.ElementAt(20));
+            poolOne.Add(allAtleti.ElementAt(11));
+            poolOne.Add(allAtleti.ElementAt(20));
 
-            campo1.Add(allAtleti.ElementAt(7));
-            campo1.Add(allAtleti.ElementAt(24));
+            poolOne.Add(allAtleti.ElementAt(7));
+            poolOne.Add(allAtleti.ElementAt(24));
 
-            List<MatchEntity> list = new List<MatchEntity>();
-            CreateMatches(list, campo1);
-
-            dataGridPoolOne.ItemsSource = list;
+            CreateMatches(dataGridPoolOne, poolOne);
         }
 
         private void LoadSecondPool(List<AtletaEliminatorie> allAtleti)
         {
-            campo2.Add(allAtleti.ElementAt(1));
-            campo2.Add(allAtleti.ElementAt(30));
+            poolTwo.Add(allAtleti.ElementAt(1));
+            poolTwo.Add(allAtleti.ElementAt(30));
 
-            campo2.Add(allAtleti.ElementAt(14));
-            campo2.Add(allAtleti.ElementAt(17));
+            poolTwo.Add(allAtleti.ElementAt(14));
+            poolTwo.Add(allAtleti.ElementAt(17));
 
-            campo2.Add(allAtleti.ElementAt(10));
-            campo2.Add(allAtleti.ElementAt(21));
+            poolTwo.Add(allAtleti.ElementAt(10));
+            poolTwo.Add(allAtleti.ElementAt(21));
 
-            campo2.Add(allAtleti.ElementAt(6));
-            campo2.Add(allAtleti.ElementAt(25));
+            poolTwo.Add(allAtleti.ElementAt(6));
+            poolTwo.Add(allAtleti.ElementAt(25));
 
             List<MatchEntity> list = new List<MatchEntity>();
-            CreateMatches(list, campo2);
-
-            dataGridPoolTwo.ItemsSource = list;
+            CreateMatches(dataGridPoolTwo, poolTwo);
         }
 
         private void LoadThirdPool(List<AtletaEliminatorie> allAtleti)
         {
-            campo3.Add(allAtleti.ElementAt(5));
-            campo3.Add(allAtleti.ElementAt(26));
+            poolThree.Add(allAtleti.ElementAt(5));
+            poolThree.Add(allAtleti.ElementAt(26));
 
-            campo3.Add(allAtleti.ElementAt(9));
-            campo3.Add(allAtleti.ElementAt(22));
+            poolThree.Add(allAtleti.ElementAt(9));
+            poolThree.Add(allAtleti.ElementAt(22));
 
-            campo3.Add(allAtleti.ElementAt(13));
-            campo3.Add(allAtleti.ElementAt(18));
+            poolThree.Add(allAtleti.ElementAt(13));
+            poolThree.Add(allAtleti.ElementAt(18));
 
-            campo3.Add(allAtleti.ElementAt(2));
-            campo3.Add(allAtleti.ElementAt(29));
+            poolThree.Add(allAtleti.ElementAt(2));
+            poolThree.Add(allAtleti.ElementAt(29));
 
             List<MatchEntity> list = new List<MatchEntity>();
-            CreateMatches(list, campo3);
-
-            dataGridPoolThree.ItemsSource = list;
+            CreateMatches(dataGridPoolThree, poolThree);
         }
 
         private void LoadFourthPool(List<AtletaEliminatorie> allAtleti)
         {
-            campo4.Add(allAtleti.ElementAt(4));
-            campo4.Add(allAtleti.ElementAt(27));
+            poolFour.Add(allAtleti.ElementAt(4));
+            poolFour.Add(allAtleti.ElementAt(27));
 
-            campo4.Add(allAtleti.ElementAt(8));
-            campo4.Add(allAtleti.ElementAt(23));
+            poolFour.Add(allAtleti.ElementAt(8));
+            poolFour.Add(allAtleti.ElementAt(23));
 
-            campo4.Add(allAtleti.ElementAt(12));
-            campo4.Add(allAtleti.ElementAt(19));
+            poolFour.Add(allAtleti.ElementAt(12));
+            poolFour.Add(allAtleti.ElementAt(19));
 
-            campo4.Add(allAtleti.ElementAt(3));
-            campo4.Add(allAtleti.ElementAt(28));
+            poolFour.Add(allAtleti.ElementAt(3));
+            poolFour.Add(allAtleti.ElementAt(28));
 
             List<MatchEntity> list = new List<MatchEntity>();
-            CreateMatches(list, campo4);
-
-            dataGridPoolFour.ItemsSource = list;
+            CreateMatches(dataGridPoolFour, poolFour);
         }
 
-        private void CreateMatches(List<MatchEntity> list, List<AtletaEliminatorie> campo)
+        private void CreateMatches(DataGrid dataGridPool, List<AtletaEliminatorie> pool)
         {
+            List<MatchEntity> list = new List<MatchEntity>();
+
             list.Add(new MatchEntity()
             {
-                IdRosso = campo[0].IdAtleta,
-                CognomeRosso = campo[0].Cognome,
-                NomeRosso = campo[0].Nome,
-                PuntiRosso = 0,
-                IdBlu = campo[1].IdAtleta,
-                CognomeBlu = campo[1].Cognome,
-                NomeBlu = campo[1].Nome,
-                PuntiBlu = 0,
+                IdRosso = pool[0].IdAtleta,
+                CognomeRosso = pool[0].Cognome,
+                NomeRosso = pool[0].Nome,
+                PuntiRosso = pool[0].PuntiFatti,
+                IdBlu = pool[1].IdAtleta,
+                CognomeBlu = pool[1].Cognome,
+                NomeBlu = pool[1].Nome,
+                PuntiBlu = pool[1].PuntiFatti,
             }
             );
 
             list.Add(new MatchEntity()
             {
-                IdRosso = campo[2].IdAtleta,
-                CognomeRosso = campo[2].Cognome,
-                NomeRosso = campo[2].Nome,
-                PuntiRosso = 0,
-                IdBlu = campo[3].IdAtleta,
-                CognomeBlu = campo[3].Cognome,
-                NomeBlu = campo[3].Nome,
-                PuntiBlu = 0,
+                IdRosso = pool[2].IdAtleta,
+                CognomeRosso = pool[2].Cognome,
+                NomeRosso = pool[2].Nome,
+                PuntiRosso = pool[2].PuntiFatti,
+                IdBlu = pool[3].IdAtleta,
+                CognomeBlu = pool[3].Cognome,
+                NomeBlu = pool[3].Nome,
+                PuntiBlu = pool[3].PuntiFatti,
             }
             );
 
             list.Add(new MatchEntity()
             {
-                IdRosso = campo[4].IdAtleta,
-                CognomeRosso = campo[4].Cognome,
-                NomeRosso = campo[4].Nome,
-                PuntiRosso = 0,
-                IdBlu = campo[5].IdAtleta,
-                CognomeBlu = campo[5].Cognome,
-                NomeBlu = campo[5].Nome,
-                PuntiBlu = 0,
+                IdRosso = pool[4].IdAtleta,
+                CognomeRosso = pool[4].Cognome,
+                NomeRosso = pool[4].Nome,
+                PuntiRosso = pool[4].PuntiFatti,
+                IdBlu = pool[5].IdAtleta,
+                CognomeBlu = pool[5].Cognome,
+                NomeBlu = pool[5].Nome,
+                PuntiBlu = pool[5].PuntiFatti,
             }
             );
 
             list.Add(new MatchEntity()
             {
-                IdRosso = campo[6].IdAtleta,
-                CognomeRosso = campo[6].Cognome,
-                NomeRosso = campo[6].Nome,
-                PuntiRosso = 0,
-                IdBlu = campo[7].IdAtleta,
-                CognomeBlu = campo[7].Cognome,
-                NomeBlu = campo[7].Nome,
-                PuntiBlu = 0,
+                IdRosso = pool[6].IdAtleta,
+                CognomeRosso = pool[6].Cognome,
+                NomeRosso = pool[6].Nome,
+                PuntiRosso = pool[6].PuntiFatti,
+                IdBlu = pool[7].IdAtleta,
+                CognomeBlu = pool[7].Cognome,
+                NomeBlu = pool[7].Nome,
+                PuntiBlu = pool[7].PuntiFatti,
             }
             );
+
+            dataGridPool.ItemsSource = list;
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -254,10 +257,6 @@ namespace UserControls.Phases
             }
         }
 
-        private void btnSavePools_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         #endregion
     }
 }

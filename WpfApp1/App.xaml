@@ -87,6 +87,7 @@
                                 </Grid>
                             </DockPanel>
                         </ControlTemplate>
+                        
                     </Setter.Value>
                 </Setter>
             </Style>

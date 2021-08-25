@@ -157,7 +157,7 @@ namespace Resources
 
         public static List<AtletaEliminatorie> GetFinali(int idTorneo, int idDisciplina, int campo)
         {
-            String commandText = "SELECT a.Nome, a.Cognome, q.* from Atleti a join Finali q on a.Id = q.IdAtleta  WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + "and Campo = " + campo + " ORDER BY Posizione ASC";
+            String commandText = "SELECT a.Nome, a.Cognome, q.* from Atleti a join Finali q on a.Id = q.IdAtleta  WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + "and Campo = " + campo + " ORDER BY Posizione, Cognome, nome ASC";
 
             SqlConnection c = null;
             List<AtletaEliminatorie> list = new List<AtletaEliminatorie>();
@@ -736,7 +736,7 @@ namespace Resources
 
             foreach (AtletaEliminatorie a in listAtleti)
                 commandText += "INSERT INTO Qualificati32(IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
-                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + ",0);";
+                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0, 0," + a.Posizione + ",0);";
 
             SqlConnection c = null;
             try

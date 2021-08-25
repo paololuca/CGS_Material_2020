@@ -22,7 +22,7 @@
                 <TextBlock Text="  Cancel"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnSaveResult" Height="32"  Click="BtnSaveResult_Click" Background="#FF28D137" Margin="733,618,34,47" IsDefault="True" >
+        <Button x:Name="btnSaveResult" Height="32"  Click="btnSaveResult_Click" Background="#FF28D137" Margin="733,618,34,47" IsDefault="True" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Create"/>
                 <TextBlock Text="  Confirm"/>

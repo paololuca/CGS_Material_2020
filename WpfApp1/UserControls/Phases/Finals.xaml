@@ -25,26 +25,12 @@
                 <DataGrid x:Name="dataGridPoolTwo" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,364,0,157" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
                           CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
                           materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Style="{DynamicResource DGHeaderStyle}"/>
-                <Button x:Name="btnSavePools" Height="42" Click="btnSavePools_Click" Background="#FF28D137"  
-                        HorizontalAlignment="Left" Width="90" Margin="1150,-72,0,0" VerticalAlignment="Top"  >
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Floppy"/>
-                        <TextBlock Text="  Save"/>
-                    </StackPanel>
-                </Button>
                 <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="22" Content="1° - 2° Place " FontSize="32" FontWeight="DemiBold" Margin="10,0,202,565" />
                 <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="22" Content="3° - 4° Place" FontSize="32" FontWeight="DemiBold" Margin="10,266,202,299" />
-                <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="1119,10,20,616" IsEnabled="False" ToolTip="Print final results">
+                <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="1119,516,20,110" IsEnabled="False" ToolTip="Print final results">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Pdf"/>
-                        <TextBlock Text="  Print"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnCloseTournament" Height="Auto"  Click="btnCloseTournament_Click" Background="#FF673AB7" Margin="1119,516,20,110" RenderTransformOrigin="0.5,0.5" 
-                        ToolTip="Close this tournament" IsEnabled="False">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="CloseBoxMultipleOutline"/>
-                        <TextBlock Text="  Close"/>
+                        <TextBlock Text="  Results"/>
                     </StackPanel>
                 </Button>
             </Grid>

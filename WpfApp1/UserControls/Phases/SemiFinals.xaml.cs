@@ -1,4 +1,5 @@
-﻿using BusinessEntity.Entity;
+﻿using BusinessEntity.DAO;
+using BusinessEntity.Entity;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -22,28 +23,53 @@ namespace UserControls.Phases
     /// </summary>
     public partial class SemiFinals : UserControl, IFinalsPhase
     {
-        private int _id_torneo;
-        private int _idDisciplina;
+        private bool _loaded = false;
+        PdfManager pdf;
+
+        private List<AtletaEliminatorie> poolOne;
+        private List<AtletaEliminatorie> poolTwo;
+
 
         public SemiFinals()
         {
             InitializeComponent();
+
+            pdf = new PdfManager();
         }
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            _id_torneo = idTorneo;
-            _idDisciplina = idDisciplina;
+            poolOne = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 1);
+            poolTwo = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 2);
 
-            //TODO da lettura da DB
-            List<MatchEntity> listaIncontri = new List<MatchEntity>
+            LoadPool(poolOne, dataGridPoolOne);
+            LoadPool(poolTwo, dataGridPoolTwo);
+
+            _loaded = true;
+        }
+
+        private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
+        {
+            if (pool.Count == 0)
+                return;
+
+            List<MatchEntity> list = new List<MatchEntity>();
+
+            list.Add(new MatchEntity()
             {
-                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
-                
-            };
+                IdRosso = pool[0].IdAtleta,
+                CognomeRosso = pool[0].Cognome,
+                NomeRosso = pool[0].Nome,
+                PuntiRosso = pool[0].PuntiFatti,
+                IdBlu = pool[1].IdAtleta,
+                CognomeBlu = pool[1].Cognome,
+                NomeBlu = pool[1].Nome,
+                PuntiBlu = pool[1].PuntiFatti,
+            }
+            );
 
-            dataGridPoolOne.ItemsSource = listaIncontri;
-            dataGridPoolTwo.ItemsSource = listaIncontri;
+            dataGridPool.ItemsSource = list;
+
         }
 
         public void SaveFields(int idTorneo, int idDisciplina)
@@ -51,19 +77,15 @@ namespace UserControls.Phases
             
         }
 
-        private void btnSavePools_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public void PrintBracket()
         {
-            throw new NotImplementedException();
+            //do noting
         }
 
         public void PrintPools()
         {
-            throw new NotImplementedException();
+            if(_loaded)
+                pdf.StampaSemifinali(poolOne, poolTwo);
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

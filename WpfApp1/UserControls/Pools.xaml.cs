@@ -391,7 +391,7 @@ namespace HEMATournamentSystem
                 System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
             {
                 //save all pools for safety
-                if (SaveAll())
+                if (SaveAllPools())
                 {
                     SqlDal_Pools.DeleteAllPahases(tournamentId, disciplineId);
 
@@ -433,7 +433,7 @@ namespace HEMATournamentSystem
                         atletiAmmessiEliminatorie == 4 ? (int)PhasesType.SemiFinals : (int)PhasesType.Finals;
         }
 
-        private bool SaveAll()
+        private bool SaveAllPools()
         {
             bool saveAllResult = true;
             for (int i = 0; i < tabControlPool.Items.Count; i++)

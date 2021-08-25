@@ -87,43 +87,6 @@ namespace FormsManagement
             lblStatus.Content = " Selezionati " + _currentSelectedItems + " Atleti per la fase successiva";
         }
 
-        private void BtnSaveResult_Click(object sender, RoutedEventArgs e)
-        {
-                        
-            if (_currentSelectedItems != atletiAmmessiEliminatorie)
-            {
-                System.Windows.Forms.MessageBox.Show("Il numero di atleti selezionati non è " + atletiAmmessiEliminatorie + ": controllare la lista", "ERRORE", 
-                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-            }
-            else
-            {
-                List<AtletaEliminatorie> listaQualificati = new List<AtletaEliminatorie>();
-                int posizione = 1;
-                foreach (GironiConclusi a in dataGridResult.Items)
-                {
-                    if (a.Qualificato)
-                    {
-                        listaQualificati.Add(new AtletaEliminatorie()
-                        {
-                            IdAtleta = a.IdAtleta,
-                            IdTorneo = a.IdTorneo,
-                            idDisciplina = a.IdDisciplina,
-                            Posizione = posizione
-                        }
-                        );
-                        posizione++;
-                    }
-                }
-
-                CreateNextPhase(listaQualificati);
-
-                SqlDal_Pools.ConcludiGironi(idTorneo, idDisciplina);
-
-                WindowCheckResult = true;
-                this.Close();
-            }
-        }
-
         private void CreateNextPhase(List<AtletaEliminatorie> listaQualificati)
         {
             if (atletiAmmessiEliminatorie == 32)
@@ -180,6 +143,44 @@ namespace FormsManagement
 
                     SetLStatusLabel();
                 }
+            }
+        }
+
+        private void btnSaveResult_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentSelectedItems != atletiAmmessiEliminatorie)
+            {
+                System.Windows.Forms.MessageBox.Show("Il numero di atleti selezionati non è " + atletiAmmessiEliminatorie + ": controllare la lista", "ERRORE",
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            else
+            {
+                List<AtletaEliminatorie> listaQualificati = new List<AtletaEliminatorie>();
+
+                int posizione = 1;
+
+                foreach (GironiConclusi a in dataGridResult.Items)
+                {
+                    if (a.Qualificato)
+                    {
+                        listaQualificati.Add(new AtletaEliminatorie()
+                        {
+                            IdAtleta = a.IdAtleta,
+                            IdTorneo = a.IdTorneo,
+                            idDisciplina = a.IdDisciplina,
+                            Posizione = posizione
+                        }
+                        );
+                        posizione++;
+                    }
+                }
+
+                CreateNextPhase(listaQualificati);
+
+                SqlDal_Pools.ConcludiGironi(idTorneo, idDisciplina);
+
+                WindowCheckResult = true;
+                this.Close();
             }
         }
     }

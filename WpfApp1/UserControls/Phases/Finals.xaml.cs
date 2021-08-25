@@ -1,4 +1,5 @@
-﻿using BusinessEntity.Entity;
+﻿using BusinessEntity.DAO;
+using BusinessEntity.Entity;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -22,29 +23,92 @@ namespace UserControls.Phases
     /// </summary>
     public partial class Finals : UserControl, IFinalsPhase
     {
-        private int _id_torneo;
+        private int _idTorneo;
         private int _idDisciplina;
+        private bool _loaded = false;
+        
+        PdfManager pdf;
+
+        String firstPlace;
+        String secondPlace;
+        String thirdPlace;
+        String fourthPlace;
+
+        private List<AtletaEliminatorie> poolOne;
+        private List<AtletaEliminatorie> poolTwo;
+        
 
         public Finals()
         {
             InitializeComponent();
+
+            pdf = new PdfManager();
         }
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            _id_torneo = idTorneo;
-            _idDisciplina = idDisciplina;
+            this._idTorneo = idTorneo;
+            this._idDisciplina = idDisciplina;
 
-            //TODO da lettura da DB
-            List<MatchEntity> listaIncontri = new List<MatchEntity>
+            poolOne = SqlDal_Pools.GetFinali(idTorneo, idDisciplina, 1);
+            poolTwo = SqlDal_Pools.GetFinali(idTorneo, idDisciplina, 2);
+
+            LoadPool(poolOne, dataGridPoolOne);
+            LoadPool(poolTwo, dataGridPoolTwo);
+
+            _loaded = true;
+        }
+
+        private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
+        {
+            if (pool.Count == 0)
+                return;
+
+            List<MatchEntity> list = new List<MatchEntity>();
+
+            #region THREE match for finals
+            list.Add(new MatchEntity()
             {
-                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
-                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
-                new MatchEntity { IdRosso = 1, IdBlu = 2, CognomeRosso = "Aaaaaa", CognomeBlu = "Bbbbbbbb", NomeRosso = "N", NomeBlu="N", DoppiaMorte=false, PuntiRosso = 0, PuntiBlu=0, SatrapiaRosso="", SatrapiaBlu=""},
-            };
+                IdRosso = pool[0].IdAtleta,
+                CognomeRosso = pool[0].Cognome,
+                NomeRosso = pool[0].Nome,
+                PuntiRosso = pool[0].PuntiFatti,
+                IdBlu = pool[3].IdAtleta,
+                CognomeBlu = pool[3].Cognome,
+                NomeBlu = pool[3].Nome,
+                PuntiBlu = pool[3].PuntiFatti,
+            }
+            );
 
-            dataGridPoolOne.ItemsSource = listaIncontri;
-            dataGridPoolTwo.ItemsSource = listaIncontri;
+            list.Add(new MatchEntity()
+            {
+                IdRosso = pool[1].IdAtleta,
+                CognomeRosso = pool[1].Cognome,
+                NomeRosso = pool[1].Nome,
+                PuntiRosso = pool[1].PuntiFatti,
+                IdBlu = pool[4].IdAtleta,
+                CognomeBlu = pool[4].Cognome,
+                NomeBlu = pool[4].Nome,
+                PuntiBlu = pool[4].PuntiFatti,
+            }
+            );
+
+            list.Add(new MatchEntity()
+            {
+                IdRosso = pool[2].IdAtleta,
+                CognomeRosso = pool[2].Cognome,
+                NomeRosso = pool[2].Nome,
+                PuntiRosso = pool[2].PuntiFatti,
+                IdBlu = pool[5].IdAtleta,
+                CognomeBlu = pool[5].Cognome,
+                NomeBlu = pool[5].Nome,
+                PuntiBlu = pool[5].PuntiFatti,
+            }
+            );
+
+            #endregion
+            
+            dataGridPool.ItemsSource = list;
         }
 
         public void SaveFields(int idTorneo, int idDisciplina)
@@ -52,21 +116,25 @@ namespace UserControls.Phases
 
 
             btnPrintResult.IsEnabled = true;
-            btnCloseTournament.IsEnabled = true;
         }
 
-        private void btnSavePools_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public void PrintBracket()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void PrintPools()
         {
-            throw new NotImplementedException();
+            if(_loaded)
+                pdf.StampaFinali(poolOne, poolTwo);
+        }
+
+        private void BtnPrintResult_Click(object sender, RoutedEventArgs e)
+        {
+            TorneoEntity tournament = Helper.GetTorneoById(_idTorneo);
+            String nomeDisciplina = Helper.GetDisciplinaById(_idDisciplina);
+
+            pdf.FineTorneo(firstPlace, secondPlace, thirdPlace, fourthPlace, tournament.Name, nomeDisciplina);
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -97,16 +165,6 @@ namespace UserControls.Phases
                     e.Column.IsReadOnly = true;
                     break;
             }
-        }
-
-        private void BtnPrintResult_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCloseTournament_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

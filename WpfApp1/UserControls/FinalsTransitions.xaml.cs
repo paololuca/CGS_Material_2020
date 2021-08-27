@@ -113,7 +113,7 @@ namespace HEMATournamentSystem
 
                 LoadPhasesData(_currentTransition + 1);
 
-                new MessageBoxCustom("Pools saved correctly, now you can go to the next phase ", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                new MessageBoxCustom("Pools saved correctly !! ", MessageType.Success, MessageButtons.Ok).ShowDialog();
             }
             catch
             {
@@ -143,6 +143,16 @@ namespace HEMATournamentSystem
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void btnClosePool_Click(object sender, RoutedEventArgs e)
+        {
+            bool? result = new MessageBoxCustom("Confirm EXIT ?", MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
+
+            if (result.Value)
+            {
+                this.Close(); ;
             }
         }
     }

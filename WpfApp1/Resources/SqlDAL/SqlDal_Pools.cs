@@ -155,6 +155,43 @@ namespace Resources
 
         }
 
+        public static int CountPhasesMatchs(int idTorneo, int idDisciplina, string tableName)
+        {
+            int result = 0;
+
+            String commandText = "SELECT COUNT(*) FROM " + tableName + " WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+            List<AtletaEliminatorie> list = new List<AtletaEliminatorie>();
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result = (int)reader[0];
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+
+            return result;
+
+        }
+
         public static List<AtletaEliminatorie> GetFinali(int idTorneo, int idDisciplina, int campo)
         {
             String commandText = "SELECT a.Nome, a.Cognome, q.* from Atleti a join Finali q on a.Id = q.IdAtleta  WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + "and Campo = " + campo + " ORDER BY Posizione, Cognome, nome ASC";
@@ -759,161 +796,6 @@ namespace Resources
             }
         }
 
-        public static void DeleteAllPahases(int idTorneo, int idDisciplina)
-        {
-            DeleteAllSedicesimi(idTorneo, idDisciplina);
-            DeleteAllOttavi(idTorneo, idDisciplina);
-            DeleteAllQuarti(idTorneo, idDisciplina);
-            DeleteAllSemifinali(idTorneo, idDisciplina);
-            DeleteAllFinali(idTorneo, idDisciplina);
-        }
-
-        public static void DeleteAfterSedicesimi(int idTorneo, int idDisciplina)
-        {
-            DeleteAllOttavi(idTorneo, idDisciplina);
-            DeleteAllQuarti(idTorneo, idDisciplina);
-            DeleteAllSemifinali(idTorneo, idDisciplina);
-            DeleteAllFinali(idTorneo, idDisciplina);
-        }
-        
-        public static void DeleteAfterOttavi(int idTorneo, int idDisciplina)
-        {
-            DeleteAllQuarti(idTorneo, idDisciplina);
-            DeleteAllSemifinali(idTorneo, idDisciplina);
-            DeleteAllFinali(idTorneo, idDisciplina);
-        }
-
-        public static void DeleteAfterQuarti(int idTorneo, int idDisciplina)
-        {
-            DeleteAllSemifinali(idTorneo, idDisciplina);
-            DeleteAllFinali(idTorneo, idDisciplina);
-        }
-
-        public static void DeleteAfterSeimifinali(int idTorneo, int idDisciplina)
-        {
-            DeleteAllFinali(idTorneo, idDisciplina);
-        }
-
-        public static bool EliminaFinaliByCampo(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
-        {
-            String commandText = "DELETE FROM Finali where IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(Helper.GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        public static bool EliminaSemifinaliByCampo(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
-        {
-            String commandText = "DELETE FROM Semifinali where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(Helper.GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        public static bool EliminaOttaviByCampo(int idCampo, int idTorneo, int idDisciplina)
-        {
-            String commandText = "DELETE FROM Qualificati8 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(Helper.GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        public static bool EliminaSedicesimiByCampo(int idCampo, int idTorneo, int idDisciplina)
-        {
-            String commandText = "DELETE FROM Qualificati16 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(Helper.GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
         public static bool DeleteAllFinali(int idTorneo, int idDisciplina)
         {
             String commandText = "DELETE FROM Finali WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
@@ -1064,6 +946,191 @@ namespace Resources
             }
         }
 
+        public static void DeleteAllPahases(int idTorneo, int idDisciplina)
+        {
+            DeleteAllSedicesimi(idTorneo, idDisciplina);
+            DeleteAllOttavi(idTorneo, idDisciplina);
+            DeleteAllQuarti(idTorneo, idDisciplina);
+            DeleteAllSemifinali(idTorneo, idDisciplina);
+            DeleteAllFinali(idTorneo, idDisciplina);
+        }
+
+        public static void DeleteAfterSedicesimi(int idTorneo, int idDisciplina)
+        {
+            DeleteAllOttavi(idTorneo, idDisciplina);
+            DeleteAllQuarti(idTorneo, idDisciplina);
+            DeleteAllSemifinali(idTorneo, idDisciplina);
+            DeleteAllFinali(idTorneo, idDisciplina);
+        }
+        
+        public static void DeleteAfterOttavi(int idTorneo, int idDisciplina)
+        {
+            DeleteAllQuarti(idTorneo, idDisciplina);
+            DeleteAllSemifinali(idTorneo, idDisciplina);
+            DeleteAllFinali(idTorneo, idDisciplina);
+        }
+
+        public static void DeleteAfterQuarti(int idTorneo, int idDisciplina)
+        {
+            DeleteAllSemifinali(idTorneo, idDisciplina);
+            DeleteAllFinali(idTorneo, idDisciplina);
+        }
+
+        public static void DeleteAfterSeimifinali(int idTorneo, int idDisciplina)
+        {
+            DeleteAllFinali(idTorneo, idDisciplina);
+        }
+
+        public static bool EliminaFinaliByCampo(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
+        {
+            String commandText = "DELETE FROM Finali where IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaSemifinaliByCampo(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
+        {
+            String commandText = "DELETE FROM Semifinali where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaQuartiByCampo(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati8 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaOttaviByCampo(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati16 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaSedicesimiByCampo(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati32 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
         public static void ConcludiGironi(int idTorneo, int idDisciplina)
         {
             String commandText = "UPDATE Gironi SET Concluso = 1 where IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
@@ -1130,7 +1197,6 @@ namespace Resources
             }
 
         }
-
 
         public static void UpdateFinali(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
         {

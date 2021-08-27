@@ -22,12 +22,12 @@
         <materialDesign:PackIcon Kind="AccountCircle" Margin="120,70,0,0" Height="108" Width="108" />
         <TextBox Name="txtName" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,178,715,359" />
         <TextBox Name="txtSurnameame" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,226,715,311" />
-        <StackPanel Margin="24,274,0,225" HorizontalAlignment="Left" Width="123" Orientation="Vertical">
+        <StackPanel Margin="24,274,0,267" HorizontalAlignment="Left" Width="291" Orientation="Horizontal">
 
-            <RadioButton Name="rbtMaschile"  Margin="4,10,4,11" IsChecked="False" Content="M" Width="110" BorderBrush="#FFB835B2" />
+            <RadioButton Name="rbtMaschile"  Margin="4,10,4,11" IsChecked="False" Content="M" Width="41" BorderBrush="#FFB835B2" />
             <RadioButton Name="rbtFemminile" Margin="4,10,4,11" IsChecked="False" Content="F" Width="110" BorderBrush="#FFB835B2"/>
         </StackPanel>
-        <ComboBox Name="cmbAssociation" materialDesign:HintAssist.Hint="Association Type" ItemsSource="{Binding LongListToTestComboVirtualization}" 
+        <ComboBox Name="cmbAssociation" materialDesign:HintAssist.Hint="Association Name" ItemsSource="{Binding LongListToTestComboVirtualization}" 
                                           Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="31,360,715,180" Height="40">
             <ComboBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -35,7 +35,7 @@
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
-        <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="164,428,715,110" RenderTransformOrigin="0.5,0.5"  >
+        <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="164,486,715,52" RenderTransformOrigin="0.5,0.5"  >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Floppy"/>
                 <TextBlock Text="  Save Fighter"/>
@@ -70,5 +70,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,312,715,225" />
     </Grid>
 </UserControl>

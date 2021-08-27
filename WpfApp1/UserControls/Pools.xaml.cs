@@ -35,7 +35,7 @@ namespace HEMATournamentSystem
         private Dictionary<string, int> _dicFighter;
         private int numeroGironi = 0;
         private int tournamentId;
-        private string tournamentName;
+        private string _tournamentName;
         private int disciplineId;
         private string disciplineName;
         private int atletiAmmessiEliminatorie;
@@ -69,12 +69,11 @@ namespace HEMATournamentSystem
                 if (creaGironi != null)
                 {
                     if ((creaGironi.IdDisciplina > 0) && (creaGironi.IdTorneo > 0))
-                    {
-                        //TODO solo se non ci sono già gironi attivi (e cioè in stato 0 per quel torneo e disciplina)
-                        //problematica rigirata sulla form di caricamento 
-                        creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina, creaGironi.Categoria);
+                    { 
                         _idTorneo = creaGironi.IdTorneo;
                         _idDisciplina = creaGironi.IdDisciplina;
+
+                        creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina, creaGironi.Categoria);
                     }
                 }
             }
@@ -279,15 +278,12 @@ namespace HEMATournamentSystem
                 if (caricaGironi != null)
                 {
                     if ((caricaGironi.IdDisciplina > 0) && (caricaGironi.IdTorneo > 0))
-                    {                        
-                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, caricaGironi.Categoria);
-                        tournamentId = caricaGironi.IdTorneo;
-                        tournamentName = caricaGironi.NomeTorneo;
-                        disciplineId = caricaGironi.IdDisciplina;
-                        disciplineName = caricaGironi.Disciplina;
-
+                    {
+                        _tournamentName = caricaGironi.NomeTorneo;
                         _idTorneo = caricaGironi.IdTorneo;
                         _idDisciplina = caricaGironi.IdDisciplina;
+
+                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, caricaGironi.Categoria);                        
                     }
                 }
             }
@@ -356,10 +352,25 @@ namespace HEMATournamentSystem
             btnClosePools.IsEnabled = true;
             btnExportMatch.IsEnabled = true;
             btnExportPools.IsEnabled = true;
-            btnLoadPhases.IsEnabled = true;
             cmbSearchFighter.IsEnabled = true;
 
+            ManagePhasesButtons();
+
             cmbSearchFighter.ItemsSource = _dicFighter.Keys.ToList().OrderBy(x => x);
+
+            tabControlPool.SelectedIndex = 0;
+        }
+
+        private void ManagePhasesButtons()
+        {
+            btnLoadPhases.IsEnabled = true;
+
+            btnOpen32th.IsEnabled = false; //for nnow is always disabled
+            btnOpen16th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_16)) == 0 ? false : true;
+            btnOpen8th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_8)) == 0 ? false : true;
+            btnOpen4th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_4)) == 0 ? false : true;
+            btnOpenSemifinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.SemiFinals)) == 0 ? false : true;
+            btnOpenFinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals)) == 0 ? false : true;
         }
 
         /// <summary>
@@ -436,6 +447,7 @@ namespace HEMATournamentSystem
         private bool SaveAllPools()
         {
             bool saveAllResult = true;
+
             for (int i = 0; i < tabControlPool.Items.Count; i++)
             {
                 tabControlPool.SelectedIndex = i;
@@ -466,13 +478,13 @@ namespace HEMATournamentSystem
         private void BtnExportPools_Click(object sender, RoutedEventArgs e)
         {
             PdfManager pdf = new PdfManager();
-            pdf.StampaGironi(gironi, tournamentName, disciplineName);
+            pdf.StampaGironi(gironi, _tournamentName, disciplineName);
         }
 
         private void BtnExportMatch_Click(object sender, RoutedEventArgs e)
         {
             PdfManager pdf = new PdfManager();
-            pdf.StampaGironiConIncontri(gironi, tournamentName, disciplineName);
+            pdf.StampaGironiConIncontri(gironi, _tournamentName, disciplineName);
         }
         #endregion
 

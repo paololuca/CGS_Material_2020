@@ -21,11 +21,13 @@ namespace HEMATournamentSystem
             //TODOPL da spostare var f = new FighterStats();
             //TODOPL da spostare f.Show();
 
+            #region to delete
             var currentUser = SqlDal_MasterDB.CheckLogin("admin");
             var main = new MainWindow(currentUser);
             main.Show();
-
             this.Close();
+
+            #endregion
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)

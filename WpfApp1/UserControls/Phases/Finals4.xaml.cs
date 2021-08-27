@@ -45,6 +45,29 @@ namespace UserControls.Phases
             _loaded = true;
         }
 
+        
+
+        public void SaveFields(int idTorneo, int idDisciplina)
+        {
+            DeleteOldValues(idTorneo, idDisciplina);
+
+            SavePool(idTorneo, idDisciplina, 1, dataGridPoolOne);
+            SavePool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
+            SavePool(idTorneo, idDisciplina, 3, dataGridPoolThree);
+            SavePool(idTorneo, idDisciplina, 4, dataGridPoolFour);
+        }
+
+        public void PrintBracket()
+        {
+            //do nothing
+        }
+
+        public void PrintPools()
+        {
+            if(_loaded)
+                pdf.StampaQuarti(poolOne, poolTwo, poolThree, poolFour);
+        }
+
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
         {
             if (pool.Count == 0)
@@ -68,20 +91,42 @@ namespace UserControls.Phases
             dataGridPool.ItemsSource = list;
 
         }
-
-        public void SaveFields(int idTorneo, int idDisciplina)
+        private static void DeleteOldValues(int idTorneo, int idDisciplina)
         {
-            
-        }
-        public void PrintBracket()
-        {
-            //do nothing
+            SqlDal_Pools.EliminaQuartiByCampo(1, idTorneo, idDisciplina);
+            SqlDal_Pools.EliminaQuartiByCampo(2, idTorneo, idDisciplina);
+            SqlDal_Pools.EliminaQuartiByCampo(3, idTorneo, idDisciplina);
+            SqlDal_Pools.EliminaQuartiByCampo(4, idTorneo, idDisciplina);
         }
 
-        public void PrintPools()
+        private void SavePool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool)
         {
-            if(_loaded)
-                pdf.StampaQuarti(poolOne, poolTwo, poolThree, poolFour);
+            int posizione = 1;
+
+            List<AtletaEliminatorie> listAtleti = new List<AtletaEliminatorie>();
+
+            foreach (MatchEntity match in dataGridPool.Items)
+            {
+                AtletaEliminatorie a = new AtletaEliminatorie();
+
+                a.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdRosso : match.IdBlu;
+
+                SqlDal_Pools.UpdateQualificati8(idTorneo, idDisciplina, pool, posizione, match.IdRosso, match.PuntiRosso, match.PuntiBlu);
+                SqlDal_Pools.UpdateQualificati8(idTorneo, idDisciplina, pool, posizione, match.IdBlu, match.PuntiBlu, match.PuntiRosso);
+
+                a.IdTorneo = idTorneo;
+                a.idDisciplina = idDisciplina;
+                a.Posizione = posizione;
+                a.Campo = pool;
+                a.PuntiFatti = 0;
+                a.PuntiSubiti = 0;
+
+                listAtleti.Add(a);
+
+                posizione++;
+            }
+
+            SqlDal_Pools.InsertSemifinali(listAtleti);
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

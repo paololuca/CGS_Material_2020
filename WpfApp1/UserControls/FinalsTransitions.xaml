@@ -8,21 +8,26 @@
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize" Height="768" Width="1280">
+        ResizeMode="CanMinimize" Height="858" Width="1350">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="256" />
+            <RowDefinition Height="591" />
+            <RowDefinition Height="176"/>
+            <RowDefinition Height="273" />
         </Grid.RowDefinitions>
         <Button x:Name="btnSavePool" Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="Save results" 
-                RenderTransformOrigin="3.198,0.5" Margin="1049,10,166,5" Width="Auto" Height="Auto" Click="btnSavePool_Click">
-            <materialDesign:PackIcon Kind="Floppy" Height="52" Width="52" />
+                RenderTransformOrigin="3.198,0.5" Margin="10,5,1265,5" Width="Auto" Height="Auto" Click="btnSavePool_Click">
+            <materialDesign:PackIcon Kind="Floppy" Height="42" Width="42" />
         </Button>
-        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="166,10,0,5" Width="60">
+        <Button x:Name="btnClosePool" Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="Close pools management" 
+                RenderTransformOrigin="3.198,0.5" Margin="1265,10,10,0" Width="Auto" Height="Auto" Click="btnClosePool_Click">
+            <materialDesign:PackIcon Kind="Shutdown" Height="42" Width="42" />
+        </Button>
+        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="84,10,0,5" Width="60">
             <materialDesign:PopupBox.ToggleContent>
-                <materialDesign:PackIcon Kind="Printer" Height="52" Width="52" ToolTip="Print"/>
+                <materialDesign:PackIcon Kind="Printer" Height="42" Width="42" ToolTip="Print"/>
             </materialDesign:PopupBox.ToggleContent>
             <StackPanel>
                 <Button Name="btnPrintBracket" Click="btnPrintBracket_Click">
@@ -41,25 +46,57 @@
                 <Separator/>
             </StackPanel>
         </materialDesign:PopupBox>
-        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center" Margin="490,0,488,0" Width="296">Finals Phases</TextBlock>
+        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center" Margin="525,0,523,0" Width="296">Finals Phases</TextBlock>
         <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnNext"
-                materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                ToolTip="Next Phase" Margin="1113,35,0.6,0.2" Click="btnNext_Click">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="SkipNext" Height="20"/>
-                <TextBlock Text="  Next"/>
+                materialDesign:ButtonAssist.CornerRadius="25 25 0 0" Background="{x:Null}" BorderBrush="{x:Null}"
+                ToolTip="Next Phase" Margin="967,370,-329,181" Click="btnNext_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Height="Auto">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <StackPanel Orientation="Horizontal" Height="32" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="SkipPrevious" Height="32" RenderTransformOrigin="0.389,-0.781" Margin="0,2,0,0" Width="40">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform X="44.988" Y="36.996"/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
             </StackPanel>
         </Button>
         <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnPrevious"
                 materialDesign:ButtonAssist.CornerRadius="25 25 0 0"
-                ToolTip="Next Phase" Margin="1,35,1112.6,0.2" Click="btnPrevious_Click">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="SkipPrevious" Height="20"/>
-                <TextBlock Text="  Prev"/>
+                ToolTip="Previous Phase" Margin="-329,369,969,182" Click="btnPrevious_Click" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <StackPanel Orientation="Horizontal" Height="32" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="SkipPrevious" Height="32" RenderTransformOrigin="0.389,-0.781" Margin="0,2,0,0" Width="40">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform X="44.988" Y="36.996"/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
             </StackPanel>
         </Button>
 
-        <smtx:XamlDisplay  Grid.Row="1">
+        <smtx:XamlDisplay  Grid.Row="1" Grid.RowSpan="2">
             <!-- the transitioner will manage your transitions. notice how SelectedIndex is set to zero: the first slide (instead of the default of -1) -->
             <materialDesign:Transitioner Name="finalTransition"  SelectedIndex="0" AutoApplyTransitionOrigins="True" >
 

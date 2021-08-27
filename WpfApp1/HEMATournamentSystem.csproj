@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
     <Compile Include="Resources\Helper\HemaRatingsHelper.cs" />
+    <Compile Include="Resources\Helper\PhasesManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_FighterStatistics.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Associations.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />
@@ -592,6 +593,7 @@
       <DependentUpon>Tornei.mdf</DependentUpon>
     </Content>
     <Content Include="DLL\IronPdf.dll" />
+    <Resource Include="img\Menu\information_2.png" />
     <Resource Include="img\sword_icon.png" />
     <Resource Include="img\atleta_sfondo_bianco.jpg" />
     <Resource Include="img\swords.ico" />

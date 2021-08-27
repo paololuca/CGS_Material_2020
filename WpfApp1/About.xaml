@@ -15,7 +15,7 @@
                  AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Description" 
                  IsReadOnly="True" Margin="245,167,26,0" />
         <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Click="BtnClose_Click"
-                Margin="690,332,0,0" VerticalAlignment="Top" Width="76" Background="#FF202AFF"/>
+                Margin="690,332,0,0" VerticalAlignment="Top" Width="76" Background="#FF673AB7"/>
         <Label x:Name="labelProductName" Content="Product Name" HorizontalAlignment="Left" Margin="245,26,0,0" VerticalAlignment="Top" Width="521"/>
         <Label x:Name="labelVersion" Content="Version" HorizontalAlignment="Left" Margin="245,55,0,0" VerticalAlignment="Top" Width="521"/>
         <Label x:Name="labelCopyright" Content="Copyright" HorizontalAlignment="Left" Margin="245,84,0,0" VerticalAlignment="Top" Width="521"/>

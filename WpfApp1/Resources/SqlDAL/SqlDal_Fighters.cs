@@ -14,7 +14,7 @@ namespace Resources
         public static Int32 InsertNewAtleta(AtletaEntity a)
         {
             String commandText = "INSERT INTO Atleti VALUES (" +
-                                a.IdAsd + ",'" + a.Cognome + "','" + a.Nome + "','" + a.Sesso + "'); " +
+                                a.IdAsd + ",'" + a.Cognome + "','" + a.Nome + "','" + a.Sesso + "','" + a.Email + "'); " +
                                     "SELECT SCOPE_IDENTITY();";
 
             SqlConnection c = null;
@@ -100,7 +100,7 @@ namespace Resources
         public static bool UpdateAngraficDataByAtleta(AtletaEntity a)
         {
             String commandText = "UPDATE Atleti " +
-                                    "SET IdASD = " + a.IdAsd + ", Cognome = '" + a.Cognome + "', Nome = '" + a.Nome + "', Sesso = '" + a.Sesso + "' " +
+                                    "SET IdASD = " + a.IdAsd + ", Cognome = '" + a.Cognome + "', Nome = '" + a.Nome + "', Sesso = '" + a.Sesso + "', Email = '" + a.Email  +"'" +
                                     "WHERE Id = " + a.IdAtleta;
 
             SqlConnection c = null;
@@ -162,7 +162,8 @@ namespace Resources
                         IdAtleta = Convert.ToInt32(reader["Id"]),
                         Asd = Convert.ToString(reader["Nome_ASD"]),
                         Sesso = Convert.ToString(reader["Sesso"]),
-                        Ranking = Convert.ToDouble(reader["Punteggio"])
+                        Ranking = Convert.ToDouble(reader["Punteggio"]),
+                        Email = Convert.ToString(reader["Email"])
                     });
                 }
                 if (atleti.Count > 0)
@@ -208,7 +209,8 @@ namespace Resources
                         Cognome = Convert.ToString(reader["Cognome"]),
                         IdAtleta = Convert.ToInt32(reader["Id"]),
                         Asd = Convert.ToString(reader["Nome_ASD"]),
-                        Sesso = Convert.ToString(reader["Sesso"])
+                        Sesso = Convert.ToString(reader["Sesso"]),
+                        Email = Convert.ToString(reader["Email"])
                     });
                 }
                 if (atleti.Count > 0)
@@ -291,7 +293,8 @@ namespace Resources
                         Cognome = Convert.ToString(reader["Cognome"]),
                         Nome = Convert.ToString(reader["Nome"]),
                         Sesso = Convert.ToString(reader["Sesso"]),
-                        Asd = Convert.ToString(reader["Nome_ASD"])
+                        Asd = Convert.ToString(reader["Nome_ASD"]),
+                        Email = Convert.ToString(reader["Email"])
                     }
                     );
                 }

@@ -12,6 +12,7 @@ namespace BusinessEntity.Entity
         public String Sesso { get; set; }
         public Double Ranking { get; set; }
         public Int32 Posizionamento { get; set; }
+        public String Email { get; set; }
 
         public AtletaEntity() { }
 

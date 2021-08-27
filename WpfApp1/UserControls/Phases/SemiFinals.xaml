@@ -12,7 +12,7 @@
             <RowDefinition Height="17"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <materialDesign:ColorZone Grid.Row="0" Mode="Dark" Height="74" Background="#FF1C83FF">
+        <materialDesign:ColorZone Grid.Row="0" Mode="Dark" Height="74" Background="#FF673AB7">
             <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" HorizontalAlignment="Center" Width="270">SEMIFINALS</TextBlock>
         </materialDesign:ColorZone>
 

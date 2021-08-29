@@ -20,8 +20,10 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class Pools : UserControl
     {
-        private int _idTorneo;
-        private int _idDisciplina;
+        private int _tournamentId;
+        private int _disciplineId;
+        private string _tournamentName;
+        private string _disciplineName;
 
         private CaricaGironiDaDisciplina caricaGironi = null;
         private CreaGironiDaDisciplina creaGironi = null;
@@ -34,12 +36,9 @@ namespace HEMATournamentSystem
         private int numeroAtletiTorneoDisciplina = 0;
         private Dictionary<string, int> _dicFighter;
         private int numeroGironi = 0;
-        private int tournamentId;
-        private string _tournamentName;
-        private int disciplineId;
-        private string disciplineName;
         private int atletiAmmessiEliminatorie;
         private int startPhase = 0;
+
         private readonly LoginUser user;
 
         public Pools(LoginUser user)
@@ -70,10 +69,11 @@ namespace HEMATournamentSystem
                 {
                     if ((creaGironi.IdDisciplina > 0) && (creaGironi.IdTorneo > 0))
                     { 
-                        _idTorneo = creaGironi.IdTorneo;
-                        _idDisciplina = creaGironi.IdDisciplina;
+                        _tournamentId = creaGironi.IdTorneo;
+                        _disciplineId = creaGironi.IdDisciplina;
+                        _disciplineName = creaGironi.NomeDisciplina;
 
-                        creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina, creaGironi.Categoria);
+                        creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
                     }
                 }
             }
@@ -83,7 +83,7 @@ namespace HEMATournamentSystem
             }
         }
 
-        private void creaGironiAndLoad(int idTorneo, int idDisciplina, String categoria)
+        private void creaGironiAndLoad(int idTorneo, int idDisciplina)
         {
             _dicFighter = new Dictionary<string, int>();
 
@@ -97,13 +97,13 @@ namespace HEMATournamentSystem
             //                                    Helper.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, categoria) :
             //                                    Helper.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
 
-            var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
+            var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina);
 
             //TODO: da parametrizzare
 
             bool rankingEnabled = partecipantiTorneo.Sum(x => x.Ranking) != 0;
 
-            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);            
+            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina);            
 
 
             if (numeroGironi > 0)
@@ -280,10 +280,11 @@ namespace HEMATournamentSystem
                     if ((caricaGironi.IdDisciplina > 0) && (caricaGironi.IdTorneo > 0))
                     {
                         _tournamentName = caricaGironi.NomeTorneo;
-                        _idTorneo = caricaGironi.IdTorneo;
-                        _idDisciplina = caricaGironi.IdDisciplina;
+                        _tournamentId = caricaGironi.IdTorneo;
+                        _disciplineId = caricaGironi.IdDisciplina;
+                        _disciplineName = caricaGironi.NomeDisciplina;
 
-                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina, caricaGironi.Categoria);                        
+                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);                        
                     }
                 }
             }
@@ -293,16 +294,16 @@ namespace HEMATournamentSystem
             }
         }
 
-        private void CaricaGironiCreati(int idTorneo, int idDisciplina, String categoria)
+        private void CaricaGironiCreati(int idTorneo, int idDisciplina)
         {
             _dicFighter = new Dictionary<string, int>();
 
-            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina, categoria);
+            numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina);
 
             if (numeroGironi > 0)
             {
                 gironi = new List<List<AtletaEntity>>();
-                gironi = SqlDal_Pools.GetGironiSalvati(idTorneo, idDisciplina, categoria);
+                gironi = SqlDal_Pools.GetGironiSalvati(idTorneo, idDisciplina);
 
                 numeroAtletiTorneoDisciplina = gironi.SelectMany(list => list).Distinct().Count();
 
@@ -366,11 +367,11 @@ namespace HEMATournamentSystem
             btnLoadPhases.IsEnabled = true;
 
             btnOpen32th.IsEnabled = false; //for nnow is always disabled
-            btnOpen16th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_16)) == 0 ? false : true;
-            btnOpen8th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_8)) == 0 ? false : true;
-            btnOpen4th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals_4)) == 0 ? false : true;
-            btnOpenSemifinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.SemiFinals)) == 0 ? false : true;
-            btnOpenFinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_idTorneo, _idDisciplina, PhasesManager.Decode(PhasesType.Finals)) == 0 ? false : true;
+            btnOpen16th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_tournamentId, _disciplineId, PhasesManager.Decode(PhasesType.Finals_16)) == 0 ? false : true;
+            btnOpen8th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_tournamentId, _disciplineId, PhasesManager.Decode(PhasesType.Finals_8)) == 0 ? false : true;
+            btnOpen4th.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_tournamentId, _disciplineId, PhasesManager.Decode(PhasesType.Finals_4)) == 0 ? false : true;
+            btnOpenSemifinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_tournamentId, _disciplineId, PhasesManager.Decode(PhasesType.SemiFinals)) == 0 ? false : true;
+            btnOpenFinal.IsEnabled = SqlDal_Pools.CountPhasesMatchs(_tournamentId, _disciplineId, PhasesManager.Decode(PhasesType.Finals)) == 0 ? false : true;
         }
 
         /// <summary>
@@ -404,7 +405,7 @@ namespace HEMATournamentSystem
                 //save all pools for safety
                 if (SaveAllPools())
                 {
-                    SqlDal_Pools.DeleteAllPahases(tournamentId, disciplineId);
+                    SqlDal_Pools.DeleteAllPahases(_tournamentId, _disciplineId);
 
                     SetPhasesIndex();
 
@@ -464,7 +465,7 @@ namespace HEMATournamentSystem
 
             if (result.WindowCheckResult)
             {
-                FinalsTransitions finals = new FinalsTransitions(startPhase, _idTorneo, _idDisciplina);
+                FinalsTransitions finals = new FinalsTransitions(startPhase, _tournamentId, _disciplineId);
                 
                 finals.Show();
             }
@@ -478,13 +479,13 @@ namespace HEMATournamentSystem
         private void BtnExportPools_Click(object sender, RoutedEventArgs e)
         {
             PdfManager pdf = new PdfManager();
-            pdf.StampaGironi(gironi, _tournamentName, disciplineName);
+            pdf.StampaGironi(gironi, _tournamentName, _disciplineName);
         }
 
         private void BtnExportMatch_Click(object sender, RoutedEventArgs e)
         {
             PdfManager pdf = new PdfManager();
-            pdf.StampaGironiConIncontri(gironi, _tournamentName, disciplineName);
+            pdf.StampaGironiConIncontri(gironi, _tournamentName, _disciplineName);
         }
         #endregion
 
@@ -493,42 +494,42 @@ namespace HEMATournamentSystem
         private void btnOpen32th_Click(object sender, RoutedEventArgs e)
         {
 
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_32, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_32, _tournamentId, _disciplineId);
 
             finals.Show();
         }
 
         private void BtnOpen16th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_16, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_16, _tournamentId, _disciplineId);
 
             finals.Show();
         }
 
         private void BtnOpen8th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_8, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_8, _tournamentId, _disciplineId);
 
             finals.Show();
         }
 
         private void BtnOpen4th_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_4, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals_4, _tournamentId, _disciplineId);
 
             finals.Show();
         }
 
         private void BtnOpenSemifinal_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.SemiFinals, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.SemiFinals, _tournamentId, _disciplineId);
 
             finals.Show();
         }
 
         private void btnOpenFinal_Click(object sender, RoutedEventArgs e)
         {
-            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals, _idTorneo, _idDisciplina);
+            FinalsTransitions finals = new FinalsTransitions((int)PhasesType.Finals, _tournamentId, _disciplineId);
 
             finals.Show();
         }

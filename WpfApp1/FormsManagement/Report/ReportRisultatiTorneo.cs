@@ -17,13 +17,11 @@ namespace Report
     {
         private int _idTorneo;
         private int _idDisciplina;
-        private string _categoria;
 
-        public ReportRisultatiTorneo(int idTorneo, int idDisciplina, string categoria)
+        public ReportRisultatiTorneo(int idTorneo, int idDisciplina)
         {
             _idTorneo = idTorneo;
             _idDisciplina = idDisciplina;
-            _categoria = categoria;
 
             InitializeComponent();
 
@@ -32,7 +30,7 @@ namespace Report
 
         private void FullFillDatagrid()
         {
-            List<OutputRisultatiTorneo> risultatiGironi = Helper.GetExportGironiTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiTorneo> risultatiGironi = SqlDal_Report.GetExportGironiTorneo(_idTorneo, _idDisciplina);
             if (risultatiGironi != null)
             {
                 dataGridViewGironi.DataSource = risultatiGironi.ToArray();
@@ -46,23 +44,23 @@ namespace Report
                 dataGridViewPostGironi.DataBindingComplete += new DataGridViewBindingCompleteEventHandler(dataGridViewPostGironi_DataBindingComplete);
             }
 
-            List<OutputRisultatiEliminatorieTorneo> risultatiSedicesimi = Helper.GetExportSedicesimiTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiEliminatorieTorneo> risultatiSedicesimi = SqlDal_Report.GetExportSedicesimiTorneo(_idTorneo, _idDisciplina);
             if(risultatiSedicesimi != null)
                 dataGridViewSedicesimi.DataSource = risultatiSedicesimi.ToArray();
 
-            List<OutputRisultatiEliminatorieTorneo> risultatiOttavi = Helper.GetExportOttaviTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiEliminatorieTorneo> risultatiOttavi = SqlDal_Report.GetExportOttaviTorneo(_idTorneo, _idDisciplina);
             if (risultatiOttavi != null)
                 dataGridViewOttavi.DataSource = risultatiOttavi.ToArray();
 
-            List<OutputRisultatiEliminatorieTorneo> risultatiQuarti = Helper.GetExportQuartiTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiEliminatorieTorneo> risultatiQuarti = SqlDal_Report.GetExportQuartiTorneo(_idTorneo, _idDisciplina);
             if (risultatiQuarti != null)
                 dataGridViewQuarti.DataSource = risultatiQuarti.ToArray();
 
-            List<OutputRisultatiEliminatorieTorneo> risultatiSemifinali = Helper.GetExportSemifinaliTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiEliminatorieTorneo> risultatiSemifinali = SqlDal_Report.GetExportSemifinaliTorneo(_idTorneo, _idDisciplina);
             if (risultatiSemifinali != null)
                 dataGridViewSemifinali.DataSource = risultatiSemifinali.ToArray();
 
-            List<OutputRisultatiEliminatorieTorneo> risultatiFinali = Helper.GetExportFinaliTorneo(_idTorneo, _idDisciplina, _categoria);
+            List<OutputRisultatiEliminatorieTorneo> risultatiFinali = SqlDal_Report.GetExportFinaliTorneo(_idTorneo, _idDisciplina);
             if (risultatiFinali != null)
                 dataGridViewFinali.DataSource = risultatiFinali.ToArray();
 

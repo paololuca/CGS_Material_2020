@@ -60,7 +60,7 @@ namespace FormsManagement.Menu
             if ((IdTorneo > 0) && (IdDisciplina > 0))
             {
                 NomeTorneo = comboBox1.Text;
-                Disciplina = comboBox2.Text;
+                NomeDisciplina = comboBox2.Text;
                 this.Close();
             }
             else
@@ -80,16 +80,6 @@ namespace FormsManagement.Menu
             IdTorneo = 0;
             IdDisciplina = 0;
             this.Close();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            Categoria = "M";
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            Categoria = "F";
         }
     }
 }

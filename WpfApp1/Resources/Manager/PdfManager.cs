@@ -38,23 +38,23 @@ namespace Resources
                 "<th>Ranking Esistente</th>" +
                 "</tr></br>";
 
-            foreach (DataRowView dr in grid.Items)
+            foreach (GironiConclusi row in grid.Items)
             {              
 
                 HtmlReport += "<tr>";
                 HtmlReport += "<td align=\"center\">" + i + "</td>";
-                HtmlReport += "<td align=\"center\">" + (dr[0].ToString() == "True" ? "Si" : "No") + "</td>";
-                HtmlReport += "<td align=\"left\">" + dr[5].ToString() + "</td>";
-                HtmlReport += "<td align=\"left\">" + dr[6].ToString() + "</td>";
-                HtmlReport += "<td align=\"center\">" + dr[7].ToString() + "</td>";
-                HtmlReport += "<td align=\"center\">" + dr[8].ToString() + "</td>";
-                HtmlReport += "<td align=\"center\">" + dr[9].ToString() + "</td>";
-                HtmlReport += "<td align=\"center\">" + dr[10].ToString() + "</td>";
+                HtmlReport += "<td align=\"center\">" + (row.Qualificato ? "Si" : "No") + "</td>";
+                HtmlReport += "<td align=\"left\">" + row.Cognome + "</td>";
+                HtmlReport += "<td align=\"left\">" + row.Nome + "</td>";
+                HtmlReport += "<td align=\"center\">" + row.Vittorie + "</td>";
+                HtmlReport += "<td align=\"center\">" + row.Sconfitte + "</td>";
+                HtmlReport += "<td align=\"center\">" + row.PuntiFatti + "</td>";
+                HtmlReport += "<td align=\"center\">" + row.PuntiSubiti + "</td>";
                 HtmlReport += "<td align=\"left\">" +
-                    (dr[11].ToString().Length > 10 ?
-                    dr[11].ToString().Substring(0, 8) :
-                    dr[11].ToString()) + "</td>";
-                HtmlReport += "<td align=\"left\">" + dr[13].ToString() + "</td>";
+                    (row.Differenziale.ToString().Length > 10 ?
+                    row.Differenziale.ToString().Substring(0, 8) :
+                    row.Differenziale.ToString()) + "</td>";
+                HtmlReport += "<td align=\"left\">" + row.Ranking + "</td>";
                 HtmlReport += "</tr>";
 
                 p.IncrementProgressBar(i++);

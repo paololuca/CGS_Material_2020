@@ -11,7 +11,8 @@ namespace FormsManagement.Menu
         public CaricaGironiDaDisciplina(bool export)
         {
             InitializeComponent();
-            Categoria = Helper.GetDbType() == Helper.MASCHILE ? "M" : "F";
+            var dbType = Helper.GetDbType();
+
             this.StartPosition = FormStartPosition.CenterScreen;
 
             if(export)
@@ -29,10 +30,7 @@ namespace FormsManagement.Menu
             this.comboBox2.ValueMember = "IdDisciplina";
             this.comboBox2.DisplayMember = "Nome";
 
-            if (Categoria == "M")
-                radioButtonMaschile.Checked = true;
-            else if (Categoria == "F")
-                radioButtonFemminile.Checked = true;
+            
 
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Abort;
@@ -61,7 +59,7 @@ namespace FormsManagement.Menu
             if ((IdTorneo > 0) && (IdDisciplina > 0))
             {
                 NomeTorneo = comboBox1.Text;
-                Disciplina = comboBox2.Text;
+                NomeDisciplina = comboBox2.Text;
                 this.Close();
             }
             else
@@ -81,16 +79,6 @@ namespace FormsManagement.Menu
             IdTorneo = 0;
             IdDisciplina = 0;
             this.Close();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            Categoria = "M";
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            Categoria = "F";
         }
     }
 }

@@ -64,8 +64,8 @@ namespace WindowsFormsApplication1
 
             if ((idTorneo > 0) && (idDisciplina > 0))
             {
-                LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
-                LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
+                LoadPartecipantFromTournament(idTorneo, idDisciplina);
+                LoadPartecipantOffTournament(idTorneo, idDisciplina);
             }
             else
             {
@@ -79,9 +79,9 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
+        private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina)
         {
-            List<AtletaEntity> atleti = SqlDal_Tournaments.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atleti = SqlDal_Tournaments.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina);
             
 
             if ((atleti != null) && (atleti.Count > 0))
@@ -106,9 +106,9 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
+        private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina)
         {
-            List<AtletaEntity> atletiOffTournament = SqlDal_Tournaments.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
+            List<AtletaEntity> atletiOffTournament = SqlDal_Tournaments.GetAtletiOffTournament(idTorneo, idDisciplina);
             comboBoxAtletaToAdd.DataSource = atletiOffTournament.OrderBy(x => x.Cognome).ToArray();
             this.comboBoxAtletaToAdd.ValueMember = "IdAtleta";
             this.comboBoxAtletaToAdd.DisplayMember = "FullName";// + " " + "Nome";
@@ -158,8 +158,8 @@ namespace WindowsFormsApplication1
 
                     if (Helper.EliminaPartecipanteDaTorneo(idTorneo, idDisciplina, (int)row.Cells["IdAtleta"].Value, Categoria))
                     {
-                        LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
-                        LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
+                        LoadPartecipantFromTournament(idTorneo, idDisciplina);
+                        LoadPartecipantOffTournament(idTorneo, idDisciplina);
                         MessageBox.Show("Atleta rimosso correttamente.", "Messaggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -191,10 +191,10 @@ namespace WindowsFormsApplication1
 
             if(idAtleta >0 )
             {
-                if(SqlDal_Tournaments.InsertAtletaOnTournament(idTorneo, idDisciplina, idAtleta, Categoria))
+                if(SqlDal_Tournaments.InsertAtletaOnTournament(idTorneo, idDisciplina, idAtleta))
                 {
-                    LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
-                    LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
+                    LoadPartecipantFromTournament(idTorneo, idDisciplina);
+                    LoadPartecipantOffTournament(idTorneo, idDisciplina);
                     MessageBox.Show("Atleta inserito correttamente.", "Messaggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -216,7 +216,12 @@ namespace WindowsFormsApplication1
             Int32 idTorneo = (int)comboBox1.SelectedValue;
             Int32 idDisciplina = (int)comboBox2.SelectedValue;
 
-            pdf.StampaAtletiTorneo(SqlDal_Tournaments.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, Categoria), comboBox1.Text, comboBox2.Text);
+            pdf.StampaAtletiTorneo(SqlDal_Tournaments.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina), comboBox1.Text, comboBox2.Text);
+        }
+
+        private void radioButtonOpen_CheckedChanged(object sender, EventArgs e)
+        {
+            Categoria = "O";
         }
     }
 }

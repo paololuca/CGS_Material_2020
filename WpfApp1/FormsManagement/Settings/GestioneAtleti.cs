@@ -67,10 +67,10 @@ namespace WindowsFormsApplication1
                 {
                     int idAtleta = (int)row.Cells["IdAtleta"].Value;
 
-                    Helper.EliminaAtleta(idAtleta);
-                    Helper.EliminaAtletaDaGironi(idAtleta);
-                    Helper.EliminaAtletaDaTorneo(idAtleta);
-                    Helper.EliminaAtletaDaRanking(idAtleta);
+                    SqlDal_Fighters.EliminaAtleta(idAtleta);
+                    SqlDal_Fighters.EliminaAtletaDaGironi(idAtleta);
+                    SqlDal_Fighters.EliminaAtletaDaTorneo(idAtleta);
+                    SqlDal_Fighters.EliminaAtletaDaRanking(idAtleta);
 
                     LoadListAtleti();
                 }

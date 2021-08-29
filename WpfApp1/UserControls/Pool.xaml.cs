@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.DAO;
 using BusinessEntity.Entity;
+using HEMATournamentSystem.Engine;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -33,18 +34,18 @@ namespace HEMATournamentSystem
             int idDisciplina,
             List<AtletaEntity> listaAtleti,
             List<MatchEntity> listaIncontri,
-            int tabIndex)
+            int poolIndex)
         {
             InitializeComponent();
 
-            this.poolIndex = tabIndex;
+            this.poolIndex = poolIndex;
             this.idTorneo = idTorneo;
             this.idDisciplina = idDisciplina;
 
             this.listaAtleti = listaAtleti;
             this.listaIncontri = listaIncontri;
 
-            this.Header = "Girone " + tabIndex;
+            this.Header = "Girone " + poolIndex;
 
             SetPool();
         }
@@ -130,128 +131,11 @@ namespace HEMATournamentSystem
             string labelIdAtleti = hiddenId.Content.ToString();
             List<Int32> idAtleti = labelIdAtleti.Split(';').Select(Int32.Parse).ToList();
 
-            /** dtgrid index columns
-             * [0] IdA
-             * [1] AsdA
-             * [2] CognomeA
-             * [3] NomeA
-             * [4] PuntiA
-             * [5] IdB
-             * [6] AdB
-             * [7] CognomeB
-             * [8] NomeB
-             * [9] PuntiB
-             * [10] DoppiaMorte 
-             * 
-             * */
-
             int numeroIncontriAdPersonam = idAtleti.Count - 1;
 
-            foreach (Int32 atleta in idAtleti)
-            {
-                RisultatiIncontriGironi res = new RisultatiIncontriGironi();
-
-                res.idAtleta = atleta;
-
-                foreach (MatchEntity match in dataGridPool.Items)
-                {
-                    bool doppiaMorte = match.DoppiaMorte;
-
-                    //            if (!Helper.UpdateGironiIncontri(idTorneo, idDisciplina, indexGirone + 1, (int)r.Cells[0].Value, (int)r.Cells[4].Value, (int)r.Cells[5].Value, (int)r.Cells[9].Value, doppiaMorte))
-                    //                  { 
-                    //                      System.Windows.MessageBox.Show("Errore di salvataggio nella tabella GironiIncontri:\n\n non ti preoccupare funziona uguale, ma chiama PL", "ATTENZIONE: PL REQUIRED", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //                      return;
-                    //                  }
-                    //
-                    //            if ((int)r.Cells[0].Value == atleta) //se sono l'atleta a "sinistra"
-                    //            {
-                    //                if (doppiaMorte)
-                    //                {
-                    //                    res.Sconfitte++;
-                    //                    res.PuntiSubiti += Math.Abs(3 - (int)r.Cells[4].Value);
-                    //                }
-                    //                else
-                    //                {
-                    //                    //HO VINTO con 3 o più punti
-                    //                    if (((int)r.Cells[4].Value >= 3) && (int)r.Cells[4].Value > (int)r.Cells[9].Value)
-                    //                    {
-                    //                        res.Vittorie++;
-                    //                        res.PuntiFatti += (int)r.Cells[4].Value;// > 3 ? 3 : (int)r.Cells[4].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[9].Value;
-                    //                    }
-
-                    //                    //HO PERSO (l'avversario ha vinto con più di tre punti
-                    //                    else if (((int)r.Cells[4].Value < (int)r.Cells[9].Value) && ((int)r.Cells[9].Value >= 3))
-                    //                    {
-                    //                        res.PuntiFatti += (int)r.Cells[4].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[9].Value;// > 3 ? 3 : (int)r.Cells[9].Value;
-                    //                        res.Sconfitte++;
-                    //                    }
-
-                    //                    else if (((int)r.Cells[9].Value < 3) && ((int)r.Cells[4].Value < 3))
-                    //                    {
-                    //                        if ((int)r.Cells[4].Value > (int)r.Cells[9].Value)
-                    //                            res.Vittorie++;
-                    //                        else if ((int)r.Cells[4].Value < (int)r.Cells[9].Value)
-                    //                            res.Sconfitte++;
-
-                    //                        res.PuntiFatti += (int)r.Cells[4].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[9].Value;
-
-                    //                    }
-                    //                }
-                    //            }
-                    //            else if ((int)r.Cells[5].Value == atleta)   //se sono l'atleta a "destra"
-                    //            {
-                    //                if (doppiaMorte)
-                    //                {
-                    //                    res.Sconfitte++;
-                    //                    res.PuntiSubiti += Math.Abs(3 - (int)r.Cells[9].Value);
-                    //                }
-
-                    //                else
-                    //                {
-                    //                    //HO vinto con più di 3 punti
-                    //                    if (((int)r.Cells[9].Value > (int)r.Cells[4].Value) && ((int)r.Cells[9].Value >= 3))
-                    //                    {
-                    //                        res.Vittorie++;
-                    //                        res.PuntiFatti += (int)r.Cells[9].Value;// > 3 ? 3 : (int)r.Cells[9].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[4].Value;
-                    //                    }
-                    //                    //HO PERSO (l'avversario ha vinto con più di tre punti
-                    //                    else if (((int)r.Cells[9].Value < (int)r.Cells[4].Value) && ((int)r.Cells[4].Value >= 3))
-                    //                    {
-                    //                        res.PuntiFatti += (int)r.Cells[9].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[4].Value;// > 3 ? 3 : (int)r.Cells[4].Value;
-                    //                        res.Sconfitte++;
-                    //                    }
-
-                    //                    else if (((int)r.Cells[4].Value < 3) && ((int)r.Cells[9].Value < 3))
-                    //                    {
-                    //                        if ((int)r.Cells[4].Value < (int)r.Cells[9].Value)
-                    //                            res.Vittorie++;
-                    //                        else if ((int)r.Cells[4].Value > (int)r.Cells[9].Value)
-                    //                            res.Sconfitte++;
-
-                    //                        res.PuntiFatti += (int)r.Cells[9].Value;
-                    //                        res.PuntiSubiti += (int)r.Cells[4].Value;
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-
-                    //        int delpaP = res.PuntiFatti - res.PuntiSubiti;
-                    //        res.NumeroIncontriDisputati = numeroIncontriAdPersonam;
-
-                    //        res.Differenziale = (Double)(delpaP + res.Vittorie) / res.NumeroIncontriDisputati;
-
-                    //        //salvare res in Gironi:
-                    //        //per ogni atleta , torneo e disciplina salvo i punti fatti, subiti, le vittorie ed il differenziale
-                    //        Helper.UpdateGironi(res, idTorneo, idDisciplina, indexGirone + 1);
-
-                    //        risultati.Add(res);
-                }
-            }
+            AscEngine.SaveTournamentPool(idTorneo, idDisciplina, poolIndex, idAtleti, numeroIncontriAdPersonam, dataGridPool);
         }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.DAO;
 using BusinessEntity.Entity;
+using HEMATournamentSystem.Engine;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,12 @@ namespace UserControls.Phases
         
         PdfManager pdf;
 
-        String firstPlace;
-        String secondPlace;
-        String thirdPlace;
-        String fourthPlace;
-
         private List<AtletaEliminatorie> poolOne;
         private List<AtletaEliminatorie> poolTwo;
-        
+        private string goldMedal;
+        private string silverMedal;
+        private string bronzeMedal;
+        private string woodMedal;
 
         public Finals()
         {
@@ -113,6 +112,14 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
+            var pool1 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 1, dataGridPoolOne);
+            var pool2 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
+
+            goldMedal = pool1.Item1;
+            silverMedal = pool1.Item2;
+
+            bronzeMedal = pool2.Item1;
+            woodMedal = pool2.Item2;
 
 
             btnPrintResult.IsEnabled = true;
@@ -134,7 +141,7 @@ namespace UserControls.Phases
             TorneoEntity tournament = Helper.GetTorneoById(_idTorneo);
             String nomeDisciplina = Helper.GetDisciplinaById(_idDisciplina);
 
-            pdf.FineTorneo(firstPlace, secondPlace, thirdPlace, fourthPlace, tournament.Name, nomeDisciplina);
+            pdf.FineTorneo(goldMedal, silverMedal, bronzeMedal, woodMedal, tournament.Name, nomeDisciplina);
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

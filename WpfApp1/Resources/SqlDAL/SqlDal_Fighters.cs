@@ -129,7 +129,6 @@ namespace Resources
             }
         }
 
-
         public static List<AtletaEntity> GetAllAnagraficaAtletiWithRanking()
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
@@ -265,6 +264,48 @@ namespace Resources
 
         }
 
+        public static AtletaEntity GetAtletaById(int idAtleta)
+        {
+            AtletaEntity atleta = new AtletaEntity();
+
+            String commandText = "select at.*, asd.Nome_ASD from atleti at join ASD asd on at.IdASD = asd.Id where at.Id = '" + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    atleta = new AtletaEntity()
+                    {
+                        IdAtleta = (int)reader["Id"],
+                        IdAsd = (int)reader["IdASD"],
+                        Cognome = Convert.ToString(reader["Cognome"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Sesso = Convert.ToString(reader["Sesso"]),
+                        Asd = Convert.ToString(reader["Nome_ASD"]),
+                        Email = Convert.ToString(reader["Email"])
+                    };
+                }
+                return atleta;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
         public static List<AtletaEntity> GetAtletiFromNameAndSurname(String name, String surname)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
@@ -313,6 +354,121 @@ namespace Resources
             }
         }
 
+        public static bool EliminaAtleta(int idAtleta)
+        {
+            string commandText = "DELETE Atleti where id = " + idAtleta;
 
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        public static bool EliminaAtletaDaGironi(int idAtleta)
+        {
+            string commandText = "DELETE Gironi where id = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        public static bool EliminaAtletaDaRanking(int idAtleta)
+        {
+            string commandText = "DELETE Ranking where IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        public static bool EliminaAtletaDaTorneo(int idAtleta)
+        {
+            string commandText = "DELETE AtletiVsTorneoVsDiscipline were IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
     }
 }

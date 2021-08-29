@@ -13,10 +13,10 @@ namespace Resources
 {
     public static class SqlDal_Pools
     {
-        public static int GetNumeroGironiByTorneoDisciplina(int idTorneo, int idDisciplina, string categoria)//aggiungere categoria)
+        public static int GetNumeroGironiByTorneoDisciplina(int idTorneo, int idDisciplina)
         {
             //anche i tornei vs discipline vanno divisi tra maschile e femminile
-            string sqlText = "SELECT * FROM TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + " AND Categoria = '" + categoria + "'";
+            string sqlText = "SELECT * FROM TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + " ";
 
             SqlConnection c = null;
 
@@ -49,7 +49,7 @@ namespace Resources
             }
         }
 
-        public static List<List<AtletaEntity>> GetGironiSalvati(int idTorneo, int idDisciplina, string categoria)
+        public static List<List<AtletaEntity>> GetGironiSalvati(int idTorneo, int idDisciplina)
         {
             List<AtletaEntity> atletiGirone = new List<AtletaEntity>();
             List<List<AtletaEntity>> gironi = new List<List<AtletaEntity>>();
@@ -61,7 +61,6 @@ namespace Resources
                                 "join AtletiVsTorneoVsDiscipline atd on atd.IdTorneoVsDiscipline = td.Id and atd.IdAtleta = a.Id " +
                                 "join Ranking r on r.IdAtleta = a.Id " +
                                 "where td.IdTorneo = g.IdTorneo " +
-                                "and td.Categoria = '" + categoria + "' " +
                                 "and g.IdTorneo = " + idTorneo + " " +
                                 "and g.IdDisciplina = " + idDisciplina + " " +
                                 "and r.IdDisciplina = " + idDisciplina +
@@ -594,7 +593,6 @@ namespace Resources
             return gironiConclusi;
 
         }
-
         internal static void InserisciGironiIncontri(int idTorneo, int idDisciplina, List<MatchEntity> incontri, int idgirone)
         {
             String commandText = "";
@@ -654,10 +652,12 @@ namespace Resources
         public static void InsertFinali(List<AtletaEliminatorie> listAtleti)
         {
             String commandText = "";
-
-            foreach (AtletaEliminatorie a in listAtleti)
-                commandText += "INSERT INTO Finali (IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
-                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + ");";
+            for (int i = 1; i <= 3; i++)
+            {
+                foreach (AtletaEliminatorie a in listAtleti)
+                    commandText += "INSERT INTO Finali (IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo, Round) " +
+                                    "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + "," + i + ");";
+            }
 
             SqlConnection c = null;
             try
@@ -1198,10 +1198,13 @@ namespace Resources
 
         }
 
-        public static void UpdateFinali(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
+        public static void UpdateFinali(int IdTorneo, int idDisciplina, int campo, int round, int idAtleta, int puntiFatti, int puntiSubiti)
         {
             String commandText = "UPDATE Finali SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
-                                    " WHERE IdAtleta = " + idAtleta + " and IdTorneo = " + IdTorneo + " and IdDisciplina = " + idDisciplina;
+                                    " WHERE IdAtleta = " + idAtleta + 
+                                    " and IdTorneo = " + IdTorneo + 
+                                    " and IdDisciplina = " + idDisciplina +
+                                    " and Round = " + round;
 
             SqlConnection c = null;
 

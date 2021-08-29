@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.DAO;
 using BusinessEntity.Entity;
+using HEMATournamentSystem.Engine;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -58,10 +59,10 @@ namespace UserControls.Phases
         {
             DeleteOldValues(idTorneo, idDisciplina);
 
-            SavePool(idTorneo, idDisciplina, 1, dataGridPoolOne);
-            SavePool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
-            SavePool(idTorneo, idDisciplina, 3, dataGridPoolThree);
-            SavePool(idTorneo, idDisciplina, 4, dataGridPoolFour);
+            AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 1, dataGridPoolOne);
+            AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
+            AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 3, dataGridPoolThree);
+            AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 4, dataGridPoolFour);
         }
 
         public void PrintBracket()
@@ -119,36 +120,6 @@ namespace UserControls.Phases
             SqlDal_Pools.EliminaOttaviByCampo(2, idTorneo, idDisciplina);
             SqlDal_Pools.EliminaOttaviByCampo(3, idTorneo, idDisciplina);
             SqlDal_Pools.EliminaOttaviByCampo(4, idTorneo, idDisciplina);
-        }
-
-        private void SavePool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool)
-        {
-            int posizione = 1;
-
-            List<AtletaEliminatorie> listAtleti = new List<AtletaEliminatorie>();
-
-            foreach (MatchEntity match in dataGridPool.Items)
-            {
-                AtletaEliminatorie a = new AtletaEliminatorie();
-
-                a.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdRosso : match.IdBlu;
-
-                SqlDal_Pools.UpdateQualificati16(idTorneo, idDisciplina, pool, posizione, match.IdRosso, match.PuntiRosso, match.PuntiBlu);
-                SqlDal_Pools.UpdateQualificati16(idTorneo, idDisciplina, pool, posizione, match.IdBlu, match.PuntiBlu, match.PuntiRosso);
-
-                a.IdTorneo = idTorneo;
-                a.idDisciplina = idDisciplina;
-                a.Posizione = posizione;
-                a.Campo = pool;
-                a.PuntiFatti = 0;
-                a.PuntiSubiti = 0;
-
-                listAtleti.Add(a);
-
-                posizione++;
-            }
-
-            SqlDal_Pools.InsertQuarti(listAtleti);
         }
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

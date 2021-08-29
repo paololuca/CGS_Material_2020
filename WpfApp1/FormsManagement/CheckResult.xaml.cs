@@ -141,6 +141,8 @@ namespace FormsManagement
                     else
                         _currentSelectedItems++;    //from false to true
 
+                    row.Qualificato = !row.Qualificato;
+
                     SetLStatusLabel();
                 }
             }

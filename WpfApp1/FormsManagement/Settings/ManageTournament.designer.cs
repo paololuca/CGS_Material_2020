@@ -44,17 +44,21 @@
             this.btnAddAtleta = new System.Windows.Forms.Button();
             this.comboBoxAtletaToAdd = new System.Windows.Forms.ComboBox();
             this.buttonPrintList = new System.Windows.Forms.Button();
+            this.radioButtonOpen = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButtonOpen);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(309, 12);
+            this.groupBox1.Location = new System.Drawing.Point(824, 29);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(273, 97);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.groupBox1.Size = new System.Drawing.Size(728, 231);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Categoria";
@@ -62,9 +66,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(17, 61);
+            this.radioButton2.Location = new System.Drawing.Point(45, 145);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 17);
+            this.radioButton2.Size = new System.Drawing.Size(184, 36);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Femminile";
@@ -75,9 +80,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 28);
+            this.radioButton1.Location = new System.Drawing.Point(45, 67);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(67, 17);
+            this.radioButton1.Size = new System.Drawing.Size(165, 36);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Maschile";
@@ -86,9 +92,10 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(807, 493);
+            this.buttonClose.Location = new System.Drawing.Point(2152, 1176);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(110, 23);
+            this.buttonClose.Size = new System.Drawing.Size(293, 55);
             this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "Chiudi";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -96,9 +103,10 @@
             // 
             // buttonLoadIscritti
             // 
-            this.buttonLoadIscritti.Location = new System.Drawing.Point(624, 84);
+            this.buttonLoadIscritti.Location = new System.Drawing.Point(1664, 200);
+            this.buttonLoadIscritti.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.buttonLoadIscritti.Name = "buttonLoadIscritti";
-            this.buttonLoadIscritti.Size = new System.Drawing.Size(110, 23);
+            this.buttonLoadIscritti.Size = new System.Drawing.Size(293, 55);
             this.buttonLoadIscritti.TabIndex = 11;
             this.buttonLoadIscritti.Text = "Visualizza Iscritti";
             this.buttonLoadIscritti.UseVisualStyleBackColor = true;
@@ -107,43 +115,49 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 70);
+            this.label2.Location = new System.Drawing.Point(61, 167);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.Size = new System.Drawing.Size(139, 32);
             this.label2.TabIndex = 10;
             this.label2.Text = "Disciplina";
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(21, 86);
+            this.comboBox2.Location = new System.Drawing.Point(56, 205);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(259, 21);
+            this.comboBox2.Size = new System.Drawing.Size(684, 39);
             this.comboBox2.TabIndex = 9;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 9);
+            this.label1.Location = new System.Drawing.Point(61, 21);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(105, 32);
             this.label1.TabIndex = 8;
             this.label1.Text = "Torneo";
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(22, 28);
+            this.comboBox1.Location = new System.Drawing.Point(59, 67);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(259, 21);
+            this.comboBox1.Size = new System.Drawing.Size(684, 39);
             this.comboBox1.TabIndex = 7;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(21, 140);
+            this.dataGridView1.Location = new System.Drawing.Point(56, 334);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(561, 376);
+            this.dataGridView1.RowHeadersWidth = 102;
+            this.dataGridView1.Size = new System.Drawing.Size(1496, 897);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -151,26 +165,29 @@
             // lblNumberOfAtleti
             // 
             this.lblNumberOfAtleti.AutoSize = true;
-            this.lblNumberOfAtleti.Location = new System.Drawing.Point(21, 532);
+            this.lblNumberOfAtleti.Location = new System.Drawing.Point(56, 1269);
+            this.lblNumberOfAtleti.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblNumberOfAtleti.Name = "lblNumberOfAtleti";
-            this.lblNumberOfAtleti.Size = new System.Drawing.Size(112, 13);
+            this.lblNumberOfAtleti.Size = new System.Drawing.Size(296, 32);
             this.lblNumberOfAtleti.TabIndex = 15;
             this.lblNumberOfAtleti.Text = "Numero Partecipanti : ";
             // 
             // lblCount
             // 
             this.lblCount.AutoSize = true;
-            this.lblCount.Location = new System.Drawing.Point(140, 532);
+            this.lblCount.Location = new System.Drawing.Point(373, 1269);
+            this.lblCount.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 13);
+            this.lblCount.Size = new System.Drawing.Size(0, 32);
             this.lblCount.TabIndex = 16;
             // 
             // btnAddAtleta
             // 
             this.btnAddAtleta.Enabled = false;
-            this.btnAddAtleta.Location = new System.Drawing.Point(624, 140);
+            this.btnAddAtleta.Location = new System.Drawing.Point(1664, 334);
+            this.btnAddAtleta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAddAtleta.Name = "btnAddAtleta";
-            this.btnAddAtleta.Size = new System.Drawing.Size(110, 23);
+            this.btnAddAtleta.Size = new System.Drawing.Size(293, 55);
             this.btnAddAtleta.TabIndex = 17;
             this.btnAddAtleta.Text = "Aggiungi";
             this.btnAddAtleta.UseVisualStyleBackColor = true;
@@ -179,26 +196,41 @@
             // comboBoxAtletaToAdd
             // 
             this.comboBoxAtletaToAdd.FormattingEnabled = true;
-            this.comboBoxAtletaToAdd.Location = new System.Drawing.Point(624, 182);
+            this.comboBoxAtletaToAdd.Location = new System.Drawing.Point(1664, 434);
+            this.comboBoxAtletaToAdd.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.comboBoxAtletaToAdd.Name = "comboBoxAtletaToAdd";
-            this.comboBoxAtletaToAdd.Size = new System.Drawing.Size(293, 21);
+            this.comboBoxAtletaToAdd.Size = new System.Drawing.Size(775, 39);
             this.comboBoxAtletaToAdd.TabIndex = 18;
             // 
             // buttonPrintList
             // 
-            this.buttonPrintList.Location = new System.Drawing.Point(624, 492);
+            this.buttonPrintList.Location = new System.Drawing.Point(1664, 1173);
+            this.buttonPrintList.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.buttonPrintList.Name = "buttonPrintList";
-            this.buttonPrintList.Size = new System.Drawing.Size(75, 23);
+            this.buttonPrintList.Size = new System.Drawing.Size(200, 55);
             this.buttonPrintList.TabIndex = 19;
             this.buttonPrintList.Text = "Stampa Elenco";
             this.buttonPrintList.UseVisualStyleBackColor = true;
             this.buttonPrintList.Click += new System.EventHandler(this.buttonPrintList_Click);
             // 
+            // radioButtonOpen
+            // 
+            this.radioButtonOpen.AutoSize = true;
+            this.radioButtonOpen.Location = new System.Drawing.Point(274, 67);
+            this.radioButtonOpen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.radioButtonOpen.Name = "radioButtonOpen";
+            this.radioButtonOpen.Size = new System.Drawing.Size(122, 36);
+            this.radioButtonOpen.TabIndex = 2;
+            this.radioButtonOpen.TabStop = true;
+            this.radioButtonOpen.Text = "Open";
+            this.radioButtonOpen.UseVisualStyleBackColor = true;
+            this.radioButtonOpen.CheckedChanged += new System.EventHandler(this.radioButtonOpen_CheckedChanged);
+            // 
             // ManageTournament
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 557);
+            this.ClientSize = new System.Drawing.Size(2477, 1328);
             this.Controls.Add(this.buttonPrintList);
             this.Controls.Add(this.comboBoxAtletaToAdd);
             this.Controls.Add(this.btnAddAtleta);
@@ -213,6 +245,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "ManageTournament";
             this.Text = "Gestione Tornei";
             this.groupBox1.ResumeLayout(false);
@@ -240,5 +273,6 @@
         private System.Windows.Forms.Button btnAddAtleta;
         private System.Windows.Forms.ComboBox comboBoxAtletaToAdd;
         private System.Windows.Forms.Button buttonPrintList;
+        private System.Windows.Forms.RadioButton radioButtonOpen;
     }
 }

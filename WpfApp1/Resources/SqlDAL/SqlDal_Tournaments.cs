@@ -279,7 +279,7 @@ namespace Resources
 
         }
 
-        public static List<AtletaEntity> GetAtletiTorneoVsDisciplinaAssoluti(int idTorneo, int idDisciplina, string categoria)
+        public static List<AtletaEntity> GetAtletiTorneoVsDisciplinaAssoluti(int idTorneo, int idDisciplina)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
 
@@ -292,7 +292,6 @@ namespace Resources
                                 "and r.IdAtleta = a.Id " +
                                 "and td.IdTorneo = " + idTorneo + " " +
                                 "and td.IdDisciplina = " + idDisciplina + " " +
-                                "and a.Sesso = '" + categoria + "' " +
                                 "and r.IdDisciplina = " + idDisciplina + " " +
                                 "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
 
@@ -337,7 +336,7 @@ namespace Resources
             }
         }
         
-        public static List<AtletaEntity> GetAtletiTorneoVsDisciplina(int idTorneo, int idDisciplina, string categoria)
+        public static List<AtletaEntity> GetAtletiTorneoVsDisciplina(int idTorneo, int idDisciplina)
         {
 
             List<AtletaEntity> atleti = new List<AtletaEntity>();
@@ -352,7 +351,6 @@ namespace Resources
                                 "and r.IdAtleta = a.Id " +
                                 "and td.IdTorneo = " + idTorneo + " " +
                                 "and td.IdDisciplina = " + idDisciplina + " " +
-                                "and a.Sesso = '" + categoria + "' " +
                                 "and r.IdDisciplina = " + idDisciplina + " " +
                                 "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
 
@@ -419,7 +417,7 @@ namespace Resources
             }
         }
         
-        public static List<AtletaEntity> GetAtletiIscrittiTorneoVsDisciplina(int idTorneo, int idDisciplina, string categoria)
+        public static List<AtletaEntity> GetAtletiIscrittiTorneoVsDisciplina(int idTorneo, int idDisciplina)
         {
 
             List<AtletaEntity> atleti = new List<AtletaEntity>();
@@ -433,7 +431,6 @@ namespace Resources
                                 "and r.IdAtleta = a.Id " +
                                 "and td.IdTorneo = " + idTorneo + " " +
                                 "and td.IdDisciplina = " + idDisciplina + " " +
-                                "and a.Sesso = '" + categoria + "' " +
                                 "and r.IdDisciplina = " + idDisciplina +
                                 "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
 
@@ -479,14 +476,13 @@ namespace Resources
             }
         }
         
-        public static List<AtletaEntity> GetAtletiOffTournament(int idTorneo, int idDisciplina, string categoria)
+        public static List<AtletaEntity> GetAtletiOffTournament(int idTorneo, int idDisciplina)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
 
             String sqlText = "SELECT * FROM ATLETI WHERE Id NOT IN (SELECT atd.IdAtleta FROM AtletiVsTorneoVsDiscipline atd JOIN TorneoVsDiscipline td " +
-                    " ON atd.IdTorneoVsDiscipline = td.Id AND td.Categoria = '" + categoria + "'" +
-                    " WHERE td.IdTorneo = " + idTorneo + " AND td.IdDisciplina = " + idDisciplina + ") " +
-                    "AND SESSO = '" + categoria + "'";
+                    " ON atd.IdTorneoVsDiscipline = td.Id " +
+                    " WHERE td.IdTorneo = " + idTorneo + " AND td.IdDisciplina = " + idDisciplina + ") ";
 
 
             SqlConnection c = null;
@@ -527,10 +523,10 @@ namespace Resources
             }
         }
 
-        public static bool InsertAtletaOnTournament(int idTorneo, int idDisciplina, int idAtleta, string categoria)
+        public static bool InsertAtletaOnTournament(int idTorneo, int idDisciplina, int idAtleta)
         {
             String sqlText = "DECLARE @IdTorneoVsDisciplina int; " +
-                                "SET @IdTorneoVsDisciplina = (SELECT Id from TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and Categoria = '" + categoria + "'); " +
+                                "SET @IdTorneoVsDisciplina = (SELECT Id from TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " ); " +
                                 "INSERT INTO AtletiVsTorneoVsDiscipline values (@IdTorneoVsDisciplina, " + idAtleta + ")";
             SqlConnection c = null;
 

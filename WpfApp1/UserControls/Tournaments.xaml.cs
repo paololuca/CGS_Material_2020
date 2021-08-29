@@ -5,8 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using BusinessEntity.Entity;
-using FormsManagement.Settings;
 using System;
+using WindowsFormsApplication1;
 
 namespace HEMATournamentSystem
 {

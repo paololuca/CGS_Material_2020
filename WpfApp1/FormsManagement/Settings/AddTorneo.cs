@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FormsManagement.Settings
+namespace WindowsFormsApplication1
 {
     public partial class AddTorneo : Form
     {
@@ -53,8 +53,7 @@ namespace FormsManagement.Settings
 
                 if(newTournamentId > 0)
                 {
-                    String categoria = radioButtonMale.Checked ? "M" : "F";
-                    //TODO
+                    String categoria = radioButtonMale.Checked ? "M" : radioButtonMale.Checked ? "F" : "O";
                     SqlDal_Tournaments.AddDisciplineToTorneo(newTournamentId, singleSword, swordAndDagger, swordAndBuckler, swordAndShield, twoHandSword, categoria);
                 }
                 else

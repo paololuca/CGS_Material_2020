@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.DAO;
 using BusinessEntity.Entity;
+using HEMATournamentSystem.Engine;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,6 @@ namespace UserControls.Phases
     /// </summary>
     public partial class SemiFinals : UserControl, IFinalsPhase
     {
-        private int _winnerPool = 1;
-        private int _looserPool = 2;
 
         private bool _loaded = false;
         PdfManager pdf;
@@ -53,8 +52,8 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            SavePool(idTorneo, idDisciplina, 1, dataGridPoolOne);
-            SavePool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
+            AscEngine.SaveSemiFinalPool(idTorneo, idDisciplina, 1, dataGridPoolOne);
+            AscEngine.SaveSemiFinalPool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
         }
 
         public void PrintBracket()
@@ -92,61 +91,8 @@ namespace UserControls.Phases
 
         }
 
-        private void SavePool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool)
-        {
-            int posizione = 1;
-
-            List<AtletaEliminatorie> listAtleti = new List<AtletaEliminatorie>();
-
-            foreach (MatchEntity match in dataGridPool.Items)
-            {
-                AtletaEliminatorie winner = new AtletaEliminatorie();
-                AtletaEliminatorie looser = new AtletaEliminatorie();
-
-                winner.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdRosso : match.IdBlu;
-                looser.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdBlu : match.IdRosso;
-
-                DeleteOldValues(pool, idTorneo, idDisciplina, match.IdRosso);
-                DeleteOldValues(pool, idTorneo, idDisciplina, match.IdBlu);
-
-                SqlDal_Pools.UpdateSemifinali(idTorneo, idDisciplina, pool, posizione, match.IdRosso, match.PuntiRosso, match.PuntiBlu);
-                SqlDal_Pools.UpdateSemifinali(idTorneo, idDisciplina, pool, posizione, match.IdBlu, match.PuntiBlu, match.PuntiRosso);
-
-                CreateFinalsRecords(idTorneo, idDisciplina, posizione, listAtleti, winner, looser);
-            }
-
-            SqlDal_Pools.InsertSemifinali(listAtleti);
-        }
-
-        private void CreateFinalsRecords(int idTorneo, int idDisciplina, int posizione, List<AtletaEliminatorie> listAtleti, AtletaEliminatorie winner, AtletaEliminatorie looser)
-        {
-            winner.IdTorneo = idTorneo;
-            winner.idDisciplina = idDisciplina;
-            winner.Posizione = posizione;
-            winner.Campo = _winnerPool;
-            winner.PuntiFatti = 0;
-            winner.PuntiSubiti = 0;
-
-            listAtleti.Add(winner);
-            listAtleti.Add(winner);
-            listAtleti.Add(winner);
-
-            looser.IdTorneo = idTorneo;
-            looser.idDisciplina = idDisciplina;
-            looser.Posizione = posizione;
-            looser.Campo = _looserPool;
-            looser.PuntiFatti = 0;
-            looser.PuntiSubiti = 0;
-
-            listAtleti.Add(looser);
-            listAtleti.Add(looser);
-            listAtleti.Add(looser);
-        }
-
-        private static void DeleteOldValues(int pool, int idTorneo, int idDisciplina, int fighterId)
-        {
-            SqlDal_Pools.EliminaSemifinaliByCampo(pool, idTorneo, idDisciplina, fighterId);
-        }
+        
+        
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

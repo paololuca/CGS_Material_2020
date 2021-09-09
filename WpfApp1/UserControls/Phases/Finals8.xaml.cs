@@ -57,7 +57,7 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            DeleteOldValues(idTorneo, idDisciplina);
+            //DeleteOldValues(idTorneo, idDisciplina);
 
             AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 1, dataGridPoolOne);
             AscEngine.SaveFinal8Pool(idTorneo, idDisciplina, 2, dataGridPoolTwo);

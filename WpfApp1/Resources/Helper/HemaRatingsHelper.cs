@@ -11,8 +11,8 @@ namespace Resources
 {
     public static class HemaRatingsHelper
     {
-        public const String MASCHILE = "MASCHILE";
-        public const String FEMMINILE = "FEMMINILE";
+        public const String PRINCIPAL = "PRINCIPAL";
+        //public const String FEMMINILE = "FEMMINILE";
         public const String TEST = "TEST";
 
         private const string fightersUrl = "https://hemaratings.com/fighters/";
@@ -207,8 +207,6 @@ namespace Resources
         {
             if (GetDbType() == TEST)
                 return ConfigurationManager.AppSettings["SqlDBTest"];
-            else if (GetDbType() == FEMMINILE)
-                return ConfigurationManager.AppSettings["SqlDBFemale"];
             else
                 return ConfigurationManager.AppSettings["SqlDB"];
         }
@@ -216,10 +214,8 @@ namespace Resources
         {
             string dbType = ConfigurationManager.AppSettings["DataBase"].ToString().ToUpper();
 
-            if (dbType == "MASCHILE")
-                return MASCHILE;
-            else if (dbType == "FEMMINILE")
-                return FEMMINILE;
+            if (dbType == "PRINCIPAL")
+                return PRINCIPAL;
             else
                 return TEST;
         }

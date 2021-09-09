@@ -21,10 +21,8 @@ namespace WindowsFormsApplication1
         {
             get
             {
-                if (rbtFemminile.Checked)
-                    return Helper.FEMMINILE;
-                else if (rbtMaschile.Checked)
-                    return Helper.MASCHILE;
+                if (rbtMaschile.Checked)
+                    return Helper.PRINCIPAL;
                 else
                     return Helper.TEST;
             }
@@ -50,8 +48,7 @@ namespace WindowsFormsApplication1
         private void ReadConfigFile()
         {
             rbtTest.Checked = Helper.GetDbType() == Helper.TEST;
-            rbtMaschile.Checked = Helper.GetDbType() == Helper.MASCHILE;
-            rbtFemminile.Checked = Helper.GetDbType() == Helper.FEMMINILE;
+            rbtMaschile.Checked = Helper.GetDbType() == Helper.PRINCIPAL;
 
             chbDebug.Checked = ConfigurationManager.AppSettings["Debug"].ToString() == "true";
             chbCreazione.Checked = ConfigurationManager.AppSettings["Creazione"].ToString() == "true";

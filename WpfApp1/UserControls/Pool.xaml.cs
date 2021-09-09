@@ -118,11 +118,11 @@ namespace HEMATournamentSystem
             try
             {
                 SavePool();
-                new MessageBoxCustom("Pool " + poolIndex + " saved", MessageType.Success, MessageButtons.Ok);
+                new MessageBoxCustom("Pool " + poolIndex + " saved", MessageType.Success, MessageButtons.Ok).ShowDialog();
             }
             catch
             {
-                new MessageBoxCustom("Error during saving pool " + poolIndex, MessageType.Error, MessageButtons.Ok);
+                new MessageBoxCustom("Error during saving pool " + poolIndex, MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 

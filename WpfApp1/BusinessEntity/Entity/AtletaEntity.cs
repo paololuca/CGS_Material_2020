@@ -13,6 +13,7 @@ namespace BusinessEntity.Entity
         public Double Ranking { get; set; }
         public Int32 Posizionamento { get; set; }
         public String Email { get; set; }
+        public bool IsEnabled { get; set; }
 
         public AtletaEntity() { }
 

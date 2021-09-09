@@ -99,6 +99,11 @@ namespace FormsManagement
                 SqlDal_Pools.InsertSemifinali(SetCampoForSemifinali(listaQualificati));
         }
 
+        /// <summary>
+        /// settings in case the forst eliminitation phhase are the finals (low probability)
+        /// </summary>
+        /// <param name="listaQualificati"></param>
+        /// <returns></returns>
         private List<AtletaEliminatorie> SetCampoForSemifinali(List<AtletaEliminatorie> listaQualificati)
         {
             listaQualificati[0].Campo = 1;

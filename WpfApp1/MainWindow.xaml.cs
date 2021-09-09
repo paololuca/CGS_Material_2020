@@ -38,10 +38,7 @@ namespace HEMATournamentSystem
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             DataContext = new MainWindowViewModel(user, MainSnackbar.MessageQueue);
-
             Snackbar = this.MainSnackbar;
-
-            
         }
 
         private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

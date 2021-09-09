@@ -183,6 +183,11 @@ namespace WindowsFormsApplication1
             Categoria = "F";
         }
 
+        private void radioButtonOpen_CheckedChanged(object sender, EventArgs e)
+        {
+            Categoria = "O";
+        }
+
         private void btnAddAtleta_Click(object sender, EventArgs e)
         {
             Int32 idTorneo = (int)comboBox1.SelectedValue;
@@ -217,11 +222,6 @@ namespace WindowsFormsApplication1
             Int32 idDisciplina = (int)comboBox2.SelectedValue;
 
             pdf.StampaAtletiTorneo(SqlDal_Tournaments.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina), comboBox1.Text, comboBox2.Text);
-        }
-
-        private void radioButtonOpen_CheckedChanged(object sender, EventArgs e)
-        {
-            Categoria = "O";
         }
     }
 }

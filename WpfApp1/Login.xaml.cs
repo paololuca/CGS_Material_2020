@@ -34,14 +34,14 @@ namespace HEMATournamentSystem
         {
             if (!_connectionAvailable)
             {
-                PopUpBoxes.ShowPopup("Unavailable DB Connection");
+                new MessageBoxCustom("Unavailable DB Connection", MessageType.Error, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             if (txtBoxUsername.Text == "")
-                PopUpBoxes.ShowPopup("User Name cannot be empty");
+                new MessageBoxCustom("User Name cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else if (txtBoxPassword.Password == "")
-                PopUpBoxes.ShowPopup("Password cannot be empty");
+                new MessageBoxCustom("Password cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else
             {
                 StringBuilder sb = EncryptionHelper.GetEncryptedPassword(txtBoxPassword.Password);
@@ -49,16 +49,16 @@ namespace HEMATournamentSystem
                 var currentUser = SqlDal_MasterDB.CheckLogin(txtBoxUsername.Text);
 
                 if (currentUser == null)
-                    PopUpBoxes.ShowPopup("Username not valid");
+                    new MessageBoxCustom("Username not valid", MessageType.Error, MessageButtons.Ok).ShowDialog();
                 else if (sb.ToString().ToUpper() != currentUser.Password)
-                    PopUpBoxes.ShowPopup("Uncorrect Password");
+                    new MessageBoxCustom("Uncorrect Password", MessageType.Error, MessageButtons.Ok).ShowDialog();
                 else if (!currentUser.IsEnabled)
                 {
-                    PopUpBoxes.ShowPopup("The user '"+ txtBoxUsername.Text + "' is not active");
+                    new MessageBoxCustom("The user '"+ txtBoxUsername.Text + "' is not active", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 }
                 else if(currentUser.Type == ProfileType.None)
                 {
-                    PopUpBoxes.ShowPopup("The user '" + txtBoxUsername.Text + "' is not allowed to access due its privileges");
+                    new MessageBoxCustom("The user '" + txtBoxUsername.Text + "' is not allowed due its privileges", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 }
                 else
                 {

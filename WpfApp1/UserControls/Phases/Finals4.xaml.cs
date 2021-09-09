@@ -50,12 +50,12 @@ namespace UserControls.Phases
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            DeleteOldValues(idTorneo, idDisciplina);
+            //DeleteOldValues(idTorneo, idDisciplina);
 
-            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 1, dataGridPoolOne);
-            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
-            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 3, dataGridPoolThree);
-            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 4, dataGridPoolFour);
+            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 1, 1, dataGridPoolOne);
+            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 2, 2, dataGridPoolTwo);
+            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 3, 2, dataGridPoolThree);
+            AscEngine.SaveFinal4Pool(idTorneo, idDisciplina, 4, 1, dataGridPoolFour);
         }
 
         public void PrintBracket()

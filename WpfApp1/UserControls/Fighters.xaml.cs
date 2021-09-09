@@ -60,6 +60,9 @@ namespace HEMATournamentSystem
                 case "Posizionamento":
                     e.Column.Visibility = Visibility.Hidden;
                     break;
+                case "IsEnabled":
+                    e.Column.IsReadOnly = true;
+                    break;
                 default:
                     e.Column.Visibility = Visibility.Visible;
                     //e.Column.IsReadOnly = true;
@@ -68,6 +71,11 @@ namespace HEMATournamentSystem
             }
         }
 
+        /// <summary>
+        /// Logical Delete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteAccount_Click(object sender, RoutedEventArgs e)
         {
 
@@ -80,7 +88,6 @@ namespace HEMATournamentSystem
 
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            //TODO uppercase dei campi
             var filtered = atletiPresenti.Where(fighter => fighter.Nome.ToLower().Contains(txtSearch.Text) || fighter.Cognome.ToLower().Contains(txtSearch.Text)).ToList();
 
             dataGridAthletes.ItemsSource = filtered;
@@ -88,15 +95,50 @@ namespace HEMATournamentSystem
 
         private void BtnSaveFighter_Click(object sender, RoutedEventArgs e)
         {
-            if (txtName.Text == "")
-                PopUpBoxes.ShowPopup("Name cannot be empty");
-            else if (txtSurnameame.Text == "")
-                PopUpBoxes.ShowPopup("Surname cannot be empty");
-            else if (!(bool)rbtFemminile.IsChecked && !(bool)rbtMaschile.IsChecked)
-                PopUpBoxes.ShowPopup("Select a gender");
+            if (!CheckForSaving())
+                return;
 
             var ass = cmbAssociation.SelectedItem;
 
+            //save
+
+            ClearField();
+
+        }
+
+        private void ClearField()
+        {
+            txtName.Text = "";
+            txtSurnameame.Text = "";
+            txtEmail.Text = "";
+
+            cmbAssociation.SelectedIndex = 0;
+        }
+
+        private bool CheckForSaving()
+        {
+            if (txtName.Text == "")
+            {
+                new MessageBoxCustom("Name cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return false;
+            }
+            else if (txtSurnameame.Text == "")
+            { 
+                new MessageBoxCustom("Surname cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return false;
+            }
+            else if (!(bool)rbtFemminile.IsChecked && !(bool)rbtMaschile.IsChecked)
+            { 
+                new MessageBoxCustom("Select a gender", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return false;
+            }
+            else if (cmbAssociation.SelectedIndex <= 0)
+            { 
+                new MessageBoxCustom("Select an Association", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -35,11 +35,8 @@ namespace HEMATournamentSystem
 
             switch (db)
             {
-                case DataBaseType.Maschile:
-                    rbtMaschile.IsChecked = true;
-                    break;
-                case DataBaseType.Femminile:
-                    rbtFemminile.IsChecked = true;
+                case DataBaseType.Principal:
+                    rbtDB.IsChecked = true;
                     break;
                 case DataBaseType.Test:
                     rbtTest.IsChecked = true;
@@ -96,25 +93,25 @@ namespace HEMATournamentSystem
                 if (SqlDal_MasterDB.DeleteUserAccount(userToDelete.UserName))
                 {
                     LoadUsersList();
-                    PopUpBoxes.ShowPopup("User " + userToDelete.UserName + " deleted ");
+                    new MessageBoxCustom("User " + userToDelete.UserName + " deleted ", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 }
                 else
-                    PopUpBoxes.ShowPopup("ERROR occurred: no User deleted");
+                    new MessageBoxCustom("ERROR occurred: no User deleted", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
 
         }
         private void BtnSaveAccount_Click(object sender, RoutedEventArgs e)
         {
             if (txtUserName.Text == "")
-                PopUpBoxes.ShowPopup("User Name cannot be empty");
+                new MessageBoxCustom("User Name cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else if (txtPassword.Password == "")
-                PopUpBoxes.ShowPopup("Password cannot be empty");
+                new MessageBoxCustom("Password cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else if ((ProfileType)cmbAccountType.SelectedValue == ProfileType.None)
-                PopUpBoxes.ShowPopup("Choose a valid Account Type");
+                new MessageBoxCustom("Choose a valid Account Type", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else
             {
                 if (SqlDal_MasterDB.CheckIfAccountExist(txtUserName.Text) > 0)
-                    PopUpBoxes.ShowPopup("User name already exist");
+                    new MessageBoxCustom("User name already exist", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 else
                 {
 
@@ -123,7 +120,7 @@ namespace HEMATournamentSystem
                     var newId = SqlDal_MasterDB.AddNewAccount(txtUserName.Text, sb.ToString(), (ProfileType)cmbAccountType.SelectedValue);
 
                     if (newId < 0)
-                        PopUpBoxes.ShowPopup("Account not created");
+                        new MessageBoxCustom("Account not created", MessageType.Error, MessageButtons.Ok).ShowDialog();
                     else
                     {
                         txtUserName.Text = "";
@@ -133,7 +130,7 @@ namespace HEMATournamentSystem
                         //referesh user lsit
                         LoadUsersList();
 
-                        PopUpBoxes.ShowPopup("Account correctly created");
+                        new MessageBoxCustom("Account correctly created", MessageType.Success, MessageButtons.Ok).ShowDialog();
 
                     }
                 }
@@ -144,21 +141,19 @@ namespace HEMATournamentSystem
         {
             DataBaseType db = DataBaseType.None;
 
-            if ((bool)rbtMaschile.IsChecked)
-                db = DataBaseType.Maschile;
-            else if ((bool)rbtFemminile.IsChecked)
-                db = DataBaseType.Femminile;
+            if ((bool)rbtDB.IsChecked)
+                db = DataBaseType.Principal;
             else if ((bool)rbtTest.IsChecked)
                 db = DataBaseType.Test;
 
             if (db == DataBaseType.None)
-                PopUpBoxes.ShowPopup("Please select a DB");
+                new MessageBoxCustom("Please select a DB", MessageType.Warning, MessageButtons.Ok).ShowDialog();
             else
             {
                 if(SqlDal_MasterDB.UpdateSelectedDB(db))
-                    PopUpBoxes.ShowPopup("Saved !!");
+                    new MessageBoxCustom("Saved !!", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 else
-                    PopUpBoxes.ShowPopup("Error during saving DB Info");
+                    new MessageBoxCustom("Error during saving DB Info", MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 

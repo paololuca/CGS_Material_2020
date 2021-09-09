@@ -42,7 +42,7 @@
 
         <materialDesign:PopupBox Name="btnLoadPhases" PlacementMode="BottomAndAlignCentres" ToolTipService.Placement="Right"  IsEnabled="false"
                                  Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                 ToggleCheckedContentCommandParameter="wowsers"
+                                 ToggleCheckedContentCommandParameter="wowsers" MouseEnter="btnLoadPhases_MouseEnter"
                                  ToolTip="Load specific phase" 
                                  Width="36" Margin="984,0,0,547" Height="Auto" Background="#FF673AB7" BorderBrush="#FF673AB7">
             <materialDesign:PopupBox.ToggleContent>

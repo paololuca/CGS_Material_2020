@@ -162,7 +162,8 @@ namespace Resources
                         Asd = Convert.ToString(reader["Nome_ASD"]),
                         Sesso = Convert.ToString(reader["Sesso"]),
                         Ranking = Convert.ToDouble(reader["Punteggio"]),
-                        Email = Convert.ToString(reader["Email"])
+                        Email = Convert.ToString(reader["Email"]),
+                        IsEnabled = Convert.ToBoolean(reader["IsEnabled"])
                     });
                 }
                 if (atleti.Count > 0)
@@ -268,7 +269,7 @@ namespace Resources
         {
             AtletaEntity atleta = new AtletaEntity();
 
-            String commandText = "select at.*, asd.Nome_ASD from atleti at join ASD asd on at.IdASD = asd.Id where at.Id = '" + idAtleta;
+            String commandText = "select at.*, asd.Nome_ASD from atleti at join ASD asd on at.IdASD = asd.Id where at.Id = " + idAtleta;
 
             SqlConnection c = null;
 

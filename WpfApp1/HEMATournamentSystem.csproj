@@ -126,6 +126,7 @@
     <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
+    <Compile Include="BusinessEntity\Type\ProfileManager.cs" />
     <Compile Include="Engine\AscEngine.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
     <Compile Include="FormsManagement\FighterStats.xaml.cs">
@@ -207,10 +208,12 @@
     <Compile Include="UserControls\Associations.xaml.cs">
       <DependentUpon>Associations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Common\AnotherCommandImplementation.cs" />
     <Compile Include="UserControls\Common\MessageBoxCustom.xaml.cs">
       <DependentUpon>MessageBoxCustom.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Common\NotEmptyValidationRule.cs" />
+    <Compile Include="UserControls\Common\ViewModelBase.cs" />
     <Compile Include="UserControls\Fighters.xaml.cs">
       <DependentUpon>Fighters.xaml</DependentUpon>
     </Compile>

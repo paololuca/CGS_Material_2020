@@ -15,34 +15,34 @@
                                    Text="Lista degli Atleti presenti all'interno del sistema" TextWrapping="Wrap" />
             <Separator Margin="0,2,208,2"></Separator>
         </StackPanel>
-        <TextBox Name="txtSearch" DockPanel.Dock="Top" Margin="820,31,10,508" Width="200" BorderThickness="0"
+        <TextBox Name="txtSearch" DockPanel.Dock="Top" Margin="820,130,10,409" Width="200" BorderThickness="0"
                         materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                         materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
-        <materialDesign:PackIcon Kind="AccountCircle" Margin="120,70,0,0" Height="108" Width="108" />
-        <TextBox Name="txtName" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,178,715,359" />
-        <TextBox Name="txtSurnameame" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,226,715,311" />
-        <StackPanel Margin="24,274,0,267" HorizontalAlignment="Left" Width="291" Orientation="Horizontal">
+        <materialDesign:PackIcon Kind="AccountCircle" Margin="10,65,0,0" Height="82" Width="74" RenderTransformOrigin="-0.925,-0.142" />
+        <TextBox Name="txtName" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="96,61,650,476" />
+        <TextBox Name="txtSurnameame" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="385,61,361,476" />
+        <StackPanel Margin="674,65,0,476" HorizontalAlignment="Left" Width="108" Orientation="Horizontal">
 
             <RadioButton Name="rbtMaschile"  Margin="4,10,4,11" IsChecked="False" Content="M" Width="41" BorderBrush="#FFB835B2" />
             <RadioButton Name="rbtFemminile" Margin="4,10,4,11" IsChecked="False" Content="F" Width="110" BorderBrush="#FFB835B2"/>
         </StackPanel>
         <ComboBox Name="cmbAssociation" materialDesign:HintAssist.Hint="Association Name" ItemsSource="{Binding LongListToTestComboVirtualization}" 
-                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="31,360,715,180" Height="40">
+                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="91,108,655,432" Height="40">
             <ComboBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel />
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
         </ComboBox>
-        <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="164,486,715,52" RenderTransformOrigin="0.5,0.5"  >
+        <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="820,65,78,473" RenderTransformOrigin="0.5,0.5"  >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Floppy"/>
-                <TextBlock Text="  Save Fighter"/>
+                <TextBlock Text="  Add Fighter"/>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="dataGridAthletes" HorizontalAlignment="Left" Height="493" 
-                  Margin="372,77,0,0" VerticalAlignment="Top" Width="648" AutoGeneratingColumn="DataGridAthletes_AutoGeneratingColumn"
+        <DataGrid x:Name="dataGridAthletes" HorizontalAlignment="Left" Height="394" 
+                  Margin="10,176,0,0" VerticalAlignment="Top" Width="1010" AutoGeneratingColumn="DataGridAthletes_AutoGeneratingColumn"
                   CanUserSortColumns="True"  CanUserAddRows="False" CanUserDeleteRows="False"
                   SelectionUnit="Cell" SelectionMode="Extended">
             <DataGrid.Columns>
@@ -62,7 +62,7 @@
                         <DataTemplate>
                             <Button x:Name="btnDeleteAccount" Height="32"  Click="BtnDeleteAccount_Click" Background="Red" Width="Auto" ToolTip="Delete Fighter">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Delete"/>
+                                    <materialDesign:PackIcon Kind="WrapDisabled"/>
                                 </StackPanel>
                             </Button>
                         </DataTemplate>
@@ -70,6 +70,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,312,715,225" />
+        <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="385,104,361,433" />
     </Grid>
 </UserControl>

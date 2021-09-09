@@ -40,11 +40,16 @@ namespace HEMATournamentSystem
         private int startPhase = 0;
 
         private readonly LoginUser user;
+        private readonly ProfileManager profileManager;
 
         public Pools(LoginUser user)
         {
             this.user = user;
+            this.profileManager = new ProfileManager();
+
             InitializeComponent();
+
+            EnableCreateControls();
         }
 
 
@@ -348,6 +353,15 @@ namespace HEMATournamentSystem
             }
         }
 
+
+        private void EnableCreateControls()
+        {
+            if (!profileManager.CanCreatePools(user.Type))
+                btnCreateTournamentPools.IsEnabled = false;
+            else
+                btnCreateTournamentPools.IsEnabled = true;
+        }
+
         private void EnablePageControls()
         {
             btnClosePools.IsEnabled = true;
@@ -398,9 +412,10 @@ namespace HEMATournamentSystem
         private void BtnClosePools_Click(object sender, RoutedEventArgs e)
         {
             //TODO PL chiamata alla "validaEliminatorie" in cui deve essere gestito il motore tramite DB
-            if (System.Windows.Forms.MessageBox.Show("If you continue all values about next phases, if present, will be deleted.\n\n Continue?", "Attenzione",
-                System.Windows.Forms.MessageBoxButtons.OKCancel,
-                System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+            bool? result = new MessageBoxCustom("Delete all final phases?", 
+                MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
+
+            if (result.Value)
             {
                 //save all pools for safety
                 if (SaveAllPools())
@@ -564,6 +579,9 @@ namespace HEMATournamentSystem
             }
         }
 
-        
+        private void btnLoadPhases_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ManagePhasesButtons();
+        }
     }
 }

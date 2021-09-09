@@ -107,15 +107,13 @@
 
                         <StackPanel Margin="24,10,0,89" Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2">
 
-                            <RadioButton Name="rbtMaschile" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4,10,4,11" IsChecked="False" Content="Maschile" Width="110" BorderBrush="#FFB835B2" />
-                            <RadioButton Name="rbtFemminile" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4,10,4,11" IsChecked="False" Content="Femminile" Width="110" BorderBrush="#FFB835B2"/>
+                            <RadioButton Name="rbtDB" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4,10,4,11" IsChecked="False" Content="Master" Width="110" BorderBrush="#FFB835B2" />
                             <RadioButton Name="rbtTest" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Test" Width="110" BorderBrush="#FFB835B2"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,68,0,37">
                             <Grid Width="377">
                                 <materialDesign:PackIcon Kind="Database" Height="31" Width="119" Margin="26,0,0,0" />
                                 <materialDesign:PackIcon Kind="Database" Height="31" Width="118" Margin="145,0,0,0" />
-                                <materialDesign:PackIcon Kind="Database" Height="31" Width="114" Margin="263,0,0,0" />
                             </Grid>
 
                         </StackPanel>

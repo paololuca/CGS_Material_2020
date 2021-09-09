@@ -13,18 +13,16 @@ namespace Resources
 {
     static class Helper
     {
-        public const String MASCHILE = "MASCHILE";
-        public const String FEMMINILE = "FEMMINILE";
+        public const String PRINCIPAL = "PRINCIPAL";
+        //deprecated public const String FEMMINILE = "FEMMINILE";
         public const String TEST = "TEST";
-        public const String OPEN = "OPEN";
+        //public const String OPEN = "OPEN";
 
 
         public static string GetConnectionString()
         {
             if (GetDbType() == TEST)
                 return ConfigurationManager.AppSettings["SqlDBTest"];
-            else if (GetDbType() == FEMMINILE)
-                return ConfigurationManager.AppSettings["SqlDBFemale"];
             else
                 return ConfigurationManager.AppSettings["SqlDB"];
         }
@@ -249,12 +247,8 @@ namespace Resources
         {
             DataBaseType dbType = SqlDal_MasterDB.GetSelectedDB();
 
-            if (dbType == DataBaseType.Maschile)
-                return MASCHILE;
-            else if (dbType == DataBaseType.Femminile)
-                return FEMMINILE;
-            else if (dbType == DataBaseType.Open)
-                return OPEN;
+            if (dbType == DataBaseType.Principal)
+                return PRINCIPAL;
             else
                 return TEST;
         }

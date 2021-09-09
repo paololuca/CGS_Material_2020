@@ -217,7 +217,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -260,7 +262,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -303,7 +307,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -346,7 +352,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -389,7 +397,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -432,7 +442,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 
@@ -475,7 +487,9 @@ namespace Resources
                         idDisciplina = (int)reader["IdDisciplina"],
                         Posizione = (int)reader["Posizione"],
                         Nome = (String)reader["Nome"],
-                        Cognome = (String)reader["Cognome"]
+                        Cognome = (String)reader["Cognome"],
+                        PuntiFatti = (int)reader["PuntiFatti"],
+                        PuntiSubiti = (int)reader["PuntiSubiti"]
                     });
                 }
 

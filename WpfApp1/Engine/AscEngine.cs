@@ -50,6 +50,13 @@ namespace HEMATournamentSystem.Engine
                                 res.Vittorie++;
                             else if (match.PuntiRosso < match.PuntiBlu)
                                 res.Sconfitte++;
+                            else
+                            {
+                                if (match.PuntiRosso > match.PuntiBlu)
+                                    res.Vittorie++;
+                                else if (match.PuntiRosso < match.PuntiBlu)
+                                    res.Sconfitte++;
+                            }
 
                             res.PuntiFatti += match.PuntiRosso;
                             res.PuntiSubiti += match.PuntiBlu;
@@ -69,6 +76,13 @@ namespace HEMATournamentSystem.Engine
                                 res.Vittorie++;
                             else if ((match.PuntiBlu < match.PuntiRosso) && (match.PuntiRosso >= 3))
                                 res.Sconfitte++;
+                            else
+                            {
+                                if (match.PuntiBlu > match.PuntiRosso)
+                                    res.Vittorie++;
+                                else if(match.PuntiBlu < match.PuntiRosso)
+                                    res.Sconfitte++;
+                            }
 
                             res.PuntiFatti += match.PuntiBlu;
                             res.PuntiSubiti += match.PuntiRosso;
@@ -147,7 +161,7 @@ namespace HEMATournamentSystem.Engine
             SqlDal_Pools.InsertQuarti(listAtleti);
         }
 
-        public static void SaveFinal4Pool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool)
+        public static void SaveFinal4Pool(int idTorneo, int idDisciplina, int pool, int semifinalPool, DataGrid dataGridPool)
         {
             int posizione = 1;
 
@@ -165,7 +179,7 @@ namespace HEMATournamentSystem.Engine
                 a.IdTorneo = idTorneo;
                 a.idDisciplina = idDisciplina;
                 a.Posizione = posizione;
-                a.Campo = pool;
+                a.Campo = semifinalPool;
                 a.PuntiFatti = 0;
                 a.PuntiSubiti = 0;
 
@@ -191,8 +205,8 @@ namespace HEMATournamentSystem.Engine
                 winner.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdRosso : match.IdBlu;
                 looser.IdAtleta = (match.PuntiRosso > match.PuntiBlu) ? match.IdBlu : match.IdRosso;
 
-                DeleteOldValues(pool, idTorneo, idDisciplina, match.IdRosso);
-                DeleteOldValues(pool, idTorneo, idDisciplina, match.IdBlu);
+                //DeleteOldValues(pool, idTorneo, idDisciplina, match.IdRosso);
+                //DeleteOldValues(pool, idTorneo, idDisciplina, match.IdBlu);
 
                 SqlDal_Pools.UpdateSemifinali(idTorneo, idDisciplina, pool, posizione, match.IdRosso, match.PuntiRosso, match.PuntiBlu);
                 SqlDal_Pools.UpdateSemifinali(idTorneo, idDisciplina, pool, posizione, match.IdBlu, match.PuntiBlu, match.PuntiRosso);
@@ -216,9 +230,9 @@ namespace HEMATournamentSystem.Engine
 
             foreach (MatchEntity match in dataGridPool.Items)
             {
-                if (match.IdRosso > match.IdBlu)
+                if (match.PuntiRosso > match.PuntiBlu)
                     vittorieRosso++;
-                else if (match.IdRosso < match.IdBlu)
+                else if (match.PuntiRosso < match.PuntiBlu)
                     vittorieBlu++;
 
                 SqlDal_Pools.UpdateFinali(idTorneo, idDisciplina, pool, round, match.IdRosso, match.PuntiRosso, match.PuntiBlu);
@@ -239,6 +253,11 @@ namespace HEMATournamentSystem.Engine
             {
                 looser = SqlDal_Fighters.GetAtletaById(m.IdRosso).Asd + " - " + m.CognomeRosso + " " + m.NomeRosso;
                 winner = SqlDal_Fighters.GetAtletaById(m.IdBlu).Asd + " - " + m.CognomeBlu + " " + m.NomeBlu;
+            }
+            else
+            {
+                winner = "";
+                looser = "";
             }
 
             return new Tuple<string, string>(winner, looser);

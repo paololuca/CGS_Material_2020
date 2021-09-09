@@ -107,9 +107,9 @@ namespace HEMATournamentSystem
         {
             try
             {
-                ((IFinalsPhase)finalTransition.SelectedItem).SaveFields(_idTorneo, _idDisciplina);
-
                 DeleteNextPhases();
+
+                ((IFinalsPhase)finalTransition.SelectedItem).SaveFields(_idTorneo, _idDisciplina);
 
                 LoadPhasesData(_currentTransition + 1);
 
@@ -152,7 +152,7 @@ namespace HEMATournamentSystem
 
             if (result.Value)
             {
-                this.Close(); ;
+                this.Close();
             }
         }
     }

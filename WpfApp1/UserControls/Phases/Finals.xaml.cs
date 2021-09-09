@@ -56,6 +56,8 @@ namespace UserControls.Phases
             LoadPool(poolTwo, dataGridPoolTwo);
 
             _loaded = true;
+
+            SaveFields(idTorneo, idDisciplina);
         }
 
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)

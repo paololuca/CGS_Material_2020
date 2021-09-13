@@ -17,6 +17,7 @@
         FontFamily="{materialDesign:MaterialDesignFont}" 
         ResizeMode="CanMinimize"
         Closed="Window_Closed"
+        Closing="Window_Closing"
         Icon="img/swords.png">
     <Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy" />

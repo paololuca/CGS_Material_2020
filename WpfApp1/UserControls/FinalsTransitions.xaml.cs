@@ -148,12 +148,22 @@ namespace HEMATournamentSystem
 
         private void btnClosePool_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             bool? result = new MessageBoxCustom("Confirm EXIT ?", MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
 
-            if (result.Value)
+            if (result != null && !result.Value)
             {
-                this.Close();
+                e.Cancel = true;
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

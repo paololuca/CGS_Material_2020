@@ -8,6 +8,8 @@
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         mc:Ignorable="d" 
         WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        Closed="Window_Closed"
         ResizeMode="CanMinimize" Height="858" Width="1350">
 
     <Grid>

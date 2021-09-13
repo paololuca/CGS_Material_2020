@@ -1143,7 +1143,17 @@ namespace Resources
    "<div id=\"H26\" style=\"position:absolute; top:360px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##6##<br> </FONT></div>" +
    "<div id=\"H28\" style=\"position:absolute; top:430px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##7##<br> </FONT></div>" +
    "<div id=\"H30\" style=\"position:absolute; top:500px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##8##<br> </FONT></div>" +
-    "</body></html>";
+			"</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>" +
+			"Firme</br></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+	"</body></html>";
 
 
         public static String bracket8 = "<head><title>bracket </title></head><body>" +
@@ -1181,7 +1191,13 @@ namespace Resources
    "<div id=\"H18\" style=\"position:absolute; top:80px;  left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##2##<br> </FONT></div>" +
    "<div id=\"H20\" style=\"position:absolute; top:150px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##3##<br> </FONT></div>" +
    "<div id=\"H22\" style=\"position:absolute; top:220px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##4##<br> </FONT></div>" +
-    "</body></html>";
+			"</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>" +
+			"Firme</br></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+			"<p>____________________________________________</p></br>" +
+	"</body></html>";
 
     }
 }

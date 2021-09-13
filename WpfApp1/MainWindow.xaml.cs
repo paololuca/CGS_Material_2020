@@ -97,7 +97,17 @@ namespace HEMATournamentSystem
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            App.Current.Shutdown();
+            App.Current.Shutdown();            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool? result = new MessageBoxCustom("Confirm EXIT ?", MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
+
+            if (!result.Value)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

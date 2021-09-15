@@ -445,19 +445,7 @@ namespace HEMATournamentSystem
                         numeroAtletiTorneoDisciplina >= 24 ? 16 :
                         numeroAtletiTorneoDisciplina >= 12 ? 8 : 4;
 
-
-            /*
-             * 0 = 1/16
-             * 1 = 1/8
-             * 2 = 1/4
-             * 3 = semifinals
-             * 4 = finals
-             */
-            //TODO calcolo dei valori presi da DB
-            startPhase = atletiAmmessiEliminatorie == 32 ? (int)PhasesType.Finals_16 :
-                        atletiAmmessiEliminatorie == 16 ? (int)PhasesType.Finals_8 :
-                        atletiAmmessiEliminatorie == 8 ? (int)PhasesType.Finals_4 :
-                        atletiAmmessiEliminatorie == 4 ? (int)PhasesType.SemiFinals : (int)PhasesType.Finals;
+            startPhase = PhasesManager.GetStartingPhase(atletiAmmessiEliminatorie);
         }
 
         private bool SaveAllPools()

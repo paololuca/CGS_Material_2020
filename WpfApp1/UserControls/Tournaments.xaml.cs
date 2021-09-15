@@ -126,5 +126,15 @@ namespace HEMATournamentSystem
         {
             
         }
+
+        private void btnmanageSubscription_Click(object sender, RoutedEventArgs e)
+        {
+            ManageTournament tournament = new ManageTournament();
+
+            tournament.Show();
+            tournament.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+
+            tournament.TopMost = false;
+        }
     }
 }

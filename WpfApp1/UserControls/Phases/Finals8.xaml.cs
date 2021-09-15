@@ -28,10 +28,10 @@ namespace UserControls.Phases
         private bool _loaded = false;
         PdfManager pdf;
 
-        private List<AtletaEliminatorie> poolOne;
-        private List<AtletaEliminatorie> poolTwo;
-        private List<AtletaEliminatorie> poolThree;
-        private List<AtletaEliminatorie> poolFour;
+        private List<AtletaEliminatorie> poolOne = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolTwo = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolThree = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolFour = new List<AtletaEliminatorie>();
 
         public Finals8()
         {
@@ -42,18 +42,29 @@ namespace UserControls.Phases
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            poolOne = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 1);
-            poolTwo = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 2);
-            poolThree = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 3);
-            poolFour = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 4);
+            var allAtleti = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina);
 
-            LoadPool(poolOne, dataGridPoolOne);
-            LoadPool(poolTwo, dataGridPoolTwo);
-            LoadPool(poolThree, dataGridPoolThree);
-            LoadPool(poolFour, dataGridPoolFour);
+            if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
+            {
+                LoadAsFirstValidPhase(allAtleti);
+            }
+            else
+            {
+                poolOne = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 1);
+                poolTwo = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 2);
+                poolThree = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 3);
+                poolFour = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina, 4);
+
+                LoadPool(poolOne, dataGridPoolOne);
+                LoadPool(poolTwo, dataGridPoolTwo);
+                LoadPool(poolThree, dataGridPoolThree);
+                LoadPool(poolFour, dataGridPoolFour);
+            }
 
             _loaded = true;
         }
+
+        
 
         public void SaveFields(int idTorneo, int idDisciplina)
         {
@@ -76,6 +87,70 @@ namespace UserControls.Phases
             if (_loaded)
                 pdf.StampaOttavi(poolOne, poolTwo, poolThree, poolFour);
         }
+
+        private void LoadAsFirstValidPhase(List<AtletaEliminatorie> allAtleti)
+        {
+            #region campo1
+            LoadFirstPool(allAtleti);
+            #endregion
+
+            #region campo2
+            LoadSecondPool(allAtleti);
+            #endregion
+
+            #region campo3
+            LoadThirdPool(allAtleti);
+            #endregion
+
+            #region campo4
+            LoadFourthPool(allAtleti);
+            #endregion
+        }
+
+        private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolOne.Add(allAtleti.ElementAt(0));
+            poolOne.Add(allAtleti.ElementAt(15));
+
+            poolOne.Add(allAtleti.ElementAt(7));
+            poolOne.Add(allAtleti.ElementAt(8));
+
+            LoadPool(poolOne, dataGridPoolOne);
+        }
+
+        private void LoadSecondPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolTwo.Add(allAtleti.ElementAt(1));
+            poolTwo.Add(allAtleti.ElementAt(14));
+
+            poolTwo.Add(allAtleti.ElementAt(6));
+            poolTwo.Add(allAtleti.ElementAt(9));
+
+            LoadPool(poolTwo, dataGridPoolTwo);
+        }
+
+        private void LoadThirdPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolThree.Add(allAtleti.ElementAt(5));
+            poolThree.Add(allAtleti.ElementAt(10));
+
+            poolThree.Add(allAtleti.ElementAt(2));
+            poolThree.Add(allAtleti.ElementAt(13));
+
+            LoadPool(poolThree, dataGridPoolThree);
+        }
+
+        private void LoadFourthPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolFour.Add(allAtleti.ElementAt(4));
+            poolFour.Add(allAtleti.ElementAt(11));
+
+            poolFour.Add(allAtleti.ElementAt(3));
+            poolFour.Add(allAtleti.ElementAt(12));
+
+            LoadPool(poolFour, dataGridPoolFour);
+        }
+
 
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
         {

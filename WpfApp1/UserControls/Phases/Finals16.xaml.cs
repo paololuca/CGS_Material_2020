@@ -27,10 +27,10 @@ namespace UserControls.Phases
         private bool _loaded = false;
         private PdfManager pdf;
 
-        private List<AtletaEliminatorie> poolOne;
-        private List<AtletaEliminatorie> poolTwo;
-        private List<AtletaEliminatorie> poolThree;
-        private List<AtletaEliminatorie> poolFour;
+        private List<AtletaEliminatorie> poolOne = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolTwo = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolThree = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolFour = new List<AtletaEliminatorie>();
         
         public Finals16()
         {
@@ -71,6 +71,7 @@ namespace UserControls.Phases
         #region Private
         private void LoadMatchs(int idTorneo, int idDisciplina)
         {
+
             List<AtletaEliminatorie> allAtleti = SqlDal_Pools.GetSedicesimi(idTorneo, idDisciplina);
 
             poolOne = new List<AtletaEliminatorie>();
@@ -134,7 +135,6 @@ namespace UserControls.Phases
             poolTwo.Add(allAtleti.ElementAt(6));
             poolTwo.Add(allAtleti.ElementAt(25));
 
-            List<MatchEntity> list = new List<MatchEntity>();
             CreateMatches(dataGridPoolTwo, poolTwo);
         }
 
@@ -152,7 +152,6 @@ namespace UserControls.Phases
             poolThree.Add(allAtleti.ElementAt(2));
             poolThree.Add(allAtleti.ElementAt(29));
 
-            List<MatchEntity> list = new List<MatchEntity>();
             CreateMatches(dataGridPoolThree, poolThree);
         }
 
@@ -170,7 +169,6 @@ namespace UserControls.Phases
             poolFour.Add(allAtleti.ElementAt(3));
             poolFour.Add(allAtleti.ElementAt(28));
 
-            List<MatchEntity> list = new List<MatchEntity>();
             CreateMatches(dataGridPoolFour, poolFour);
         }
 
@@ -232,16 +230,7 @@ namespace UserControls.Phases
 
             dataGridPool.ItemsSource = list;
         }
-
-        private static void DeleteOldValues(int idTorneo, int idDisciplina)
-        {
-            SqlDal_Pools.EliminaSedicesimiByCampo(1, idTorneo, idDisciplina);
-            SqlDal_Pools.EliminaSedicesimiByCampo(2, idTorneo, idDisciplina);
-            SqlDal_Pools.EliminaSedicesimiByCampo(3, idTorneo, idDisciplina);
-            SqlDal_Pools.EliminaSedicesimiByCampo(4, idTorneo, idDisciplina);
-        }
-
-        
+      
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

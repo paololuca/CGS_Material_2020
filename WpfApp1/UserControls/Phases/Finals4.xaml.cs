@@ -4,6 +4,7 @@ using HEMATournamentSystem.Engine;
 using Resources;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,10 +20,10 @@ namespace UserControls.Phases
         private bool _loaded = false;
         PdfManager pdf;
 
-        private List<AtletaEliminatorie> poolOne;
-        private List<AtletaEliminatorie> poolTwo;
-        private List<AtletaEliminatorie> poolThree;
-        private List<AtletaEliminatorie> poolFour;
+        private List<AtletaEliminatorie> poolOne = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolTwo = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolThree = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolFour = new List<AtletaEliminatorie>();
 
         public Finals4()
         {
@@ -33,15 +34,25 @@ namespace UserControls.Phases
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            poolOne = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 1);
-            poolTwo = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 2);
-            poolThree = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 3);
-            poolFour = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 4);
 
-            LoadPool(poolOne, dataGridPoolOne);
-            LoadPool(poolTwo, dataGridPoolTwo);
-            LoadPool(poolThree, dataGridPoolThree);
-            LoadPool(poolFour, dataGridPoolFour);
+            var allAtleti = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina);
+
+            if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
+            {
+                LoadAsFirstValidPhase(allAtleti);
+            }
+            else
+            {
+                poolOne = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 1);
+                poolTwo = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 2);
+                poolThree = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 3);
+                poolFour = SqlDal_Pools.GetQuarti(idTorneo, idDisciplina, 4);
+
+                LoadPool(poolOne, dataGridPoolOne);
+                LoadPool(poolTwo, dataGridPoolTwo);
+                LoadPool(poolThree, dataGridPoolThree);
+                LoadPool(poolFour, dataGridPoolFour);
+            }
 
             _loaded = true;
         }
@@ -68,6 +79,58 @@ namespace UserControls.Phases
             if(_loaded)
                 pdf.StampaQuarti(poolOne, poolTwo, poolThree, poolFour);
         }
+
+        private void LoadAsFirstValidPhase(List<AtletaEliminatorie> allAtleti)
+        {
+            #region campo1
+            LoadFirstPool(allAtleti);
+            #endregion
+
+            #region campo2
+            LoadSecondPool(allAtleti);
+            #endregion
+
+            #region campo3
+            LoadThirdPool(allAtleti);
+            #endregion
+
+            #region campo4
+            LoadFourthPool(allAtleti);
+            #endregion
+        }
+
+        private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolOne.Add(allAtleti.ElementAt(0));
+            poolOne.Add(allAtleti.ElementAt(7));
+
+            LoadPool(poolOne, dataGridPoolOne);
+        }
+
+        private void LoadSecondPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolTwo.Add(allAtleti.ElementAt(1));
+            poolTwo.Add(allAtleti.ElementAt(6));
+
+            LoadPool(poolTwo, dataGridPoolTwo);
+        }
+
+        private void LoadThirdPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolThree.Add(allAtleti.ElementAt(2));
+            poolThree.Add(allAtleti.ElementAt(5));
+
+            LoadPool(poolThree, dataGridPoolThree);
+        }
+
+        private void LoadFourthPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolFour.Add(allAtleti.ElementAt(3));
+            poolFour.Add(allAtleti.ElementAt(4));
+
+            LoadPool(poolFour, dataGridPoolFour);
+        }
+
 
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
         {

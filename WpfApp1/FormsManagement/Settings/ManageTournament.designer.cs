@@ -44,14 +44,14 @@
             this.btnAddAtleta = new System.Windows.Forms.Button();
             this.comboBoxAtletaToAdd = new System.Windows.Forms.ComboBox();
             this.buttonPrintList = new System.Windows.Forms.Button();
-            this.radioButtonOpen = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButtonOpen);
+            this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(824, 29);
@@ -69,7 +69,7 @@
             this.radioButton2.Location = new System.Drawing.Point(45, 145);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(184, 36);
+            this.radioButton2.Size = new System.Drawing.Size(156, 35);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Femminile";
@@ -83,7 +83,7 @@
             this.radioButton1.Location = new System.Drawing.Point(45, 67);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(165, 36);
+            this.radioButton1.Size = new System.Drawing.Size(139, 35);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Maschile";
@@ -118,7 +118,7 @@
             this.label2.Location = new System.Drawing.Point(61, 167);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 32);
+            this.label2.Size = new System.Drawing.Size(131, 31);
             this.label2.TabIndex = 10;
             this.label2.Text = "Disciplina";
             // 
@@ -137,7 +137,7 @@
             this.label1.Location = new System.Drawing.Point(61, 21);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 32);
+            this.label1.Size = new System.Drawing.Size(100, 31);
             this.label1.TabIndex = 8;
             this.label1.Text = "Torneo";
             // 
@@ -156,7 +156,6 @@
             this.dataGridView1.Location = new System.Drawing.Point(56, 334);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 102;
             this.dataGridView1.Size = new System.Drawing.Size(1496, 897);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.Visible = false;
@@ -168,7 +167,7 @@
             this.lblNumberOfAtleti.Location = new System.Drawing.Point(56, 1269);
             this.lblNumberOfAtleti.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblNumberOfAtleti.Name = "lblNumberOfAtleti";
-            this.lblNumberOfAtleti.Size = new System.Drawing.Size(296, 32);
+            this.lblNumberOfAtleti.Size = new System.Drawing.Size(283, 31);
             this.lblNumberOfAtleti.TabIndex = 15;
             this.lblNumberOfAtleti.Text = "Numero Partecipanti : ";
             // 
@@ -178,7 +177,7 @@
             this.lblCount.Location = new System.Drawing.Point(373, 1269);
             this.lblCount.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 32);
+            this.lblCount.Size = new System.Drawing.Size(0, 31);
             this.lblCount.TabIndex = 16;
             // 
             // btnAddAtleta
@@ -213,18 +212,18 @@
             this.buttonPrintList.UseVisualStyleBackColor = true;
             this.buttonPrintList.Click += new System.EventHandler(this.buttonPrintList_Click);
             // 
-            // radioButtonOpen
+            // radioButton3
             // 
-            this.radioButtonOpen.AutoSize = true;
-            this.radioButtonOpen.Location = new System.Drawing.Point(274, 67);
-            this.radioButtonOpen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.radioButtonOpen.Name = "radioButtonOpen";
-            this.radioButtonOpen.Size = new System.Drawing.Size(122, 36);
-            this.radioButtonOpen.TabIndex = 2;
-            this.radioButtonOpen.TabStop = true;
-            this.radioButtonOpen.Text = "Open";
-            this.radioButtonOpen.UseVisualStyleBackColor = true;
-            this.radioButtonOpen.CheckedChanged += new System.EventHandler(this.radioButtonOpen_CheckedChanged);
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(281, 67);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(98, 35);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Open";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // ManageTournament
             // 
@@ -273,6 +272,6 @@
         private System.Windows.Forms.Button btnAddAtleta;
         private System.Windows.Forms.ComboBox comboBoxAtletaToAdd;
         private System.Windows.Forms.Button buttonPrintList;
-        private System.Windows.Forms.RadioButton radioButtonOpen;
+        private System.Windows.Forms.RadioButton radioButton3;
     }
 }

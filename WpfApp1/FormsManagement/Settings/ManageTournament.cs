@@ -21,10 +21,10 @@ namespace WindowsFormsApplication1
 
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            List<TorneoEntity> tornei = SqlDal_Tournaments.GetTorneiAttivi(true);
+            List<TorneoEntity> tornei = SqlDal_Tournaments.GetTorneiAttivi(false);
             this.comboBox1.DataSource = tornei.ToArray();
-            this.comboBox1.ValueMember = "TournamentId";
-            this.comboBox1.DisplayMember = "TournamentName";
+            this.comboBox1.ValueMember = "Id";
+            this.comboBox1.DisplayMember = "Name";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             this.comboBox1.SelectedItem = 0;
 
@@ -64,8 +64,8 @@ namespace WindowsFormsApplication1
 
             if ((idTorneo > 0) && (idDisciplina > 0))
             {
-                LoadPartecipantFromTournament(idTorneo, idDisciplina);
-                LoadPartecipantOffTournament(idTorneo, idDisciplina);
+                LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
+                LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
             }
             else
             {
@@ -79,7 +79,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina)
+        private void LoadPartecipantFromTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
             List<AtletaEntity> atleti = SqlDal_Tournaments.GetAtletiIscrittiTorneoVsDisciplina(idTorneo, idDisciplina);
             
@@ -95,20 +95,20 @@ namespace WindowsFormsApplication1
 
                 lblCount.Text = atleti.Count.ToString();
 
-                btnAddAtleta.Enabled = true;
-                buttonPrintList.Enabled = true;
-
             }
             else
             {
                 dataGridView1.DataSource = null;
                 MessageBox.Show("Nessun Atelta trovato per il Torneo e la Disciplina Selezionati", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            btnAddAtleta.Enabled = true;
+            buttonPrintList.Enabled = true;
         }
 
-        private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina)
+        private void LoadPartecipantOffTournament(Int32 idTorneo, Int32 idDisciplina, string categoria)
         {
-            List<AtletaEntity> atletiOffTournament = SqlDal_Tournaments.GetAtletiOffTournament(idTorneo, idDisciplina);
+            List<AtletaEntity> atletiOffTournament = SqlDal_Tournaments.GetAtletiOffTournament(idTorneo, idDisciplina, categoria);
             comboBoxAtletaToAdd.DataSource = atletiOffTournament.OrderBy(x => x.Cognome).ToArray();
             this.comboBoxAtletaToAdd.ValueMember = "IdAtleta";
             this.comboBoxAtletaToAdd.DisplayMember = "FullName";// + " " + "Nome";
@@ -156,10 +156,10 @@ namespace WindowsFormsApplication1
                     Int32 idTorneo = (int)comboBox1.SelectedValue;
                     Int32 idDisciplina = (int)comboBox2.SelectedValue;
 
-                    if (Helper.EliminaPartecipanteDaTorneo(idTorneo, idDisciplina, (int)row.Cells["IdAtleta"].Value, Categoria))
+                    if (Helper.EliminaPartecipanteDaTorneo(idTorneo, idDisciplina, (int)row.Cells["IdAtleta"].Value))
                     {
-                        LoadPartecipantFromTournament(idTorneo, idDisciplina);
-                        LoadPartecipantOffTournament(idTorneo, idDisciplina);
+                        LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
+                        LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
                         MessageBox.Show("Atleta rimosso correttamente.", "Messaggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -183,10 +183,12 @@ namespace WindowsFormsApplication1
             Categoria = "F";
         }
 
-        private void radioButtonOpen_CheckedChanged(object sender, EventArgs e)
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             Categoria = "O";
         }
+
+
 
         private void btnAddAtleta_Click(object sender, EventArgs e)
         {
@@ -198,8 +200,8 @@ namespace WindowsFormsApplication1
             {
                 if(SqlDal_Tournaments.InsertAtletaOnTournament(idTorneo, idDisciplina, idAtleta))
                 {
-                    LoadPartecipantFromTournament(idTorneo, idDisciplina);
-                    LoadPartecipantOffTournament(idTorneo, idDisciplina);
+                    LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
+                    LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);
                     MessageBox.Show("Atleta inserito correttamente.", "Messaggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -223,5 +225,7 @@ namespace WindowsFormsApplication1
 
             pdf.StampaAtletiTorneo(SqlDal_Tournaments.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina), comboBox1.Text, comboBox2.Text);
         }
+
+        
     }
 }

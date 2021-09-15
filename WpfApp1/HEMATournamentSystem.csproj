@@ -196,7 +196,7 @@
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
     <Compile Include="Resources\Helper\HemaRatingsHelper.cs" />
-    <Compile Include="Resources\Helper\PhasesManager.cs" />
+    <Compile Include="Resources\Manager\PhasesManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_FighterStatistics.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Associations.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />
@@ -575,6 +575,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
+    <Content Include="DB\TorneiTest.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\TorneiTest_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>TorneiTest.mdf</DependentUpon>
+    </Content>
     <Content Include="DB\Tornei.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -584,13 +591,6 @@
     <Content Include="DB\TorneiFemminile_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>TorneiFemminile.mdf</DependentUpon>
-    </Content>
-    <Content Include="DB\TorneiTest.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DB\TorneiTest_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>TorneiTest.mdf</DependentUpon>
     </Content>
     <Content Include="DB\Tornei_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

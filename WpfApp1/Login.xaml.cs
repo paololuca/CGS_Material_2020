@@ -22,11 +22,10 @@ namespace HEMATournamentSystem
             //TODOPL da spostare f.Show();
 
             #region to delete
-            var currentUser = SqlDal_MasterDB.CheckLogin("admin");
-            var main = new MainWindow(currentUser);
-            main.Show();
-            this.Close();
-
+            //var currentUser = SqlDal_MasterDB.CheckLogin("admin");
+            //var main = new MainWindow(currentUser);
+            //main.Show();
+            //this.Close();
             #endregion
         }
 

@@ -59,5 +59,33 @@ namespace Resources
                     return PhasesType.None;
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="atletiAmmessiEliminatorie"></param> 
+        ///  0 = 1/16
+        ///  1 = 1/8
+        ///  2 = 1/4
+        ///  3 = semifinals
+        ///  4 = finals
+        /// <returns></returns>
+        public static int GetStartingPhase(int atletiAmmessiEliminatorie)
+        {
+            switch (atletiAmmessiEliminatorie)
+            {
+                case 32:
+                    return (int)PhasesType.Finals_16;
+                case 16:
+                    return (int)PhasesType.Finals_8;
+                case 8:
+                    return (int)PhasesType.Finals_4;
+                case 4:
+                    return (int)PhasesType.SemiFinals;
+                default: 
+                    return (int)PhasesType.Finals;
+            }
+        }
     }
 }

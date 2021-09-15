@@ -28,8 +28,8 @@ namespace UserControls.Phases
         private bool _loaded = false;
         PdfManager pdf;
 
-        private List<AtletaEliminatorie> poolOne;
-        private List<AtletaEliminatorie> poolTwo;
+        private List<AtletaEliminatorie> poolOne = new List<AtletaEliminatorie>();
+        private List<AtletaEliminatorie> poolTwo = new List<AtletaEliminatorie>();
 
 
         public SemiFinals()
@@ -41,12 +41,20 @@ namespace UserControls.Phases
 
         public void LoadFields(int idTorneo, int idDisciplina)
         {
-            poolOne = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 1);
-            poolTwo = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 2);
+            var allAtleti = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina);
 
-            LoadPool(poolOne, dataGridPoolOne);
-            LoadPool(poolTwo, dataGridPoolTwo);
+            if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
+            {
+                LoadAsFirstValidPhase(allAtleti);
+            }
+            else
+            {
+                poolOne = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 1);
+                poolTwo = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina, 2);
 
+                LoadPool(poolOne, dataGridPoolOne);
+                LoadPool(poolTwo, dataGridPoolTwo);
+            }
             _loaded = true;
         }
 
@@ -66,6 +74,34 @@ namespace UserControls.Phases
             if(_loaded)
                 pdf.StampaSemifinali(poolOne, poolTwo);
         }
+
+        private void LoadAsFirstValidPhase(List<AtletaEliminatorie> allAtleti)
+        {
+            #region campo1
+            LoadFirstPool(allAtleti);
+            #endregion
+
+            #region campo2
+            LoadSecondPool(allAtleti);
+            #endregion
+        }
+
+        private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolOne.Add(allAtleti.ElementAt(0));
+            poolOne.Add(allAtleti.ElementAt(3));
+
+            LoadPool(poolOne, dataGridPoolOne);
+        }
+
+        private void LoadSecondPool(List<AtletaEliminatorie> allAtleti)
+        {
+            poolTwo.Add(allAtleti.ElementAt(1));
+            poolTwo.Add(allAtleti.ElementAt(2));
+
+            LoadPool(poolTwo, dataGridPoolTwo);
+        }
+
 
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
         {
@@ -90,9 +126,6 @@ namespace UserControls.Phases
             dataGridPool.ItemsSource = list;
 
         }
-
-        
-        
 
         private void dataGridPool_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

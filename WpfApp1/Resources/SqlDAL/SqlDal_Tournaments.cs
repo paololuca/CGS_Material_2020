@@ -476,7 +476,7 @@ namespace Resources
             }
         }
         
-        public static List<AtletaEntity> GetAtletiOffTournament(int idTorneo, int idDisciplina)
+        public static List<AtletaEntity> GetAtletiOffTournament(int idTorneo, int idDisciplina, string categoria)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
 
@@ -484,6 +484,9 @@ namespace Resources
                     " ON atd.IdTorneoVsDiscipline = td.Id " +
                     " WHERE td.IdTorneo = " + idTorneo + " AND td.IdDisciplina = " + idDisciplina + ") ";
 
+
+            if (categoria != "O")
+                sqlText += "And Sesso = '" + categoria + "'";
 
             SqlConnection c = null;
 

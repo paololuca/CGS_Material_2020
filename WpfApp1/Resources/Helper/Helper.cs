@@ -438,11 +438,6 @@ namespace Resources
             }
         }
         
-       
-        
-        
-
-        
         
         
 
@@ -452,7 +447,7 @@ namespace Resources
 
         
 
-        public static bool EliminaPartecipanteDaTorneo(int idTorneo, int idDisciplina, int idAtleta, string categoria)
+        public static bool EliminaPartecipanteDaTorneo(int idTorneo, int idDisciplina, int idAtleta)
         {
             String sqlText = "delete AtletiVsTorneoVsDiscipline where IdAtleta = " + idAtleta +
                                 "and IdTorneoVsDiscipline in (select Id from TorneoVsDiscipline where " +
@@ -485,9 +480,6 @@ namespace Resources
             }
         }
         
-
-        
-
         public static bool EliminaAtletiVsTorneoVsDiscipline(Int32 idTorneo)
         {
             String commandText = "DELETE AtletiVsTorneoVsDiscipline WHERE IdTorneoVsDiscipline in " +

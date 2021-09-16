@@ -277,5 +277,45 @@ namespace Resources
             }
         }
         #endregion
+
+        #region QualificationCap
+
+        internal static int GetQualificationCap(int numberToQuelify)
+        {
+            String commandText = "SELECT * FROM QualificationCap WHERE NumberOfQuelified = '" + numberToQuelify + "'";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(GetMasterConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                Int32 minCap = 0;
+
+                while (reader.Read())
+                    minCap = Convert.ToInt32(reader["NumberOfPartecipants"]);
+
+                if (minCap > 0)
+                    return minCap;
+                else
+                    return -1;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+
+        #endregion
     }
 }

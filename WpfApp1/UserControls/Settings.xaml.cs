@@ -76,6 +76,15 @@ namespace HEMATournamentSystem
         {
             cmbAccountType.ItemsSource = Enum.GetValues(typeof(ProfileType)).Cast<ProfileType>();
             cmbAccountType.SelectedValue = ProfileType.None;
+
+            sldMinFor16.Value = QualificationManager.GetMinFightersFor16th();
+            txtBoxFor16th.Text = sldMinFor16.Value.ToString();
+
+            sldMinFor8.Value = QualificationManager.GetMinFightersFor8th();
+            txtBoxFor8th.Text = sldMinFor8.Value.ToString();
+
+            sldMinFor4.Value = QualificationManager.GetMinFightersFor4th();
+            txtBoxFor4th.Text = sldMinFor4.Value.ToString();
         }
 
 

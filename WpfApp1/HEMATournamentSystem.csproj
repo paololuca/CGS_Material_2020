@@ -197,6 +197,7 @@
     <Compile Include="Resources\DataBaseType.cs" />
     <Compile Include="Resources\Helper\HemaRatingsHelper.cs" />
     <Compile Include="Resources\Manager\PhasesManager.cs" />
+    <Compile Include="Resources\Manager\QualificationManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_FighterStatistics.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Associations.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_Fighters.cs" />

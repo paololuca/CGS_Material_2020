@@ -65,16 +65,20 @@ namespace Resources
         /// 
         /// </summary>
         /// <param name="atletiAmmessiEliminatorie"></param> 
-        ///  0 = 1/16
-        ///  1 = 1/8
-        ///  2 = 1/4
-        ///  3 = semifinals
-        ///  4 = finals
+        ///  E' l'indice della fase nel transitioner
+        ///  0 = 1/32
+        ///  1 = 1/16
+        ///  2 = 1/8
+        ///  3 = 1/4
+        ///  4 = semifinals
+        ///  5 = finals
         /// <returns></returns>
         public static int GetStartingPhase(int atletiAmmessiEliminatorie)
         {
             switch (atletiAmmessiEliminatorie)
             {
+                case 64:
+                    return (int)PhasesType.Finals_32;
                 case 32:
                     return (int)PhasesType.Finals_16;
                 case 16:
@@ -85,6 +89,25 @@ namespace Resources
                     return (int)PhasesType.SemiFinals;
                 default: 
                     return (int)PhasesType.Finals;
+            }
+        }
+
+        public static int GetQualificationCapFromPhase(PhasesType phase)
+        {
+            switch (phase)
+            {
+                case PhasesType.Finals_32:
+                    return 64;
+                case PhasesType.Finals_16:
+                    return 32;
+                case PhasesType.Finals_8:
+                    return 16;
+                case PhasesType.Finals_4:
+                    return 8;
+                case PhasesType.SemiFinals:
+                    return 4;
+                default:
+                    return 4;
             }
         }
     }

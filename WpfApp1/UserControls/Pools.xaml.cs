@@ -79,6 +79,7 @@ namespace HEMATournamentSystem
                         _disciplineName = creaGironi.NomeDisciplina;
 
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
+                        lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
                     }
                 }
             }
@@ -289,7 +290,8 @@ namespace HEMATournamentSystem
                         _disciplineId = caricaGironi.IdDisciplina;
                         _disciplineName = caricaGironi.NomeDisciplina;
 
-                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);                        
+                        CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);
+                        lblTitle.Text = caricaGironi.NomeTorneo + " - " + caricaGironi.NomeDisciplina;
                     }
                 }
             }

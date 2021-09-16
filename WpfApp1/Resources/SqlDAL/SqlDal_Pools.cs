@@ -118,6 +118,8 @@ namespace Resources
             }
         }
 
+        
+
         public static void CaricaPunteggiEsistentiGironiIncontri(int idTorneo, int idDisciplina, MatchEntity i, int idGirone)
         {
             String commandText = "SELECT * FROM GironiIncontri WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and NumeroGirone = " + idGirone + " " +
@@ -607,6 +609,71 @@ namespace Resources
             return gironiConclusi;
 
         }
+
+        internal static void DeletePoolsAndMatches(int idTorneo, int idDisciplina)
+        {
+            DeleteGironiIncontri(idTorneo, idDisciplina);
+            DeleteGironi(idTorneo, idDisciplina);
+        }
+
+        private static void DeleteGironiIncontri(int idTorneo, int idDisciplina)
+        {
+            String commandText = "";
+
+
+            commandText += "DELETE FROM  GironiIncontri " +
+                            "WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + "";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        private static void DeleteGironi(int idTorneo, int idDisciplina)
+        {
+            String commandText = "";
+
+
+            commandText += "DELETE FROM  Gironi " +
+                            "WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + "";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
         internal static void InserisciGironiIncontri(int idTorneo, int idDisciplina, List<MatchEntity> incontri, int idgirone)
         {
             String commandText = "";

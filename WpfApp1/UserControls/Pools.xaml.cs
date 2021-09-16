@@ -73,11 +73,13 @@ namespace HEMATournamentSystem
                 if (creaGironi != null)
                 {
                     if ((creaGironi.IdDisciplina > 0) && (creaGironi.IdTorneo > 0))
-                    { 
+                    {
+                        _tournamentName = caricaGironi.NomeTorneo;
+                        _disciplineName = caricaGironi.NomeDisciplina;
+
                         _tournamentId = creaGironi.IdTorneo;
                         _disciplineId = creaGironi.IdDisciplina;
-                        _disciplineName = creaGironi.NomeDisciplina;
-
+                                                
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
                         lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
                     }
@@ -102,6 +104,8 @@ namespace HEMATournamentSystem
             //partecipantiTorneo = assoluti == false ?
             //                                    Helper.GetAtletiTorneoVsDisciplina(idTorneo, idDisciplina, categoria) :
             //                                    Helper.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
+
+            SqlDal_Pools.DeletePoolsAndMatches(idTorneo, idDisciplina);
 
             var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina);
 
@@ -286,9 +290,11 @@ namespace HEMATournamentSystem
                     if ((caricaGironi.IdDisciplina > 0) && (caricaGironi.IdTorneo > 0))
                     {
                         _tournamentName = caricaGironi.NomeTorneo;
+                        _disciplineName = caricaGironi.NomeDisciplina;
+                        
                         _tournamentId = caricaGironi.IdTorneo;
                         _disciplineId = caricaGironi.IdDisciplina;
-                        _disciplineName = caricaGironi.NomeDisciplina;
+                        
 
                         CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);
                         lblTitle.Text = caricaGironi.NomeTorneo + " - " + caricaGironi.NomeDisciplina;

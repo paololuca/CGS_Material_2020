@@ -74,8 +74,8 @@ namespace HEMATournamentSystem
                 {
                     if ((creaGironi.IdDisciplina > 0) && (creaGironi.IdTorneo > 0))
                     {
-                        _tournamentName = caricaGironi.NomeTorneo;
-                        _disciplineName = caricaGironi.NomeDisciplina;
+                        _tournamentName = creaGironi.NomeTorneo;
+                        _disciplineName = creaGironi.NomeDisciplina;
 
                         _tournamentId = creaGironi.IdTorneo;
                         _disciplineId = creaGironi.IdDisciplina;

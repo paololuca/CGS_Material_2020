@@ -55,6 +55,11 @@ namespace UserControls.Phases
             LoadPool(poolOne, dataGridPoolOne);
             LoadPool(poolTwo, dataGridPoolTwo);
 
+            btnPrintResult.IsEnabled = poolOne.Select(x => x.PuntiFatti > 0).ToList().Count > 0 ||
+                                        poolTwo.Select(x => x.PuntiFatti > 0).ToList().Count > 0; 
+
+
+
             _loaded = true;
         }
 

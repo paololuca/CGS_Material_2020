@@ -39,6 +39,9 @@ namespace UserControls.Phases
 
             if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
             {
+                if (allAtleti.Count == 0)
+                    return;
+
                 LoadAsFirstValidPhase(allAtleti);
             }
             else

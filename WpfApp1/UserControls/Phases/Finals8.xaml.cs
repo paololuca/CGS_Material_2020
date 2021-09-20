@@ -90,6 +90,9 @@ namespace UserControls.Phases
 
         private void LoadAsFirstValidPhase(List<AtletaEliminatorie> allAtleti)
         {
+            if (allAtleti.Count == 0)
+                return;
+
             #region campo1
             LoadFirstPool(allAtleti);
             #endregion
@@ -109,6 +112,8 @@ namespace UserControls.Phases
 
         private void LoadFirstPool(List<AtletaEliminatorie> allAtleti)
         {
+            
+
             poolOne.Add(allAtleti.ElementAt(0));
             poolOne.Add(allAtleti.ElementAt(15));
 

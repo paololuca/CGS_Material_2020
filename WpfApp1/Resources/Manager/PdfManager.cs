@@ -872,15 +872,15 @@ namespace Resources
 
             temp = "<A NAME=\"table1\"><H1>Campo 1</H1></A>";
             temp += FormattedString.match.Replace("##a##", campo1[0].Cognome + " " + campo1[0].Nome);
-            temp = temp.Replace("##b##", campo1[1].Cognome + " " + campo1[1].Nome);
+            temp = temp.Replace("##b##", campo1[3].Cognome + " " + campo1[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Primo e Secondo Posto");
             temp += "<BR>";
             temp += FormattedString.match.Replace("##a##", campo1[0].Cognome + " " + campo1[0].Nome);
-            temp = temp.Replace("##b##", campo1[1].Cognome + " " + campo1[1].Nome);
+            temp = temp.Replace("##b##", campo1[3].Cognome + " " + campo1[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Primo e Secondo Posto");
             temp += "<BR>";
             temp += FormattedString.match.Replace("##a##", campo1[0].Cognome + " " + campo1[0].Nome);
-            temp = temp.Replace("##b##", campo1[1].Cognome + " " + campo1[1].Nome);
+            temp = temp.Replace("##b##", campo1[3].Cognome + " " + campo1[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Primo e Secondo Posto");
             p.IncrementProgressBar(i++);
 
@@ -895,15 +895,15 @@ namespace Resources
             #region campo2
             temp = "<A NAME=\"table1\"><H1>Campo 2</H1></A>";
             temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[1].Cognome + " " + campo2[1].Nome);
+            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
             temp += "<BR>";
             temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[1].Cognome + " " + campo2[1].Nome);
+            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
             temp += "<BR>";
             temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[1].Cognome + " " + campo2[1].Nome);
+            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
             p.IncrementProgressBar(i++);
 

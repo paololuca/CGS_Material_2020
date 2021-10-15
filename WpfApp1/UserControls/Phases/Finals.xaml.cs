@@ -55,8 +55,11 @@ namespace UserControls.Phases
             LoadPool(poolOne, dataGridPoolOne);
             LoadPool(poolTwo, dataGridPoolTwo);
 
-            btnPrintResult.IsEnabled = poolOne.Select(x => x.PuntiFatti > 0).ToList().Count > 0 ||
-                                        poolTwo.Select(x => x.PuntiFatti > 0).ToList().Count > 0; 
+            if(poolOne.Select(x => x.PuntiFatti > 0).ToList().Count > 0 || poolTwo.Select(x => x.PuntiFatti > 0).ToList().Count > 0)
+            { 
+                btnPrintResult.IsEnabled = true;
+                SaveFields(idTorneo, idDisciplina);
+            }
 
 
 

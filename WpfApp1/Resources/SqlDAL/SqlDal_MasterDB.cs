@@ -280,9 +280,9 @@ namespace Resources
 
         #region QualificationCap
 
-        internal static int GetQualificationCap(int numberToQuelify)
+        internal static int GetQualificationCap(int numberToQualify)
         {
-            String commandText = "SELECT * FROM QualificationCap WHERE NumberOfQuelified = '" + numberToQuelify + "'";
+            String commandText = "SELECT * FROM QualificationCap WHERE NumberOfQuelified = '" + numberToQualify + "'";
 
             SqlConnection c = null;
             try

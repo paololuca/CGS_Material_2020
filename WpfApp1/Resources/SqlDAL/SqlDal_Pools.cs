@@ -330,7 +330,7 @@ namespace Resources
         public static List<AtletaEliminatorie> GetQuarti(int idTorneo, int idDisciplina, int campo)
         {
             String commandText = "SELECT a.Nome, a.Cognome, q.* from Atleti a join Qualificati8 q on a.Id = q.IdAtleta  WHERE IdTorneo = "
-                + idTorneo + " and IdDisciplina = " + idDisciplina + "and Campo = " + campo + " ORDER BY Posizione ASC";
+                + idTorneo + " and IdDisciplina = " + idDisciplina + " and Campo = " + campo + " ORDER BY Posizione ASC";
 
             SqlConnection c = null;
             List<AtletaEliminatorie> list = new List<AtletaEliminatorie>();

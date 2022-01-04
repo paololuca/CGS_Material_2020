@@ -41,6 +41,12 @@
                 <TextBlock Text="  Add Fighter"/>
             </StackPanel>
         </Button>
+        <Button x:Name="btnExportFighters" Height="Auto"  Click="btnExportFighters_Click" Background="#FF673AB7" Margin="972,65,10,473" RenderTransformOrigin="0.5,0.5" ToolTip="Export List" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="MicrosoftExcel"/>
+                <TextBlock Text=" "/>
+            </StackPanel>
+        </Button>
         <DataGrid x:Name="dataGridAthletes" HorizontalAlignment="Left" Height="394" 
                   Margin="10,176,0,0" VerticalAlignment="Top" Width="1010" AutoGeneratingColumn="DataGridAthletes_AutoGeneratingColumn"
                   CanUserSortColumns="True"  CanUserAddRows="False" CanUserDeleteRows="False"

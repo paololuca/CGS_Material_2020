@@ -562,6 +562,41 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DB\bck\HemaRatings.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\HemaRatings_log.ldf">
+      <DependentUpon>HemaRatings.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\Master.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\Master_log.ldf">
+      <DependentUpon>Master.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\Tornei.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\TorneiFemminile.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\TorneiFemminile_log.ldf">
+      <DependentUpon>TorneiFemminile.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\TorneiTest.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\TorneiTest_log.ldf">
+      <DependentUpon>TorneiTest.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\bck\Tornei_log.ldf">
+      <DependentUpon>Tornei.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DB\HemaRatings.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -576,6 +611,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
+    <Resource Include="DB\Scripts\Controllo iscritti.txt" />
     <Content Include="DB\TorneiTest.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

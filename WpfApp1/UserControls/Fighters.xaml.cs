@@ -1,5 +1,6 @@
 ﻿using BusinessEntity.Entity;
 using Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -139,6 +140,12 @@ namespace HEMATournamentSystem
             }
 
             return true;
+        }
+
+        private void btnExportFighters_Click(object sender, RoutedEventArgs e)
+        {
+            // Not developed yet.
+            throw new NotImplementedException();
         }
     }
 }

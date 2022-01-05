@@ -7,6 +7,9 @@ using System.Windows.Input;
 using BusinessEntity.Entity;
 using System;
 using WindowsFormsApplication1;
+using HEMATournamentSystem.Report;
+using FormsManagement.Menu;
+using Report;
 
 namespace HEMATournamentSystem
 {
@@ -18,6 +21,7 @@ namespace HEMATournamentSystem
         private List<TorneoEntity> newTournamentList;
         private List<TorneoEntity> activeTournamentList;
         private List<TorneoEntity> closedTournamentList;
+        private CaricaGironiDaDisciplina risultatiTorneo;
         private readonly LoginUser user;
 
         public Tournaments(LoginUser user)
@@ -136,5 +140,48 @@ namespace HEMATournamentSystem
 
             tournament.TopMost = false;
         }
+
+        private void btnReportActiveTournament_Click(object sender, RoutedEventArgs e)
+        {
+            ShowReport(sender);
+        }
+
+        private void btnReportNoActiveTournament_Click(object sender, RoutedEventArgs e)
+        {
+            ShowReport(sender);
+        }
+
+        private static void ShowReport(object sender)
+        {
+            TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
+
+            TournamentResultReport report = new TournamentResultReport(torunament.Id, torunament.Name);
+
+            report.Show();
+        }
+
+        //private void VisualizzaReport_FormClosed(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        //{
+        //    if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.None)
+        //    {
+        //        // Then assume that X has been clicked and act accordingly.
+        //    }
+        //    else if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        if (risultatiTorneo != null)
+        //        {
+        //            if ((risultatiTorneo.IdDisciplina > 0) && (risultatiTorneo.IdTorneo > 0))
+        //            {
+        //                ReportRisultatiTorneo report = new ReportRisultatiTorneo(risultatiTorneo.IdTorneo, risultatiTorneo.IdDisciplina);
+        //                report.Show();
+        //                report.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        //            }
+        //        }
+        //    }
+        //    else if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.Abort)
+        //    {
+        //        // Then assume that Cancel Button has been clicked and act accordingly.)
+        //    }
+        //}
     }
 }

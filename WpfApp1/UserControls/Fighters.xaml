@@ -68,7 +68,7 @@
                         <DataTemplate>
                             <Button x:Name="btnDeleteAccount" Height="32"  Click="BtnDeleteAccount_Click" Background="Red" Width="Auto" ToolTip="Delete Fighter">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="WrapDisabled"/>
+                                    <materialDesign:PackIcon Kind="DeleteForever"/>
                                 </StackPanel>
                             </Button>
                         </DataTemplate>

@@ -146,8 +146,8 @@ namespace UserControls.Phases
 
         private void BtnPrintResult_Click(object sender, RoutedEventArgs e)
         {
-            TorneoEntity tournament = Helper.GetTorneoById(_idTorneo);
-            String nomeDisciplina = Helper.GetDisciplinaById(_idDisciplina);
+            TorneoEntity tournament = SqlDal_Tournaments.GetTorneoById(_idTorneo);
+            String nomeDisciplina = SqlDal_Tournaments.GetDisciplinaById(_idDisciplina);
 
             pdf.FineTorneo(goldMedal, silverMedal, bronzeMedal, woodMedal, tournament.Name, nomeDisciplina);
         }

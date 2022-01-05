@@ -87,8 +87,22 @@
                             </Button>
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
                                     Margin="24,102,10,10">
-                                <DataGrid Name="dataGridActiveTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
+                                <DataGrid Name="dataGridActiveTournament" CanUserSortColumns="True" Height="314" 
+                                          AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnActiveTournamentReport" Height="32"  Click="btnReportActiveTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Report">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="FileReport"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                         </Grid>
@@ -101,7 +115,7 @@
                                 <TextBlock Opacity=".68"
                                    Text="Lista dei tornei conclusi all'interno del sistema dai quali si possono estrapolare vari report" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBox Name="txtSearchClosedTournament" DockPanel.Dock="Top" Margin="24,46,788.8,499.6" BorderThickness="0"
+                            <TextBox Name="txtSearchClosedTournament" DockPanel.Dock="Top" Margin="24,46,789,533" BorderThickness="0"
                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchClosedTournament_KeyUp" />
@@ -109,8 +123,22 @@
                                     Margin="24,102,10,10">
                                 <DataGrid Name="dataGridClosedTournament" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="dataGridTournament_AutoGeneratingColumn" VerticalAlignment="Center"
                                    CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnClosedTournamentReport" Height="32"  Click="btnReportNoActiveTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Report">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="FileReport"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
+                            
                         </Grid>
                     </Expander>
                 </StackPanel>

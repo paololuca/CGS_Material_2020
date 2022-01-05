@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HEMATournamentSystem.Report {
+namespace Report {
     using System;
     
     

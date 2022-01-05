@@ -167,8 +167,8 @@ namespace FormsManagement
             PdfManager pdf = new PdfManager();
             pdf.StampaRisultatiGironi(
                 dataGridView1, 
-                Helper.GetTorneoById(this.idTorneo).Name,
-                Helper.GetDisciplinaById(this.idDisciplina));
+                SqlDal_Tournaments.GetTorneoById(this.idTorneo).Name,
+                SqlDal_Tournaments.GetDisciplinaById(this.idDisciplina));
         }
     }
 }

@@ -212,9 +212,6 @@ namespace Resources
         }
 
 
-        ///TODO implementare i metodi che restituiscono liste di incontri
-        ///
-
 
         #region READ
         public static bool TestConnectionString()
@@ -323,120 +320,6 @@ namespace Resources
         }
 
 
-        public static String GetDisciplinaById(int idDisciplina)
-        {
-            String commandText = "select Nome FROM Discipline WHERE Id = " + idDisciplina;
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                string nomeDisciplina = "";
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    nomeDisciplina = (String)reader["nome"];
-                }
-
-                return nomeDisciplina;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-        public static TorneoEntity GetTorneoById(int idTorneo)
-        {
-            SqlConnection c = null;
-
-            try
-            {
-                String sqlText = "SELECT * FROM TORNEO WHERE Id = " + idTorneo;
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-                TorneoEntity torneo = new TorneoEntity();
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    torneo = new TorneoEntity()
-                    {
-                        Name = reader["NomeTorneo"].ToString(),
-                        Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString())
-                    };
-                }
-
-                return torneo;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-        
-        public static List<DisciplinaEntity> GetDisciplineByIdTorneo(int idTorneo)
-        {
-            SqlConnection c = null;
-
-            try
-            {
-                //TODO 
-                String sqlText = "select * from TorneoVsDiscipline td, Discipline d " +
-                                    "where td.IdDisciplina = d.Id " +
-                                    "and td.IdTorneo = " + idTorneo;
-
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-                List<DisciplinaEntity> discipline = new List<DisciplinaEntity>();
-                discipline.Add(new DisciplinaEntity() { IdDisciplina = 0 });
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    discipline.Add(new DisciplinaEntity()
-                    {
-                        IdDisciplina = Convert.ToInt32(reader["IdDisciplina"])
-                        ,
-                        Nome = Convert.ToString(reader["Nome"]),
-                        Descrizione = Convert.ToString(reader["Descrizione"])
-                    });
-                }
-
-
-                return discipline;
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
         
         
         
@@ -545,16 +428,5 @@ namespace Resources
 
         #endregion
 
-
-        #region UPDATE
-
-        
-
-        #endregion
-
-        #region REPORT
-
-        
-        #endregion
     }
 }

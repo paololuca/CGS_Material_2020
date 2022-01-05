@@ -1,0 +1,39 @@
+﻿<Window x:Class="HEMATournamentSystem.TournamentResultReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:UserControls.Phases"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing"
+        Closed="Window_Closed"
+        ResizeMode="CanMinimize" Height="858" Width="1350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="658" />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnCloseReport" Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="Close report" 
+                RenderTransformOrigin="3.198,0.5" Margin="1281,0,10,0" Width="Auto" Height="Auto" Click="btnCloseReport_Click">
+            <materialDesign:PackIcon Kind="Shutdown" Height="42" Width="42" />
+        </Button>
+        <TextBlock x:Name="txtBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+        <TabControl x:Name="tabControlResults" Margin="10,10,10,-62" Grid.Row="1"/>
+        <Button x:Name="btnExportResults" Height="Auto" Margin="1185,726,10,-95" IsEnabled="true" Click="btnExportResults_Click"
+                Background="#FF03A803" 
+                 ToolTip="Export All Result in multiple xls files" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF03A803" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FileExcelBoxOutline" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="18" Height="19">
+                </materialDesign:PackIcon>
+                <TextBlock Text=" Export" Background="#FF03A803" Foreground="#DDFFFFFF" Height="19" RenderTransformOrigin="0.5,0.5" Width="58" >
+                </TextBlock>
+
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</Window>

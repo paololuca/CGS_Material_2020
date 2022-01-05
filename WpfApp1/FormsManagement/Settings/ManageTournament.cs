@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
             this.comboBox1.SelectedItem = 0;
 
             //La inizializzo a 0
-            List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo(0);
+            List<DisciplinaEntity> discipline = SqlDal_Tournaments.GetDisciplineByIdTorneo(0);
             this.comboBox2.DataSource = discipline.ToArray();
             this.comboBox2.ValueMember = "IdDisciplina";
             this.comboBox2.DisplayMember = "Nome";
@@ -48,7 +48,7 @@ namespace WindowsFormsApplication1
             {
                 ComboBox comboBox = (ComboBox)sender;
 
-                List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
+                List<DisciplinaEntity> discipline = SqlDal_Tournaments.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
 
                 this.comboBox2.DataSource = discipline.ToArray();
                 this.comboBox2.ValueMember = "IdDisciplina";

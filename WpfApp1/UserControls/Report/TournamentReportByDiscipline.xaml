@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="HEMATournamentSystem.TournamentReportByDiscipline"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HEMATournamentSystem"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="650" Width="1200">
+    <Grid Background="White">
+        <TabControl x:Name="tabControlPool" Height="603" Margin="18,37,10,0"
+                    VerticalAlignment="Top" >
+            <TabItem x:Name="tabPools" Header="Pools">
+                <DataGrid x:Name="dataGridViewGironi" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false" CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tabPoolsResult" Header="Pools Result">
+                <DataGrid x:Name="dataGridViewPostGironi" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridViewPostGironi_AutoGeneratingColumn"/>
+            </TabItem>
+            <TabItem x:Name="tab16Finals" Header="16th Finals">
+                <DataGrid x:Name="dataGridViewSedicesimi" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tab8Finals" Header="8 Finals">
+                <DataGrid x:Name="dataGridViewOttavi" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tab4Finals" Header="4 Finals">
+                <DataGrid x:Name="dataGridViewQuarti" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tabSemiFinals" Header="Semifinals">
+                <DataGrid x:Name="dataGridViewSemifinali" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tabFinals" Header="Finals">
+                <DataGrid x:Name="dataGridViewFinali" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

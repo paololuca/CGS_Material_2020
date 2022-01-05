@@ -125,8 +125,8 @@ namespace FormsManagement
             PdfManager pdf = new PdfManager();
             pdf.StampaRisultatiGironi(
                 dataGridResult,
-                Helper.GetTorneoById(this.idTorneo).Name,
-                Helper.GetDisciplinaById(this.idDisciplina));
+                SqlDal_Tournaments.GetTorneoById(this.idTorneo).Name,
+                SqlDal_Tournaments.GetDisciplinaById(this.idDisciplina));
         }
 
         private void dataGridResult_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)

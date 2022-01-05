@@ -26,7 +26,7 @@ namespace FormsManagement.Menu
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.Tornei_SelectedIndexChanged);
 
             //La inizializzo a 0
-            List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo(0);
+            List<DisciplinaEntity> discipline = SqlDal_Tournaments.GetDisciplineByIdTorneo(0);
             this.comboBox2.DataSource = discipline.ToArray();
             this.comboBox2.ValueMember = "IdDisciplina";
             this.comboBox2.DisplayMember = "Nome";
@@ -43,7 +43,7 @@ namespace FormsManagement.Menu
                 ComboBox comboBox = (ComboBox)sender;
 
                 //TODO estrarre solo le discipline di cui non esistono i gironi
-                List<DisciplinaEntity> discipline = Helper.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
+                List<DisciplinaEntity> discipline = SqlDal_Tournaments.GetDisciplineByIdTorneo((int)comboBox1.SelectedValue);
 
                 this.comboBox2.DataSource = discipline.ToArray();
                 this.comboBox2.ValueMember = "IdDisciplina";

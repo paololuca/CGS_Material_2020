@@ -23,7 +23,9 @@
         </Button>
         <TextBlock x:Name="txtBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
         <TabControl x:Name="tabControlResults" Margin="10,10,10,-62" Grid.Row="1"/>
-        <Button x:Name="btnExportResults" Height="Auto" Margin="1185,726,10,-95" IsEnabled="true" Click="btnExportResults_Click"
+        <ProgressBar x:Name="progressBarExpot" Value="0" 
+  Height="Auto" Margin="10,735,178,-104" Grid.Row="1" />
+        <Button x:Name="btnExportResults" Height="Auto" Margin="1185,735,10,-104" IsEnabled="true" Click="btnExportResults_Click"
                 Background="#FF03A803" 
                  ToolTip="Export All Result in multiple xls files" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF03A803" Grid.Row="1">
             <StackPanel Orientation="Horizontal">

@@ -28,9 +28,7 @@ namespace HEMATournamentSystem
             LoadListAtleti();
             LoadAssociation();
         }
-
         
-
         private void LoadListAtleti()
         {
             atletiPresenti = SqlDal_Fighters.GetAllAnagraficaAtletiWithRanking();

@@ -3,8 +3,11 @@ using Report;
 using Resources;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace HEMATournamentSystem
 {
@@ -26,6 +30,8 @@ namespace HEMATournamentSystem
         private string _nomeTorneo;
         private int _idDisciplina;
 
+        BackgroundWorker bgWorkerExport;
+
         public TournamentResultReport(int idTorneo, string nomeTorneo)
         {
             _idTorneo = idTorneo;
@@ -36,6 +42,7 @@ namespace HEMATournamentSystem
             LoadAllResults();
 
             txtBlockTitle.Text = nomeTorneo;
+
         }
 
         private void LoadAllResults()
@@ -81,12 +88,55 @@ namespace HEMATournamentSystem
         
         private void btnExportResults_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < tabControlResults.Items.Count; i++)
+            btnExportResults.IsEnabled = false;
+            tabControlResults.IsEnabled = false;
+
+            LoadingCustom loading = new LoadingCustom();
+
+            loading.Owner = this;
+            loading.Show();
+
+
+            string exportMessage = "";
+
+            using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
             {
-                tabControlResults.SelectedIndex = i;
-                TournamentReportByDiscipline p = (TournamentReportByDiscipline)tabControlResults.SelectedContent;
-                p.GenerateExcel(_nomeTorneo);
+                System.Windows.Forms.DialogResult result = fbd.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    var tabsNumber = tabControlResults.Items.Count;
+                    var addingValue = 100 / tabsNumber;
+
+                    try
+                    {                            
+                        for (int i = 0; i < tabsNumber; i++)
+                        {
+                            tabControlResults.SelectedIndex = i;
+                            TournamentReportByDiscipline p = (TournamentReportByDiscipline)tabControlResults.SelectedContent;
+
+                            p.GenerateExcel(_nomeTorneo, p.nomeDisciplina, fbd.SelectedPath);
+
+                            loading.IncrementProgressBar(100 / tabsNumber);
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exportMessage = ex.Message;
+
+                    }
+                }
             }
+            if(exportMessage == "")
+                new MessageBoxCustom("Export completato con successo", MessageType.Success, MessageButtons.Ok);
+            else
+                new MessageBoxCustom(exportMessage, MessageType.Error, MessageButtons.Ok);
+
+            btnExportResults.IsEnabled = true;
+            tabControlResults.IsEnabled = true;
+
+            loading.Close();
         }
     }
 }

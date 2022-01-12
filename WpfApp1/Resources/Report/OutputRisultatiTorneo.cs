@@ -12,7 +12,7 @@ namespace Report
         public string CognomeRosso { get; set; }
         public string NomeRosso { get; set; }
         public int PuntiRosso { get; set; }
-        public int Idblu { get; set; }
+        public int IdBlu { get; set; }
         public string CognomeBlu { get; set; }
         public string NomeBlu { get; set; }
         public int PuntiBlu { get; set; }

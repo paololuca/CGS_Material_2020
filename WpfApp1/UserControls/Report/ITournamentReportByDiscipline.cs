@@ -2,6 +2,6 @@
 {
     public interface ITournamentReportByDiscipline
     {
-        int GenerateExcel(string tournamentName);
+        void GenerateExcel(string tournamentName, string disciplineName, string path);
     }
 }

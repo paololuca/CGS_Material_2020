@@ -41,7 +41,7 @@ namespace Resources
                         CognomeRosso = (string)reader["CognomeAtletaRosso"],
                         NomeRosso = (string)reader["NomeAtletaRosso"],
                         PuntiRosso = (int)reader["PuntiAtletaRosso"],
-                        Idblu = (int)reader["IdBlu"],
+                        IdBlu = (int)reader["IdBlu"],
                         CognomeBlu = (string)reader["CognomeAtletaBlu"],
                         NomeBlu = (string)reader["NomeAtletaBlu"],
                         PuntiBlu = (int)reader["PuntiAtletaBlu"],

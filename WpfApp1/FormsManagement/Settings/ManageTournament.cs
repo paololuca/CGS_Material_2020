@@ -156,7 +156,7 @@ namespace WindowsFormsApplication1
                     Int32 idTorneo = (int)comboBox1.SelectedValue;
                     Int32 idDisciplina = (int)comboBox2.SelectedValue;
 
-                    if (Helper.EliminaPartecipanteDaTorneo(idTorneo, idDisciplina, (int)row.Cells["IdAtleta"].Value))
+                    if (SqlDal_Tournaments.EliminaPartecipanteDaTorneo(idTorneo, idDisciplina, (int)row.Cells["IdAtleta"].Value))
                     {
                         LoadPartecipantFromTournament(idTorneo, idDisciplina, Categoria);
                         LoadPartecipantOffTournament(idTorneo, idDisciplina, Categoria);

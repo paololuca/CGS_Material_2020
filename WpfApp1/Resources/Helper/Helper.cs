@@ -8,6 +8,7 @@ using System.Configuration;
 using BusinessEntity.Entity;
 using BusinessEntity.DAO;
 using Report;
+using System.IO;
 
 namespace Resources
 {
@@ -320,113 +321,34 @@ namespace Resources
         }
 
 
-        
-        
-        
 
         #endregion
 
-        #region DELETE
-
-        
-
-        public static bool EliminaPartecipanteDaTorneo(int idTorneo, int idDisciplina, int idAtleta)
+        public static bool IsValidPath(string path, bool allowRelativePaths = false)
         {
-            String sqlText = "delete AtletiVsTorneoVsDiscipline where IdAtleta = " + idAtleta +
-                                "and IdTorneoVsDiscipline in (select Id from TorneoVsDiscipline where " +
-                                "IdDisciplina = " + idDisciplina + " " +
-                                "and IdTorneo = " + idTorneo + ") ";
-
-            SqlConnection c = null;
+            bool isValid = true;
 
             try
             {
-                c = new SqlConnection(GetConnectionString());
+                string fullPath = Path.GetFullPath(path);
 
-                c.Open();
-
-                SqlCommand command = new SqlCommand(sqlText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
+                if (allowRelativePaths)
+                {
+                    isValid = Path.IsPathRooted(path);
+                }
                 else
-                    return false;
+                {
+                    string root = Path.GetPathRoot(path);
+                    isValid = string.IsNullOrEmpty(root.Trim(new char[] { '\\', '/' })) == false;
+                }
             }
             catch (Exception ex)
             {
-                return false;
+                isValid = false;
             }
-            finally
-            {
-                c.Close();
-            }
+
+            return isValid;
         }
-        
-        public static bool EliminaAtletiVsTorneoVsDiscipline(Int32 idTorneo)
-        {
-            String commandText = "DELETE AtletiVsTorneoVsDiscipline WHERE IdTorneoVsDiscipline in " +
-                                    "(SELECT Id FROM TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + ")";
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        public static bool EliminaTorneoVsDiscipline(Int32 idTorneo)
-        {
-            String commandText = "DELETE TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + ")";
-
-            SqlConnection c = null;
-
-            try
-            {
-                c = new SqlConnection(GetConnectionString());
-
-                c.Open();
-
-                SqlCommand command = new SqlCommand(commandText, c);
-                Int32 rowAffected = command.ExecuteNonQuery();
-
-                if (rowAffected == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                c.Close();
-            }
-        }
-
-        
-
-        #endregion
 
     }
 }

@@ -210,6 +210,9 @@
       <DependentUpon>Associations.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Common\AnotherCommandImplementation.cs" />
+    <Compile Include="UserControls\Common\LoadingCustom.xaml.cs">
+      <DependentUpon>LoadingCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Common\MessageBoxCustom.xaml.cs">
       <DependentUpon>MessageBoxCustom.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Common\DocumentationLinks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Common\LoadingCustom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

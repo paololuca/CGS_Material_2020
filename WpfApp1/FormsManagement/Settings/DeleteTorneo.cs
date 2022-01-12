@@ -61,9 +61,9 @@ namespace WindowsFormsApplication1
 
                     if(SqlDal_Tournaments.EliminaTorneo(idTorneo))
                     {
-                        if (Helper.EliminaAtletiVsTorneoVsDiscipline(idTorneo))
+                        if (SqlDal_Tournaments.EliminaAtletiVsTorneoVsDiscipline(idTorneo))
                         {
-                            if (Helper.EliminaTorneoVsDiscipline(idTorneo))
+                            if (SqlDal_Tournaments.EliminaTorneoVsDiscipline(idTorneo))
                             {
                                 MessageBox.Show("Torneo ELIMINATO correttamente", "Messaggio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 LoadAllTornei();

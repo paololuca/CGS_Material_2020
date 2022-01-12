@@ -672,5 +672,99 @@ namespace Resources
                 c.Close();
             }
         }
+
+        public static bool EliminaPartecipanteDaTorneo(int idTorneo, int idDisciplina, int idAtleta)
+        {
+            String sqlText = "delete AtletiVsTorneoVsDiscipline where IdAtleta = " + idAtleta +
+                                "and IdTorneoVsDiscipline in (select Id from TorneoVsDiscipline where " +
+                                "IdDisciplina = " + idDisciplina + " " +
+                                "and IdTorneo = " + idTorneo + ") ";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaAtletiVsTorneoVsDiscipline(Int32 idTorneo)
+        {
+            String commandText = "DELETE AtletiVsTorneoVsDiscipline WHERE IdTorneoVsDiscipline in " +
+                                    "(SELECT Id FROM TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + ")";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public static bool EliminaTorneoVsDiscipline(Int32 idTorneo)
+        {
+            String commandText = "DELETE TorneoVsDiscipline WHERE IdTorneo = " + idTorneo + ")";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
     }
 }

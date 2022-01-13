@@ -61,8 +61,6 @@ namespace UserControls.Phases
                 SaveFields(idTorneo, idDisciplina);
             }
 
-
-
             _loaded = true;
         }
 

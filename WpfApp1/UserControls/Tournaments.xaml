@@ -36,9 +36,9 @@
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="btnActivateTournament" Height="32"  Click="btnActivateTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                                                    <Button x:Name="btnActivateTournament" Height="32"  Click="btnActivateTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Activate Tournament">
                                                         <StackPanel Orientation="Horizontal">
-                                                            <materialDesign:PackIcon Kind="CardAccountDetails"/>
+                                                            <materialDesign:PackIcon Kind="Alarm"/>
                                                         </StackPanel>
                                                     </Button>
                                                 </DataTemplate>
@@ -47,7 +47,7 @@
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="btnDeleteTournament" Height="32"  Click="btnDeleteTournament_Click" Background="Red" Width="Auto" ToolTip="Delete Fighter">
+                                                    <Button x:Name="btnDeleteTournament" Height="32"  Click="btnDeleteTournament_Click" Background="Red" Width="Auto" ToolTip="Delete Tournament">
                                                         <StackPanel Orientation="Horizontal">
                                                             <materialDesign:PackIcon Kind="Delete"/>
                                                         </StackPanel>
@@ -59,7 +59,7 @@
                                 </DataGrid>
                             </StackPanel>
                             <Button x:Name="btnNewTournament" HorizontalAlignment="Left" Margin="711,70,0,0" Click="btnNewTournament_Click"
-                                Background="#FF28D137" VerticalAlignment="Top" Width="133" ToolTip="New Tournament" Grid.Column="1">
+                                Background="#FF28D137" VerticalAlignment="Top" Width="133" ToolTip="Add new Tournament" Grid.Column="1">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="AddBox" RenderTransformOrigin="0.771,1.104" Height="18"/>
                                     <TextBlock Text="  Tournament"/>
@@ -80,7 +80,7 @@
                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                 materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="txtSearchActiveTournament_KeyUp" />
-                            <Button x:Name="btnmanageSubscription" Height="Auto"  Click="btnmanageSubscription_Click" Background="#FF673AB7" Margin="936,51,24,542" RenderTransformOrigin="0.5,0.5"  ToolTip="Mmanage Subscribers" >
+                            <Button x:Name="btnmanageSubscription" Height="Auto"  Click="btnmanageSubscription_Click" Background="#FF673AB7" Margin="936,51,24,542" RenderTransformOrigin="0.5,0.5"  ToolTip="Manage Subscribers" >
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Settings"/>
                                 </StackPanel>

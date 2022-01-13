@@ -13,186 +13,188 @@
             <ColumnDefinition Width="1051*"/>
         </Grid.ColumnDefinitions>
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
-            <StackPanel>
-                <Expander HorizontalAlignment="Stretch" Header="Account's Management">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="289*"/>
-                            <ColumnDefinition Width="226*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
-                                    Margin="10,8,24,359" Grid.ColumnSpan="1" Grid.Column="1">
-                            <TextBlock Text="Add account" FontWeight="Bold" />
-                            <TextBlock Opacity=".68"
-                                   TextWrapping="Wrap" ><Run Text="Compile the field below to add a new User account"/><LineBreak/><Run/></TextBlock>
-                            <Separator></Separator>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
-                                    Margin="24,8,10,359" Grid.ColumnSpan="1">
-                            <TextBlock Text="Account List" FontWeight="Bold" />
-                            <TextBlock Opacity=".68"
-                                   Text="Lista degli utenti attualment presenti all'interno del sistema. Ogni utente può essere modificato all'interno della lista" TextWrapping="Wrap" />
-                            <Separator></Separator>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
-                                    Margin="24,102,10,10">
-                            <DataGrid Name="dataGridAccount" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="DataGridAccount_AutoGeneratingColumn" VerticalAlignment="Center"
-                                   CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended" SelectedCellsChanged="DataGridAccount_SelectedCellsChanged">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button x:Name="btnDeleteAccount" Height="32"  Click="BtnDeleteAccount_Click" Background="Red" Width="Auto">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <materialDesign:PackIcon Kind="Delete"/>
-                                                        <TextBlock Text="  Delete"/>
-                                                    </StackPanel>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                        <StackPanel  TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
-                                    Margin="48,102,24,0" Grid.Column="1" >
-                            <Grid Height="308">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20*"/>
-                                    <RowDefinition Height="20*"/>
-                                    <RowDefinition Height="37*"/>
-                                </Grid.RowDefinitions>
-                                <materialDesign:PackIcon Kind="AccountCircle" Margin="0,36,0,0" Height="26" Width="26" />
-                                <TextBox Name="txtUserName" materialDesign:HintAssist.Hint="User Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,18,0,18" />
-                                <materialDesign:PackIcon Kind="KeyVariant" Margin="0,20,0,0" Height="26" Width="26" Grid.Row="1" />
-                                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green" 
-                                             materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="31,0,0,34" Grid.Row="1" />
-                                <materialDesign:PackIcon Kind="CardAccountDetailsOutline" Margin="0,14,0,0" Height="26" Width="26" Grid.Row="2" />
-                                <ComboBox Name="cmbAccountType" materialDesign:HintAssist.Hint="Account Type" ItemsSource="{Binding LongListToTestComboVirtualization}" 
-                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="31,0,-10,108" Grid.Row="2" Height="40">
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel />
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
-                                <Button x:Name="btnSaveAccount" Height="Auto"  Click="BtnSaveAccount_Click" Background="#FF28D137" Margin="286,98,0,13" RenderTransformOrigin="0.5,0.5" Grid.Row="2" >
+            <ScrollViewer>
+                <StackPanel>
+                    <Expander HorizontalAlignment="Stretch" Header="Account's Management">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="289*"/>
+                                <ColumnDefinition Width="226*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                        Margin="10,8,24,359" Grid.ColumnSpan="1" Grid.Column="1">
+                                <TextBlock Text="Add account" FontWeight="Bold" />
+                                <TextBlock Opacity=".68"
+                                       TextWrapping="Wrap" ><Run Text="Compile the field below to add a new User account"/><LineBreak/><Run/></TextBlock>
+                                <Separator></Separator>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                        Margin="24,8,10,359" Grid.ColumnSpan="1">
+                                <TextBlock Text="Account List" FontWeight="Bold" />
+                                <TextBlock Opacity=".68"
+                                       Text="Lista degli utenti attualment presenti all'interno del sistema. Ogni utente può essere modificato all'interno della lista" TextWrapping="Wrap" />
+                                <Separator></Separator>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                        Margin="24,102,10,10">
+                                <DataGrid Name="dataGridAccount" CanUserSortColumns="True" Height="314" AutoGeneratingColumn="DataGridAccount_AutoGeneratingColumn" VerticalAlignment="Center"
+                                       CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" SelectionMode="Extended" SelectedCellsChanged="DataGridAccount_SelectedCellsChanged">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnDeleteAccount" Height="32"  Click="BtnDeleteAccount_Click" Background="Red" Width="Auto">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="Delete"/>
+                                                            <TextBlock Text="  Delete"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <StackPanel  TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                        Margin="48,102,24,0" Grid.Column="1" >
+                                <Grid Height="308">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20*"/>
+                                        <RowDefinition Height="20*"/>
+                                        <RowDefinition Height="37*"/>
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:PackIcon Kind="AccountCircle" Margin="0,36,0,0" Height="26" Width="26" />
+                                    <TextBox Name="txtUserName" materialDesign:HintAssist.Hint="User Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="31,18,0,18" />
+                                    <materialDesign:PackIcon Kind="KeyVariant" Margin="0,20,0,0" Height="26" Width="26" Grid.Row="1" />
+                                    <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Password" materialDesign:HintAssist.Foreground="Green" 
+                                                 materialDesign:TextFieldAssist.UnderlineBrush="Green" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="31,0,0,34" Grid.Row="1" />
+                                    <materialDesign:PackIcon Kind="CardAccountDetailsOutline" Margin="0,14,0,0" Height="26" Width="26" Grid.Row="2" />
+                                    <ComboBox Name="cmbAccountType" materialDesign:HintAssist.Hint="Account Type" ItemsSource="{Binding LongListToTestComboVirtualization}" 
+                                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="31,0,-10,108" Grid.Row="2" Height="40">
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel />
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
+                                    <Button x:Name="btnSaveAccount" Height="Auto"  Click="BtnSaveAccount_Click" Background="#FF28D137" Margin="286,98,0,13" RenderTransformOrigin="0.5,0.5" Grid.Row="2" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Floppy"/>
+                                            <TextBlock Text="  Save"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="Database's Management" >
+                        <Grid Height="249">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="109*"/>
+                                <ColumnDefinition Width="921*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="54*"/>
+                                <RowDefinition Height="43*"/>
+                                <RowDefinition Height="152*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,10" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                                <TextBlock Text="Database" FontWeight="Bold" />
+                                <TextBlock Opacity=".68" Text="Choose your DB to connect" TextWrapping="Wrap" Height="22" />
+
+                                <Separator></Separator>
+                            </StackPanel>
+
+                            <StackPanel Margin="24,10,0,89" Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2">
+
+                                <RadioButton Name="rbtDB" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4,10,4,11" IsChecked="False" Content="Master" Width="110" BorderBrush="#FFB835B2" />
+                                <RadioButton Name="rbtTest" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Test" Width="110" BorderBrush="#FFB835B2"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,68,0,37">
+                                <Grid Width="377">
+                                    <materialDesign:PackIcon Kind="Database" Height="31" Width="119" Margin="26,0,0,0" />
+                                    <materialDesign:PackIcon Kind="Database" Height="31" Width="118" Margin="145,0,0,0" />
+                                </Grid>
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="615,99,0,10" Grid.Row="2">
+                                <Button x:Name="btnSaveDB" Height="34"  Click="BtnSaveDB_Click" Background="#FF28D137" Margin="191,0,10,0" >
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Floppy"/>
                                         <TextBlock Text="  Save"/>
                                     </StackPanel>
                                 </Button>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Database's Management" >
-                    <Grid Height="249">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="109*"/>
-                            <ColumnDefinition Width="921*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="54*"/>
-                            <RowDefinition Height="43*"/>
-                            <RowDefinition Height="152*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,10" Grid.RowSpan="3" Grid.ColumnSpan="2">
-                            <TextBlock Text="Database" FontWeight="Bold" />
-                            <TextBlock Opacity=".68" Text="Choose your DB to connect" TextWrapping="Wrap" Height="22" />
+                            </StackPanel>
 
-                            <Separator></Separator>
-                        </StackPanel>
-
-                        <StackPanel Margin="24,10,0,89" Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2">
-
-                            <RadioButton Name="rbtDB" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4,10,4,11" IsChecked="False" Content="Master" Width="110" BorderBrush="#FFB835B2" />
-                            <RadioButton Name="rbtTest" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Test" Width="110" BorderBrush="#FFB835B2"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" HorizontalAlignment="Left" Width="376" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,68,0,37">
-                            <Grid Width="377">
-                                <materialDesign:PackIcon Kind="Database" Height="31" Width="119" Margin="26,0,0,0" />
-                                <materialDesign:PackIcon Kind="Database" Height="31" Width="118" Margin="145,0,0,0" />
-                            </Grid>
-
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="615,99,0,10" Grid.Row="2">
-                            <Button x:Name="btnSaveDB" Height="34"  Click="BtnSaveDB_Click" Background="#FF28D137" Margin="206,0,10,0" >
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Floppy"/>
-                                    <TextBlock Text="  Save"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-
-                    </Grid>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Tournament's Engine">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <TextBlock Text="Tournament's Engine" />
-                        <TextBlock Opacity=".68"
-                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." TextWrapping="Wrap" />
-                    </StackPanel>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Pools Setting">
-                    <Grid Height="384">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="109*"/>
-                            <ColumnDefinition Width="921*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="152*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16" Grid.ColumnSpan="2">
-                            <TextBlock Text="Phase control" />
+                        </Grid>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="Tournament's Engine">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <TextBlock Text="Tournament's Engine" />
                             <TextBlock Opacity=".68"
-                                   Text="In this control panel you can set the minimum number of athletes who must be present in the groups and decide which phase they will access" TextWrapping="Wrap" />
+                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." TextWrapping="Wrap" />
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="24,10,24,0" Grid.RowSpan="2">
-                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
-                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for 16th" />
-                                <Slider Name="sldMinFor16" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                        ToolTip="Min number of present fighter to have round of 16" Value="0" Width="280" ValueChanged="SldMinFor16_ValueChanged"/>
-                                <TextBox x:Name="txtBoxFor16th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" Header="Pools Setting">
+                        <Grid Height="384">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="109*"/>
+                                <ColumnDefinition Width="921*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30*"/>
+                                <RowDefinition Height="152*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16" Grid.ColumnSpan="2">
+                                <TextBlock Text="Phase control" />
+                                <TextBlock Opacity=".68"
+                                       Text="In this control panel you can set the minimum number of athletes who must be present in the groups and decide which phase they will access" TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
-                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   8th" />
-                                <Slider Name="sldMinFor8" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                        ToolTip="Min number of present fighter to have round of 8" Value="0" Width="280" ValueChanged="SldMinFor8_ValueChanged"/>
-                                <TextBox x:Name="txtBoxFor8th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
-                                <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   4th" />
-                                <Slider Name="sldMinFor4" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                        ToolTip="Min number of present fighter to have round of 4" Value="0" Width="280" ValueChanged="SldMinFor4_ValueChanged"/>
-                                <TextBox x:Name="txtBoxFor4th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="615,241,0,40" Grid.Row="1">
-                            <Button x:Name="btnSaveFighterByPhase" Height="34"  Click="BtnSaveFighterByPhase_Click" Background="#FF28D137" Margin="206,0,10,0" >
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Floppy"/>
-                                    <TextBlock Text="  Save"/>
+                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="24,10,24,0" Grid.RowSpan="2">
+                                <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                    <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for 16th" />
+                                    <Slider Name="sldMinFor16" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                            ToolTip="Min number of present fighter to have round of 16" Value="0" Width="280" ValueChanged="SldMinFor16_ValueChanged"/>
+                                    <TextBox x:Name="txtBoxFor16th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                             AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
                                 </StackPanel>
-                            </Button>
+                                <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                    <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   8th" />
+                                    <Slider Name="sldMinFor8" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                            ToolTip="Min number of present fighter to have round of 8" Value="0" Width="280" ValueChanged="SldMinFor8_ValueChanged"/>
+                                    <TextBox x:Name="txtBoxFor8th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                             AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 16 0 0">
+                                    <TextBlock VerticalAlignment="Bottom" Text="Min Fighter for   4th" />
+                                    <Slider Name="sldMinFor4" Minimum="0" Maximum="100" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                            ToolTip="Min number of present fighter to have round of 4" Value="0" Width="280" ValueChanged="SldMinFor4_ValueChanged"/>
+                                    <TextBox x:Name="txtBoxFor4th" Text="0" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                             AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Width="45"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="615,241,0,40" Grid.Row="1">
+                                <Button x:Name="btnSaveFighterByPhase" Height="34"  Click="BtnSaveFighterByPhase_Click" Background="#FF28D137" Margin="206,0,10,0" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Floppy"/>
+                                        <TextBlock Text="  Save"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                    <!--<Expander HorizontalAlignment="Stretch" Header="Expander Example 2c">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <TextBlock Text="Your Content" />
+                            <TextBlock Opacity=".68"
+                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." TextWrapping="Wrap" />
                         </StackPanel>
-                    </Grid>
-                </Expander>
-                <!--<Expander HorizontalAlignment="Stretch" Header="Expander Example 2c">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <TextBlock Text="Your Content" />
-                        <TextBlock Opacity=".68"
-                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." TextWrapping="Wrap" />
-                    </StackPanel>
-                </Expander>-->
-            </StackPanel>
+                    </Expander>-->
+                </StackPanel>
+            </ScrollViewer>
         </materialDesign:Card>
     </Grid>
 </UserControl>

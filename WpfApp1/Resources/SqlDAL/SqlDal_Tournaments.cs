@@ -35,8 +35,8 @@ namespace Resources
                     {
                         Name = reader["NomeTorneo"].ToString(),
                         Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date,
                         Place = reader["Luogo"].ToString(),
                         Note = reader["Commenti"].ToString()
                     });
@@ -79,8 +79,8 @@ namespace Resources
                     {
                         Name = reader["NomeTorneo"].ToString(),
                         Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date,
                         Place = reader["Luogo"].ToString(),
                         Note = reader["Commenti"].ToString()
                     });
@@ -123,8 +123,8 @@ namespace Resources
                     {
                         Name = reader["NomeTorneo"].ToString(),
                         Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()),
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date,
                         Place = reader["Luogo"].ToString(),
                         Note = reader["Commenti"].ToString()
                     });
@@ -258,8 +258,8 @@ namespace Resources
                         Id = (int)reader["Id"],
                         Name = Convert.ToString(reader["NomeTorneo"]),
                         Place = Convert.ToString(reader["Luogo"]),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()),
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString())
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date
                     }
                     );
                 }
@@ -612,7 +612,8 @@ namespace Resources
                     {
                         Name = reader["NomeTorneo"].ToString(),
                         Id = Int32.Parse(reader["Id"].ToString()),
-                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString())
+                        StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date
                     };
                 }
 

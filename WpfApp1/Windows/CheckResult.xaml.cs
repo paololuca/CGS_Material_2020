@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace FormsManagement
+namespace HEMATournamentSystem
 {
     /// <summary>
     /// Interaction logic for Window1.xaml

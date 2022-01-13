@@ -43,7 +43,7 @@ namespace UserControls.Phases
         {
             var allAtleti = SqlDal_Pools.GetSemifinali(idTorneo, idDisciplina);
 
-            if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
+            if (allAtleti.Where(x => x.Campo > 0).ToList().Count() == 0)
             {
                 if (allAtleti.Count == 0)
                     return;

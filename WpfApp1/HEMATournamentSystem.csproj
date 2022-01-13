@@ -129,7 +129,7 @@
     <Compile Include="BusinessEntity\Type\ProfileManager.cs" />
     <Compile Include="Engine\AscEngine.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
-    <Compile Include="FormsManagement\FighterStats.xaml.cs">
+    <Compile Include="Windows\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormsManagement\Settings\AddAnagraphic.cs">
@@ -191,7 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidaEliminatorie.resx</DependentUpon>
     </Compile>
-    <Compile Include="FormsManagement\CheckResult.xaml.cs">
+    <Compile Include="Windows\CheckResult.xaml.cs">
       <DependentUpon>CheckResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
@@ -210,10 +210,10 @@
       <DependentUpon>Associations.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Common\AnotherCommandImplementation.cs" />
-    <Compile Include="UserControls\Common\LoadingCustom.xaml.cs">
+    <Compile Include="Windows\Common\LoadingCustom.xaml.cs">
       <DependentUpon>LoadingCustom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Common\MessageBoxCustom.xaml.cs">
+    <Compile Include="Windows\Common\MessageBoxCustom.xaml.cs">
       <DependentUpon>MessageBoxCustom.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Common\NotEmptyValidationRule.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="UserControls\Fighters.xaml.cs">
       <DependentUpon>Fighters.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FinalsTransitions.xaml.cs">
+    <Compile Include="Windows\FinalsTransitions.xaml.cs">
       <DependentUpon>FinalsTransitions.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Report\ITournamentReportByDiscipline.cs" />
@@ -250,7 +250,7 @@
     <Compile Include="UserControls\Report\TournamentReportByDiscipline.xaml.cs">
       <DependentUpon>TournamentReportByDiscipline.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Report\TournamentResultReport.xaml.cs">
+    <Compile Include="Windows\TournamentResultReport.xaml.cs">
       <DependentUpon>TournamentResultReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Tournaments.xaml.cs">
@@ -260,11 +260,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FormsManagement\CheckResult.xaml">
+    <Page Include="Windows\CheckResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FormsManagement\FighterStats.xaml">
+    <Page Include="Windows\FighterStats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,11 +276,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Common\LoadingCustom.xaml">
+    <Page Include="Windows\Common\LoadingCustom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Common\MessageBoxCustom.xaml">
+    <Page Include="Windows\Common\MessageBoxCustom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,7 +292,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\FinalsTransitions.xaml">
+    <Page Include="Windows\FinalsTransitions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,17 +343,6 @@
     </Compile>
     <Compile Include="Resources\Report\OutputRisultatiEliminatorieTorneo.cs" />
     <Compile Include="Resources\Report\OutputRisultatiTorneo.cs" />
-    <Compile Include="FormsManagement\Report\ReportAssociazioni.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormsManagement\Report\ReportAssociazioni.designer.cs">
-      <DependentUpon>ReportAssociazioni.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormsManagement\Report\ReportAssociazioni2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportAssociazioni.resx</DependentUpon>
-    </Compile>
     <Compile Include="FormsManagement\Report\ReportAtleti.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,7 +443,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Report\TournamentResultReport.xaml">
+    <Page Include="Windows\TournamentResultReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -530,11 +519,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormsManagement\Report\ReportAssociazioni.resx">
-      <Generator>ResXFileCodeGeneratorEx</Generator>
-      <DependentUpon>ReportAssociazioni.cs</DependentUpon>
-      <LastGenOutput>ReportAssociazioni2.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsManagement\Report\ReportAtleti.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>

@@ -221,7 +221,8 @@ namespace Resources
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
                         PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiSubiti = (int)reader["PuntiSubiti"],
+                        Campo = (int)reader["Campo"]
                     });
                 }
 
@@ -311,7 +312,8 @@ namespace Resources
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
                         PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiSubiti = (int)reader["PuntiSubiti"],
+                        Campo = (int)reader["Campo"]
                     });
                 }
 
@@ -401,7 +403,8 @@ namespace Resources
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
                         PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiSubiti = (int)reader["PuntiSubiti"],
+                        Campo = (int)reader["Campo"]
                     });
                 }
 
@@ -491,7 +494,8 @@ namespace Resources
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
                         PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiSubiti = (int)reader["PuntiSubiti"],
+                        Campo = (int)reader["Campo"]
                     });
                 }
 

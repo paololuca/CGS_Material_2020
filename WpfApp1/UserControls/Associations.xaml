@@ -35,7 +35,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnMigrateAssociation" Height="32"  Click="BtnMigrateAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Deatils">
+                            <Button x:Name="btnMigrateAssociation" Height="32"  Click="BtnMigrateAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Migrate">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Transfer"/>
                                 </StackPanel>
@@ -61,7 +61,7 @@
                 <materialDesign:PackIcon Kind="FileExport"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnExport_Copy" Height="Auto"  Click="BtnExport_Copy_Click" Background="#FF673AB7" Margin="24,169,958,382" RenderTransformOrigin="0.5,0.5" ToolTip="Import Associations" >
+        <Button x:Name="btnImport" Height="Auto"  Click="BtnImport_Click" Background="#FF673AB7" Margin="24,169,958,382" RenderTransformOrigin="0.5,0.5" ToolTip="Import Associations" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="FileImport"/>
             </StackPanel>

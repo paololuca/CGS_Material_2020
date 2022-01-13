@@ -44,7 +44,7 @@ namespace UserControls.Phases
         {
             var allAtleti = SqlDal_Pools.GetOttavi(idTorneo, idDisciplina);
 
-            if (allAtleti.Select(x => x.Campo > 0).ToList().Count() == 0)
+            if (allAtleti.Where(x => x.Campo > 0).ToList().Count() == 0)
             {
                 LoadAsFirstValidPhase(allAtleti);
             }

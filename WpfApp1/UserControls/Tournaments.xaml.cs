@@ -67,6 +67,9 @@ namespace HEMATournamentSystem
             switch (e.Column.Header.ToString())
             {
                 case "Id":
+                case "Note":
+                case "StartDate":
+                case "EndDate":
                     e.Column.Visibility = Visibility.Hidden;
                     break;
                 default:
@@ -160,28 +163,6 @@ namespace HEMATournamentSystem
             report.Show();
         }
 
-        //private void VisualizzaReport_FormClosed(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        //{
-        //    if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.None)
-        //    {
-        //        // Then assume that X has been clicked and act accordingly.
-        //    }
-        //    else if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        if (risultatiTorneo != null)
-        //        {
-        //            if ((risultatiTorneo.IdDisciplina > 0) && (risultatiTorneo.IdTorneo > 0))
-        //            {
-        //                ReportRisultatiTorneo report = new ReportRisultatiTorneo(risultatiTorneo.IdTorneo, risultatiTorneo.IdDisciplina);
-        //                report.Show();
-        //                report.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        //            }
-        //        }
-        //    }
-        //    else if ((sender as System.Windows.Forms.Form).DialogResult == System.Windows.Forms.DialogResult.Abort)
-        //    {
-        //        // Then assume that Cancel Button has been clicked and act accordingly.)
-        //    }
-        //}
+        
     }
 }

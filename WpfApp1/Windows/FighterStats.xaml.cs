@@ -8,7 +8,7 @@ using Microsoft.Research.DynamicDataDisplay.DataSources; // EnumerableDataSource
 using Microsoft.Research.DynamicDataDisplay.PointMarkers; // CirclePointMarker
 using Resources;
 
-namespace FormsManagement
+namespace HEMATournamentSystem
 {
     /// <summary>
     /// Interaction logic for FighterStats.xaml

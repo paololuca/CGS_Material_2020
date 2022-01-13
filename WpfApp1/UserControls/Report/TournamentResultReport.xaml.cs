@@ -28,7 +28,9 @@ namespace HEMATournamentSystem
     {
         private int _idTorneo;
         private string _nomeTorneo;
-        private int _idDisciplina;
+        private List<TournamentReportByDiscipline> tournamentsDisciplinesList;
+        private string exportMessage = "";
+        private string exportPath = "";
 
         BackgroundWorker bgWorkerExport;
 
@@ -43,7 +45,18 @@ namespace HEMATournamentSystem
 
             txtBlockTitle.Text = nomeTorneo;
 
+            bgWorkerExport = new BackgroundWorker();
+            // To report progress from the background worker we need to set this property
+            bgWorkerExport.WorkerReportsProgress = true;
+            // This event will be raised on the worker thread when the worker starts
+            bgWorkerExport.DoWork += new DoWorkEventHandler(bgWorkerExport_DoWork);
+            // This event will be raised when we call ReportProgress
+            bgWorkerExport.ProgressChanged += new ProgressChangedEventHandler(bgWorkerExport_ProgressChanged);
+            bgWorkerExport.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorkerExport_Completed);
+
         }
+
+        
 
         private void LoadAllResults()
         {
@@ -88,55 +101,83 @@ namespace HEMATournamentSystem
         
         private void btnExportResults_Click(object sender, RoutedEventArgs e)
         {
-            btnExportResults.IsEnabled = false;
-            tabControlResults.IsEnabled = false;
-
-            LoadingCustom loading = new LoadingCustom();
-
-            loading.Owner = this;
-            loading.Show();
-
-
-            string exportMessage = "";
-
             using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
             {
                 System.Windows.Forms.DialogResult result = fbd.ShowDialog();
 
                 if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    var tabsNumber = tabControlResults.Items.Count;
-                    var addingValue = 100 / tabsNumber;
 
-                    try
-                    {                            
-                        for (int i = 0; i < tabsNumber; i++)
-                        {
-                            tabControlResults.SelectedIndex = i;
-                            TournamentReportByDiscipline p = (TournamentReportByDiscipline)tabControlResults.SelectedContent;
+                    btnExportResults.IsEnabled = false;
+                    tabControlResults.IsEnabled = false;
+                    progressBarExport.Value = 0;
+                    lblPercentage.Content = "0%";
+                    exportPath = fbd.SelectedPath;
 
-                            p.GenerateExcel(_nomeTorneo, p.nomeDisciplina, fbd.SelectedPath);
+                    tournamentsDisciplinesList = new List<TournamentReportByDiscipline>();
 
-                            loading.IncrementProgressBar(100 / tabsNumber);
-
-                        }
-                    }
-                    catch (Exception ex)
+                    for (int i = 0; i < tabControlResults.Items.Count; i++)
                     {
-                        exportMessage = ex.Message;
-
+                        tabControlResults.SelectedIndex = i;
+                        TournamentReportByDiscipline p = (TournamentReportByDiscipline)tabControlResults.SelectedContent;
+                        tournamentsDisciplinesList.Add(p);
                     }
+
+                    tabControlResults.SelectedIndex = 0;
+
+                    bgWorkerExport.RunWorkerAsync();
                 }
             }
-            if(exportMessage == "")
-                new MessageBoxCustom("Export completato con successo", MessageType.Success, MessageButtons.Ok);
-            else
-                new MessageBoxCustom(exportMessage, MessageType.Error, MessageButtons.Ok);
+        }
 
-            btnExportResults.IsEnabled = true;
-            tabControlResults.IsEnabled = true;
+        void bgWorkerExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var i  = 0;
+            foreach(var t in tournamentsDisciplinesList)
+            {
+                try
+                {
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        t.GenerateExcel(_nomeTorneo, t.nomeDisciplina, exportPath);
+                    }), DispatcherPriority.ContextIdle);
 
-            loading.Close();
+                    var percentage = (i + 1) * 100 / tabControlResults.Items.Count;
+                    bgWorkerExport.ReportProgress(percentage);
+                    Thread.Sleep(2000);                    
+                }
+                catch (Exception ex)
+                {
+                    exportMessage += "Error on Export " + i + 1 + " : " + ex.Message + "\n";
+                }
+                finally
+                {
+                    i++;
+                }
+            }
+        }
+
+        // Back on the 'UI' thread so we can update the progress bar
+        void bgWorkerExport_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // The progress percentage is a property of e
+            progressBarExport.Value = e.ProgressPercentage;
+            lblPercentage.Content = e.ProgressPercentage + "%";
+        }
+
+        private void bgWorkerExport_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                btnExportResults.IsEnabled = true;
+                tabControlResults.IsEnabled = true;
+
+                if (exportMessage == "")
+                    new MessageBoxCustom("Export completato con successo", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                else
+                    new MessageBoxCustom(exportMessage, MessageType.Error, MessageButtons.Ok).ShowDialog();
+
+            }), DispatcherPriority.ContextIdle);
         }
     }
 }

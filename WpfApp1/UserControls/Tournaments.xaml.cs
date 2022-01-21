@@ -37,6 +37,11 @@ namespace HEMATournamentSystem
             LoadActiveTournaments();
 
             LoadClosedTournaments();
+
+            //TODO legare i bottone di attivazione e disattivazione al ruolo utente
+
+            if (!user.IsAdmin || user.Type != BusinessEntity.Type.ProfileType.Editor)
+                btnNewTournament.IsEnabled = false;
         }
 
         private void LoadClosedTournaments()

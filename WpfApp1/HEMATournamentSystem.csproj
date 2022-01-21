@@ -583,6 +583,7 @@
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
     <Content Include="DB\Scripts\Controllo iscritti.sql" />
+    <Content Include="DB\Scripts\merge db.sql" />
     <Content Include="DB\TorneiTest.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

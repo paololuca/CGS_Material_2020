@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using BusinessEntity.Entity;
 using HtmlAgilityPack;
-using WindowsFormsApplication1;
 
 namespace Resources
 {
     public static class HemaRatingsHelper
     {
-        public const String PRINCIPAL = "PRINCIPAL";
-        //public const String FEMMINILE = "FEMMINILE";
-        public const String TEST = "TEST";
 
-        private const string fightersUrl = "https://hemaratings.com/fighters/";
-        private const string clubsUrl = "https://hemaratings.com/clubs/";
-
-        public static async void SyncFigthersAsync()
+        public static async Task<bool> SyncFigthersAsync()
         {
-            ProgressBar p = new ProgressBar();
-            //p.SetProgressBarTitle("Fighters");
+            string fightersUrl = ConfigurationManager.AppSettings["HemaRatingsFightersUrl"];
 
             var response = await GetResponse(fightersUrl);
 
@@ -29,13 +24,10 @@ namespace Resources
 
             List<HemaRatingsFighterEntity> hemaFigthers = new List<HemaRatingsFighterEntity>();
 
-            p.InizializeProgressBar(1, figtherNodes.Count);
-            p.Show();
             int i = 1;
 
             foreach (var node in figtherNodes)
             {
-                p.IncrementProgressBar(i++);
 
                 var li = node.Descendants("td").ToList();
 
@@ -50,41 +42,34 @@ namespace Resources
                     {
                         Id = figtherId,
                         IdClub = clubId,
-                        Name = name_surname,
-                        Nationality = nationality
+                        Name = name_surname.Replace("'", "''"),
+                        Nationality = nationality.Replace("'", "''")
                     });
                 }
             }
 
-            p.Close();
-            p.Dispose();
+            return SqlDal_HemaRatings.InsertFightersIntoDB(hemaFigthers);            
 
-            InsertFightersIntoDB(hemaFigthers);
         }
-        
 
-        public static async void SyncClubsAsync()
+
+        public static async Task<bool> SyncClubsAsync()
         {
-            ProgressBar p = new ProgressBar();
-            //p.SetProgressBarTitle("Clubs");
+            string clubsUrl = ConfigurationManager.AppSettings["HemaRatingsClubUrl"];
 
             var response = await GetResponse(clubsUrl);
-            
+
             List<HtmlNode> clubNodes = GetNodes(response);
 
             List<HemaRatingsClubEntity> hemaClubs = new List<HemaRatingsClubEntity>();
 
-            p.InizializeProgressBar(1, clubNodes.Count);
-            p.Show();
             int i = 1;
 
             foreach (var node in clubNodes)
             {
-                p.IncrementProgressBar(i++);
-
                 var li = node.Descendants("td").ToList();
 
-                if(li.Count > 0)
+                if (li.Count > 0)
                 {
                     var clubName = li[0].InnerText.Replace("\r\n", "").Trim();
                     var clubId = GetId(li);
@@ -95,18 +80,20 @@ namespace Resources
                     hemaClubs.Add(new HemaRatingsClubEntity
                     {
                         Id = clubId,
-                        Name = clubName,
-                        Country = country,
-                        State = state,
-                        City = city
+                        Name = clubName.Replace("'", "''"),
+                        Country = country.Replace("'", "''"),
+                        State = state.Replace("'", "''"),
+                        City = city.Replace("'", "''")
                     });
                 }
 
             }
 
-            p.Close();
-            p.Dispose();
+            return SqlDal_HemaRatings.InsertClubsIntoDB(hemaClubs);
         }
+
+
+
 
         #region Parsing
         private static List<HtmlNode> GetNodes(byte[] response)
@@ -156,7 +143,7 @@ namespace Resources
         {
             try
             {
-                return li[1].Descendants("i").ToList()[0].GetAttributeValue("title", null);
+                return li[1].InnerText;
             }
             catch
             {
@@ -192,7 +179,7 @@ namespace Resources
         {
             try
             {
-                return li[1].Descendants("i").ToList()[0].GetAttributeValue("title", null);
+                return li[1].InnerText;
             }
             catch
             {
@@ -201,31 +188,8 @@ namespace Resources
         }
         #endregion
 
-        #region DataBase 
+        
 
-        private static string GetConnectionString()
-        {
-            if (GetDbType() == TEST)
-                return ConfigurationManager.AppSettings["SqlDBTest"];
-            else
-                return ConfigurationManager.AppSettings["SqlDB"];
-        }
-        private static string GetDbType()
-        {
-            string dbType = ConfigurationManager.AppSettings["DataBase"].ToString().ToUpper();
-
-            if (dbType == "PRINCIPAL")
-                return PRINCIPAL;
-            else
-                return TEST;
-        }
-        //TODO: l'inserimento deve essere in delta
-        private static void InsertFightersIntoDB(List<HemaRatingsFighterEntity> hemaFigthers)
-        {
-            //throw new NotImplementedException();
-        }
-        #endregion
-
-    }   
+    }
 
 }

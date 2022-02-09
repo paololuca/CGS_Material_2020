@@ -129,6 +129,7 @@
     <Compile Include="BusinessEntity\Type\ProfileManager.cs" />
     <Compile Include="Engine\AscEngine.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_HemaRatings.cs" />
     <Compile Include="Windows\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
     </Compile>
@@ -195,7 +196,7 @@
       <DependentUpon>CheckResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\DataBaseType.cs" />
-    <Compile Include="Resources\Helper\HemaRatingsHelper.cs" />
+    <Compile Include="Resources\Manager\HemaRatingsManager.cs" />
     <Compile Include="Resources\Manager\PhasesManager.cs" />
     <Compile Include="Resources\Manager\QualificationManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_FighterStatistics.cs" />

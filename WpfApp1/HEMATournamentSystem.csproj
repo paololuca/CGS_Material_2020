@@ -584,6 +584,12 @@
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
     <Content Include="DB\Scripts\Controllo iscritti.sql" />
+    <Content Include="DB\Scripts\HemaRatings\cgs.sql" />
+    <Content Include="DB\Scripts\HemaRatings\cgs_sedicesimi.sql" />
+    <Content Include="DB\Scripts\HemaRatings\cgs_trentaduesimi.sql" />
+    <Content Include="DB\Scripts\HemaRatings\hema ratings completo.sql" />
+    <Content Include="DB\Scripts\HemaRatings\query for CSEN\cgs.sql" />
+    <Content Include="DB\Scripts\HemaRatings\query for CSEN\hema ratings completo.sql" />
     <Content Include="DB\Scripts\merge db.sql" />
     <Content Include="DB\TorneiTest.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

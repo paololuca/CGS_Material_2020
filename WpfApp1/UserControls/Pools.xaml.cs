@@ -106,6 +106,8 @@ namespace HEMATournamentSystem
             //                                    Helper.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, categoria);
 
             SqlDal_Pools.DeletePoolsAndMatches(idTorneo, idDisciplina);
+            
+            SqlDal_Pools.DeleteAllPahases(idTorneo, idDisciplina);
 
             var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina);
 

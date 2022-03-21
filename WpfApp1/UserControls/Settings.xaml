@@ -77,7 +77,7 @@
                                             </ItemsPanelTemplate>
                                         </ComboBox.ItemsPanel>
                                     </ComboBox>
-                                    <Button x:Name="btnSaveAccount" Height="Auto"  Click="BtnSaveAccount_Click" Background="#FF28D137" Margin="286,98,0,13" RenderTransformOrigin="0.5,0.5" Grid.Row="2" >
+                                    <Button x:Name="btnSaveAccount" Height="Auto"  Click="BtnSaveAccount_Click" Background="#FF28D137" Margin="283,98,0,13" RenderTransformOrigin="0.5,0.5" Grid.Row="2" >
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Floppy"/>
                                             <TextBlock Text="  Save"/>
@@ -177,7 +177,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="615,241,0,40" Grid.Row="1">
-                                <Button x:Name="btnSaveFighterByPhase" Height="34"  Click="BtnSaveFighterByPhase_Click" Background="#FF28D137" Margin="206,0,10,0" >
+                                <Button x:Name="btnSaveFighterByPhase" Height="34"  Click="BtnSaveFighterByPhase_Click" Background="#FF28D137" Margin="191,0,10,0" >
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Floppy"/>
                                         <TextBlock Text="  Save"/>

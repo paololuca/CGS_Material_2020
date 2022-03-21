@@ -15,7 +15,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{materialDesign:MaterialDesignFont}" 
-        ResizeMode="CanMinimize"
+        ResizeMode="CanResize"
         Closed="Window_Closed"
         Closing="Window_Closing"
         Icon="img/swords.png">

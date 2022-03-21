@@ -139,9 +139,9 @@ namespace Resources
 
                 while (reader.Read())
                 {
-                    i.PuntiRosso = (int)reader["PuntiAtletaRosso"];
-                    i.PuntiBlu = (int)reader["PuntiAtletaBlu"];
-                    i.DoppiaMorte = ((int)reader["DoppiaMorte"] == 1 ? true : false);
+                    i.PuntiRosso = Convert.ToInt32(reader["PuntiAtletaRosso"].ToString());
+                    i.PuntiBlu = Convert.ToInt32(reader["PuntiAtletaBlu"].ToString());
+                    i.DoppiaMorte = (Convert.ToInt32(reader["DoppiaMorte"].ToString()) == 1 ? true : false);
                 }
 
             }
@@ -176,7 +176,7 @@ namespace Resources
 
                 while (reader.Read())
                 {
-                    result = (int)reader[0];
+                    result = Convert.ToInt32(reader[0].ToString());
                 }
 
             }
@@ -214,15 +214,15 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"],
-                        Campo = (int)reader["Campo"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString()),
+                        Campo = Convert.ToInt32(reader["Campo"].ToString())
                     });
                 }
 
@@ -260,14 +260,14 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString())
                     });
                 }
 
@@ -305,15 +305,15 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"],
-                        Campo = (int)reader["Campo"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString()),
+                        Campo = Convert.ToInt32(reader["Campo"].ToString())
                     });
                 }
 
@@ -351,14 +351,14 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString())
                     });
                 }
 
@@ -396,15 +396,15 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"],
-                        Campo = (int)reader["Campo"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString()),
+                        Campo = Convert.ToInt32(reader["Campo"].ToString())
                     });
                 }
 
@@ -442,14 +442,14 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString())
                     });
                 }
 
@@ -487,15 +487,15 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"],
-                        Campo = (int)reader["Campo"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString()),
+                        Campo = Convert.ToInt32(reader["Campo"].ToString())
                     });
                 }
 
@@ -535,14 +535,14 @@ namespace Resources
                     list.Add(new AtletaEliminatorie()
 
                     {
-                        IdAtleta = (int)reader["IdAtleta"],
-                        IdTorneo = (int)reader["IdTorneo"],
-                        idDisciplina = (int)reader["IdDisciplina"],
-                        Posizione = (int)reader["Posizione"],
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
+                        IdTorneo = Convert.ToInt32(reader["IdTorneo"].ToString()),
+                        idDisciplina = Convert.ToInt32(reader["IdDisciplina"].ToString()),
+                        Posizione = Convert.ToInt32(reader["Posizione"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"]
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString())
                     });
                 }
 
@@ -585,17 +585,17 @@ namespace Resources
                     {
                         IdTorneo = idTorneo,
                         IdDisciplina = idDisciplina,
-                        IdGirone = (int)reader["IdGirone"],
-                        IdAtleta = (int)reader["IdAtleta"],
+                        IdGirone = Convert.ToInt32(reader["IdGirone"].ToString()),
+                        IdAtleta = Convert.ToInt32(reader["IdAtleta"].ToString()),
                         Nome = (String)reader["Nome"],
                         Cognome = (String)reader["Cognome"],
-                        Vittorie = (int)reader["Vittorie"],
-                        Sconfitte = (int)reader["Sconfitte"],
-                        PuntiFatti = (int)reader["PuntiFatti"],
-                        PuntiSubiti = (int)reader["PuntiSubiti"],
-                        Differenziale = (Double)reader["Differenziale"],
-                        Posizionamento = (int)reader["Posizionamento"],
-                        Ranking = Convert.ToDouble(reader["Punteggio"])
+                        Vittorie = Convert.ToInt32(reader["Vittorie"].ToString()),
+                        Sconfitte = Convert.ToInt32(reader["Sconfitte"].ToString()),
+                        PuntiFatti = Convert.ToInt32(reader["PuntiFatti"].ToString()),
+                        PuntiSubiti = Convert.ToInt32(reader["PuntiSubiti"].ToString()),
+                        Differenziale = Convert.ToDouble(reader["Differenziale"]),
+                        Posizionamento = Convert.ToInt32(reader["Posizionamento"].ToString()),
+                        Ranking = Convert.ToDouble(reader["Punteggio"].ToString())
 
                     });
                 }

@@ -244,6 +244,7 @@ namespace Resources
 
             HtmlReport += temp;
             var htmlContent = String.Format(HtmlReport, DateTime.Now);
+            
             var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
             var pdfBytes = htmlToPdf.GeneratePdf(htmlContent);
 

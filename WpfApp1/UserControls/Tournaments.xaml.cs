@@ -40,7 +40,7 @@ namespace HEMATournamentSystem
 
             //TODO legare i bottone di attivazione e disattivazione al ruolo utente
 
-            if (!user.IsAdmin || user.Type != BusinessEntity.Type.ProfileType.Editor)
+            if (!user.IsAdmin && user.Type != BusinessEntity.Type.ProfileType.Editor)
                 btnNewTournament.IsEnabled = false;
         }
 

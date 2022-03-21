@@ -1096,65 +1096,31 @@ namespace Resources
 		
         public static String footer = "</TBODY></TABLE>";
 
-        #endregion
+		#endregion
 
 
-        public static String bracket16 = "<head><title>bracket </title></head><body>" +
-   "<div id=\"H\"    style=\"position:absolute; top:606px; left:1132px;width:24px; height:2x; \">##CAMPO##</div>" +
-   "<div id=\"HL2\"  style=\"position:absolute; top:315px; left:900px; width:130px; height:260px; background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL3\"  style=\"position:absolute; top:635px; left:900px; width:130px; height:260px; background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL4\"  style=\"position:absolute; top:145px; left:670px; width:130px; height:110px; background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL5\"  style=\"position:absolute; top:785px; left:670px; width:130px; height:110px; background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL6\"  style=\"position:absolute; top:315px; left:670px; width:130px; height:110px; background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL7\"  style=\"position:absolute; top:955px; left:670px; width:130px; height:110px; background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL8\"  style=\"position:absolute; top:75px;  left:440px; width:130px; height:40px;  background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL9\"  style=\"position:absolute; top:715px; left:440px; width:130px; height:40px;  background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL10\" style=\"position:absolute; top:175px; left:440px; width:130px; height:40px;  background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL11\" style=\"position:absolute; top:815px; left:440px; width:130px; height:40px;  background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL12\" style=\"position:absolute; top:355px; left:440px; width:130px; height:40px;  background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL13\" style=\"position:absolute; top:995px; left:440px; width:130px; height:40px;  background-image: url(Rood1.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL14\" style=\"position:absolute; top:455px; left:440px; width:130px; height:40px;  background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL15\" style=\"position:absolute; top:1095px;left:440px; width:130px; height:40px;  background-image: url(Blauw1.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL16\" style=\"position:absolute; top:30px;  left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL17\" style=\"position:absolute; top:670px; left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL18\" style=\"position:absolute; top:105px; left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL20\" style=\"position:absolute; top:170px; left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL22\" style=\"position:absolute; top:245px; left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL24\" style=\"position:absolute; top:310px; left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL26\" style=\"position:absolute; top:385px; left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL27\" style=\"position:absolute; top:1025px;left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL28\" style=\"position:absolute; top:1090px;left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL28\" style=\"position:absolute; top:450px; left:210px; width:130px; height:15px;  background-image: url(Rood3.png);  background-size:100% 100%;\"></div>" +
-   "<div id=\"HL30\" style=\"position:absolute; top:525px; left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-   "<div id=\"HL31\" style=\"position:absolute; top:1165px;left:210px; width:130px; height:15px;  background-image: url(Blauw3.png); background-size:100% 100%;\"></div>" +
-
-   "<div id=\"H2\"  style=\"position:absolute; top:255px; left:700px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br><br></FONT></div>" +
-   "<div id=\"H4\"  style=\"position:absolute; top:115px; left:470px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H6\"  style=\"position:absolute; top:395px; left:470px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H8\"  style=\"position:absolute; top:45px ; left:240px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H10\" style=\"position:absolute; top:185px; left:240px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H12\" style=\"position:absolute; top:325px; left:240px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H14\" style=\"position:absolute; top:465px; left:240px; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br> <br> </FONT></div>" +
-   "<div id=\"H16\" style=\"position:absolute; top:10px;  left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##1##<br> </FONT></div>" +
-   "<div id=\"H18\" style=\"position:absolute; top:80px;  left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##2##<br> </FONT></div>" +
-   "<div id=\"H20\" style=\"position:absolute; top:150px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##3##<br> </FONT></div>" +
-   "<div id=\"H22\" style=\"position:absolute; top:220px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##4##<br> </FONT></div>" +
-   "<div id=\"H24\" style=\"position:absolute; top:290px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##5##<br> </FONT></div>" +
-   "<div id=\"H26\" style=\"position:absolute; top:360px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##6##<br> </FONT></div>" +
-   "<div id=\"H28\" style=\"position:absolute; top:430px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##7##<br> </FONT></div>" +
-   "<div id=\"H30\" style=\"position:absolute; top:500px; left:10px ; width:200px; height:60px; border:1px solid #000; \"><FONT SIZE=\"4\" COLOR=\"000000\"> <br>##8##<br> </FONT></div>" +
-			"</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>" +
-			"Firme</br></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-			"<p>____________________________________________</p></br>" +
-	"</body></html>";
-
+		public static String bracket16 = "<h1  style=\"0position: absolute;\">##CAMPO##</h1>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />1- ##1##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />1- ##2##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />2- ##3##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />2- ##4##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />3- ##5##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />3- ##6##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />4- ##7##<br /></span></h3>" +
+									"<h3  style=\"0position: absolute;\"><span style=\"color: 0000000\"> <br />4- ##8##<br /></span></h3>" +
+									"<p>&nbsp;</p>" +
+									"<p>&nbsp;</p>" +
+									"<p>&nbsp;</p>" +
+									"<p>&nbsp;</p>" +
+									"<p>Firme</p> " +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>" +
+									"<p>____________________________________________</p>";
 
         public static String bracket8 = "<head><title>bracket </title></head><body>" +
    "<div id=\"H\"    style=\"position:absolute; top:606px; left:1132px;width:24px; height:2x; \">##CAMPO##</div>" +

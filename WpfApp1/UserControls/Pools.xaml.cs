@@ -493,10 +493,10 @@ namespace HEMATournamentSystem
         private void BtnExportPools_Click(object sender, RoutedEventArgs e)
         {
             PdfManager pdf = new PdfManager();
-            //pdf.StampaGironi(gironi, _tournamentName, _disciplineName);
+            pdf.StampaGironi(gironi, _tournamentName, _disciplineName);
 
-            DynamicsPdfManager dManger = new DynamicsPdfManager();
-            dManger.StampaGironi(gironi, _tournamentName, _disciplineName);
+            //DynamicsPdfManager dManger = new DynamicsPdfManager();
+            //dManger.StampaGironi(gironi, _tournamentName, _disciplineName);
         }
 
         private void BtnExportMatch_Click(object sender, RoutedEventArgs e)

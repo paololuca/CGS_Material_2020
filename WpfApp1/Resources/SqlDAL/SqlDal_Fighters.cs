@@ -34,14 +34,7 @@ namespace Resources
                 idInserted = Convert.ToInt32(reader[0]);
 
                 if (idInserted > 0)
-                {
-                    int rowAffected = InsertNewRanking(idInserted);
-                    //insert in ranking storico
-                    if (rowAffected >= 1)
-                        return idInserted;
-                    else
-                        return -1;
-                }
+                    return idInserted;
                 else
                     return -1;
             }

@@ -1,0 +1,41 @@
+﻿<Window x:Class="HEMATournamentSystem.AddTournament"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterScreen"
+        Title="Add a new Tournament"
+        Closing="Window_Closing"
+        Closed="Window_Closed"
+        ResizeMode="CanMinimize" Height="450" Width="800">
+    <Grid>
+        <DatePicker Name="startDate" Width="140" materialDesign:HintAssist.Hint="Start Date" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Height="67" Margin="445,10,208.6,344.2" />
+        <DatePicker Name="endDate" Width="140" materialDesign:HintAssist.Hint="End Date" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Height="67" Margin="445,82,208.6,272.2" />
+
+        <ListBox Margin="11,173,572.6,10.2" Name="remainingDiscipline" BorderThickness="2" BorderBrush="BlueViolet"/>
+        <ListBox Margin="0,173,208.6,10.2" Name="selectedDiscipline" HorizontalAlignment="Right" Width="214" BorderThickness="2" BorderBrush="BlueViolet"/>
+        <Button x:Name="btnAddDiscipline" ToolTip="Add Discipline to tournament" Click="AddDiscipline_Click"
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="Auto" Margin="226,173,427.6,210.2" Background="#FF28D138" BorderBrush="#FF673AB7">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Redo"/>
+                <TextBlock Text="  Add"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnRemoveDiscipline" ToolTip="Remove Discipline from tournament"  Click="RemoveDiscipline_Click" BorderBrush="#FF673AB7"
+            materialDesign:RippleAssist.Feedback="#DD000000" Height="Auto" Margin="226,240,427.6,145.2" Background="#FFDC0606">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Undo"/>
+                <TextBlock Text="  Del"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnSaveTournament" Height="Auto"  Click="btnSaveTournament_Click" Background="#FF28D137" Margin="654,373,9.6,10.2" IsDefault="True" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="CalendarAdd"/>
+                <TextBlock Text="  Save"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</Window>

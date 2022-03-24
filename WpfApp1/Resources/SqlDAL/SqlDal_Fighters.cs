@@ -13,8 +13,8 @@ namespace Resources
     {
         public static Int32 InsertNewAtleta(AtletaEntity a)
         {
-            String commandText = "INSERT INTO Atleti VALUES (" +
-                                a.IdAsd + ",'" + a.Cognome + "','" + a.Nome + "','" + a.Sesso + "','" + a.Email + "'); " +
+            String commandText = "INSERT INTO Atleti(IdAsd,Cognome,Nome,Sesso,Email, IsEnabled)  VALUES (" +
+                                a.IdAsd + ",'" + a.Cognome + "','" + a.Nome + "','" + a.Sesso + "','" + a.Email + "', 1); " +
                                     "SELECT SCOPE_IDENTITY();";
 
             SqlConnection c = null;

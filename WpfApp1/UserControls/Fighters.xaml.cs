@@ -87,7 +87,10 @@ namespace HEMATournamentSystem
 
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = atletiPresenti.Where(fighter => fighter.Nome.ToLower().Contains(txtSearch.Text) || fighter.Cognome.ToLower().Contains(txtSearch.Text)).ToList();
+            var filtered = atletiPresenti.Where(fighter => 
+            fighter.Nome.ToLower().Contains(txtSearch.Text.ToLower()) 
+            || 
+            fighter.Cognome.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
 
             dataGridAthletes.ItemsSource = filtered;
         }
@@ -97,18 +100,34 @@ namespace HEMATournamentSystem
             if (!CheckForSaving())
                 return;
 
-            var ass = cmbAssociation.SelectedItem;
+            var ass = cmbAssociation.SelectedItem as AsdEntity;
 
-            //save
+            int id = SqlDal_Fighters.InsertNewAtleta(new AtletaEntity
+                ()
+            {
+                IdAsd = ass.Id,
+                Cognome = txtSurname.Text.TrimStart().TrimEnd(),
+                Nome = txtName.Text.TrimStart().TrimEnd(),
+                Sesso = (bool)rbtMaschile.IsChecked ? "M" : "F",
+                Email = txtEmail.Text.TrimStart().TrimEnd()
+            });
 
-            ClearField();
+            if (id > 0)
+            {
+                new MessageBoxCustom("Saved", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
+                ClearField();
+                LoadListAtleti();
+            }
+            else
+                new MessageBoxCustom("Error during saving", MessageType.Error, MessageButtons.Ok).ShowDialog();
 
         }
 
         private void ClearField()
         {
             txtName.Text = "";
-            txtSurnameame.Text = "";
+            txtSurname.Text = "";
             txtEmail.Text = "";
 
             cmbAssociation.SelectedIndex = 0;
@@ -121,7 +140,7 @@ namespace HEMATournamentSystem
                 new MessageBoxCustom("Name cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 return false;
             }
-            else if (txtSurnameame.Text == "")
+            else if (txtSurname.Text == "")
             { 
                 new MessageBoxCustom("Surname cannot be empty", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 return false;

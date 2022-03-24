@@ -92,6 +92,9 @@ namespace HEMATournamentSystem
 
             newTorneo.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             newTorneo.Show();
+
+            var nT = new AddTournament();
+            nT.Show();
         }
 
         private void creaTorneo_FormClosed(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -129,11 +132,6 @@ namespace HEMATournamentSystem
             dataGridClosedTournament.ItemsSource = filtered;
         }
 
-        private void btnDeleteTournament_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnActivateTournament_Click(object sender, RoutedEventArgs e)
         {
             
@@ -168,6 +166,43 @@ namespace HEMATournamentSystem
             report.Show();
         }
 
-        
+        private void btnDeleteTournament_Click(object sender, RoutedEventArgs e)
+        {
+            bool? result = new MessageBoxCustom("Tournament will be DELETED! Continue?",
+                MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
+
+            if(result.Value)
+            {
+                TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
+
+                DeleteMatches(torunament);
+
+                SqlDal_Tournaments.EliminaTorneo(torunament.Id);
+            }
+        }
+
+        private static void DeleteMatches(TorneoEntity torunament)
+        {
+            var disciplines = SqlDal_Tournaments.GetDisciplineByIdTorneo(torunament.Id);
+
+            foreach (var d in disciplines)
+            {
+                SqlDal_Pools.DeletePoolsAndMatches(torunament.Id, d.IdDisciplina);
+
+                SqlDal_Pools.DeleteAllPahases(torunament.Id, d.IdDisciplina);
+            }
+        }
+
+        private void btnDeleteTournamentMatchs_Click(object sender, RoutedEventArgs e)
+        {
+            bool? result = new MessageBoxCustom("Tournament will be DELETED! Continue?",
+                MessageType.Warning, MessageButtons.OkCancel).ShowDialog();
+
+            if (result.Value)
+            {
+                TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
+                DeleteMatches(torunament);
+            }
+        }
     }
 }

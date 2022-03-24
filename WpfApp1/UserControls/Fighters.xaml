@@ -21,7 +21,7 @@
                         materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
         <materialDesign:PackIcon Kind="AccountCircle" Margin="10,65,0,0" Height="82" Width="74" RenderTransformOrigin="-0.925,-0.142" />
         <TextBox Name="txtName" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="96,61,650,476" />
-        <TextBox Name="txtSurnameame" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="385,61,361,476" />
+        <TextBox Name="txtSurname" materialDesign:HintAssist.Hint="Surname" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="385,61,361,476" />
         <StackPanel Margin="674,65,0,476" HorizontalAlignment="Left" Width="108" Orientation="Horizontal">
 
             <RadioButton Name="rbtMaschile"  Margin="4,10,4,11" IsChecked="False" Content="M" Width="41" BorderBrush="#FFB835B2" />
@@ -38,7 +38,7 @@
         <Button x:Name="btnSaveFighter" Height="Auto"  Click="BtnSaveFighter_Click" Background="#FF28D137" Margin="820,65,78,473" RenderTransformOrigin="0.5,0.5"  >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Floppy"/>
-                <TextBlock Text="  Add Fighter"/>
+                <TextBlock Text="  Save"/>
             </StackPanel>
         </Button>
         <Button x:Name="btnExportFighters" Height="Auto"  Click="btnExportFighters_Click" Background="#FF673AB7" Margin="972,65,10,473" RenderTransformOrigin="0.5,0.5" ToolTip="Export List" >

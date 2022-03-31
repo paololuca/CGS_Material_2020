@@ -452,7 +452,7 @@ namespace HEMATournamentSystem
 
             //TODO calcolo dei valori presi da DB
             //TODO atletiAmmessiEliminatorie = QualificationManager.GetAdmittedFightersNumber(numeroAtletiTorneoDisciplina)
-            atletiAmmessiEliminatorie = numeroAtletiTorneoDisciplina >= 45 ? 32 :
+            atletiAmmessiEliminatorie = numeroAtletiTorneoDisciplina >= 56 ? 32 :
                         numeroAtletiTorneoDisciplina >= 24 ? 16 :
                         numeroAtletiTorneoDisciplina >= 12 ? 8 : 4;
 

@@ -9,31 +9,37 @@
         WindowStartupLocation="CenterScreen"
         Title="Chek Result" Height="728.5" Width="900">
     <Grid Margin="0,0,0,-21">
-        <DataGrid x:Name="dataGridResult" HorizontalAlignment="Left" Height="552" Margin="31,32,0,0" VerticalAlignment="Top" Width="827"
+        <DataGrid x:Name="dataGridResult" Margin="31,32,34,134"
                   CanUserSortColumns="False" CanUserAddRows="False" materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                   materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" CellEditEnding="dataGridResult_CellEditEnding"
                   AutoGeneratingColumn="DataGridResult_AutoGeneratingColumn" SelectionUnit="Cell" SelectionMode="Extended"/>
 
-        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="10,589,0,0" VerticalAlignment="Top" Width="872"/>
-        
-        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FFA0AAA0" Margin="616,618,164,47" IsCancel="True">
+        <Label x:Name="lblStatus" Content="" Margin="10,589,10,0" VerticalAlignment="Top"/>
+
+        <Button x:Name="btnCancel" Height="32"  Click="BtnCancel_Click" Background="#FFA0AAA0" Margin="0,0,164,58" IsCancel="True" HorizontalAlignment="Right" Width="112" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Cancel"/>
                 <TextBlock Text="  Cancel"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnSaveResult" Height="32"  Click="btnSaveResult_Click" Background="#FF28D137" Margin="733,618,34,47" IsDefault="True" >
+        <Button x:Name="btnSaveResult" Height="32"  Click="btnSaveResult_Click" Background="#FF28D137" Margin="0,0,34,58" IsDefault="True" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="125" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Create"/>
                 <TextBlock Text="  Confirm"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="31,618,748,47" >
+        <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="31,0,0,58" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="113" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Pdf"/>
                 <TextBlock Text="  Print"/>
             </StackPanel>
         </Button>
-        
+        <Button x:Name="btnExportResult" Height="32"  Click="btnExportResult_Click" Background="#FF168105" Margin="149,0,0,58" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="113" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="MicrosoftExcel"/>
+                <TextBlock Text="  Export"/>
+            </StackPanel>
+        </Button>
+
     </Grid>
 </Window>

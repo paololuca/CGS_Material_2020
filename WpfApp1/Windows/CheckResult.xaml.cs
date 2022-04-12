@@ -2,6 +2,7 @@
 using Resources;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -188,6 +189,83 @@ namespace HEMATournamentSystem
 
                 WindowCheckResult = true;
                 this.Close();
+            }
+        }
+
+        private void btnExportResult_Click(object sender, RoutedEventArgs e)
+        {
+            using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = fbd.ShowDialog();
+
+                var nomeTorneo = SqlDal_Tournaments.GetTorneoById(idTorneo).Name;
+                var nomeDisciplina = SqlDal_Tournaments.GetDisciplinaById(idDisciplina);
+
+                var fileNameWithPath = fbd.SelectedPath + "\\" + nomeTorneo + "_" + nomeDisciplina + ".xlsx";
+
+                if (File.Exists(fileNameWithPath))
+                    File.Delete(fileNameWithPath);
+
+                // Creating a Excel object. 
+                Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+
+                try
+                {
+
+                    worksheet = workbook.ActiveSheet;
+
+                    worksheet.Name = "Risultati";
+
+                    int cellRowIndex = 1;
+
+                    worksheet.Cells[cellRowIndex, 1] = "Qualificato";
+                    worksheet.Cells[cellRowIndex, 2] = "Cognome";
+                    worksheet.Cells[cellRowIndex, 3] = "Nome";
+                    worksheet.Cells[cellRowIndex, 4] = "Vittorie";                                         
+                    worksheet.Cells[cellRowIndex, 5] = "Sconfitte";
+                    worksheet.Cells[cellRowIndex, 6] = "PuntiFatti";
+                    worksheet.Cells[cellRowIndex, 7] = "PuntiSubiti";
+                    worksheet.Cells[cellRowIndex, 8] = "Differenziale";
+                    worksheet.Cells[cellRowIndex, 9] = "Ranking";
+
+                    cellRowIndex++;
+
+                    foreach (GironiConclusi r in dataGridResult.Items)
+                    {
+
+                        worksheet.Cells[cellRowIndex, 1] = r.Qualificato;
+                        worksheet.Cells[cellRowIndex, 2] = r.Cognome;
+                        worksheet.Cells[cellRowIndex, 3] = r.Nome;
+                        worksheet.Cells[cellRowIndex, 4] = r.Vittorie;
+
+                        worksheet.Cells[cellRowIndex, 5] = r.Sconfitte;
+                        worksheet.Cells[cellRowIndex, 6] = r.PuntiFatti;
+                        worksheet.Cells[cellRowIndex, 7] = r.PuntiSubiti;
+                        worksheet.Cells[cellRowIndex, 8] = r.Differenziale;
+
+                        worksheet.Cells[cellRowIndex, 9] = r.Ranking;
+                        
+                        cellRowIndex++;
+                    }
+
+                    workbook.SaveAs(fileNameWithPath);
+
+                    new MessageBoxCustom("Export completato con successo", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
+                }
+                catch (System.Exception ex)
+                {
+                    new MessageBoxCustom("Errore inaspettato durante l'export", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                    throw ex;
+                }
+                finally
+                {
+                    excel.Quit();
+                    workbook = null;
+                    excel = null;
+                }
             }
         }
     }

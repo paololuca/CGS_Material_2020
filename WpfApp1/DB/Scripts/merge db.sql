@@ -8,7 +8,7 @@ select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.
 */
 
 declare @IdTorneo int
-set @IdTorneo = 3
+set @IdTorneo = 7
 
 delete from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.Gironi where IdTorneo  = @IdTorneo
 delete from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = @IdTorneo

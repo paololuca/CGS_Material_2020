@@ -22,7 +22,8 @@
         <materialDesign:PackIcon Kind="HomeAccount" Margin="0,61,0,0" Height="90" Width="90" />
         <TextBox Name="txtAssociation" materialDesign:HintAssist.Hint="Association Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="96,61,650,476" />
         <TextBox Name="txtAssociationPlace" materialDesign:HintAssist.Hint="Association Place" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="385,61,361,476" RenderTransformOrigin="1.433,-2.291" />
-        <Button x:Name="btnSaveAssociation" Height="Auto"  Click="BtnSaveAssociation_Click" Background="#FF28D137" Margin="688,62,176,476" RenderTransformOrigin="0.5,0.5"  >
+        <Button x:Name="btnSaveAssociation" Height="Auto"  Click="BtnSaveAssociation_Click" IsEnabled="False"
+                Background="#FF28D137" Margin="688,62,176,476" RenderTransformOrigin="0.5,0.5"  >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Floppy"/>
                 <TextBlock Text="  Save Association"/>

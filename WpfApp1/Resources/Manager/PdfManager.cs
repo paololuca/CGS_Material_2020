@@ -871,7 +871,10 @@ namespace Resources
             p.Show();
             int i = 1;
 
-            temp = "<A NAME=\"table1\"><H1>Campo 1</H1></A>";
+            temp = "<A NAME=\"table1\"><H2>Campo 1<BR><BR>";
+            temp += SqlDal_Fighters.GetAtletaById(campo1[0].IdAtleta).Asd + " - " + campo1[0].Cognome + " " + campo1[0].Nome + "<BR>";
+            temp += SqlDal_Fighters.GetAtletaById(campo1[3].IdAtleta).Asd + " - " + campo1[3].Cognome + " " + campo1[3].Nome + "<BR>";
+            temp += "</H2></A><BR>";
             temp += FormattedString.match.Replace("##a##", campo1[0].Cognome + " " + campo1[0].Nome);
             temp = temp.Replace("##b##", campo1[3].Cognome + " " + campo1[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Primo e Secondo Posto");
@@ -894,7 +897,10 @@ namespace Resources
             #endregion
 
             #region campo2
-            temp = "<A NAME=\"table1\"><H1>Campo 2</H1></A>";
+            temp = "<A NAME=\"table1\"><H2>Campo 2<BR><BR>";
+            temp += SqlDal_Fighters.GetAtletaById(campo2[0].IdAtleta).Asd + " - " + campo2[0].Cognome + " " + campo2[0].Nome + "<BR>";
+            temp += SqlDal_Fighters.GetAtletaById(campo2[3].IdAtleta).Asd + " - " + campo2[3].Cognome + " " + campo2[3].Nome + "<BR>";
+            temp += "</H2></A><BR>";
             temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
             temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
             temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");

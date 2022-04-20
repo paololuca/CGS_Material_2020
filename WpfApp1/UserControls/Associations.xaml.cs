@@ -42,6 +42,8 @@ namespace HEMATournamentSystem
             dataGridAssociations.ItemsSource = associations;
         }
 
+        #region Buttons
+
         //TODO
         private void BtnDeleteAssociation_Click(object sender, RoutedEventArgs e)
         {
@@ -53,6 +55,19 @@ namespace HEMATournamentSystem
         {
 
         }
+
+        //TODO
+        private void btnModifyAssociation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //TODO
+        private void BtnSaveAssociation_Click(object sender, RoutedEventArgs e)
+        {
+            //SqlDal_Associations.GetAllAsd
+        } 
+        #endregion
 
         private void DataGridAssociations_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -82,11 +97,9 @@ namespace HEMATournamentSystem
             return associations.Where(associaition => associaition.NomeAsd.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
         }
 
-        //TODO
-        private void BtnSaveAssociation_Click(object sender, RoutedEventArgs e)
-        {
+        
 
-        }
+        
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -144,5 +157,7 @@ namespace HEMATournamentSystem
         {
             //TODO to implement
         }
+
+        
     }
 }

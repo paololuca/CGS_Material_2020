@@ -594,6 +594,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
+    <Content Include="DB\Scripts\Torneo Stats.sql" />
     <Content Include="DB\Scripts\Controllo iscritti.sql" />
     <Content Include="DB\Scripts\HemaRatings\cgs.sql" />
     <Content Include="DB\Scripts\HemaRatings\cgs_sedicesimi.sql" />

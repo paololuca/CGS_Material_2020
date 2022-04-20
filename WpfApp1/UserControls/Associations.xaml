@@ -36,6 +36,17 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <Button x:Name="btnModifyAssociation" Height="32"  Click="btnModifyAssociation_Click" Background="#FF673AB7" Width="Auto" ToolTip="Modify">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ModeEdit"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
                             <Button x:Name="btnMigrateAssociation" Height="32"  Click="BtnMigrateAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Migrate">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Transfer"/>

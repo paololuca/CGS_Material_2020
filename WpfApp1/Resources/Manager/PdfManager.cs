@@ -78,7 +78,6 @@ namespace Resources
             Process.Start(".\\PDF\\AtletiPostGironi" + tournamentName + disciplineName + ".pdf");
         }
 
-
         public void StampaRisultatiGironi(DataGridView grid, string nomeTorneo, string disciplina)
         {
             ProgressBar p = new ProgressBar();

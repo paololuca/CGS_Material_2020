@@ -1,7 +1,7 @@
 ﻿declare @IdTorneo int;
-set @IdTorneo = 4;
+set @IdTorneo = 9;
 
-select t.NomeTorneo,d.Nome, td.Categoria, Fighters from 
+select t.NomeTorneo,d.Nome, td.Categoria, Fighters, Fighters/4 as Pools from 
 Torneo t 
 join TorneoVsDiscipline td on t.Id = td.IdTorneo
 join Discipline d on td.IdDisciplina = d.Id

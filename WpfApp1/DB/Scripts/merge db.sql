@@ -1,14 +1,12 @@
 /*
 select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.GironiIncontri where IdTorneo  = 3
-select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.GironiIncontri where IdTorneo  = 3
-select * from [C:\USERS\PAOLO\DESKTOP\BONONIA 2021\GESTIONALE TORNEO\FEMMINILE\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = 3
 select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = 3
 select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.Qualificati16  where IdTorneo  = 3
 select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.Qualificati16 where IdTorneo  = 3 
 */
 
 declare @IdTorneo int
-set @IdTorneo = 7
+--set @IdTorneo = --id torneo femminile
 
 delete from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.Gironi where IdTorneo  = @IdTorneo
 delete from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = @IdTorneo

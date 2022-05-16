@@ -11,6 +11,7 @@ namespace BusinessEntity.DAO
         public double Punteggio { get; set; }
         public int Anno { get; set; }
         public int Fase { get; set; }
+        public DateTime InsertedDate { get; set; }
 
     }
 }

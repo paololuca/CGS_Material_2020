@@ -18,9 +18,7 @@ namespace HEMATournamentSystem
         {
             InitializeComponent();
             _connectionAvailable = Helper.TestConnectionString();
-            //TODOPL da spostare var f = new FighterStats();
-            //TODOPL da spostare f.Show();
-
+            
             #region to delete
             //var currentUser = SqlDal_MasterDB.CheckLogin("admin");
             //var main = new MainWindow(currentUser);

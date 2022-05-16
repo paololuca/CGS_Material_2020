@@ -10,18 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
     <Grid>
-        <d3:ChartPlotter Name="plotter" Margin="10,10,20,213">
-            <d3:ChartPlotter.HorizontalAxis>
-                <d3:HorizontalDateTimeAxis Name="dateAxis"/>
-            </d3:ChartPlotter.HorizontalAxis>
-            <d3:ChartPlotter.VerticalAxis>
-                <d3:VerticalIntegerAxis Name="countAxis"/>
-            </d3:ChartPlotter.VerticalAxis>
-            <d3:Header FontFamily="Century Gothic" Content="Sword and dagger"/>
-            <d3:VerticalAxisTitle FontFamily="Arial" Content="Ranking"/>
-            <d3:HorizontalAxisTitle FontFamily="Arial" Content="Date"/>
-        </d3:ChartPlotter>
-        <d3:ChartPlotter Name="plotter2" Margin="10,0,20,28" Height="162" VerticalAlignment="Bottom">
+        <d3:ChartPlotter Name="sideSwordPlotter" Margin="10,0,20.2,250.8" Height="162" VerticalAlignment="Bottom">
             <d3:ChartPlotter.HorizontalAxis>
                 <d3:HorizontalDateTimeAxis Name="dateAxis2"/>
             </d3:ChartPlotter.HorizontalAxis>
@@ -32,5 +21,17 @@
             <d3:VerticalAxisTitle FontFamily="Arial" Content="Ranking"/>
             <d3:HorizontalAxisTitle FontFamily="Arial" Content="Date"/>
         </d3:ChartPlotter>
+        <d3:ChartPlotter Name="swordAndDaggerPlotter" Margin="10,213,20.2,9.8">
+            <d3:ChartPlotter.HorizontalAxis>
+                <d3:HorizontalDateTimeAxis Name="dateAxis"/>
+            </d3:ChartPlotter.HorizontalAxis>
+            <d3:ChartPlotter.VerticalAxis>
+                <d3:VerticalIntegerAxis Name="countAxis"/>
+            </d3:ChartPlotter.VerticalAxis>
+            <d3:Header FontFamily="Century Gothic" Content="Sword and dagger"/>
+            <d3:VerticalAxisTitle FontFamily="Arial" Content="Ranking"/>
+            <d3:HorizontalAxisTitle FontFamily="Arial" Content="Date"/>
+        </d3:ChartPlotter>
+        
     </Grid>
 </Window>

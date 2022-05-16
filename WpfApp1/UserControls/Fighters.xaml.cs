@@ -82,7 +82,9 @@ namespace HEMATournamentSystem
 
         private void BtnDetailsAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            AtletaEntity fighter = ((FrameworkElement)sender).DataContext as AtletaEntity;
+            var f = new FighterStats(fighter.IdAtleta);
+            f.Show();
         }
 
         private void TxtSearch_KeyUp(object sender, KeyEventArgs e)

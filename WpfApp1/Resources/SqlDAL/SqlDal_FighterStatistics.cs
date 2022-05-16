@@ -37,6 +37,7 @@ namespace Resources
                         Punteggio = Convert.ToDouble(reader["Punteggio"].ToString()),
                         Anno = Convert.ToInt32(reader["Anno"].ToString()),
                         Fase = Convert.ToInt32(reader["Fase"].ToString()),
+                        InsertedDate = Convert.ToDateTime(reader["DataInserimentoRanking"].ToString())
                     });
                 }                    
 

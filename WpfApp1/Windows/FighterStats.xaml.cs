@@ -15,25 +15,59 @@ namespace HEMATournamentSystem
     /// </summary>
     public partial class FighterStats : Window
     {
-        public FighterStats()
+        private int idFighter;
+
+        public FighterStats(int idFighter)
         {
+            this.idFighter = idFighter;
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<RankingByYear> rankingList = LoadBugInfo(54, 2);   //s&d per pielle
+            FillSideSword();
+            FillSwordAndDagger();
 
+        } // Window1_Loaded()
+
+        private void FillSideSword()
+        {
+            List<RankingByYear> rankingList = LoadUserInfo(idFighter, 1);
+
+            CompositeDataSource compositeDataSource = CreateCompositeDataSource(rankingList);
+
+            sideSwordPlotter.AddLineGraph(compositeDataSource,
+                new Pen(Brushes.Blue, 2),
+                new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
+                new PenDescription("Sidesword"));
+
+            sideSwordPlotter.Viewport.FitToView();
+        }
+
+        private void FillSwordAndDagger()
+        {
+            List<RankingByYear> rankingList = LoadUserInfo(idFighter, 2);   //s&d per pielle
+
+            CompositeDataSource compositeDataSource = CreateCompositeDataSource(rankingList);
+
+            swordAndDaggerPlotter.AddLineGraph(compositeDataSource,
+                new Pen(Brushes.Blue, 2),
+                new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
+                new PenDescription("Sword and Dagger"));
+
+            swordAndDaggerPlotter.Viewport.FitToView();
+        }
+
+        private CompositeDataSource CreateCompositeDataSource(List<RankingByYear> rankingList)
+        {
             DateTime[] dates = new DateTime[rankingList.Count];
             double[] punteggi = new double[rankingList.Count];
             double[] numberClosed = new double[rankingList.Count];
 
             for (int i = 0; i < rankingList.Count; ++i)
             {
-
-                dates[i] = new DateTime(rankingList[i].Anno, i+1, 1);
+                dates[i] = rankingList[i].InsertedDate;
                 punteggi[i] = rankingList[i].Punteggio;
-                //numberClosed[i] = rankingList[i].numberClosed;
             }
 
             var datesDataSource = new EnumerableDataSource<DateTime>(dates);
@@ -42,34 +76,14 @@ namespace HEMATournamentSystem
             var numberOpenDataSource = new EnumerableDataSource<double>(punteggi);
             numberOpenDataSource.SetYMapping(y => y);
 
-            //var numberClosedDataSource = new EnumerableDataSource<int>(numberClosed);
-            //numberClosedDataSource.SetYMapping(y => y);
-
             CompositeDataSource compositeDataSource1 = new
               CompositeDataSource(datesDataSource, numberOpenDataSource);
             //CompositeDataSource compositeDataSource2 = new
             //  CompositeDataSource(datesDataSource, numberClosedDataSource);
-            
-            plotter.AddLineGraph(compositeDataSource1,
-                new Pen(Brushes.Blue, 2),
-                new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
-                new PenDescription("Sword and Dagger"));
+            return compositeDataSource1;
+        }
 
-            //plotter.AddLineGraph(compositeDataSource2, 
-            //    new Pen(Brushes.Green, 2),
-            //    new TrianglePointMarker
-            //    {
-            //        Size = 10.0,
-            //        Pen = new Pen(Brushes.Black, 2.0),
-            //        Fill = Brushes.GreenYellow
-            //    },
-            //    new PenDescription("Number bugs closed"));
-
-            plotter.Viewport.FitToView();
-
-        } // Window1_Loaded()
-
-        private static List<RankingByYear> LoadBugInfo(int idAtleta, int idDisciplina)
+        private static List<RankingByYear> LoadUserInfo(int idAtleta, int idDisciplina)
         {
             var result = SqlDal_FighterStatistics.GetFighterRankingByCategory(idAtleta, idDisciplina);
 

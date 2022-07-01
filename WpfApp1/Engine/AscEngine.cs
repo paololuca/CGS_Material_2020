@@ -42,7 +42,7 @@ namespace HEMATournamentSystem.Engine
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(3 - match.PuntiRosso);
+                            res.PuntiSubiti += Math.Abs(5 - match.PuntiRosso);
                         }
                         else
                         {
@@ -67,14 +67,14 @@ namespace HEMATournamentSystem.Engine
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(3 - match.PuntiBlu);
+                            res.PuntiSubiti += Math.Abs(5 - match.PuntiBlu);
                         }
 
                         else
                         {
-                            if ((match.PuntiBlu > match.PuntiRosso) && (match.PuntiBlu >= 3))
+                            if ((match.PuntiBlu > match.PuntiRosso) && (match.PuntiBlu >= 5))
                                 res.Vittorie++;
-                            else if ((match.PuntiBlu < match.PuntiRosso) && (match.PuntiRosso >= 3))
+                            else if ((match.PuntiBlu < match.PuntiRosso) && (match.PuntiRosso >= 5))
                                 res.Sconfitte++;
                             else
                             {

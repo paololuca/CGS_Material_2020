@@ -14,6 +14,7 @@ namespace HEMATournamentSystem.Engine
     {
         private static int _winnerPool = 1;
         private static int _looserPool = 2;
+        private static int _maxScoreCap = 5;
 
         public static void SaveTournamentPool(
             int idTorneo, int idDisciplina, int poolIndex,
@@ -37,12 +38,12 @@ namespace HEMATournamentSystem.Engine
                         return;
                     }
 
-                    if (match.IdRosso == atleta) //se sono l'atleta a "sinistra"
+                    if (match.IdRosso == atleta) //se sono l'atleta a "sinistra" [ROSSO]
                     {
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(5 - match.PuntiRosso);
+                            res.PuntiSubiti += Math.Abs(_maxScoreCap - match.PuntiRosso);
                         }
                         else
                         {
@@ -50,40 +51,25 @@ namespace HEMATournamentSystem.Engine
                                 res.Vittorie++;
                             else if (match.PuntiRosso < match.PuntiBlu)
                                 res.Sconfitte++;
-                            else
-                            {
-                                if (match.PuntiRosso > match.PuntiBlu)
-                                    res.Vittorie++;
-                                else if (match.PuntiRosso < match.PuntiBlu)
-                                    res.Sconfitte++;
-                            }
-
+                            
                             res.PuntiFatti += match.PuntiRosso;
                             res.PuntiSubiti += match.PuntiBlu;
                         }
                     }
-                    else if (match.IdBlu == atleta)   //se sono l'atleta a "destra"
+                    else if (match.IdBlu == atleta)   //se sono l'atleta a "destra" [BLU]
                     {
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(5 - match.PuntiBlu);
+                            res.PuntiSubiti += Math.Abs(_maxScoreCap - match.PuntiBlu);
                         }
-
                         else
                         {
-                            if ((match.PuntiBlu > match.PuntiRosso) && (match.PuntiBlu >= 5))
+                            if (match.PuntiBlu > match.PuntiRosso)
                                 res.Vittorie++;
-                            else if ((match.PuntiBlu < match.PuntiRosso) && (match.PuntiRosso >= 5))
+                            else if (match.PuntiBlu < match.PuntiRosso)
                                 res.Sconfitte++;
-                            else
-                            {
-                                if (match.PuntiBlu > match.PuntiRosso)
-                                    res.Vittorie++;
-                                else if(match.PuntiBlu < match.PuntiRosso)
-                                    res.Sconfitte++;
-                            }
-
+                            
                             res.PuntiFatti += match.PuntiBlu;
                             res.PuntiSubiti += match.PuntiRosso;
                         }

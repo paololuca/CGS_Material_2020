@@ -109,11 +109,11 @@ namespace HEMATournamentSystem
             
             SqlDal_Pools.DeleteAllPahases(idTorneo, idDisciplina);
 
-            var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina);
-
             //TODO: da parametrizzare
 
-            bool rankingEnabled = partecipantiTorneo.Sum(x => x.Ranking) != 0;
+            bool rankingEnabled = false; // partecipantiTorneo.Sum(x => x.Ranking) != 0;
+
+            var partecipantiTorneo = SqlDal_Tournaments.GetAtletiTorneoVsDisciplinaAssoluti(idTorneo, idDisciplina, rankingEnabled);
 
             numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina);            
 

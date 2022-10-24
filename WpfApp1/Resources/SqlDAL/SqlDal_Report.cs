@@ -14,7 +14,7 @@ namespace Resources
         {
             List<OutputRisultatiTorneo> result = new List<OutputRisultatiTorneo>();
 
-            String commandText = "SELECT rosso.Id IdRosso, rosso.Cognome as CognomeAtletaRosso, rosso.Nome as NomeAtletaRosso, gi.PuntiAtletaRosso, blu.Id IdBlu, blu.Cognome CognomeAtletaBlu, blu.Nome as NomeAtletaBlu, gi.PuntiAtletaBlu, NumeroGirone as Field " +
+            String commandText = "SELECT rosso.Id IdRosso, rosso.Cognome as CognomeAtletaRosso, rosso.Nome as NomeAtletaRosso, gi.PuntiAtletaRosso, blu.Id IdBlu, blu.Cognome CognomeAtletaBlu, blu.Nome as NomeAtletaBlu, gi.PuntiAtletaBlu, NumeroGirone as Field, DoppiaMorte " +
                                     "FROM GironiIncontri gi " +
                                     "join Atleti rosso on gi.IdAtletaRosso = rosso.Id " +
                                     "join Atleti blu on gi.IdAtletaBlu = blu.Id " +
@@ -45,7 +45,8 @@ namespace Resources
                         CognomeBlu = (string)reader["CognomeAtletaBlu"],
                         NomeBlu = (string)reader["NomeAtletaBlu"],
                         PuntiBlu = (int)reader["PuntiAtletaBlu"],
-                        Campo = (int)reader["Field"]
+                        Campo = (int)reader["Field"],
+                        DoppiaMorte = Convert.ToBoolean((int)reader["DoppiaMorte"])
                     });
                 }
                 if (result.Count > 0)

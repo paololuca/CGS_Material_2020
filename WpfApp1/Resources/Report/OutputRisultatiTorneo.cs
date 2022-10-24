@@ -17,6 +17,7 @@ namespace Report
         public string NomeBlu { get; set; }
         public int PuntiBlu { get; set; }
         public int Campo { get; set; }
+        public bool DoppiaMorte { get; set; }
 
     }
 }

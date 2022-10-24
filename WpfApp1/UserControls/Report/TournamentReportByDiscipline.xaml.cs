@@ -124,13 +124,17 @@ namespace HEMATournamentSystem
 
                 #region Gironi
                 //Loop through gironi
-                
-                for (int j = 0; j < dataGridViewGironi.Columns.Count; j++)
-                {
-                    // Excel index starts from 1,1. As first Row would have the Column headers, adding a condition check. 
-                    worksheet.Cells[cellRowIndex, cellColumnIndex] = dataGridViewGironi.Columns[j].Header.ToString();
-                    cellColumnIndex++;
-                }
+
+                worksheet.Cells[cellRowIndex, 1] = "IdRosso";
+                worksheet.Cells[cellRowIndex, 2] = "CognomeRosso";
+                worksheet.Cells[cellRowIndex, 3] = "NomeRosso";
+                worksheet.Cells[cellRowIndex, 4] = "PuntiRosso";
+                worksheet.Cells[cellRowIndex, 5] = "IdBlu";
+                worksheet.Cells[cellRowIndex, 6] = "CognomeBlu";
+                worksheet.Cells[cellRowIndex, 7] = "NomeBlu";
+                worksheet.Cells[cellRowIndex, 8] = "PuntiBlu";
+                worksheet.Cells[cellRowIndex, 9] = "Campo";
+                worksheet.Cells[cellRowIndex, 10] = "DoppiaMorte";
                 cellRowIndex++;
 
                 foreach (OutputRisultatiTorneo r in dataGridViewGironi.Items)
@@ -146,6 +150,8 @@ namespace HEMATournamentSystem
                     worksheet.Cells[cellRowIndex, 8] = r.PuntiBlu;
 
                     worksheet.Cells[cellRowIndex, 9] = r.Campo;
+                    worksheet.Cells[cellRowIndex, 10] = r.DoppiaMorte.ToString();
+
 
                     cellRowIndex++;
                 }

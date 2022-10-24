@@ -279,7 +279,7 @@ namespace Resources
 
         }
 
-        public static List<AtletaEntity> GetAtletiTorneoVsDisciplinaAssoluti(int idTorneo, int idDisciplina, bool rankingEnabled)
+        public static List<AtletaEntity> GetAtletiTorneoVsDisciplinaAssoluti(int idTorneo, int idDisciplina)
         {
             List<AtletaEntity> atleti = new List<AtletaEntity>();
 
@@ -292,10 +292,8 @@ namespace Resources
                                 "and r.IdAtleta = a.Id " +
                                 "and td.IdTorneo = " + idTorneo + " " +
                                 "and td.IdDisciplina = " + idDisciplina + " " +
-                                "and r.IdDisciplina = " + idDisciplina + " ";
-            sqlText = rankingEnabled ?
-                sqlText + "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC" :
-                sqlText + "order by ASD.Nome_ASD ASC, a.Cognome ASC";
+                                "and r.IdDisciplina = " + idDisciplina + " " +
+                                "order by r.Punteggio DESC, ASD.Nome_ASD ASC, a.Cognome ASC";
 
             SqlConnection c = null;
 

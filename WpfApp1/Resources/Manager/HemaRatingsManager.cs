@@ -16,83 +16,106 @@ namespace Resources
 
         public static async Task<bool> SyncFigthersAsync()
         {
-            string fightersUrl = ConfigurationManager.AppSettings["HemaRatingsFightersUrl"];
-
-            var response = await GetResponse(fightersUrl);
-
-            List<HtmlNode> figtherNodes = GetNodes(response);
-
-            List<HemaRatingsFighterEntity> hemaFigthers = new List<HemaRatingsFighterEntity>();
-
-            int i = 1;
-
-            foreach (var node in figtherNodes)
+            try
             {
+                if (!SqlDal_HemaRatings.DeleteFighters())
+                    return false;
 
-                var li = node.Descendants("td").ToList();
+                string fightersUrl = ConfigurationManager.AppSettings["HemaRatingsFightersUrl"];
 
-                if (li.Count > 0)
+                var response = await GetResponse(fightersUrl).ConfigureAwait(false);
+
+                List<HtmlNode> figtherNodes = GetNodes(response);
+
+                List<HemaRatingsFighterEntity> hemaFigthers = new List<HemaRatingsFighterEntity>();
+
+                int i = 1;
+
+                foreach (var node in figtherNodes)
                 {
-                    var name_surname = li[0].InnerText;
-                    string nationality = GetNationality(li);
-                    var figtherId = GetId(li);
-                    int clubId = GetClubId(li);
 
-                    hemaFigthers.Add(new HemaRatingsFighterEntity
+                    var li = node.Descendants("td").ToList();
+
+                    if (li.Count > 0)
                     {
-                        Id = figtherId,
-                        IdClub = clubId,
-                        Name = name_surname.Replace("'", "''"),
-                        Nationality = nationality.Replace("'", "''")
-                    });
-                }
-            }
+                        var name_surname = li[0].InnerText;
+                        string nationality = GetNationality(li);
+                        var figtherId = GetId(li);
+                        int clubId = GetClubId(li);
 
-            return SqlDal_HemaRatings.InsertFightersIntoDB(hemaFigthers);            
+                        SqlDal_HemaRatings.InsertFightersIntoDB(new HemaRatingsFighterEntity
+                        {
+                            Id = figtherId,
+                            IdClub = clubId,
+                            Name = name_surname.Replace("'", "''"),
+                            Nationality = nationality.Replace("'", "''")
+                        });
+                    }
+                }
+                //return SqlDal_HemaRatings.InsertFightersIntoDB(hemaFigthers);            
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
 
         }
 
 
         public static async Task<bool> SyncClubsAsync()
         {
-            string clubsUrl = ConfigurationManager.AppSettings["HemaRatingsClubUrl"];
-
-            var response = await GetResponse(clubsUrl);
-
-            List<HtmlNode> clubNodes = GetNodes(response);
-
-            List<HemaRatingsClubEntity> hemaClubs = new List<HemaRatingsClubEntity>();
-
-            int i = 1;
-
-            foreach (var node in clubNodes)
+            try
             {
-                var li = node.Descendants("td").ToList();
+                if (!SqlDal_HemaRatings.DeleteClubs())
+                    return false;
 
-                if (li.Count > 0)
+                string clubsUrl = ConfigurationManager.AppSettings["HemaRatingsClubsUrl"];
+
+                var response = await GetResponse(clubsUrl).ConfigureAwait(false);
+
+                List<HtmlNode> clubNodes = GetNodes(response);
+
+                List<HemaRatingsClubEntity> hemaClubs = new List<HemaRatingsClubEntity>();
+
+                foreach (var node in clubNodes)
                 {
-                    var clubName = li[0].InnerText.Replace("\r\n", "").Trim();
-                    var clubId = GetId(li);
-                    var country = GetCountry(li);
-                    var state = GetState(li);
-                    var city = GetCity(li);
+                    var li = node.Descendants("td").ToList();
 
-                    hemaClubs.Add(new HemaRatingsClubEntity
+                    if (li.Count > 0)
                     {
-                        Id = clubId,
-                        Name = clubName.Replace("'", "''"),
-                        Country = country.Replace("'", "''"),
-                        State = state.Replace("'", "''"),
-                        City = city.Replace("'", "''")
-                    });
+                        var clubName = li[0].InnerText.Replace("\r\n", "").Trim();
+                        var clubId = GetId(li);
+                        var country = GetCountry(li);
+                        var state = GetState(li);
+                        var city = GetCity(li);
+
+                        SqlDal_HemaRatings.InsertClubsIntoDB(new HemaRatingsClubEntity
+                        {
+                            Id = clubId,
+                            Name = clubName.Replace("'", "''"),
+                            Country = country.Replace("'", "''"),
+                            State = state.Replace("'", "''"),
+                            City = city.Replace("'", "''")
+                        });
+                    }
+
                 }
 
+                return true;
             }
-
-            return SqlDal_HemaRatings.InsertClubsIntoDB(hemaClubs);
+            catch
+            {
+                return false;
+            }
         }
 
 
+        public static bool SyncFightersBetweenDBs()
+        {
+            return SqlDal_HemaRatings.SyncWithLocalFightersId();
+        }
 
 
         #region Parsing
@@ -111,7 +134,9 @@ namespace Resources
         private static async System.Threading.Tasks.Task<byte[]> GetResponse(string url)
         {
             HttpClient http = new HttpClient();
-            var response = await http.GetByteArrayAsync(url);
+            
+            var response = await http.GetByteArrayAsync(url).ConfigureAwait(false);
+            
             return response;
         }
 

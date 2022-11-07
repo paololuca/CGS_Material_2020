@@ -1,6 +1,6 @@
 
 DECLARE @idTorneo INT
-set @idtorneo = 12;
+set @idtorneo = 17;
 
 DECLARE @idDisciplina INT
 set @idDisciplina = 4
@@ -21,8 +21,8 @@ select
 (rosso.Nome + ' ' + Rosso.Cognome) as Fighter1,
 (blu.Nome + ' ' + blu.Cognome) as Fighter2,
 case 
-	when gi.PuntiAtletaRosso > gi.PuntiAtletaBlu and gi.PuntiAtletaBlu < 3 then 'Win'
-	when gi.PuntiAtletaRosso < gi.PuntiAtletaBlu and gi.PuntiAtletaRosso < 3 then 'Loss'
+	when gi.PuntiAtletaRosso > gi.PuntiAtletaBlu and gi.PuntiAtletaBlu < 5 then 'Win'
+	when gi.PuntiAtletaRosso < gi.PuntiAtletaBlu and gi.PuntiAtletaRosso < 5 then 'Loss'
 	when gi.PuntiAtletaRosso = gi.PuntiAtletaRosso then 'Draw'
 	else 'Draw' 
 	END as Fighter_1_Result,
@@ -30,8 +30,8 @@ case
 --gi.IdAtletaBlu, 
 --gi.PuntiAtletaBlu, 
 case 
-	when gi.PuntiAtletaBlu > gi.PuntiAtletaRosso and gi.PuntiAtletaRosso < 3 then 'Win'
-	when gi.PuntiAtletaBlu < gi.PuntiAtletaRosso and gi.PuntiAtletaBlu < 3 then 'Loss'
+	when gi.PuntiAtletaBlu > gi.PuntiAtletaRosso and gi.PuntiAtletaRosso < 5 then 'Win'
+	when gi.PuntiAtletaBlu < gi.PuntiAtletaRosso and gi.PuntiAtletaBlu < 5 then 'Loss'
 	when gi.PuntiAtletaBlu = gi.PuntiAtletaRosso then 'Draw'
 	else 'Draw' 
 	END as Fighter_2_Result,
@@ -60,8 +60,8 @@ if (@i > 1) set @commandText = @commandText + ' UNION ';
 
 set @commandText = @commandText + 
 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (blu.Nome + '' '' + blu.Cognome) as Fighter2, '+
-'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 3 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 3 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
-'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 3 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 3 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''16nd Final'' as Round '+ 
+'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 5 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 5 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
+'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 5 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 5 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''16nd Final'' as Round '+ 
 'from Atleti rosso, Atleti blu, ' +
 '(select rosso.IdAtleta as idRosso, rosso.PuntiFatti as PuntiAtletaRosso, blu.IdAtleta as idBlu, blu.PuntiFatti as PuntiAtletaBlu from Qualificati32 rosso ,Qualificati32 blu where rosso.IdTorneo = '+CAST(@idTorneo as varchar(2))+' and rosso.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' and blu.IdTorneo = '+CAST(@idTorneo as varchar(2))+' and blu.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' and rosso.Posizione = '+CAST(@i as varchar(2))+' and blu.Posizione = (32 -('+CAST(@i as varchar(2))+'-1)) and rosso.Campo = 0 and blu.Campo = 0) as result '
 + ' where rosso.Id = result.idRosso and blu.Id = result.idBlu' ;
@@ -105,8 +105,8 @@ end
 
 set @commandText = 
 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (blu.Nome + '' '' + blu.Cognome) as Fighter2, '+
-'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 3 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 3 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
-'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 3 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 3 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Eights Final'' as Round '+ 
+'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 5 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 5 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
+'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 5 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 5 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Eights Final'' as Round '+ 
 'from Atleti rosso, Atleti blu, (' +@commandText+') as result '
 + ' where rosso.Id = result.idRosso and blu.Id = result.idBlu' ;
 
@@ -149,8 +149,8 @@ end
 
 set @commandText = 
 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (blu.Nome + '' '' + blu.Cognome) as Fighter2, '+
-'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 3 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 3 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
-'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 3 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 3 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Quarter Final'' as Round '+ 
+'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 5 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 5 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
+'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 5 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 5 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Quarter Final'' as Round '+ 
 'from Atleti rosso, Atleti blu, (' +@commandText+') as result '
 + ' where rosso.Id = result.idRosso and blu.Id = result.idBlu' ;
 
@@ -158,8 +158,8 @@ EXEC (@commandText)
 
 -- semifinali
 set @commandText = 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (blu.Nome + '' '' + blu.Cognome) as Fighter2, '+
-'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 3 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 3 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
-'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 3 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 3 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Semi Final'' as Round '+ 
+'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 5 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 5 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
+'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 5 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 5 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Semi Final'' as Round '+ 
 'from Atleti rosso, Atleti blu, '+
 '(select top(1) rosso.IdAtleta as idRosso, rosso.PuntiFatti as PuntiAtletaRosso, blu.IdAtleta as idBlu, blu.PuntiFatti as PuntiAtletaBlu  '+
 'from Semifinali rosso, Semifinali blu '+
@@ -181,8 +181,8 @@ EXEC (@commandText)
 
 --finali
 set @commandText = 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (blu.Nome + '' '' + blu.Cognome) as Fighter2, '+
-'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 3 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 3 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
-'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 3 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 3 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Final'' as Round '+ 
+'case when result.PuntiAtletaRosso > result.PuntiAtletaBlu and result.PuntiAtletaBlu < 5 then ''Win'' when result.PuntiAtletaRosso < result.PuntiAtletaBlu and result.PuntiAtletaRosso < 5 then ''Loss'' 	when result.PuntiAtletaRosso = result.PuntiAtletaRosso then ''Draw'' 	else ''Draw'' END as Fighter_1_Result, '+
+'case  when result.PuntiAtletaBlu > result.PuntiAtletaRosso and result.PuntiAtletaRosso < 5 then ''Win''when result.PuntiAtletaBlu < result.PuntiAtletaRosso and result.PuntiAtletaBlu < 5 then ''Loss'' when result.PuntiAtletaBlu = result.PuntiAtletaRosso then ''Draw'' else ''Draw''  END as Fighter_2_Result, ''Final'' as Round '+ 
 'from Atleti rosso, Atleti blu, '+
 '(select top(1) rosso.IdAtleta as idRosso, rosso.PuntiFatti as PuntiAtletaRosso, blu.IdAtleta as idBlu, blu.PuntiFatti as PuntiAtletaBlu  '+
 'from Finali rosso, Finali blu '+
@@ -190,14 +190,7 @@ set @commandText = 'select (rosso.Nome + '' '' + Rosso.Cognome) as Fighter1, (bl
 'and rosso.IdTorneo = '+CAST(@idTorneo as varchar(2))+' '+
 'and blu.IdTorneo = '+CAST(@idTorneo as varchar(2))+' '+
 'and rosso.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' '+
-'and blu.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' and rosso.Campo = 1 UNION '+
-'select top(1) rosso.IdAtleta as idRosso, rosso.PuntiFatti as PuntiAtletaRosso, blu.IdAtleta as idBlu, blu.PuntiFatti as PuntiAtletaBlu  '+
-'from Finali rosso, Finali blu '+
-'where rosso.Campo = blu.Campo and rosso.IdAtleta <> blu.IdAtleta '+
-'and rosso.IdTorneo = '+CAST(@idTorneo as varchar(2))+' '+
-'and blu.IdTorneo = '+CAST(@idTorneo as varchar(2))+' '+
-'and rosso.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' '+
-'and blu.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' and rosso.Campo = 2) as result '+
+'and blu.IdDisciplina = '+CAST(@idDisciplina as varchar(2))+' and rosso.Campo = 1) as result '+
 + ' where rosso.Id = result.idRosso and blu.Id = result.idBlu' ;
 
 EXEC (@commandText)

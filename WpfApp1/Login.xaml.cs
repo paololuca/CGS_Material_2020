@@ -19,12 +19,6 @@ namespace HEMATournamentSystem
             InitializeComponent();
             _connectionAvailable = Helper.TestConnectionString();
             
-            #region to delete
-            //var currentUser = SqlDal_MasterDB.CheckLogin("admin");
-            //var main = new MainWindow(currentUser);
-            //main.Show();
-            //this.Close();
-            #endregion
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -59,6 +53,13 @@ namespace HEMATournamentSystem
                 }
                 else
                 {
+
+                    //var f = HemaRatingsHelper.SyncFigthersAsync();
+                    //f.Wait();
+                    //var c = HemaRatingsHelper.SyncClubsAsync();
+                    //c.Wait();
+                    //HemaRatingsHelper.SyncFightersBetweenDBs();
+
                     var main = new MainWindow(currentUser);
                     main.Show();
 

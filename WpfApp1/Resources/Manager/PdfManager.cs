@@ -865,7 +865,9 @@ namespace Resources
             String HtmlReport = FormattedString.header;
 
             #region campo1
-            p.InizializeProgressBar(1, (campo1.Count+3) + (campo2.Count+3) + 2);
+            p.InizializeProgressBar(1, (campo1.Count+3) + 
+                //(campo2.Count+3) + 
+                2);
 
             p.Show();
             int i = 1;
@@ -890,39 +892,45 @@ namespace Resources
             temp += FormattedString.footer;
 
             HtmlReport += temp;
-            HtmlReport += "<div style=\"page-break-after:always\"></div>";
-            p.IncrementProgressBar(i + 1);
+            
 
             #endregion
 
             #region campo2
-            temp = "<A NAME=\"table1\"><H2>Campo 2<BR><BR>";
-            temp += SqlDal_Fighters.GetAtletaById(campo2[0].IdAtleta).Asd + " - " + campo2[0].Cognome + " " + campo2[0].Nome + "<BR>";
-            temp += SqlDal_Fighters.GetAtletaById(campo2[3].IdAtleta).Asd + " - " + campo2[3].Cognome + " " + campo2[3].Nome + "<BR>";
-            temp += "</H2></A><BR>";
-            temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
-            temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
-            temp += "<BR>";
-            temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
-            temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
-            temp += "<BR>";
-            temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
-            temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
-            temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
-            p.IncrementProgressBar(i++);
 
-            temp += FormattedString.footer;
+            //HtmlReport += "<div style=\"page-break-after:always\"></div>";
+            //p.IncrementProgressBar(i + 1);
 
-            HtmlReport += temp;
+
+            //temp = "<A NAME=\"table1\"><H2>Campo 2<BR><BR>";
+            //temp += SqlDal_Fighters.GetAtletaById(campo2[0].IdAtleta).Asd + " - " + campo2[0].Cognome + " " + campo2[0].Nome + "<BR>";
+            //temp += SqlDal_Fighters.GetAtletaById(campo2[3].IdAtleta).Asd + " - " + campo2[3].Cognome + " " + campo2[3].Nome + "<BR>";
+            //temp += "</H2></A><BR>";
+            //temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
+            //temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
+            //temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
+            //temp += "<BR>";
+            //temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
+            //temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
+            //temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
+            //temp += "<BR>";
+            //temp += FormattedString.match.Replace("##a##", campo2[0].Cognome + " " + campo2[0].Nome);
+            //temp = temp.Replace("##b##", campo2[3].Cognome + " " + campo2[3].Nome);
+            //temp = temp.Replace("##INCONTRO##", "Finale Terzo e Quarto Posto");
+            //p.IncrementProgressBar(i++);
+
+            //temp += FormattedString.footer;
+            //HtmlReport += temp;
+
+            #endregion
+
             HtmlReport += "</BODY></HTML>";
             p.IncrementProgressBar(i + 1);
 
             p.Close();
             p.Dispose();
 
-            #endregion
+            
 
             var htmlContent = String.Format(HtmlReport, DateTime.Now);
             var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
@@ -941,7 +949,7 @@ namespace Resources
             HtmlReport += "<h2>Primo classificato: " + primo + "</h2>";
             HtmlReport += "<h2>Secondo classificato: " + secondo + "</h2>";
             HtmlReport += "<h3>Terzo classificato: " + terzo + "</h3>";
-            HtmlReport += "<h4>Quarto classificato: " + quarto + "</h4>";
+            HtmlReport += "<h3>Terzo classificato: " + quarto + "</h3>";
 
 
             var htmlContent = String.Format(HtmlReport, DateTime.Now);

@@ -52,10 +52,12 @@ namespace UserControls.Phases
             poolOne = SqlDal_Pools.GetFinali(idTorneo, idDisciplina, 1);
             poolTwo = SqlDal_Pools.GetFinali(idTorneo, idDisciplina, 2);
 
+            ShowBronzMedals(poolTwo);
+
             LoadPool(poolOne, dataGridPoolOne);
             LoadPool(poolTwo, dataGridPoolTwo);
 
-            if(poolOne.Select(x => x.PuntiFatti > 0).ToList().Count > 0 || poolTwo.Select(x => x.PuntiFatti > 0).ToList().Count > 0)
+            if(poolOne.Where(x => x.PuntiFatti > 0).ToList().Count > 0 || poolTwo.Where(x => x.PuntiFatti > 0).ToList().Count > 0)
             { 
                 btnPrintResult.IsEnabled = true;
                 SaveFields(idTorneo, idDisciplina);
@@ -64,12 +66,26 @@ namespace UserControls.Phases
             _loaded = true;
         }
 
+        private void ShowBronzMedals(List<AtletaEliminatorie> poolTwo)
+        {
+            if(poolTwo.Count > 0)
+            {
+                var bornzes = (poolTwo.GroupBy(a => a.IdAtleta)).Select(a => a.First()).ToList();
+                labelThird1.Content = bornzes[0].Cognome + " " + bornzes[0].Nome;
+                labelThird2.Content = bornzes[1].Cognome + " " + bornzes[0].Nome;
+            }
+        }
+
         private void LoadPool(List<AtletaEliminatorie> pool, DataGrid dataGridPool)
         {
-            if (pool.Count == 0)
-                return;
-
             List<MatchEntity> list = new List<MatchEntity>();
+
+            if (pool.Count == 0)
+            {
+                Clear(dataGridPool, list);
+                return;
+            }
+
 
             #region THREE match for finals
             list.Add(new MatchEntity()
@@ -116,17 +132,23 @@ namespace UserControls.Phases
             dataGridPool.ItemsSource = list;
         }
 
+        private void Clear(DataGrid dataGridPool, List<MatchEntity> list)
+        {
+            dataGridPool.ItemsSource = list;
+            labelThird1.Content = "";
+            labelThird2.Content = "";
+        }
+
         public void SaveFields(int idTorneo, int idDisciplina)
         {
-            var pool1 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 1, dataGridPoolOne);
-            var pool2 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 2, dataGridPoolTwo);
+            var pool1 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 1, dataGridPoolOne, false);
+            var pool2 = AscEngine.SaveFinalPool(idTorneo, idDisciplina, 2, dataGridPoolTwo, true);
 
             goldMedal = pool1.Item1;
             silverMedal = pool1.Item2;
 
             bronzeMedal = pool2.Item1;
             woodMedal = pool2.Item2;
-
 
             btnPrintResult.IsEnabled = true;
         }

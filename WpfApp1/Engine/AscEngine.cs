@@ -203,7 +203,7 @@ namespace HEMATournamentSystem.Engine
             SqlDal_Pools.InsertFinali(listAtleti);
         }
 
-        public static Tuple<string, string> SaveFinalPool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool)
+        public static Tuple<string, string> SaveFinalPool(int idTorneo, int idDisciplina, int pool, DataGrid dataGridPool, bool thirdsPlaces)
         {
             List<AtletaEliminatorie> listAtleti = new List<AtletaEliminatorie>();
 
@@ -240,10 +240,15 @@ namespace HEMATournamentSystem.Engine
                 looser = SqlDal_Fighters.GetAtletaById(m.IdRosso).Asd + " - " + m.CognomeRosso + " " + m.NomeRosso;
                 winner = SqlDal_Fighters.GetAtletaById(m.IdBlu).Asd + " - " + m.CognomeBlu + " " + m.NomeBlu;
             }
+            else if (thirdsPlaces)//gestione terzo e quarto posto parimenti
+            {
+                looser = SqlDal_Fighters.GetAtletaById(m.IdRosso).Asd + " - " + m.CognomeRosso + " " + m.NomeRosso;
+                winner = SqlDal_Fighters.GetAtletaById(m.IdBlu).Asd + " - " + m.CognomeBlu + " " + m.NomeBlu;
+            }
             else
             {
-                winner = "";
                 looser = "";
+                winner = "";
             }
 
             return new Tuple<string, string>(winner, looser);

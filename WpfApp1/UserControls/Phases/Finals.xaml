@@ -21,12 +21,14 @@
                 <DataGrid x:Name="dataGridPoolOne" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,98,0,423" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
                           CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
                           materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Style="{DynamicResource DGHeaderStyle}"/>
-                
+
                 <DataGrid x:Name="dataGridPoolTwo" HorizontalAlignment="Left"  VerticalScrollBarVisibility="Auto" Margin="10,364,0,157" Width="1048" AlternatingRowBackground="#FFD2ECFF" 
                           CanUserSortColumns="False"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridPool_AutoGeneratingColumn" SelectionUnit="Cell" 
-                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Style="{DynamicResource DGHeaderStyle}"/>
+                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" Style="{DynamicResource DGHeaderStyle}" Visibility="Hidden"/>
                 <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="22" Content="1° - 2° Place " FontSize="32" FontWeight="DemiBold" Margin="10,0,202,565" />
-                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="22" Content="3° - 4° Place" FontSize="32" FontWeight="DemiBold" Margin="10,266,202,299" />
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:ShadowAssist.ShadowEdges="Bottom,Right" Padding="22" Content="3ths Places" FontSize="32" FontWeight="DemiBold" Margin="10,266,202,299" />
+                <Label x:Name="labelThird1" Margin="10,0,202,239" Height="45" FontSize="24" VerticalAlignment="Bottom">-</Label>
+                <Label x:Name="labelThird2" Margin="10,0,202,189" Height="45" FontSize="24" VerticalAlignment="Bottom">-</Label>
                 <Button x:Name="btnPrintResult" Height="32"  Click="BtnPrintResult_Click" Background="#FFDC0606" Margin="1119,516,20,110" IsEnabled="False" ToolTip="Print final results">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Pdf"/>

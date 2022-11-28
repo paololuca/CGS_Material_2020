@@ -594,6 +594,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Master.mdf</DependentUpon>
     </Content>
+    <Content Include="DB\Scripts\Update Ranking.sql" />
     <Content Include="DB\Scripts\Estrazione Anagrafica Atleti.sql" />
     <Content Include="DB\Scripts\Torneo Stats.sql" />
     <Content Include="DB\Scripts\Controllo iscritti.sql" />

@@ -10,6 +10,6 @@ join
 join TorneoVsDiscipline td2 on atd.IdTorneoVsDiscipline = td2.Id 
 
 group by atd.IdTorneoVsDiscipline) c on c.IdTorneoVsDiscipline = td.Id
-where t.id > @IdTorneo
+where t.id >= @IdTorneo
 order by t.Id, d.Id
 

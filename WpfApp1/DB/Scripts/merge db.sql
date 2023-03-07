@@ -1,8 +1,8 @@
 /*
-select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.GironiIncontri where IdTorneo  = 3
-select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = 3
-select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.Qualificati16  where IdTorneo  = 3
-select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.Qualificati16 where IdTorneo  = 3 
+select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.GironiIncontri where IdTorneo  = 22
+select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.GironiIncontri where IdTorneo  = 22
+select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEIFEMMINILE.MDF].dbo.Qualificati16  where IdTorneo  = 22
+select * from [C:\USERS\PAOLO\SOURCE\GITHUB\CGS_MATERIAL_2020\WPFAPP1\DB\TORNEI.MDF].dbo.Qualificati16 where IdTorneo  = 22 
 */
 
 declare @IdTorneo int

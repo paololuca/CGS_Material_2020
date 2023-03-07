@@ -5,6 +5,14 @@ set @idtorneo = 17;
 DECLARE @idDisciplina INT
 set @idDisciplina = 4
 
+select distinct asd.Nome_ASD as Name
+from Atleti a join AtletiVsTorneoVsDiscipline atd on a.Id = atd.IdAtleta
+join TorneoVsDiscipline td on td.Id = atd.IdTorneoVsDiscipline
+join ASD asd on a.IdASD = asd.Id
+left outer join HemaRatings hr on hr.IdAtleta = a.Id
+where td.IdTorneo = @idTorneo
+and td.IdDisciplina = @idDisciplina
+order by Name
 
 select (a.Nome + ' ' + a.Cognome) as Name, asd.Nome_ASD as Club, 'IT' as Nationality, a.Sesso as Gender, hr.IdHemaRatings as HemaRatingsId
 from Atleti a join AtletiVsTorneoVsDiscipline atd on a.Id = atd.IdAtleta

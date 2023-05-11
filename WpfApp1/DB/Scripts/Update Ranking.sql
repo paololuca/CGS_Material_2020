@@ -1,10 +1,6 @@
 ﻿--update in tabella ranking per disciplina ed atleta
 
-update ranking set
-Punteggio = @punteggio,
-LastUdate = GETDATE(),
-Posizionamento = @posizionamento
-where IdAtleta = @atleta and IdDisciplina = @iddisciplina
+update ranking set Punteggio = @punteggio, LastUdate = GETDATE(), Posizionamento = @posizionamento where IdAtleta = @atleta and IdDisciplina = @iddisciplina
 
 
 --insert into storico con nuova fase

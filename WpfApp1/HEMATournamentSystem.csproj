@@ -705,6 +705,13 @@
   </Target>
   <PropertyGroup>
     <PreBuildEvent>if not exist "$(TargetDir)\PDF " mkdir "$(TargetDir)\PDF"
-if not exist "$(TargetDir)\Mobile " mkdir "$(TargetDir)\Mobile"</PreBuildEvent>
+if not exist "$(TargetDir)\Mobile " mkdir "$(TargetDir)\Mobile"
+
+if not exist "$(TargetDir)\Mobile\Spada Sola" mkdir "$(TargetDir)\Mobile\Spada Sola"
+if not exist "$(TargetDir)\Mobile\Spada e Pugnale" mkdir "$(TargetDir)\Mobile\Spada e Pugnale"
+if not exist "$(TargetDir)\Mobile\Spada e Rotella" mkdir "$(TargetDir)\Mobile\Spada e Rotella"
+if not exist "$(TargetDir)\Mobile\Spada e Brocchiere" mkdir "$(TargetDir)\Mobile\Spada e Brocchiere"
+if not exist "$(TargetDir)\Mobile\Spada a due Mani" mkdir "$(TargetDir)\Mobile\Spada a due Mani"
+</PreBuildEvent>
   </PropertyGroup>
 </Project>

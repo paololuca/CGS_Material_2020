@@ -24,6 +24,8 @@ namespace HEMATournamentSystem
         private int _disciplineId;
         private string _tournamentName;
         private string _disciplineName;
+        private string _disciplineCategory;
+
 
         private CaricaGironiDaDisciplina caricaGironi = null;
         private CreaGironiDaDisciplina creaGironi = null;
@@ -76,10 +78,12 @@ namespace HEMATournamentSystem
                     {
                         _tournamentName = creaGironi.NomeTorneo;
                         _disciplineName = creaGironi.NomeDisciplina;
-
+                        
                         _tournamentId = creaGironi.IdTorneo;
                         _disciplineId = creaGironi.IdDisciplina;
-                                                
+
+                        //_disciplineCategory = SqlDal_Tournaments.GetTorneoById(_tournamentId).
+
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
                         lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
                     }
@@ -512,7 +516,7 @@ namespace HEMATournamentSystem
 
         private void BtnSerialize_Click(object sender, RoutedEventArgs e)
         {
-            MobileAppHelper mHelper = new MobileAppHelper();
+            MobileAppHelper mHelper = new MobileAppHelper(_disciplineName);
 
             for (int i = 0; i < tabControlPool.Items.Count; i++)
             {

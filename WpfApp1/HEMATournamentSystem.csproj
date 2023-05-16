@@ -84,6 +84,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NReco.PdfGenerator, Version=1.1.14.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\NReco.PdfGenerator.dll</HintPath>
@@ -689,6 +692,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mobile\" />
     <Folder Include="PDF\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -700,6 +704,7 @@
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>if not exist "$(TargetDir)\PDF " mkdir "$(TargetDir)\PDF"</PreBuildEvent>
+    <PreBuildEvent>if not exist "$(TargetDir)\PDF " mkdir "$(TargetDir)\PDF"
+if not exist "$(TargetDir)\Mobile " mkdir "$(TargetDir)\Mobile"</PreBuildEvent>
   </PropertyGroup>
 </Project>

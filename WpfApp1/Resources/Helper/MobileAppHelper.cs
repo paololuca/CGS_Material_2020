@@ -35,15 +35,15 @@ namespace Resources
         {
             foreach (var m in matchs)
             {
-                entityToSerialize.incontri.Add(m.NomeRosso + " " + m.CognomeRosso);
-                entityToSerialize.incontri.Add(m.NomeBlu + " " + m.CognomeBlu);
+                entityToSerialize.incontri.Add(m.CognomeRosso + " " + m.NomeRosso );
+                entityToSerialize.incontri.Add(m.CognomeBlu + " " + m.NomeBlu);
             }
         }
 
         private static void SetAthletesList(List<AtletaEntity> atleti, MobileAppEntity entityToSerialize)
         {
             foreach (var a in atleti)
-                entityToSerialize.atleti.Add(a.Nome + " " + a.Cognome);
+                entityToSerialize.atleti.Add(a.Cognome + " " + a.Nome);
         }
     }
 }

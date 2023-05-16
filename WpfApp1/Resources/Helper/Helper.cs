@@ -151,6 +151,17 @@ namespace Resources
             return incontri;
         }
 
+        internal static List<MatchEntity> ElaborateT3(List<AtletaEntity> g)
+        {
+            List<MatchEntity> match = new List<MatchEntity>();
+
+            match.Add(new MatchEntity(g[0], g[1]));
+            match.Add(new MatchEntity(g[1], g[2]));
+            match.Add(new MatchEntity(g[0], g[2]));
+
+            return match;
+        }
+
         internal static List<MatchEntity> ElaborateT4(List<AtletaEntity> g)
         {
             List<MatchEntity> match = new List<MatchEntity>();

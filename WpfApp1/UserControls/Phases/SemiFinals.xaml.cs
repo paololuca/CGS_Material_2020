@@ -138,6 +138,7 @@ namespace UserControls.Phases
 
             switch (e.Column.Header.ToString())
             {
+                case "M":
                 case "IdBlu":
                 case "IdRosso":
                 case "SatrapiaRosso":

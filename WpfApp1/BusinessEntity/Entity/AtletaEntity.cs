@@ -22,5 +22,6 @@ namespace BusinessEntity.Entity
             get { return Cognome + " " + Nome; }
         }
 
+
     }
 }

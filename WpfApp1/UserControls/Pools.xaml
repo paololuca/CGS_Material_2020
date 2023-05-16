@@ -134,6 +134,40 @@
             </StackPanel>
         </Button>
         <TextBlock Name="lblTitle" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="" Margin="243,544,227,10" HorizontalAlignment="Center"/>
+        <Button x:Name="btnSerialize" Height="Auto" Margin="218,533,712,16" IsEnabled="False"
+            Click="BtnSerialize_Click" Background="#FF025EB9" Style="{StaticResource MaterialDesignRaisedAccentButton}"
+            materialDesign:ButtonAssist.CornerRadius="25 25 0 0" ToolTip="Export Pool's Match in Pdf File" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF025EB9">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text=" ToApp" Background="#FF025EB9" Foreground="#DDFFFFFF" RenderTransformOrigin="0.5,0.5" Width="49" Height="20" >
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <materialDesign:PackIcon Kind="DriveDocument" Foreground="White" RenderTransformOrigin="0.5,0.5" Width="18" Height="19">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </UserControl>

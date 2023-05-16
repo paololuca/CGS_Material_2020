@@ -72,7 +72,7 @@ namespace UserControls.Phases
             {
                 var bornzes = (poolTwo.GroupBy(a => a.IdAtleta)).Select(a => a.First()).ToList();
                 labelThird1.Content = bornzes[0].Cognome + " " + bornzes[0].Nome;
-                labelThird2.Content = bornzes[1].Cognome + " " + bornzes[0].Nome;
+                labelThird2.Content = bornzes[1].Cognome + " " + bornzes[1].Nome;
             }
         }
 
@@ -180,6 +180,7 @@ namespace UserControls.Phases
 
             switch (e.Column.Header.ToString())
             {
+                case "M":
                 case "IdBlu":
                 case "IdRosso":
                 case "SatrapiaRosso":

@@ -240,7 +240,9 @@ namespace HEMATournamentSystem
                 {
                     List<MatchEntity> matchList = null;
 
-                    if (g.Count == 4)
+                    if(g.Count == 3)
+                        matchList = Helper.ElaborateT3(g);
+                    else if (g.Count == 4)
                         matchList = Helper.ElaborateT4(g);
                     else if (g.Count == 5)
                         matchList = Helper.ElaborateT5(g);
@@ -333,7 +335,9 @@ namespace HEMATournamentSystem
                     List<MatchEntity> matchList = null;
 
                     //TODO eliminabile visto che sono già sul DB
-                    if (poolList.Count == 4)
+                    if (poolList.Count == 3)
+                        matchList = Helper.ElaborateT3(poolList);
+                    else if (poolList.Count == 4)
                         matchList = Helper.ElaborateT4(poolList);
                     else if (poolList.Count == 5)
                         matchList = Helper.ElaborateT5(poolList);
@@ -377,6 +381,7 @@ namespace HEMATournamentSystem
             btnClosePools.IsEnabled = true;
             btnExportMatch.IsEnabled = true;
             btnExportPools.IsEnabled = true;
+            btnSerialize.IsEnabled = true;
             cmbSearchFighter.IsEnabled = true;
 
             ManagePhasesButtons();
@@ -504,6 +509,19 @@ namespace HEMATournamentSystem
             PdfManager pdf = new PdfManager();
             pdf.StampaGironiConIncontri(gironi, _tournamentName, _disciplineName);
         }
+
+        private void BtnSerialize_Click(object sender, RoutedEventArgs e)
+        {
+            MobileAppHelper mHelper = new MobileAppHelper();
+
+            for (int i = 0; i < tabControlPool.Items.Count; i++)
+            {
+                tabControlPool.SelectedIndex = i;
+                Pool p = (Pool)tabControlPool.SelectedContent;
+
+                mHelper.SerializePool(i + 1, p.GetListaAtleti(), p.GetListaIncontri());
+            }
+        }
         #endregion
 
         #region open intermediate phases
@@ -592,5 +610,7 @@ namespace HEMATournamentSystem
 
             tabControlPool.Items.Clear();
         }
+
+        
     }
 }

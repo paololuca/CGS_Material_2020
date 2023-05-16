@@ -95,7 +95,7 @@
       <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.1.0.12\lib\net45\ShowMeTheXAML.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -128,10 +128,12 @@
     <Compile Include="BusinessEntity\EntityDAO\RankingByYear.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
+    <Compile Include="BusinessEntity\Entity\MobileAppEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
     <Compile Include="BusinessEntity\Type\ProfileManager.cs" />
     <Compile Include="Engine\AscEngine.cs" />
     <Compile Include="Engine\Type\EngineType.cs" />
+    <Compile Include="Resources\Helper\MobileAppHelper.cs" />
     <Compile Include="Resources\Manager\DynamicsPdfManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_HemaRatings.cs" />
     <Compile Include="Windows\FighterStats.xaml.cs">

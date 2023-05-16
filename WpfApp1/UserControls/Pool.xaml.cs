@@ -43,7 +43,7 @@ namespace HEMATournamentSystem
             this.idDisciplina = idDisciplina;
 
             this.listaAtleti = listaAtleti;
-            this.listaIncontri = listaIncontri;
+            this.listaIncontri = SetIndex(listaIncontri);
 
             this.Header = "Girone " + poolIndex;
 
@@ -51,6 +51,15 @@ namespace HEMATournamentSystem
         }
 
         #region Private Methods
+        private List<MatchEntity> SetIndex(List<MatchEntity> listaIncontri)
+        {
+            int index = 1;
+            foreach (var i in listaIncontri)
+                i.M = index++;
+
+            return listaIncontri;
+        }
+
         private void SetPool()
         {
             foreach (AtletaEntity a in listaAtleti)
@@ -71,6 +80,15 @@ namespace HEMATournamentSystem
         #endregion
 
 
+        public List<MatchEntity> GetListaIncontri()
+        {
+            return listaIncontri;
+        }
+
+        public List<AtletaEntity> GetListaAtleti()
+        {
+            return listaAtleti;
+        }
 
         public bool SavePoolFromFather()
         {

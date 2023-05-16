@@ -4,6 +4,10 @@ namespace BusinessEntity.Entity
 {
     public class MatchEntity
     {
+        /// <summary>
+        /// Match's index order
+        /// </summary>
+        public int M { get; set; }
         public int IdRosso { get; set; }
         public String SatrapiaRosso { get; set; }
         public String CognomeRosso { get; set; }

@@ -12,10 +12,12 @@ namespace Resources
     public class MobileAppHelper
     {
         private string disciplina;
+        private object categoria;
 
-        public MobileAppHelper(string disciplina)
+        public MobileAppHelper(string disciplina, string category)
         {
             this.disciplina = disciplina;
+            this.categoria = category;
         }
 
         public void SerializePool(int poolIndex, List<AtletaEntity> atleti, List<MatchEntity> matchs)
@@ -29,7 +31,7 @@ namespace Resources
 
             SetMatchsList(matchs, entityToSerialize);
 
-            File.WriteAllText(@".\Mobile\" + disciplina + @"\Girone" + poolIndex + ".json",
+            File.WriteAllText(@".\Mobile\" + disciplina + @"\" + categoria + @"\Girone" + poolIndex + ".json",
                 JsonConvert.SerializeObject(entityToSerialize, Formatting.Indented));
 
 

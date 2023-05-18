@@ -516,7 +516,9 @@ namespace HEMATournamentSystem
 
         private void BtnSerialize_Click(object sender, RoutedEventArgs e)
         {
-            MobileAppHelper mHelper = new MobileAppHelper(_disciplineName);
+            string category = SqlDal_Tournaments.GetTournamentCategory(_tournamentId, _disciplineId);
+
+            MobileAppHelper mHelper = new MobileAppHelper(_disciplineName, category);
 
             for (int i = 0; i < tabControlPool.Items.Count; i++)
             {

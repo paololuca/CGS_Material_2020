@@ -712,6 +712,21 @@ if not exist "$(TargetDir)\Mobile\Spada e Pugnale" mkdir "$(TargetDir)\Mobile\Sp
 if not exist "$(TargetDir)\Mobile\Spada e Rotella" mkdir "$(TargetDir)\Mobile\Spada e Rotella"
 if not exist "$(TargetDir)\Mobile\Spada e Brocchiere" mkdir "$(TargetDir)\Mobile\Spada e Brocchiere"
 if not exist "$(TargetDir)\Mobile\Spada a due Mani" mkdir "$(TargetDir)\Mobile\Spada a due Mani"
+
+if not exist "$(TargetDir)\Mobile\Spada Sola\M" mkdir "$(TargetDir)\Mobile\Spada Sola\M"
+if not exist "$(TargetDir)\Mobile\Spada Sola\F" mkdir "$(TargetDir)\Mobile\Spada Sola\F"
+
+if not exist "$(TargetDir)\Mobile\Spada e Pugnale\M" mkdir "$(TargetDir)\Mobile\Spada e Pugnale\M"
+if not exist "$(TargetDir)\Mobile\Spada e Pugnale\F" mkdir "$(TargetDir)\Mobile\Spada e Pugnale\F"
+
+if not exist "$(TargetDir)\Mobile\Spada e Rotella\M" mkdir "$(TargetDir)\Mobile\Spada e Rotella\M"
+if not exist "$(TargetDir)\Mobile\Spada e Rotella\F" mkdir "$(TargetDir)\Mobile\Spada e Rotella\F"
+
+if not exist "$(TargetDir)\Mobile\Spada e Brocchiere\M" mkdir "$(TargetDir)\Mobile\Spada e Brocchiere\M"
+if not exist "$(TargetDir)\Mobile\Spada e Brocchiere\F" mkdir "$(TargetDir)\Mobile\Spada e Brocchiere\F"
+
+if not exist "$(TargetDir)\Mobile\Spada a due Mani\M" mkdir "$(TargetDir)\Mobile\Spada a due Mani\M"
+if not exist "$(TargetDir)\Mobile\Spada a due Mani\F" mkdir "$(TargetDir)\Mobile\Spada a due Mani\F"
 </PreBuildEvent>
   </PropertyGroup>
 </Project>

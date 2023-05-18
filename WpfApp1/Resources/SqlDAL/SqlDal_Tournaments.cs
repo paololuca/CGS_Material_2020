@@ -674,6 +674,41 @@ namespace Resources
             }
         }
 
+        internal static string GetTournamentCategory(int idTorneo, int idDisciplina)
+        {
+            string sqlText = "select Categoria From TorneoVsDiscipline where IdDisciplina = " + idDisciplina + " " +
+                                "and IdTorneo = " + idTorneo + "";
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(sqlText, c);
+                SqlDataReader reader = command.ExecuteReader();
+
+                var category = "";
+
+                while (reader.Read())
+                {
+                   category = Convert.ToString(reader["Categoria"]);
+                }
+
+                return category;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
         public static bool EliminaPartecipanteDaTorneo(int idTorneo, int idDisciplina, int idAtleta)
         {
             String sqlText = "delete AtletiVsTorneoVsDiscipline where IdAtleta = " + idAtleta +

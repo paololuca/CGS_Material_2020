@@ -61,7 +61,7 @@ namespace Resources
 
             try
             {
-                String sqlText = "SELECT * FROM TORNEO WHERE ATTIVO = 0";
+                String sqlText = "SELECT * FROM TORNEO WHERE CONCLUSO = 0 AND ATTIVO = 0";
                 c = new SqlConnection(Helper.GetConnectionString());
 
                 c.Open();

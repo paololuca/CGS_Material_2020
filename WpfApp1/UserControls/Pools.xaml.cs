@@ -520,6 +520,8 @@ namespace HEMATournamentSystem
 
             MobileAppHelper mHelper = new MobileAppHelper(_disciplineName, category);
 
+            mHelper.DeleteAllFiles();
+
             for (int i = 0; i < tabControlPool.Items.Count; i++)
             {
                 tabControlPool.SelectedIndex = i;

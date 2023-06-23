@@ -409,7 +409,7 @@ namespace HEMATournamentSystem
 
         /// <summary>
         /// Costruisce il tab dello specifico del girone
-        /// </summary>
+        /// </summary>crea
         /// <param name="title">Titolo del TAB</param>
         /// <param name="poolList">lista dei giroi (lista di persone)</param>
         /// <param name="matchList">Lista degli incontri</param>

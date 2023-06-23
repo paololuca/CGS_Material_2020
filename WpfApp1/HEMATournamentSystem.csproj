@@ -715,6 +715,7 @@ if not exist "$(TargetDir)\Mobile\Spada a due Mani" mkdir "$(TargetDir)\Mobile\S
 
 if not exist "$(TargetDir)\Mobile\Spada Sola\M" mkdir "$(TargetDir)\Mobile\Spada Sola\M"
 if not exist "$(TargetDir)\Mobile\Spada Sola\F" mkdir "$(TargetDir)\Mobile\Spada Sola\F"
+if not exist "$(TargetDir)\Mobile\Spada Sola\O" mkdir "$(TargetDir)\Mobile\Spada Sola\O"
 
 if not exist "$(TargetDir)\Mobile\Spada e Pugnale\M" mkdir "$(TargetDir)\Mobile\Spada e Pugnale\M"
 if not exist "$(TargetDir)\Mobile\Spada e Pugnale\F" mkdir "$(TargetDir)\Mobile\Spada e Pugnale\F"

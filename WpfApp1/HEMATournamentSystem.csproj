@@ -131,6 +131,7 @@
     <Compile Include="BusinessEntity\EntityDAO\RankingByYear.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
+    <Compile Include="BusinessEntity\Entity\HemaRatingsFighterMatchEntity.cs" />
     <Compile Include="BusinessEntity\Entity\MobileAppEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
     <Compile Include="BusinessEntity\Type\ProfileManager.cs" />
@@ -139,6 +140,9 @@
     <Compile Include="Resources\Helper\MobileAppHelper.cs" />
     <Compile Include="Resources\Manager\DynamicsPdfManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_HemaRatings.cs" />
+    <Compile Include="UserControls\Report\HemaRatingsTournamentResultReportByDiscipline.xaml.cs">
+      <DependentUpon>HemaRatingsTournamentResultReportByDiscipline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FighterStats.xaml.cs">
       <DependentUpon>FighterStats.xaml</DependentUpon>
     </Compile>
@@ -260,6 +264,9 @@
     <Compile Include="UserControls\Report\TournamentReportByDiscipline.xaml.cs">
       <DependentUpon>TournamentReportByDiscipline.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\HemaRatingsTournamentResultReport.xaml.cs">
+      <DependentUpon>HemaRatingsTournamentResultReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TournamentResultReport.xaml.cs">
       <DependentUpon>TournamentResultReport.xaml</DependentUpon>
     </Compile>
@@ -272,6 +279,10 @@
     <Page Include="About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Report\HemaRatingsTournamentResultReportByDiscipline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\CheckResult.xaml">
       <SubType>Designer</SubType>
@@ -455,6 +466,10 @@
     <Page Include="UserControls\Report\TournamentReportByDiscipline.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\HemaRatingsTournamentResultReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\TournamentResultReport.xaml">
       <SubType>Designer</SubType>

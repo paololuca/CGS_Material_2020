@@ -166,6 +166,15 @@ namespace HEMATournamentSystem
             report.Show();
         }
 
+        private static void ShowHemaRatingsReport(object sender)
+        {
+            TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
+
+            TournamentResultReport report = new TournamentResultReport(torunament.Id, torunament.Name);
+
+            report.Show();
+        }
+
         private void btnDeleteTournament_Click(object sender, RoutedEventArgs e)
         {
             bool? result = new MessageBoxCustom("Tournament will be DELETED! Continue?",

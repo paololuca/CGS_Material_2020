@@ -52,7 +52,6 @@ namespace Resources
                 connection.Close();
             }
         }
-
         public static bool InsertFightersIntoDB(HemaRatingsFighterEntity hemaFigthers)
         {
 
@@ -90,7 +89,6 @@ namespace Resources
                 connection.Close();
             }
         }
-
         public static bool SyncWithLocalFightersId()
         {
             //truncate table HemaRatings
@@ -100,7 +98,6 @@ namespace Resources
 
             return true;
         }
-
         public static bool InsertClubsIntoDB(List<HemaRatingsClubEntity> hemaClubs)
         {
             if (!DeleteClubs())
@@ -176,7 +173,6 @@ namespace Resources
                 connection.Close();
             }
         }
-
         public static bool DeleteFighters()
         {
             StringBuilder sb = new StringBuilder();
@@ -207,7 +203,6 @@ namespace Resources
                 connection.Close();
             }
         }
-
         public static bool DeleteClubs()
         {
             StringBuilder sb = new StringBuilder();
@@ -237,6 +232,105 @@ namespace Resources
             {
                 connection.Close();
             }
+        }
+
+        public static List<HemaRatingsClubEntity> GetClubsInvolved(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsClubEntity> result = new List<HemaRatingsClubEntity>();
+
+            String SqlText = "select distinct asd.Nome_ASD as Name " +
+                            "from Atleti a join AtletiVsTorneoVsDiscipline atd on a.Id = atd.IdAtleta " +
+                            "join TorneoVsDiscipline td on td.Id = atd.IdTorneoVsDiscipline " +
+                            "join ASD asd on a.IdASD = asd.Id " +
+                            "left outer join HemaRatings hr on hr.IdAtleta = a.Id " +
+                            "where td.IdTorneo = " + idTorneo + " " +
+                            "and td.IdDisciplina = " + idDisciplina + " " +
+                            "order by Name ";
+
+            SqlConnection connection = null;
+
+            try
+            {
+
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(SqlText, connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(new HemaRatingsClubEntity()
+                    {
+                        Name = reader[0].ToString(),
+                        Country = "",
+                        State = "",
+                        City = ""
+                    });
+                        
+
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+
+        }
+
+        public static List<HemaRatingsFighterMatchEntity> GetFightersInvolved(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsFighterMatchEntity> result = new List<HemaRatingsFighterMatchEntity>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select(a.Nome + ' ' + a.Cognome) as Name, asd.Nome_ASD as Club, 'IT' as Nationality, a.Sesso as Gender, hr.IdHemaRatings as HemaRatingsId");
+            sb.AppendLine("from Atleti a join AtletiVsTorneoVsDiscipline atd on a.Id = atd.IdAtleta");
+            sb.AppendLine("join TorneoVsDiscipline td on td.Id = atd.IdTorneoVsDiscipline");
+            sb.AppendLine("join ASD asd on a.IdASD = asd.Id");
+            sb.AppendLine("left outer join HemaRatings hr on hr.IdAtleta = a.Id");
+            sb.AppendLine("where td.IdTorneo = " + idTorneo + "");
+            sb.AppendLine("and td.IdDisciplina = " + idDisciplina + "");
+            sb.AppendLine("order by a.Cognome");
+
+            SqlConnection connection = null;
+
+            try
+            {
+
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(new HemaRatingsFighterMatchEntity()
+                    {
+                        Name = reader["Name"].ToString(),
+                        Club = reader["Nome_ASD"].ToString(),
+                        Nationality = reader["Nationality"].ToString(),
+                        Gender = reader["Gender"].ToString(),
+                        HemaRatingsId = Convert.ToInt32(reader["HemaRatingsId"])
+                    });
+
+
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return result;
         }
     }
 }

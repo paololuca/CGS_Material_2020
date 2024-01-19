@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="HEMATournamentSystem.HemaRatingsTournamentResultReportByDiscipline"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HEMATournamentSystem"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="650" Width="1200">
+    <Grid Background="White">
+        <TabControl x:Name="tabControlPool" Height="603" Margin="18,37,10,0"
+                    VerticalAlignment="Top" >
+            <TabItem x:Name="tabClubs" Header="Clubs">
+                <DataGrid x:Name="dataGridViewClubs" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false" CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            <TabItem x:Name="tabFighters" Header="Fighters">
+                <DataGrid x:Name="dataGridViewFighters" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridViewPostGironi_AutoGeneratingColumn"/>
+            </TabItem>
+            <TabItem x:Name="tabMatches" Header="Matchs">
+                <DataGrid x:Name="dataGridViewMatchs" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</UserControl>

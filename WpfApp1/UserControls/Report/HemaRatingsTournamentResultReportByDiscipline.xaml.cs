@@ -83,15 +83,15 @@ namespace HEMATournamentSystem
 
         public void GenerateExcel(string tournamentName, string disciplineName, string path)
         {
-            //var fileNameWithPath = path + "\\" + tournamentName + "_" + disciplineName + ".xlsx";
-            //
-            //if (File.Exists(fileNameWithPath))
-            //    File.Delete(fileNameWithPath);
-            //
-            //// Creating a Excel object. 
-            //Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
-            //Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
-            //Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            var fileNameWithPath = path + "\\" + tournamentName + "_" + disciplineName + ".xlsx";
+            
+            if (File.Exists(fileNameWithPath))
+                File.Delete(fileNameWithPath);
+            
+            // Creating a Excel object. 
+            Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
 
             //try
             //{

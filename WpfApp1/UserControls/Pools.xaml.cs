@@ -82,7 +82,7 @@ namespace HEMATournamentSystem
                         _tournamentId = creaGironi.IdTorneo;
                         _disciplineId = creaGironi.IdDisciplina;
 
-                        //_disciplineCategory = SqlDal_Tournaments.GetTorneoById(_tournamentId).
+                        //_disciplineCategory = SqlDal_Tournaments.GetTorneoById(_tournamentId)
 
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
                         lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
@@ -120,7 +120,6 @@ namespace HEMATournamentSystem
             bool rankingEnabled = partecipantiTorneo.Sum(x => x.Ranking) != 0;
 
             numeroGironi = SqlDal_Pools.GetNumeroGironiByTorneoDisciplina(idTorneo, idDisciplina);
-
 
             if (numeroGironi > 0)
             {

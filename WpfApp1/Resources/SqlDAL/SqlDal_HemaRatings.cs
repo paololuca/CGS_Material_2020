@@ -313,10 +313,10 @@ namespace Resources
                     result.Add(new HemaRatingsFighterMatchEntity()
                     {
                         Name = reader["Name"].ToString(),
-                        Club = reader["Nome_ASD"].ToString(),
+                        Club = reader["Club"].ToString(),
                         Nationality = reader["Nationality"].ToString(),
                         Gender = reader["Gender"].ToString(),
-                        HemaRatingsId = Convert.ToInt32(reader["HemaRatingsId"])
+                        HemaRatingsId = reader["HemaRatingsId"].ToString()
                     });
 
 
@@ -331,6 +331,246 @@ namespace Resources
 
 
             return result;
+        }
+
+        public static List<HemaRatingsMatchResult> GetPoolsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select ");
+            sb.AppendLine("--gi.IdAtletaRosso, ");
+            sb.AppendLine("--gi.PuntiAtletaRosso, ");
+            sb.AppendLine("(rosso.Nome + ' ' + Rosso.Cognome) as Fighter1,");
+            sb.AppendLine("(blu.Nome + ' ' + blu.Cognome) as Fighter2,");
+            sb.AppendLine("case ");
+            sb.AppendLine("when gi.PuntiAtletaRosso > gi.PuntiAtletaBlu and gi.PuntiAtletaBlu < 5 then 'Win'");
+            sb.AppendLine("when gi.PuntiAtletaRosso < gi.PuntiAtletaBlu and gi.PuntiAtletaRosso < 5 then 'Loss'");
+            sb.AppendLine("when gi.PuntiAtletaRosso = gi.PuntiAtletaRosso then 'Draw'");
+            sb.AppendLine("else 'Draw' ");
+            sb.AppendLine("END as Fighter_1_Result,");
+            sb.AppendLine("--gi.IdAtletaBlu, ");
+            sb.AppendLine("--gi.PuntiAtletaBlu, ");
+            sb.AppendLine("case ");
+            sb.AppendLine("when gi.PuntiAtletaBlu > gi.PuntiAtletaRosso and gi.PuntiAtletaRosso < 5 then 'Win'");
+            sb.AppendLine("when gi.PuntiAtletaBlu < gi.PuntiAtletaRosso and gi.PuntiAtletaBlu < 5 then 'Loss'");
+            sb.AppendLine("when gi.PuntiAtletaBlu = gi.PuntiAtletaRosso then 'Draw'");
+            sb.AppendLine("else 'Draw' ");
+            sb.AppendLine("END as Fighter_2_Result,");
+            sb.AppendLine("('Pool '+CAST(gi.NumeroGirone as varchar(2))) as Round ");
+            sb.AppendLine("from GironiIncontri gi");
+            sb.AppendLine("join Atleti rosso on rosso.id = gi.IdAtletaRosso");
+            sb.AppendLine("join Atleti blu on blu.id = gi.IdAtletaBlu");
+            sb.AppendLine("where gi.IdTorneo = "+ idTorneo + "");
+            sb.AppendLine("and gi.IdDisciplina = "+idDisciplina + "");
+            sb.AppendLine("order by NumeroGirone");
+
+            SqlConnection connection = null;
+
+            try
+            {
+
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+
+
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return result;
+
+        }
+
+        public static List<HemaRatingsMatchResult> Get16FinalsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("EXEC	 [dbo].[HemaRating16Final]  @idTorneo = " + idTorneo + ",  @idDisciplina = " + idDisciplina);
+
+            SqlConnection connection = null;
+
+            try
+            {
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        public static List<HemaRatingsMatchResult> Get8FinalsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("EXEC	 [dbo].[HemaRating8Final]  @idTorneo = " + idTorneo + ",  @idDisciplina = " + idDisciplina);
+
+            SqlConnection connection = null;
+
+            try
+            {
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        public static List<HemaRatingsMatchResult> Get4FinalsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("EXEC	 [dbo].[HemaRating4Final]  @idTorneo = " + idTorneo + ",  @idDisciplina = " + idDisciplina);
+
+            SqlConnection connection = null;
+
+            try
+            {
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        public static List<HemaRatingsMatchResult> GetSemiFinalsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("EXEC	 [dbo].[HemaRatingSemiFinal]  @idTorneo = " + idTorneo + ",  @idDisciplina = " + idDisciplina);
+
+            SqlConnection connection = null;
+
+            try
+            {
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        public static List<HemaRatingsMatchResult> GetFinalsResults(int idTorneo, int idDisciplina)
+        {
+            List<HemaRatingsMatchResult> result = new List<HemaRatingsMatchResult>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("EXEC	 [dbo].[HemaRatingFinal]  @idTorneo = " + idTorneo + ",  @idDisciplina = " + idDisciplina);
+
+            SqlConnection connection = null;
+
+            try
+            {
+                connection = new SqlConnection(Helper.GetConnectionString());
+
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sb.ToString(), connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    result.Add(getHemaRatingMatchResults(reader));
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        private static HemaRatingsMatchResult getHemaRatingMatchResults(SqlDataReader reader)
+        {
+            return new HemaRatingsMatchResult()
+            {
+                Fighter1 = reader["Fighter1"].ToString(),
+                Fighter2 = reader["Fighter2"].ToString(),
+                Fighter_1_Result = reader["Fighter_1_Result"].ToString(),
+                Fighter_2_Result = reader["Fighter_2_Result"].ToString(),
+                Round = reader["Round"].ToString()
+            };
         }
     }
 }

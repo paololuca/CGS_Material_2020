@@ -157,6 +157,16 @@ namespace HEMATournamentSystem
             ShowReport(sender);
         }
 
+        private void btnHemaRatingReportActiveTournament_Click(object sender, RoutedEventArgs e)
+        {
+            ShowHemaRatingsReport(sender);
+        }
+
+        private void btnHemaRatingReportNoActiveTournament_Click(object sender, RoutedEventArgs e)
+        {
+            ShowHemaRatingsReport(sender);
+        }
+
         private static void ShowReport(object sender)
         {
             TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
@@ -170,7 +180,7 @@ namespace HEMATournamentSystem
         {
             TorneoEntity torunament = ((FrameworkElement)sender).DataContext as TorneoEntity;
 
-            TournamentResultReport report = new TournamentResultReport(torunament.Id, torunament.Name);
+            HemaRatingsTournamentResultReport report = new HemaRatingsTournamentResultReport(torunament.Id, torunament.Name);
 
             report.Show();
         }

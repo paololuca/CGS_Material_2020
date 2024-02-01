@@ -105,6 +105,17 @@
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
+                                                    <Button x:Name="btnHemaRatingActiveTournamentReport" Height="32"  Click="btnHemaRatingReportActiveTournament_Click" Background="#FFA152F0" Width="Auto" ToolTip="HemaRating Report">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="FileReport"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
                                                     <Button x:Name="btnDeleteTournamentMatchs" Height="32"  Click="btnDeleteTournamentMatchs_Click" Background="Red" Width="Auto" ToolTip="Delete matches">
                                                         <StackPanel Orientation="Horizontal">
                                                             <materialDesign:PackIcon Kind="Remove"/>
@@ -150,6 +161,17 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <Button x:Name="btnClosedTournamentReport" Height="32"  Click="btnReportNoActiveTournament_Click" Background="#FF28D137" Width="Auto" ToolTip="Report">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Kind="FileReport"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="btnHemaRatingClosedTournamentReport" Height="32"  Click="btnHemaRatingReportNoActiveTournament_Click" Background="#FFA152F0" Width="Auto" ToolTip="HemaRating Report">
                                                         <StackPanel Orientation="Horizontal">
                                                             <materialDesign:PackIcon Kind="FileReport"/>
                                                         </StackPanel>

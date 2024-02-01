@@ -11,10 +11,10 @@
         <TabControl x:Name="tabControlPool" Height="603" Margin="18,37,10,0"
                     VerticalAlignment="Top" >
             <TabItem x:Name="tabClubs" Header="Clubs">
-                <DataGrid x:Name="dataGridViewClubs" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false" CanUserAddRows="False" CanUserDeleteRows="False"/>
+                <DataGrid x:Name="dataGridViewClubs" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false" CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridViewClubs_AutoGeneratingColumn"/>
             </TabItem>
             <TabItem x:Name="tabFighters" Header="Fighters">
-                <DataGrid x:Name="dataGridViewFighters" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridViewPostGironi_AutoGeneratingColumn"/>
+                <DataGrid x:Name="dataGridViewFighters" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>
             </TabItem>
             <TabItem x:Name="tabMatches" Header="Matchs">
                 <DataGrid x:Name="dataGridViewMatchs" SelectionUnit="FullRow" SelectionMode="Extended" CanUserSortColumns="false"  CanUserAddRows="False" CanUserDeleteRows="False"/>

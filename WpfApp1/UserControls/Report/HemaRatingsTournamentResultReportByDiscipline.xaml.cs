@@ -54,36 +54,41 @@ namespace HEMATournamentSystem
             List<HemaRatingsFighterMatchEntity> fightersInvolved = SqlDal_HemaRatings.GetFightersInvolved(_idTorneo, _idDisciplina);
             if (fightersInvolved != null)
                 dataGridViewFighters.ItemsSource = fightersInvolved.ToArray();
+
+            List<HemaRatingsMatchResult> matches = SqlDal_HemaRatings.GetPoolsResults(_idTorneo, _idDisciplina);
+
+            matches.AddRange(SqlDal_HemaRatings.Get16FinalsResults(_idTorneo, _idDisciplina));
+            matches.AddRange(SqlDal_HemaRatings.Get8FinalsResults(_idTorneo, _idDisciplina));
+            matches.AddRange(SqlDal_HemaRatings.Get4FinalsResults(_idTorneo, _idDisciplina));
+            matches.AddRange(SqlDal_HemaRatings.GetSemiFinalsResults(_idTorneo, _idDisciplina));
+            matches.AddRange(SqlDal_HemaRatings.GetFinalsResults(_idTorneo, _idDisciplina));
+
             
-            //List<OutputRisultatiEliminatorieTorneo> risultatiSedicesimi = SqlDal_Report.GetExportSedicesimiTorneo(_idTorneo, _idDisciplina);
-            //if (risultatiSedicesimi != null)
-            //    dataGridViewSedicesimi.ItemsSource = risultatiSedicesimi.ToArray();
+            if (matches != null)
+                dataGridViewMatchs.ItemsSource = matches.ToArray();
         }
 
-        private void dataGridViewPostGironi_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private void dataGridViewClubs_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             Style horizontalAlignment = new Style();
             horizontalAlignment.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
 
             switch (e.Column.Header.ToString())
             {
-                case "Qualificato":
-                case "IdTorneo":
-                case "IdDisciplina":
-                case "Posizionamento":
+                case "Id":
                     e.Column.Visibility = Visibility.Hidden;
                     break;
                 default:
                     e.Column.Visibility = Visibility.Visible;
                     //e.Column.IsReadOnly = true;
                     break;
-
+            
             }
         }
 
         public void GenerateExcel(string tournamentName, string disciplineName, string path)
         {
-            var fileNameWithPath = path + "\\" + tournamentName + "_" + disciplineName + ".xlsx";
+            var fileNameWithPath = path + "\\HemaRating_" + tournamentName + "_" + disciplineName + ".xlsx";
             
             if (File.Exists(fileNameWithPath))
                 File.Delete(fileNameWithPath);
@@ -93,258 +98,242 @@ namespace HEMATournamentSystem
             Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
             Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
 
-            //try
-            //{
-            //    excel.SheetsInNewWorkbook = 7;
+            try
+            {
+                excel.SheetsInNewWorkbook = 4;
 
-            //    workbook = excel.Workbooks.Add();
+                workbook = excel.Workbooks.Add();
 
-            //    worksheet = workbook.Worksheets[1];
+                worksheet = workbook.Worksheets[1];
 
-            //    worksheet.Name = "Gironi";
+                worksheet.Name = "Event Info";
 
-            //    int cellRowIndex = 1;
-            //    int cellColumnIndex = 1;
+                int cellRowIndex = 1;
+                int cellColumnIndex = 1;
 
-            //    #region Gironi
-            //    //Loop through gironi
+                #region Event info
+                //Loop through gironi
 
-            //    worksheet.Cells[cellRowIndex, 1] = "IdRosso";
-            //    worksheet.Cells[cellRowIndex, 2] = "CognomeRosso";
-            //    worksheet.Cells[cellRowIndex, 3] = "NomeRosso";
-            //    worksheet.Cells[cellRowIndex, 4] = "PuntiRosso";
-            //    worksheet.Cells[cellRowIndex, 5] = "IdBlu";
-            //    worksheet.Cells[cellRowIndex, 6] = "CognomeBlu";
-            //    worksheet.Cells[cellRowIndex, 7] = "NomeBlu";
-            //    worksheet.Cells[cellRowIndex, 8] = "PuntiBlu";
-            //    worksheet.Cells[cellRowIndex, 9] = "Campo";
-            //    worksheet.Cells[cellRowIndex, 10] = "DoppiaMorte";
-            //    cellRowIndex++;
+                worksheet.Cells[1, 1] = "Event info";
+                worksheet.Cells[1, 2] = "Fill out here";
+                worksheet.Cells[1, 3] = "Example";
+                worksheet.Cells[1, 4] = "Required?";
+                worksheet.Cells[1, 5] = "Description/explanation";
 
-            //    foreach (OutputRisultatiTorneo r in dataGridViewGironi.Items)
-            //    { 
-            //        worksheet.Cells[cellRowIndex, 1] = r.IdRosso;
-            //        worksheet.Cells[cellRowIndex, 2] = r.CognomeRosso;
-            //        worksheet.Cells[cellRowIndex, 3] = r.NomeRosso;
-            //        worksheet.Cells[cellRowIndex, 4] = r.PuntiRosso;
+                worksheet.Cells[2, 1] = "Event name";
+                worksheet.Cells[2, 2] = "";
+                worksheet.Cells[2, 3] = "";
+                worksheet.Cells[2, 4] = "Yes";
+                worksheet.Cells[2, 5] = "The date of the event. If the event went over several days, the first day of the event";
 
-            //        worksheet.Cells[cellRowIndex, 5] = r.IdBlu;
-            //        worksheet.Cells[cellRowIndex, 6] = r.CognomeBlu;
-            //        worksheet.Cells[cellRowIndex, 7] = r.NomeBlu;
-            //        worksheet.Cells[cellRowIndex, 8] = r.PuntiBlu;
+                worksheet.Cells[3, 1] = "Date";
+                worksheet.Cells[3, 2] = "";
+                worksheet.Cells[3, 3] = "";
+                worksheet.Cells[3, 4] = "Yes";
+                worksheet.Cells[3, 5] = "";
 
-            //        worksheet.Cells[cellRowIndex, 9] = r.Campo;
-            //        worksheet.Cells[cellRowIndex, 10] = r.DoppiaMorte.ToString();
+                worksheet.Cells[4, 1] = "Country";
+                worksheet.Cells[4, 2] = "";
+                worksheet.Cells[4, 3] = "";
+                worksheet.Cells[4, 4] = "Yes";
+                worksheet.Cells[4, 5] = "";
 
+                worksheet.Cells[5, 1] = "State (If applicable)";
+                worksheet.Cells[5, 2] = "";
+                worksheet.Cells[5, 3] = "";
+                worksheet.Cells[5, 4] = "No";
+                worksheet.Cells[5, 5] = "";
 
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                worksheet.Cells[6, 1] = "City";
+                worksheet.Cells[6, 2] = "";
+                worksheet.Cells[6, 3] = "";
+                worksheet.Cells[6, 4] = "Yes";
+                worksheet.Cells[6, 5] = "";
 
-            //    #region Classifica post gironi
-            //    worksheet = workbook.Sheets[2];
-            //    worksheet.Name = "PostGironi";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
-            //    //TODO
-            //    //Loop through Sedicesimi
+                worksheet.Cells[7, 1] = "Organizing club (if any)";
+                worksheet.Cells[7, 2] = "";
+                worksheet.Cells[7, 3] = "";
+                worksheet.Cells[7, 4] = "No";
+                worksheet.Cells[7, 5] = "";
 
-            //    worksheet.Cells[cellRowIndex, 1] = "IdGirone";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "Cognome";
-            //    worksheet.Cells[cellRowIndex, 4] = "Nome";
-            //    worksheet.Cells[cellRowIndex, 5] = "Vittorie";
-            //    worksheet.Cells[cellRowIndex, 6] = "Sconfitte";
-            //    worksheet.Cells[cellRowIndex, 7] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 8] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 9] = "Differenziale";
-            //    worksheet.Cells[cellRowIndex, 10] = "Ranking";
+                worksheet.Cells[8, 1] = "Social media links";
+                worksheet.Cells[8, 2] = "";
+                worksheet.Cells[8, 3] = "";
+                worksheet.Cells[8, 4] = "Yes";
+                worksheet.Cells[8, 5] = "One or more links to info about the event on Facebook, VK, Eventbrite, etc. This makes it easier to tag, find photos, etc. If this is missing, please write an explanation why.";
 
-            //    cellRowIndex++;
-            //    foreach (GironiConclusi r in dataGridViewPostGironi.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.IdGirone;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.Cognome;
-            //        worksheet.Cells[cellRowIndex, 4] = r.Nome;
-            //        worksheet.Cells[cellRowIndex, 5] = r.Vittorie;
-            //        worksheet.Cells[cellRowIndex, 6] = r.Sconfitte;
-            //        worksheet.Cells[cellRowIndex, 7] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 8] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 9] = r.Differenziale;
-            //        worksheet.Cells[cellRowIndex, 10] = r.Ranking;
-                    
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                worksheet.Cells[9, 1] = "Photo links";
+                worksheet.Cells[9, 2] = "";
+                worksheet.Cells[9, 3] = "";
+                worksheet.Cells[9, 4] = "Yes";
+                worksheet.Cells[9, 5] = "Links to photos/albums we can use when announcing that we’ve added the results to the ratings. These can also be submitted to us directly via email or Facebook message. If this is missing, please write an explanation why.";
 
-            //    #region sedicesimi
-            //    worksheet = workbook.Sheets[3];
-            //    worksheet.Name = "Sedicesimi";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
+                worksheet.Cells[10, 1] = "";
+                worksheet.Cells[10, 2] = "";
+                worksheet.Cells[10, 3] = "";
+                worksheet.Cells[10, 4] = "";
+                worksheet.Cells[10, 5] = "";
 
-            //    //Loop through Sedicesimi
-            //    worksheet.Cells[cellRowIndex, 1] = "Posizione";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "CognomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 4] = "NomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 5] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 6] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 7] = "Campo";
+                worksheet.Cells[11, 1] = "Submitter info";
+                worksheet.Cells[11, 2] = "";
+                worksheet.Cells[11, 3] = "";
+                worksheet.Cells[11, 4] = "";
+                worksheet.Cells[11, 5] = "";
 
-            //    cellRowIndex++;
+                worksheet.Cells[12, 1] = "Submitter";
+                worksheet.Cells[12, 2] = "";
+                worksheet.Cells[12, 3] = "";
+                worksheet.Cells[12, 4] = "Yes";
+                worksheet.Cells[12, 5] = "The person who submitted the data to us";
 
-            //    foreach(OutputRisultatiEliminatorieTorneo r in dataGridViewSedicesimi.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.Posizione;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.CognomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 4] = r.NomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 5] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 6] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 7] = r.Campo;
-                       
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                worksheet.Cells[13, 1] = "Submitter email address";
+                worksheet.Cells[13, 2] = "";
+                worksheet.Cells[13, 3] = "";
+                worksheet.Cells[13, 4] = "Yes";
+                worksheet.Cells[13, 5] = "The email address of the person submitting the results";
 
-            //    #region ottavi
-            //    worksheet = workbook.Sheets[4];
-            //    worksheet.Name = "Ottavi";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
+                worksheet.Cells[14, 1] = "Organizer (if different from submitter)";
+                worksheet.Cells[14, 2] = "";
+                worksheet.Cells[14, 3] = "";
+                worksheet.Cells[14, 4] = "No";
+                worksheet.Cells[14, 5] = "Someone who can help us sort out any mistakes in the data if the original submitter can't";
 
-            //    //Loop through Ottavi
-            //    worksheet.Cells[cellRowIndex, 1] = "Posizione";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "CognomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 4] = "NomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 5] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 6] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 7] = "Campo";
+                worksheet.Cells[15, 1] = "Organizer email address";
+                worksheet.Cells[15, 2] = "";
+                worksheet.Cells[15, 3] = "";
+                worksheet.Cells[15, 4] = "No";
+                worksheet.Cells[15, 5] = "The email address of the person who can sort out mistakes";
 
-            //    cellRowIndex++;
+                worksheet.Cells[16, 1] = "";
+                worksheet.Cells[16, 2] = "";
+                worksheet.Cells[16, 3] = "";
+                worksheet.Cells[16, 4] = "";
+                worksheet.Cells[16, 5] = "";
 
-            //    foreach (OutputRisultatiEliminatorieTorneo r in dataGridViewOttavi.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.Posizione;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.CognomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 4] = r.NomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 5] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 6] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 7] = r.Campo;
+                worksheet.Cells[17, 1] = "Info about the data";
+                worksheet.Cells[17, 2] = "";
+                worksheet.Cells[17, 3] = "";
+                worksheet.Cells[17, 4] = "";
+                worksheet.Cells[17, 5] = "";
 
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                worksheet.Cells[18, 1] = "Does the event conform to the HEMA Ratings event criteria?";
+                worksheet.Cells[18, 2] = "";
+                worksheet.Cells[18, 3] = "";
+                worksheet.Cells[18, 4] = "Yes";
+                worksheet.Cells[18, 5] = "I have read and understood the criteria laid out on HEMA Ratings \"About\" page, and the event meets these requirements: https://hemaratings.com/about/";
 
-            //    #region Quarti
-            //    worksheet = workbook.Sheets[5];
-            //    worksheet.Name = "Quarti";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
+                worksheet.Cells[19, 1] = "Are there any fights in the submitted results that didn't happen?";
+                worksheet.Cells[19, 2] = "";
+                worksheet.Cells[19, 3] = "";
+                worksheet.Cells[19, 4] = "Yes";
+                worksheet.Cells[19, 5] = "If someone withdrew due to injury or for some other reason didn't fight all their fights, those fight should not be included. We want to rate people's fighting ability, not their injuries";
 
-            //    //Loop through Ottavi
-            //    worksheet.Cells[cellRowIndex, 1] = "Posizione";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "CognomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 4] = "NomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 5] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 6] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 7] = "Campo";
+                worksheet.Cells[20, 1] = "Are there any missing fights in the data?";
+                worksheet.Cells[20, 2] = "";
+                worksheet.Cells[20, 3] = "";
+                worksheet.Cells[20, 4] = "Yes";
+                worksheet.Cells[20, 5] = "Sometimes there are fights missing for various reasons. If there are any fights missing, please let us know why and we'll find out how to proceed.";
 
-            //    cellRowIndex++;
-            //    foreach (OutputRisultatiEliminatorieTorneo r in dataGridViewQuarti.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.Posizione;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.CognomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 4] = r.NomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 5] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 6] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 7] = r.Campo;
+                #endregion
 
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                #region Clubs
+                worksheet = workbook.Sheets[2];
+                worksheet.Name = "Clubs";
+                cellRowIndex = 1;
+                cellColumnIndex = 1;
+                //TODO
+                //Loop through Sedicesimi
 
-            //    #region Semifinali
-            //    worksheet = workbook.Sheets[6];
-            //    worksheet.Name = "Semifinali";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
+                worksheet.Cells[cellRowIndex, 1] = "Name";
+                worksheet.Cells[cellRowIndex, 2] = "Country";
+                worksheet.Cells[cellRowIndex, 3] = "State";
+                worksheet.Cells[cellRowIndex, 4] = "City";
+                worksheet.Cells[cellRowIndex, 5] = "Website URL";
+                worksheet.Cells[cellRowIndex, 6] = "Facebook URL";
+                worksheet.Cells[cellRowIndex, 7] = "Parent club (see explanation document)";
 
-            //    //Loop through Semifinali
-            //    worksheet.Cells[cellRowIndex, 1] = "Posizione";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "CognomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 4] = "NomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 5] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 6] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 7] = "Campo";
+                cellRowIndex++;
+                foreach (HemaRatingsClubEntity r in dataGridViewClubs.Items)
+                {
+                    worksheet.Cells[cellRowIndex, 1] = r.Name;
+                    worksheet.Cells[cellRowIndex, 2] = r.Country;
+                    worksheet.Cells[cellRowIndex, 3] = r.State;
+                    worksheet.Cells[cellRowIndex, 4] = r.City;
+                    worksheet.Cells[cellRowIndex, 5] = "";
+                    worksheet.Cells[cellRowIndex, 6] = "";
+                    worksheet.Cells[cellRowIndex, 7] = "";
+                  
+                    cellRowIndex++;
+                }
+                #endregion
 
-            //    cellRowIndex++;
+                #region Fighters
+                worksheet = workbook.Sheets[3];
+                worksheet.Name = "Fighters";
+                cellRowIndex = 1;
+                cellColumnIndex = 1;
 
-            //    foreach (OutputRisultatiEliminatorieTorneo r in dataGridViewSemifinali.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.Posizione;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.CognomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 4] = r.NomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 5] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 6] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 7] = r.Campo;
+                //Loop through Sedicesimi
+                worksheet.Cells[cellRowIndex, 1] = "Name";
+                worksheet.Cells[cellRowIndex, 2] = "Club";
+                worksheet.Cells[cellRowIndex, 3] = "Nationality";
+                worksheet.Cells[cellRowIndex, 4] = "Gender";
+                worksheet.Cells[cellRowIndex, 5] = "HemaRatingsId";
 
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                cellRowIndex++;
 
-            //    #region Finali
-            //    worksheet = workbook.Sheets[7];
-            //    worksheet.Name = "Finali";
-            //    cellRowIndex = 1;
-            //    cellColumnIndex = 1;
+                foreach(HemaRatingsFighterMatchEntity r in dataGridViewFighters.Items)
+                {
+                    worksheet.Cells[cellRowIndex, 1] = r.Name;
+                    worksheet.Cells[cellRowIndex, 2] = r.Club;
+                    worksheet.Cells[cellRowIndex, 3] = r.Nationality;
+                    worksheet.Cells[cellRowIndex, 4] = r.Gender;
+                    worksheet.Cells[cellRowIndex, 5] = r.HemaRatingsId;
+                     
+                    cellRowIndex++;
+                }
+                #endregion
 
-            //    //Loop through Finali 
-            //    worksheet.Cells[cellRowIndex, 1] = "Posizione";
-            //    worksheet.Cells[cellRowIndex, 2] = "IdAtleta";
-            //    worksheet.Cells[cellRowIndex, 3] = "CognomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 4] = "NomeAtleta";
-            //    worksheet.Cells[cellRowIndex, 5] = "PuntiFatti";
-            //    worksheet.Cells[cellRowIndex, 6] = "PuntiSubiti";
-            //    worksheet.Cells[cellRowIndex, 7] = "Campo";
+                #region matches results
+                worksheet = workbook.Sheets[4];
+                worksheet.Name = nomeDisciplina;
+                cellRowIndex = 1;
+                cellColumnIndex = 1;
 
-            //    cellRowIndex++;
+                //Loop through Ottavi
+                worksheet.Cells[cellRowIndex, 1] = "Fighter1";
+                worksheet.Cells[cellRowIndex, 2] = "Fighter2";
+                worksheet.Cells[cellRowIndex, 3] = "Fighter_1_Result";
+                worksheet.Cells[cellRowIndex, 4] = "Fighter_2_Result";
+                worksheet.Cells[cellRowIndex, 5] = "Round";
 
-            //    foreach (OutputRisultatiEliminatorieTorneo r in dataGridViewFinali.Items)
-            //    {
-            //        worksheet.Cells[cellRowIndex, 1] = r.Posizione;
-            //        worksheet.Cells[cellRowIndex, 2] = r.IdAtleta;
-            //        worksheet.Cells[cellRowIndex, 3] = r.CognomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 4] = r.NomeAtleta;
-            //        worksheet.Cells[cellRowIndex, 5] = r.PuntiFatti;
-            //        worksheet.Cells[cellRowIndex, 6] = r.PuntiSubiti;
-            //        worksheet.Cells[cellRowIndex, 7] = r.Campo;
+                cellRowIndex++;
 
-            //        cellRowIndex++;
-            //    }
-            //    #endregion
+                foreach (HemaRatingsMatchResult r in dataGridViewMatchs.Items)
+                {
+                    worksheet.Cells[cellRowIndex, 1] = r.Fighter1;
+                    worksheet.Cells[cellRowIndex, 2] = r.Fighter2;
+                    worksheet.Cells[cellRowIndex, 3] = r.Fighter_1_Result;
+                    worksheet.Cells[cellRowIndex, 4] = r.Fighter_2_Result;
+                    worksheet.Cells[cellRowIndex, 5] = r.Round;
 
-            //    workbook.SaveAs(fileNameWithPath);
-                
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    excel.Quit();
-            //    workbook = null;
-            //    excel = null;
-            //}
+                    cellRowIndex++;
+                }
+                #endregion
+
+                workbook.SaveAs(fileNameWithPath);
+              
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                excel.Quit();
+                workbook = null;
+                excel = null;
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

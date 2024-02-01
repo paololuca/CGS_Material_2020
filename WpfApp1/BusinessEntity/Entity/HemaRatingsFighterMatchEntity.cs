@@ -12,6 +12,6 @@ namespace BusinessEntity.Entity
         public String Club { get; set; }
         public String Nationality { get; set; }
         public String Gender { get; set; }
-        public int HemaRatingsId { get; set; }
+        public string HemaRatingsId { get; set; }
     }
 }

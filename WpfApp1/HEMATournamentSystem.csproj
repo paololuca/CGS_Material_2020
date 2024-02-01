@@ -145,6 +145,7 @@
     <Compile Include="BusinessEntity\Entity\HemaRatingsClubEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterEntity.cs" />
     <Compile Include="BusinessEntity\Entity\HemaRatingsFighterMatchEntity.cs" />
+    <Compile Include="BusinessEntity\Entity\HemaRatingsMatchResult.cs" />
     <Compile Include="BusinessEntity\Entity\MobileAppEntity.cs" />
     <Compile Include="BusinessEntity\Type\PhasesType.cs" />
     <Compile Include="BusinessEntity\Type\ProfileManager.cs" />

@@ -90,6 +90,8 @@ namespace HEMATournamentSystem
                     items.Add(new WindowsItem("Manage Disciplines", new Home(), null));
                     items.Add(new WindowsItem("Manage Fighters", new Fighters(user), null));
                     items.Add(new WindowsItem("Manage Tournaments", new Tournaments(user), null));
+
+                    items.Add(new WindowsItem("Reports", new Home(), null));
                     
                     items.Add(new WindowsItem("System Settings", new Settings(user), null));
                     

@@ -30,6 +30,7 @@ namespace HEMATournamentSystem.Engine
 
                 foreach (MatchEntity match in dataGridPool.Items)
                 {
+
                     bool doppiaMorte = match.DoppiaMorte;
 
                     if (!SqlDal_Pools.UpdateGironiIncontri(idTorneo, idDisciplina, poolIndex, match.IdRosso, match.PuntiRosso, match.IdBlu, match.PuntiBlu, doppiaMorte))

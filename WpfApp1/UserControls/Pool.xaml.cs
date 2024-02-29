@@ -152,8 +152,17 @@ namespace HEMATournamentSystem
             int numeroIncontriAdPersonam = idAtleti.Count - 1;
 
             AscEngine.SaveTournamentPool(idTorneo, idDisciplina, poolIndex, idAtleti, numeroIncontriAdPersonam, dataGridPool);
+
+            UpdateHemaSite();
+
         }
 
-        
+        private void UpdateHemaSite()
+        {
+            SqlDal_HemaSite.UpdateStatistics(idTorneo, idDisciplina, poolIndex);
+
+            SqlDal_HemaSite.UpdatePoolsMatchs(idTorneo, poolIndex, dataGridPool);
+        }
+
     }
 }

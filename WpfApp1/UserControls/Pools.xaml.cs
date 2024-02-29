@@ -85,7 +85,7 @@ namespace HEMATournamentSystem
                         //_disciplineCategory = SqlDal_Tournaments.GetTorneoById(_tournamentId)
 
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
-                        lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
+                        lblTitle.Text = creaGironi.NomeTorneo + "\n" + creaGironi.NomeDisciplina;
                     }
                 }
             }
@@ -305,6 +305,7 @@ namespace HEMATournamentSystem
 
                         CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);
                         lblTitle.Text = caricaGironi.NomeTorneo + " - " + caricaGironi.NomeDisciplina;
+                        btnHemaSite.IsEnabled = true;
                     }
                 }
             }
@@ -618,6 +619,24 @@ namespace HEMATournamentSystem
             tabControlPool.Items.Clear();
         }
 
-        
+        private void btnHemaSite_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedIndex = tabControlPool.SelectedIndex;
+
+            SqlDal_HemaSite.ClearAllTable(_tournamentId);
+            SqlDal_HemaSite.UpdateTournamentDescription(_tournamentId, _tournamentName + " - " + _disciplineName, numeroGironi);
+
+
+            for (int i = 0; i < tabControlPool.Items.Count; i++)
+            {
+                tabControlPool.SelectedIndex = i;
+                Pool p = (Pool)tabControlPool.SelectedContent;
+                p.SavePoolFromFather();
+            }
+
+            tabControlPool.SelectedIndex = selectedIndex;
+
+            new MessageBoxCustom("Site ready to stream", MessageType.Success, MessageButtons.Ok).ShowDialog();
+        }
     }
 }

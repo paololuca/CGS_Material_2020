@@ -223,5 +223,11 @@ namespace HEMATournamentSystem
                 DeleteMatches(torunament);
             }
         }
+
+        private void btnResetHemaTournamentsSite_Click(object sender, RoutedEventArgs e)
+        {
+            SqlDal_HemaSite.TruncateAllTables();
+            new MessageBoxCustom("Site rest completed", MessageType.Success, MessageButtons.Ok).ShowDialog();
+        }
     }
 }

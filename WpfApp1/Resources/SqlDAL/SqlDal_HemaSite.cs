@@ -20,6 +20,43 @@ namespace Resources
 
         static bool _hemaSiteActivated = Convert.ToBoolean(ConfigurationManager.AppSettings["HEMASITE"]);
 
+        public static void TruncateAllTables()
+        {
+            SqlConnection c = null;
+
+            List<string> tables = new List<string>()
+            {
+                "TOURNAMENT",
+                "POOLS_STATS",
+                "POOLS_MATCHES"
+
+            };
+
+            foreach (var table in tables)
+            {
+                try
+                {
+                    string commandText = "TRUNCATE TABLE " + table;
+                    c = new SqlConnection(_hemaConnectionString);
+
+                    c.Open();
+
+                    SqlCommand command = new SqlCommand(commandText, c);
+                    command.ExecuteNonQuery();
+
+                }
+                catch (Exception e)
+                {
+
+                }
+                finally
+                {
+                    c.Close();
+                }
+            }
+
+        }
+
         public static void ClearAllTable(int idTorneo)
         {
             if (!_hemaSiteActivated)

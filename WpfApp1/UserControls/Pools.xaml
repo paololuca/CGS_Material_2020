@@ -139,7 +139,7 @@
                 <TextBlock Text="  Next Pase"/>
             </StackPanel>
         </Button>
-        <TextBlock Name="lblTitle" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="" Margin="243,544,227,10" HorizontalAlignment="Center"/>
+        <TextBlock Name="lblTitle" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="" Margin="243,544,227,10" HorizontalAlignment="Center" FontSize="14px"/>
         <Button x:Name="btnSerialize" Height="Auto" Margin="220,532,709,17" IsEnabled="False"
             Click="BtnSerialize_Click" Background="#FF025EB9" Style="{StaticResource MaterialDesignRaisedAccentButton}"
             materialDesign:ButtonAssist.CornerRadius="25 25 0 0" ToolTip="Export Pool's Match in Pdf File" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF025EB9">

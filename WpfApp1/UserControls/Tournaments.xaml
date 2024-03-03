@@ -85,6 +85,11 @@
                                     <materialDesign:PackIcon Kind="Settings"/>
                                 </StackPanel>
                             </Button>
+                            <Button x:Name="btnResetHemaTournamentsSite" Height="Auto"  Click="btnResetHemaTournamentsSite_Click" Background="#FF673AB7" Margin="878,51,82,542" RenderTransformOrigin="0.5,0.5"  ToolTip="Reset all torunaments stats and result for HEMA site" >
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Web"/>
+                                </StackPanel>
+                            </Button>
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
                                     Margin="24,102,10,10">
                                 <DataGrid Name="dataGridActiveTournament" CanUserSortColumns="True" Height="314" 

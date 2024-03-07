@@ -85,7 +85,7 @@ namespace HEMATournamentSystem
                         //_disciplineCategory = SqlDal_Tournaments.GetTorneoById(_tournamentId)
 
                         creaGironiAndLoad(creaGironi.IdTorneo, creaGironi.IdDisciplina);
-                        lblTitle.Text = creaGironi.NomeTorneo + "\n" + creaGironi.NomeDisciplina;
+                        lblTitle.Text = creaGironi.NomeTorneo + " - " + creaGironi.NomeDisciplina;
                     }
                 }
             }

@@ -112,8 +112,8 @@ namespace UserControls.Phases
             poolOne.Add(allAtleti.ElementAt(15));
             poolOne.Add(allAtleti.ElementAt(16));
 
-            poolOne.Add(allAtleti.ElementAt(11));
-            poolOne.Add(allAtleti.ElementAt(20));
+            poolOne.Add(allAtleti.ElementAt(8));
+            poolOne.Add(allAtleti.ElementAt(23));
 
             poolOne.Add(allAtleti.ElementAt(7));
             poolOne.Add(allAtleti.ElementAt(24));
@@ -129,8 +129,8 @@ namespace UserControls.Phases
             poolTwo.Add(allAtleti.ElementAt(14));
             poolTwo.Add(allAtleti.ElementAt(17));
 
-            poolTwo.Add(allAtleti.ElementAt(10));
-            poolTwo.Add(allAtleti.ElementAt(21));
+            poolTwo.Add(allAtleti.ElementAt(9));
+            poolTwo.Add(allAtleti.ElementAt(22));
 
             poolTwo.Add(allAtleti.ElementAt(6));
             poolTwo.Add(allAtleti.ElementAt(25));
@@ -143,8 +143,8 @@ namespace UserControls.Phases
             poolThree.Add(allAtleti.ElementAt(5));
             poolThree.Add(allAtleti.ElementAt(26));
 
-            poolThree.Add(allAtleti.ElementAt(9));
-            poolThree.Add(allAtleti.ElementAt(22));
+            poolThree.Add(allAtleti.ElementAt(10));
+            poolThree.Add(allAtleti.ElementAt(21));
 
             poolThree.Add(allAtleti.ElementAt(13));
             poolThree.Add(allAtleti.ElementAt(18));
@@ -160,8 +160,8 @@ namespace UserControls.Phases
             poolFour.Add(allAtleti.ElementAt(4));
             poolFour.Add(allAtleti.ElementAt(27));
 
-            poolFour.Add(allAtleti.ElementAt(8));
-            poolFour.Add(allAtleti.ElementAt(23));
+            poolFour.Add(allAtleti.ElementAt(11));
+            poolFour.Add(allAtleti.ElementAt(20));
 
             poolFour.Add(allAtleti.ElementAt(12));
             poolFour.Add(allAtleti.ElementAt(19));

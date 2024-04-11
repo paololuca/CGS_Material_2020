@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="HEMATournamentSystem.HemaRatings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HEMATournamentSystem"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" Height="580" Width="1030" Loaded="UserControl_Loaded">
+    <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" 
+                                    Margin="24,8,215,500" Grid.ColumnSpan="1">
+            <TextBlock Text="Hema Ratings" FontWeight="Bold" />
+            <TextBlock Opacity=".68"
+                                   Text="Lista dei valori di HemaRatings presenti nel loro DataBase" TextWrapping="Wrap" />
+            <Separator Height="8"></Separator>
+        </StackPanel>
+        <TextBox Name="txtSearch" DockPanel.Dock="Top" Margin="820,157,10,382" Width="200" BorderThickness="0"
+                        materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.IsFloating="True" materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4" KeyUp="TxtSearch_KeyUp"/>
+        <materialDesign:PackIcon Kind="PeopleSwitch" Margin="0,61,0,0" Height="90" Width="90" />
+        <Button x:Name="btnRefreshHemaRatings" Height="Auto"  Click="btnRefreshHemaRatings_Click" IsEnabled="true"
+                Background="#FF28D137" Margin="90,85,774,453" RenderTransformOrigin="0.5,0.5"  >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Floppy"/>
+                <TextBlock Text="  Save Association"/>
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="dataGridAHemaRatings" HorizontalAlignment="Left" Height="367" Margin="10,203,0,0" VerticalAlignment="Top" Width="1010"
+                  CanUserSortColumns="True"  CanUserAddRows="False" CanUserDeleteRows="False" AutoGeneratingColumn="dataGridAHemaRatings_AutoGeneratingColumn"
+                  SelectionUnit="Cell" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnModifyAssociation" Height="32"  Click="btnModifyAssociation_Click" Background="#FF673AB7" Width="Auto" ToolTip="Modify">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ModeEdit"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnMigrateAssociation" Height="32"  Click="BtnMigrateAssociation_Click" Background="#FF28D137" Width="Auto" ToolTip="Migrate">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Transfer"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDeleteAssociation" Height="32"  Click="BtnDeleteAssociation_Click" Background="Red" Width="Auto" ToolTip="Delete Association">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Delete"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnExport" Height="Auto"  Click="BtnExport_Click" Background="#FF673AB7" Margin="24,169,958,382" RenderTransformOrigin="0.5,0.5" ToolTip="Export Associations" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FileExport"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</UserControl>

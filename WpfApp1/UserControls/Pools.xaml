@@ -36,14 +36,14 @@
                 <TextBlock Text="  Create Pools"/>
             </StackPanel>
         </Button>
-        <Button x:Name="btnHemaSite" Height="Auto" Margin="861,0,52,554" Click="btnHemaSite_Click" Background="#FF673AB7" IsEnabled="False" >
+        <Button x:Name="btnHemaSite" Height="Auto" Margin="300,0,613,554" Click="btnHemaSite_Click" Background="#FF673AB7" IsEnabled="False" >
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Web"/>
                 <TextBlock Text="  Set Site"/>
             </StackPanel>
         </Button>
         <ComboBox Name="cmbSearchFighter" materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.HelperText="Search a Fighter by Surname and name" materialDesign:HintAssist.HintOpacity=".26" 
-                  IsEditable="True" Margin="411,-2,338,554" materialDesign:TextFieldAssist.HasClearButton="True"
+                  IsEditable="True" Margin="698,0,51,552" materialDesign:TextFieldAssist.HasClearButton="True"
                   IsEnabled="False" KeyUp="cmbSearchFighter_KeyUp" DropDownClosed="cmbSearchFighter_DropDownClosed">
         </ComboBox>
 

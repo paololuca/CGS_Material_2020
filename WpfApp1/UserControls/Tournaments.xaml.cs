@@ -226,7 +226,7 @@ namespace HEMATournamentSystem
 
         private void btnResetHemaTournamentsSite_Click(object sender, RoutedEventArgs e)
         {
-            SqlDal_HemaSite.TruncateAllTables();
+            SqlDal_HemaSiteMongoDB.TruncateAllTables();
             new MessageBoxCustom("Site rest completed", MessageType.Success, MessageButtons.Ok).ShowDialog();
         }
     }

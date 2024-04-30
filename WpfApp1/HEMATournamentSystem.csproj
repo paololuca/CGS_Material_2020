@@ -211,6 +211,7 @@
     <Compile Include="Resources\Helper\MobileAppHelper.cs" />
     <Compile Include="Resources\Manager\DynamicsPdfManager.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_HemaRatings.cs" />
+    <Compile Include="Resources\SqlDAL\SqlDal_HemaSite.cs" />
     <Compile Include="Resources\SqlDAL\SqlDal_HemaSiteMongoDB.cs" />
     <Compile Include="UserControls\HemaRatings.xaml.cs">
       <DependentUpon>HemaRatings.xaml</DependentUpon>

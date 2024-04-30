@@ -19,7 +19,7 @@ namespace Resources
 
     public static class SqlDal_HemaSiteMongoDB
     {
-        
+        static string _hemaConnectionString = "mongodb+srv://paololuca:sAxXUKrqU20Mj6sp@piellelandia.y5mdses.mongodb.net/?retryWrites=true&w=majority&appName=Piellelandia";
 
         static bool _hemaSiteActivated = Convert.ToBoolean(ConfigurationManager.AppSettings["HEMASITE"]);
         static MongoClient client = new MongoClient(_hemaConnectionString);

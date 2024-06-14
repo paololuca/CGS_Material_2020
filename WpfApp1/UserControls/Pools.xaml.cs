@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BusinessEntity.Type;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace HEMATournamentSystem
 {
@@ -305,7 +306,7 @@ namespace HEMATournamentSystem
 
                         CaricaGironiCreati(caricaGironi.IdTorneo, caricaGironi.IdDisciplina);
                         lblTitle.Text = caricaGironi.NomeTorneo + " - " + caricaGironi.NomeDisciplina;
-                        btnHemaSite.IsEnabled = true;
+                        btnHemaSite.IsEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["HEMASITE"]);
                     }
                 }
             }

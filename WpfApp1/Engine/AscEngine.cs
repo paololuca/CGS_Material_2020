@@ -30,7 +30,6 @@ namespace HEMATournamentSystem.Engine
 
                 foreach (MatchEntity match in dataGridPool.Items)
                 {
-
                     bool doppiaMorte = match.DoppiaMorte;
 
                     if (!SqlDal_Pools.UpdateGironiIncontri(idTorneo, idDisciplina, poolIndex, match.IdRosso, match.PuntiRosso, match.IdBlu, match.PuntiBlu, doppiaMorte))
@@ -44,7 +43,7 @@ namespace HEMATournamentSystem.Engine
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(_maxScoreCap - match.PuntiRosso);
+                            res.PuntiSubiti += match.PuntiBlu; // Math.Abs(_maxScoreCap - match.PuntiRosso);
                         }
                         else
                         {
@@ -62,7 +61,7 @@ namespace HEMATournamentSystem.Engine
                         if (doppiaMorte)
                         {
                             res.Sconfitte++;
-                            res.PuntiSubiti += Math.Abs(_maxScoreCap - match.PuntiBlu);
+                            res.PuntiSubiti += match.PuntiRosso; // Math.Abs(_maxScoreCap - match.PuntiBlu);
                         }
                         else
                         {

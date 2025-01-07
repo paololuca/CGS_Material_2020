@@ -624,8 +624,8 @@ namespace HEMATournamentSystem
         {
             int selectedIndex = tabControlPool.SelectedIndex;
 
-            SqlDal_HemaSiteMongoDB.ClearAllTable(_tournamentId);
-            SqlDal_HemaSiteMongoDB.UpdateTournamentDescription(_tournamentId, _tournamentName + " - " + _disciplineName, numeroGironi);
+            SqlDal_HemaSite.ClearAllTable(_tournamentId, _disciplineId);
+            SqlDal_HemaSite.UpdateTournamentDescription(_tournamentId);
 
 
             for (int i = 0; i < tabControlPool.Items.Count; i++)

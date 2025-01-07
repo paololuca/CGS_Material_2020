@@ -57,23 +57,28 @@ namespace Resources
 
         }
 
-        public static void ClearAllTable(int idTorneo)
+        public static void ClearAllTable(int idTorneo, int idDisciplina)
         {
             if (!_hemaSiteActivated)
                 return;
 
-            ClearStatisticsValue(idTorneo);
-            ClearPoolsMatchs(idTorneo);
+            ClearStatisticsValue(idTorneo, idDisciplina);
+            ClearPoolsMatchs(idTorneo, idDisciplina);
             ClearTournamentDescValue(idTorneo);
         }
 
-        public static void ClearStatisticsValue(int idTorneo)
+        /// <summary>
+        /// OK
+        /// </summary>
+        /// <param name="idTorneo"></param>
+        /// <param name="idDisciplina"></param>
+        public static void ClearStatisticsValue(int idTorneo, int idDisciplina)
         {
             SqlConnection c = null;
 
             try
             {
-                string commandText = "DELETE [POOLS_STATS] WHERE IdTorneo = " + idTorneo;
+                string commandText = "DELETE [POOLS_STATS] WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina;
                 c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
@@ -92,13 +97,19 @@ namespace Resources
             }
         }
 
-        public static void ClearStatisticsValue(int idTorneo, int idGirone)
+        /// <summary>
+        /// ok
+        /// </summary>
+        /// <param name="idTorneo"></param>
+        /// <param name="idGirone"></param>
+        /// <param name="idDisciplina"></param>
+        public static void ClearStatisticsValue(int idTorneo, int idGirone, int idDisciplina)
         {
             SqlConnection c = null;
 
             try
             {
-                string commandText = "DELETE [POOLS_STATS] WHERE IdTorneo = " + idTorneo + " AND IdGirone = " + idGirone;
+                string commandText = "DELETE [POOLS_STATS] WHERE IdTorneo = " + idTorneo + " AND IdGirone = " + idGirone + " AND IdDisciplina = " + idDisciplina;
                 c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
@@ -142,13 +153,13 @@ namespace Resources
             }
         }
 
-        public static void ClearPoolsMatchs(int idTorneo, int idGirone)
+        public static void ClearPoolsMatchs(int idTorneo, int idGirone, int idDisciplina)
         {
             SqlConnection c = null;
 
             try
             {
-                string commandText = "DELETE [POOLS_MATCHES] WHERE IdTorneo = " + idTorneo + " AND IdGirone = " + idGirone;
+                string commandText = "DELETE [POOLS_MATCHES] WHERE IdTorneo = " + idTorneo + " AND IdGirone = " + idGirone + " AND IdDisciplina = " + idDisciplina;
                 c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
@@ -167,13 +178,13 @@ namespace Resources
             }
         }
 
-        public static void ClearPoolsMatchs(int idTorneo)
+        public static void ClearPoolsMatchs(int idTorneo, int idDisciplina)
         {
             SqlConnection c = null;
 
             try
             {
-                string commandText = "DELETE [POOLS_MATCHES] WHERE IdTorneo = " + idTorneo;
+                string commandText = "DELETE [POOLS_MATCHES] WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina;
                 c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
@@ -197,7 +208,7 @@ namespace Resources
             if (!_hemaSiteActivated)
                 return;
 
-            ClearStatisticsValue(idTorneo, idGirone);
+            ClearStatisticsValue(idTorneo, idGirone, idDisciplina);
 
             //prendo tutti i valori post gironi...anche se non ho finito
             //TODO forse è da fare per girone....
@@ -216,17 +227,17 @@ namespace Resources
             }
         }
 
-        public static void UpdatePoolsMatchs(int idTorneo, int idGirone, DataGrid dataGridPool)
+        public static void UpdatePoolsMatchs(int idTorneo, int idGirone, DataGrid dataGridPool, int idDisciplina)
         {
             if (!_hemaSiteActivated)
                 return;
 
-            ClearPoolsMatchs(idTorneo, idGirone);
+            ClearPoolsMatchs(idTorneo, idGirone, idDisciplina);
 
             List<MatchEntityPoolsMatches> matchList = new List<MatchEntityPoolsMatches>();
 
             foreach (MatchEntity match in dataGridPool.Items)
-                matchList.Add(new MatchEntityPoolsMatches(match, idTorneo, idGirone));
+                matchList.Add(new MatchEntityPoolsMatches(match, idTorneo, idGirone, idDisciplina));
 
             DataTable dataTable = ToDataTable(matchList);
 
@@ -241,34 +252,44 @@ namespace Resources
             }
 
         }
-
-        public static void UpdateTournamentDescription(int idTorneo, string desc, int pools)
+        /// <summary>
+        /// ok
+        /// </summary>
+        /// <param name="idTorneo"></param>
+        public static void UpdateTournamentDescription(int idTorneo)
         {
             if (!_hemaSiteActivated)
+                return;
+
+            var tournament = SqlDal_Tournaments.GetTorneoById(idTorneo);
+
+            if (tournament == null)
                 return;
 
             ClearTournamentDescValue(idTorneo);
 
             SqlConnection c = null;
 
-            try
+            using (SqlConnection connection = new SqlConnection(_hemaConnectionString))
             {
-                string commandText = "INSERT INTO [TOURNAMENT] VALUES(" + idTorneo + ", '" + desc + "', " + pools + ")";
-                c = new SqlConnection(_hemaConnectionString);
+                string query = @"INSERT INTO TOURNAMENT (IdTorneo, NomeTorneo, Luogo, DataInizio, DataFine)
+                             VALUES (@IdTorneo, @NomeTorneo, @Luogo, @DataInizio, @DataFine)";
 
-                c.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Configura i parametri con i relativi tipi
+                    command.Parameters.Add(new SqlParameter("@IdTorneo", SqlDbType.Int) { Value = idTorneo });
+                    command.Parameters.Add(new SqlParameter("@NomeTorneo", SqlDbType.NVarChar, 50) { Value = tournament.Name });
+                    command.Parameters.Add(new SqlParameter("@Luogo", SqlDbType.NVarChar, 50) { Value = tournament.Place ?? ""});
+                    command.Parameters.Add(new SqlParameter("@DataInizio", SqlDbType.Date) { Value = tournament.StartDate });
+                    command.Parameters.Add(new SqlParameter("@DataFine", SqlDbType.Date) { Value = tournament.EndDate });
 
-                SqlCommand command = new SqlCommand(commandText, c);
-                command.ExecuteNonQuery();
+                    // Apri la connessione e esegui il comando
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
 
-            }
-            catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                c.Close();
+                    Console.WriteLine($"{rowsAffected} riga(e) inserita(e).");
+                }
             }
         }
 

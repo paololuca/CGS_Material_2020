@@ -159,9 +159,9 @@ namespace HEMATournamentSystem
 
         private void UpdateHemaSite()
         {
-            SqlDal_HemaSiteMongoDB.UpdateStatistics(idTorneo, idDisciplina, poolIndex);
+            SqlDal_HemaSite.UpdateStatistics(idTorneo, idDisciplina, poolIndex);
 
-            SqlDal_HemaSiteMongoDB.UpdatePoolsMatchs(idTorneo, poolIndex, dataGridPool);
+            SqlDal_HemaSite.UpdatePoolsMatchs(idTorneo, poolIndex, dataGridPool, idDisciplina);
         }
 
     }

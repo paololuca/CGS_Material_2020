@@ -135,7 +135,7 @@ namespace Resources
             }
         }
 
-        public static void UpdatePoolsMatchs(int idTorneo, int idGirone, DataGrid dataGridPool)
+        public static void UpdatePoolsMatchs(int idTorneo, int idGirone, DataGrid dataGridPool, int idDisciplina)
         {
             if (!_hemaSiteActivated)
                 return;
@@ -145,7 +145,7 @@ namespace Resources
             List<MatchEntityPoolsMatches> matchList = new List<MatchEntityPoolsMatches>();
 
             foreach (MatchEntity match in dataGridPool.Items)
-                matchList.Add(new MatchEntityPoolsMatches(match, idTorneo, idGirone));
+                matchList.Add(new MatchEntityPoolsMatches(match, idTorneo, idGirone, idDisciplina));
 
 
             foreach (var m in matchList)

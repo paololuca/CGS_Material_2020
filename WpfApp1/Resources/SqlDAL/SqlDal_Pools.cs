@@ -118,8 +118,6 @@ namespace Resources
             }
         }
 
-        
-
         public static void CaricaPunteggiEsistentiGironiIncontri(int idTorneo, int idDisciplina, MatchEntity i, int idGirone)
         {
             String commandText = "SELECT * FROM GironiIncontri WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and NumeroGirone = " + idGirone + " " +

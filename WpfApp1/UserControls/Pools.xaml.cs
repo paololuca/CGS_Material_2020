@@ -260,8 +260,13 @@ namespace HEMATournamentSystem
                     //TODO l'inserimento va fatto solo se già non è stato fatto, altrimenti vanno eliminati TUTTI i dati
                     SqlDal_Pools.InserisciGironiIncontri(idTorneo, idDisciplina, matchList, idGirone);
 
+                    int ordineGirone = 1;
+
                     foreach (AtletaEntity a in g)
-                        SqlDal_Pools.InsertAtletaInGirone(creaGironi.IdTorneo, creaGironi.IdDisciplina, idGirone, a.IdAtleta);
+                    {
+                        SqlDal_Pools.InsertAtletaInGirone(creaGironi.IdTorneo, creaGironi.IdDisciplina, idGirone, a.IdAtleta, ordineGirone);
+                        ordineGirone++;
+                    }
 
                     idGirone++;
                 }
@@ -384,6 +389,7 @@ namespace HEMATournamentSystem
         private void EnablePageControls()
         {
             btnClosePools.IsEnabled = true;
+            btnSaveAll.IsEnabled = true;
             btnExportMatch.IsEnabled = true;
             btnExportPools.IsEnabled = true;
             btnSerialize.IsEnabled = true;
@@ -638,6 +644,16 @@ namespace HEMATournamentSystem
             tabControlPool.SelectedIndex = selectedIndex;
 
             new MessageBoxCustom("Site ready to stream", MessageType.Success, MessageButtons.Ok).ShowDialog();
+        }
+
+        private void btnSaveAll_Click(object sender, RoutedEventArgs e)
+        {
+            if(SaveAllPools())
+            {
+                new MessageBoxCustom("All pools saved", MessageType.Success, MessageButtons.Ok).ShowDialog();
+            }
+            else
+                new MessageBoxCustom("Error wihile saving pools", MessageType.Error, MessageButtons.Ok).ShowDialog();
         }
     }
 }

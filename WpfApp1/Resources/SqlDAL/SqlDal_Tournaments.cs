@@ -613,7 +613,8 @@ namespace Resources
                         Name = reader["NomeTorneo"].ToString(),
                         Id = Int32.Parse(reader["Id"].ToString()),
                         StartDate = Convert.ToDateTime(reader["DataInizio"].ToString()).Date,
-                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date
+                        EndDate = Convert.ToDateTime(reader["DataFine"].ToString()).Date,
+                        Place = reader["Luogo"].ToString()
                     };
                 }
 

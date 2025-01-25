@@ -2,6 +2,7 @@
 using BusinessEntity.Entity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Resources
 {
     public static class SqlDal_Pools
     {
+        static string _hemaConnectionString = ConfigurationManager.AppSettings["HEMASITEDataSource"].ToString();
+
         public static int GetNumeroGironiByTorneoDisciplina(int idTorneo, int idDisciplina)
         {
             //anche i tornei vs discipline vanno divisi tra maschile e femminile
@@ -64,7 +67,7 @@ namespace Resources
                                 "and g.IdTorneo = " + idTorneo + " " +
                                 "and g.IdDisciplina = " + idDisciplina + " " +
                                 "and r.IdDisciplina = " + idDisciplina +
-                                "order by g.IdGirone ASC, r.Punteggio DESC, asd.Nome_ASD ASC, a.Cognome ASC";
+                                "order by g.IdGirone ASC, g.OrdineAtleta asc";
 
             AtletaEntity a;
             int currentGirone = 0;
@@ -644,9 +647,37 @@ namespace Resources
             finally
             {
                 c.Close();
+                DeleteGironiIncontriHemasite(idTorneo, idDisciplina);
             }
         }
+        private static void DeleteGironiIncontriHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "";
 
+
+            commandText += "DELETE FROM  GironiIncontri " +
+                            "WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + "";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
         private static void DeleteGironi(int idTorneo, int idDisciplina)
         {
             String commandText = "";
@@ -673,9 +704,37 @@ namespace Resources
             finally
             {
                 c.Close();
+                DeleteGironiHemasite(idTorneo, idDisciplina);
             }
         }
+        private static void DeleteGironiHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "";
 
+
+            commandText += "DELETE FROM  Gironi " +
+                            "WHERE IdTorneo = " + idTorneo + " AND IdDisciplina = " + idDisciplina + "";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
         internal static void InserisciGironiIncontri(int idTorneo, int idDisciplina, List<MatchEntity> incontri, int idgirone)
         {
             String commandText = "";
@@ -702,20 +761,77 @@ namespace Resources
             finally
             {
                 c.Close();
+                InserisciGironiIncontriHemasite(idTorneo, idDisciplina, incontri, idgirone);
             }
 
         }
 
-        internal static void InsertAtletaInGirone(int idTorneo, int idDisciplina, int idGirone, int idAtleta)
+        internal static void InserisciGironiIncontriHemasite(int idTorneo, int idDisciplina, List<MatchEntity> incontri, int idgirone)
+        {
+            String commandText = "";
+
+            foreach (MatchEntity i in incontri)
+                commandText += "INSERT INTO GironiIncontri (IdTorneo, IdDisciplina, IdAtletaRosso, PuntiAtletaRosso, IdAtletaBlu, PuntiAtletaBlu, NumeroGirone) " +
+                                "VALUES(" + idTorneo + "," + idDisciplina + "," + i.IdRosso + ",0," + i.IdBlu + ",0, " + idgirone + ");";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+            }
+
+        }
+
+        internal static void InsertAtletaInGirone(int idTorneo, int idDisciplina, int idGirone, int idAtleta, int ordineGirone)
         {
             String commandText = "INSERT INTO Gironi VALUES (" +
-                                    idTorneo + "," + idDisciplina + "," + idGirone + "," + idAtleta + ",0,0,0,0,0,0)";
+                                    idTorneo + "," + idDisciplina + "," + idGirone + "," + idAtleta + ",0,0,0,0,0,0," + ordineGirone + ")";
 
             SqlConnection c = null;
             try
             {
 
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+                InsertAtletaInGironeHemasite(idTorneo, idDisciplina, idGirone, idAtleta, ordineGirone);
+            }
+        }
+        internal static void InsertAtletaInGironeHemasite(int idTorneo, int idDisciplina, int idGirone, int idAtleta, int ordineGirone)
+        {
+            String commandText = "INSERT INTO Gironi VALUES (" +
+                                    idTorneo + "," + idDisciplina + "," + idGirone + "," + idAtleta + ",0,0,0,0,0,0," + ordineGirone + ")";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -760,6 +876,37 @@ namespace Resources
             finally
             {
                 c.Close();
+                InsertFinaliHemasite(listAtleti);
+            }
+        }
+        public static void InsertFinaliHemasite(List<AtletaEliminatorie> listAtleti)
+        {
+            String commandText = "";
+            for (int i = 1; i <= 3; i++)
+            {
+                foreach (AtletaEliminatorie a in listAtleti)
+                    commandText += "INSERT INTO Finali (IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo, Round) " +
+                                    "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + "," + i + ");";
+            }
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore: " + ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -776,6 +923,36 @@ namespace Resources
             {
 
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore: " + ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                c.Close();
+                InsertSemifinaliHemasite(listAtleti);
+            }
+        }
+
+        public static void InsertSemifinaliHemasite(List<AtletaEliminatorie> listAtleti)
+        {
+            String commandText = "";
+
+            foreach (AtletaEliminatorie a in listAtleti)
+                commandText += "INSERT INTO Semifinali (IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
+                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + ");";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -818,6 +995,35 @@ namespace Resources
             finally
             {
                 c.Close();
+                InsertQuartiHemasite(listAtleti);
+            }
+        }
+        public static void InsertQuartiHemasite(List<AtletaEliminatorie> listAtleti)
+        {
+            String commandText = "";
+
+            foreach (AtletaEliminatorie a in listAtleti)
+                commandText += "INSERT INTO Qualificati8 (IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
+                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + ");";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore: " + ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -834,6 +1040,35 @@ namespace Resources
             {
 
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore: " + ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                c.Close();
+                InsertOttaviHemasite(listAtleti);
+            }
+        }
+        public static void InsertOttaviHemasite(List<AtletaEliminatorie> listAtleti)
+        {
+            String commandText = "";
+
+            foreach (AtletaEliminatorie a in listAtleti)
+                commandText += "INSERT INTO Qualificati16(IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
+                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0,0," + a.Posizione + "," + a.Campo + ");";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -876,6 +1111,35 @@ namespace Resources
             finally
             {
                 c.Close();
+                InsertSedicesimiHemasite(listAtleti);
+            }
+        }
+        public static void InsertSedicesimiHemasite(List<AtletaEliminatorie> listAtleti)
+        {
+            String commandText = "";
+
+            foreach (AtletaEliminatorie a in listAtleti)
+                commandText += "INSERT INTO Qualificati32(IdAtleta, IdTorneo, IdDisciplina, PuntiFatti, PuntiSubiti, Posizione, Campo) " +
+                                "VALUES (" + a.IdAtleta + ", " + a.IdTorneo + ", " + a.idDisciplina + ", " + "0, 0," + a.Posizione + ",0);";
+
+            SqlConnection c = null;
+            try
+            {
+
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                int rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore: " + ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -888,6 +1152,36 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                DeleteAllFinaliHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static bool DeleteAllFinaliHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Finali WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -936,6 +1230,36 @@ namespace Resources
             finally
             {
                 c.Close();
+                DeleteAllSemifinaliHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static bool DeleteAllSemifinaliHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Semifinali WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -948,6 +1272,36 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                DeleteAllQuartiHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static bool DeleteAllQuartiHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati8 WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -996,6 +1350,36 @@ namespace Resources
             finally
             {
                 c.Close();
+                DeleteAllOttaviHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static bool DeleteAllOttaviHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati16 WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1008,6 +1392,36 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                DeleteAllSedicesimiHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static bool DeleteAllSedicesimiHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati32 WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1091,6 +1505,37 @@ namespace Resources
             finally
             {
                 c.Close();
+                EliminaFinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
+            }
+        }
+
+        public static bool EliminaFinaliByCampoHemasite(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
+        {
+            String commandText = "DELETE FROM Finali where IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1103,6 +1548,36 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                EliminaSemifinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
+            }
+        }
+        public static bool EliminaSemifinaliByCampoHemasite(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
+        {
+            String commandText = "DELETE FROM Semifinali where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and IdAtleta = " + idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1151,6 +1626,36 @@ namespace Resources
             finally
             {
                 c.Close();
+                EliminaQuartiByCampoHemasite(idCampo, idTorneo, idDisciplina);
+            }
+        }
+        public static bool EliminaQuartiByCampoHemasite(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati8 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1163,6 +1668,36 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                EliminaOttaviByCampoHemasite(idCampo, idTorneo, idDisciplina);
+            }
+        }
+        public static bool EliminaOttaviByCampoHemasite(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati16 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1211,6 +1746,37 @@ namespace Resources
             finally
             {
                 c.Close();
+                EliminaSedicesimiByCampoHemasite(idCampo, idTorneo, idDisciplina);
+            }
+        }
+
+        public static bool EliminaSedicesimiByCampoHemasite(int idCampo, int idTorneo, int idDisciplina)
+        {
+            String commandText = "DELETE FROM Qualificati32 where Campo = " + idCampo + " and IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1224,6 +1790,32 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+                ConcludiGironiHemasite(idTorneo, idDisciplina);
+            }
+        }
+        public static void ConcludiGironiHemasite(int idTorneo, int idDisciplina)
+        {
+            String commandText = "UPDATE Gironi SET Concluso = 1 where IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina;
+
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1277,6 +1869,47 @@ namespace Resources
             finally
             {
                 c.Close();
+                UpdateGironiHemasite(res, idTorneo, idDisciplina, idGirone);
+            }
+
+        }
+        public static bool UpdateGironiHemasite(RisultatiIncontriGironi res, int idTorneo, int idDisciplina, int idGirone)
+        {
+            String commandText = "UPDATE Gironi SET Vittorie = " + res.Vittorie +
+                                                    ", Sconfitte = " + res.Sconfitte +
+                                                    ", PuntiFatti = " + res.PuntiFatti +
+                                                    ", PuntiSubiti = " + res.PuntiSubiti +
+                                                    ", Differenziale = @differenziale" +
+                                                    " WHERE IdTorneo = " + idTorneo +
+                                                    " and IdDisciplina = " + idDisciplina +
+                                                    " and IdGirone = " + idGirone +
+                                                    " and IdAtleta = " + res.idAtleta;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                SqlParameter p = new SqlParameter("@differenziale", SqlDbType.Float, 0) { Value = res.Differenziale };
+
+                command.Parameters.Add(p);
+
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+                return rowAffected == 1;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
             }
 
         }
@@ -1308,6 +1941,36 @@ namespace Resources
             finally
             {
                 c.Close();
+                UpdateFinaliHemasite(IdTorneo, idDisciplina, campo, round, idAtleta, puntiFatti, puntiSubiti);
+            }
+        }
+        public static void UpdateFinaliHemasite(int IdTorneo, int idDisciplina, int campo, int round, int idAtleta, int puntiFatti, int puntiSubiti)
+        {
+            String commandText = "UPDATE Finali SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
+                                    " WHERE IdAtleta = " + idAtleta +
+                                    " and IdTorneo = " + IdTorneo +
+                                    " and IdDisciplina = " + idDisciplina +
+                                    " and Round = " + round;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1321,6 +1984,33 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+                UpdateSemifinaliHemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+            }
+        }
+        public static void UpdateSemifinaliHemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
+        {
+            String commandText = "UPDATE Semifinali SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
+                                    " WHERE IdAtleta = " + idAtleta + " and IdTorneo = " + IdTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1371,6 +2061,33 @@ namespace Resources
             finally
             {
                 c.Close();
+                UpdateQualificati8Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+            }
+        }
+        public static void UpdateQualificati8Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
+        {
+            String commandText = "UPDATE Qualificati8 SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
+                                    " WHERE IdAtleta = " + idAtleta + " and IdTorneo = " + IdTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1393,6 +2110,33 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
+                UpdateQualificati16Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+            }
+        }
+        public static void UpdateQualificati16Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
+        {
+            String commandText = "UPDATE Qualificati16 SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
+                                    " WHERE IdAtleta = " + idAtleta + " and IdTorneo = " + IdTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 
@@ -1443,6 +2187,33 @@ namespace Resources
             finally
             {
                 c.Close();
+                UpdateQualificati32Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+            }
+        }
+        public static void UpdateQualificati32Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
+        {
+            String commandText = "UPDATE Qualificati32 SET PuntiFatti = " + puntiFatti + ", PuntiSubiti = " + puntiSubiti +
+                                    " WHERE IdAtleta = " + idAtleta + " and IdTorneo = " + IdTorneo + " and IdDisciplina = " + idDisciplina;
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                c.Close();
             }
         }
 
@@ -1470,6 +2241,61 @@ namespace Resources
             try
             {
                 c = new SqlConnection(Helper.GetConnectionString());
+
+                c.Open();
+
+                SqlCommand command = new SqlCommand(commandText, c);
+                Int32 rowAffected = command.ExecuteNonQuery();
+                if (rowAffected == 1)
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                c.Close();
+                UpdateGironiIncontriHemasite(
+                                            idTorneo,
+                                            idDisciplina,
+                                            idGirone,
+                                            idAtletaRosso,
+                                            puntiRosso,
+                                            idAtletaBlu,
+                                            puntiBlu,
+                                            doppiaMorte);
+            }
+
+        }
+
+        public static bool UpdateGironiIncontriHemasite(
+           int idTorneo,
+           int idDisciplina,
+           int idGirone,
+           int idAtletaRosso,
+           int puntiRosso,
+           int idAtletaBlu,
+           int puntiBlu,
+           bool doppiaMorte)
+        {
+
+            String commandText = "UPDATE GironiIncontri SET PuntiAtletaRosso = " + puntiRosso +
+                                    ", PuntiAtletaBlu = " + puntiBlu +
+                                    ", DoppiaMorte = " + (doppiaMorte ? 1 : 0) + " " +
+                                    "WHERE IdTorneo = " + idTorneo + " and IdDisciplina = " + idDisciplina + " and NumeroGirone = " + idGirone + " " +
+                                    "AND ((IdAtletaRosso = " + idAtletaRosso + " and IdAtletaBlu = " + idAtletaBlu
+                                    + ") OR (IdAtletaRosso = " + idAtletaBlu + " and IdAtletaBlu = " + idAtletaRosso + "))";
+
+
+            SqlConnection c = null;
+
+            try
+            {
+                c = new SqlConnection(_hemaConnectionString);
 
                 c.Open();
 

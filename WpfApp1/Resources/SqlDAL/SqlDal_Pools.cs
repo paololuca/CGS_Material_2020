@@ -14,6 +14,8 @@ namespace Resources
 {
     public static class SqlDal_Pools
     {
+        static bool _hemaSiteActivated = Convert.ToBoolean(ConfigurationManager.AppSettings["HEMASITE"]);
+
         static string _hemaConnectionString = ConfigurationManager.AppSettings["HEMASITEDataSource"].ToString();
 
         public static int GetNumeroGironiByTorneoDisciplina(int idTorneo, int idDisciplina)
@@ -647,7 +649,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteGironiIncontriHemasite(idTorneo, idDisciplina);
+                if(_hemaSiteActivated)
+                    DeleteGironiIncontriHemasite(idTorneo, idDisciplina);
             }
         }
         private static void DeleteGironiIncontriHemasite(int idTorneo, int idDisciplina)
@@ -704,7 +707,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteGironiHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteGironiHemasite(idTorneo, idDisciplina);
             }
         }
         private static void DeleteGironiHemasite(int idTorneo, int idDisciplina)
@@ -761,7 +765,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InserisciGironiIncontriHemasite(idTorneo, idDisciplina, incontri, idgirone);
+                if (_hemaSiteActivated)
+                    InserisciGironiIncontriHemasite(idTorneo, idDisciplina, incontri, idgirone);
             }
 
         }
@@ -819,7 +824,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertAtletaInGironeHemasite(idTorneo, idDisciplina, idGirone, idAtleta, ordineGirone);
+                if (_hemaSiteActivated)
+                    InsertAtletaInGironeHemasite(idTorneo, idDisciplina, idGirone, idAtleta, ordineGirone);
             }
         }
         internal static void InsertAtletaInGironeHemasite(int idTorneo, int idDisciplina, int idGirone, int idAtleta, int ordineGirone)
@@ -876,7 +882,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertFinaliHemasite(listAtleti);
+                if (_hemaSiteActivated)
+                    InsertFinaliHemasite(listAtleti);
             }
         }
         public static void InsertFinaliHemasite(List<AtletaEliminatorie> listAtleti)
@@ -936,7 +943,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertSemifinaliHemasite(listAtleti);
+                if (_hemaSiteActivated)
+                    InsertSemifinaliHemasite(listAtleti);
             }
         }
 
@@ -995,7 +1003,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertQuartiHemasite(listAtleti);
+                if (_hemaSiteActivated)
+                    InsertQuartiHemasite(listAtleti);
             }
         }
         public static void InsertQuartiHemasite(List<AtletaEliminatorie> listAtleti)
@@ -1053,7 +1062,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertOttaviHemasite(listAtleti);
+                if (_hemaSiteActivated)
+                    InsertOttaviHemasite(listAtleti);
             }
         }
         public static void InsertOttaviHemasite(List<AtletaEliminatorie> listAtleti)
@@ -1111,7 +1121,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                InsertSedicesimiHemasite(listAtleti);
+                if (_hemaSiteActivated)
+                    InsertSedicesimiHemasite(listAtleti);
             }
         }
         public static void InsertSedicesimiHemasite(List<AtletaEliminatorie> listAtleti)
@@ -1170,7 +1181,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteAllFinaliHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteAllFinaliHemasite(idTorneo, idDisciplina);
             }
         }
         public static bool DeleteAllFinaliHemasite(int idTorneo, int idDisciplina)
@@ -1230,7 +1242,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteAllSemifinaliHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteAllSemifinaliHemasite(idTorneo, idDisciplina);
             }
         }
         public static bool DeleteAllSemifinaliHemasite(int idTorneo, int idDisciplina)
@@ -1290,7 +1303,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteAllQuartiHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteAllQuartiHemasite(idTorneo, idDisciplina);
             }
         }
         public static bool DeleteAllQuartiHemasite(int idTorneo, int idDisciplina)
@@ -1350,7 +1364,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteAllOttaviHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteAllOttaviHemasite(idTorneo, idDisciplina);
             }
         }
         public static bool DeleteAllOttaviHemasite(int idTorneo, int idDisciplina)
@@ -1410,7 +1425,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                DeleteAllSedicesimiHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    DeleteAllSedicesimiHemasite(idTorneo, idDisciplina);
             }
         }
         public static bool DeleteAllSedicesimiHemasite(int idTorneo, int idDisciplina)
@@ -1505,7 +1521,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                EliminaFinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
+                if (_hemaSiteActivated)
+                    EliminaFinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
             }
         }
 
@@ -1566,7 +1583,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                EliminaSemifinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
+                if (_hemaSiteActivated)
+                    EliminaSemifinaliByCampoHemasite(idCampo, idTorneo, idDisciplina, idAtleta);
             }
         }
         public static bool EliminaSemifinaliByCampoHemasite(int idCampo, int idTorneo, int idDisciplina, int idAtleta)
@@ -1626,7 +1644,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                EliminaQuartiByCampoHemasite(idCampo, idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    EliminaQuartiByCampoHemasite(idCampo, idTorneo, idDisciplina);
             }
         }
         public static bool EliminaQuartiByCampoHemasite(int idCampo, int idTorneo, int idDisciplina)
@@ -1686,7 +1705,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                EliminaOttaviByCampoHemasite(idCampo, idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    EliminaOttaviByCampoHemasite(idCampo, idTorneo, idDisciplina);
             }
         }
         public static bool EliminaOttaviByCampoHemasite(int idCampo, int idTorneo, int idDisciplina)
@@ -1746,7 +1766,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                EliminaSedicesimiByCampoHemasite(idCampo, idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    EliminaSedicesimiByCampoHemasite(idCampo, idTorneo, idDisciplina);
             }
         }
 
@@ -1803,7 +1824,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                ConcludiGironiHemasite(idTorneo, idDisciplina);
+                if (_hemaSiteActivated)
+                    ConcludiGironiHemasite(idTorneo, idDisciplina);
             }
         }
         public static void ConcludiGironiHemasite(int idTorneo, int idDisciplina)
@@ -1869,7 +1891,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateGironiHemasite(res, idTorneo, idDisciplina, idGirone);
+                if (_hemaSiteActivated)
+                    UpdateGironiHemasite(res, idTorneo, idDisciplina, idGirone);
             }
 
         }
@@ -1941,7 +1964,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateFinaliHemasite(IdTorneo, idDisciplina, campo, round, idAtleta, puntiFatti, puntiSubiti);
+                if (_hemaSiteActivated)
+                    UpdateFinaliHemasite(IdTorneo, idDisciplina, campo, round, idAtleta, puntiFatti, puntiSubiti);
             }
         }
         public static void UpdateFinaliHemasite(int IdTorneo, int idDisciplina, int campo, int round, int idAtleta, int puntiFatti, int puntiSubiti)
@@ -1998,7 +2022,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateSemifinaliHemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+                if (_hemaSiteActivated)
+                    UpdateSemifinaliHemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
             }
         }
         public static void UpdateSemifinaliHemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
@@ -2061,7 +2086,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateQualificati8Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+                if (_hemaSiteActivated)
+                    UpdateQualificati8Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
             }
         }
         public static void UpdateQualificati8Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
@@ -2124,7 +2150,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateQualificati16Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+                if (_hemaSiteActivated)
+                    UpdateQualificati16Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
             }
         }
         public static void UpdateQualificati16Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
@@ -2187,7 +2214,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateQualificati32Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
+                if (_hemaSiteActivated)
+                    UpdateQualificati32Hemasite(IdTorneo, idDisciplina, campo, posizione, idAtleta, puntiFatti, puntiSubiti);
             }
         }
         public static void UpdateQualificati32Hemasite(int IdTorneo, int idDisciplina, int campo, int posizione, int idAtleta, int puntiFatti, int puntiSubiti)
@@ -2259,7 +2287,8 @@ namespace Resources
             finally
             {
                 c.Close();
-                UpdateGironiIncontriHemasite(
+                if (_hemaSiteActivated)
+                    UpdateGironiIncontriHemasite(
                                             idTorneo,
                                             idDisciplina,
                                             idGirone,

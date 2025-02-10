@@ -345,6 +345,7 @@ namespace Resources
             sb.AppendLine("(rosso.Nome + ' ' + Rosso.Cognome) as Fighter1,");
             sb.AppendLine("(blu.Nome + ' ' + blu.Cognome) as Fighter2,");
             sb.AppendLine("case ");
+            sb.AppendLine("when gi.DoppiaMorte = 1 then 'Loss' ");
             sb.AppendLine("when gi.PuntiAtletaRosso > gi.PuntiAtletaBlu and gi.PuntiAtletaBlu < 5 then 'Win'");
             sb.AppendLine("when gi.PuntiAtletaRosso < gi.PuntiAtletaBlu and gi.PuntiAtletaRosso < 5 then 'Loss'");
             sb.AppendLine("when gi.PuntiAtletaRosso = gi.PuntiAtletaRosso then 'Draw'");
@@ -353,6 +354,7 @@ namespace Resources
             sb.AppendLine("--gi.IdAtletaBlu, ");
             sb.AppendLine("--gi.PuntiAtletaBlu, ");
             sb.AppendLine("case ");
+            sb.AppendLine("when gi.DoppiaMorte = 1 then 'Loss' ");
             sb.AppendLine("when gi.PuntiAtletaBlu > gi.PuntiAtletaRosso and gi.PuntiAtletaRosso < 5 then 'Win'");
             sb.AppendLine("when gi.PuntiAtletaBlu < gi.PuntiAtletaRosso and gi.PuntiAtletaBlu < 5 then 'Loss'");
             sb.AppendLine("when gi.PuntiAtletaBlu = gi.PuntiAtletaRosso then 'Draw'");
